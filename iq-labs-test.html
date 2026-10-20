@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#071323"><title>IQ QUEST — IQ Labs Devnet Lab</title>
+<style>
+:root{color-scheme:dark;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;--bg:#071323;--panel:#10283a;--line:#305369;--mute:#a9c4d2;--mint:#57edc8;--gold:#f2c67b;--red:#ffa7ad}
+*{box-sizing:border-box}body{margin:0;color:#e9f8ff;background:radial-gradient(circle at 20% -5%,#144760 0%,#091a2b 44%,#071323 92%);line-height:1.48}
+main{max-width:660px;margin:auto;padding:27px 16px 70px}.brand{color:var(--mint);font-weight:900;font-size:12px;letter-spacing:.25em}.hero{font-size:33px;line-height:1.09;margin:14px 0 10px;letter-spacing:-.04em}.sub{color:var(--mute);font-size:15px}.pill{display:inline-block;background:#1b3848;border:1px solid #3d6570;border-radius:99px;padding:5px 10px;font-size:11px;font-weight:700;color:#b6ffe9}.panel{border:1px solid var(--line);background:linear-gradient(150deg,#10283d,#0b2031);box-shadow:0 12px 40px #0003;padding:18px;border-radius:19px;margin-top:15px}.num{display:flex;gap:11px;align-items:center;color:#efffff;font-size:18px;font-weight:750;margin:0 0 13px}.round{width:29px;height:29px;border-radius:10px;background:#174b56;display:grid;place-items:center;color:var(--mint);font-size:13px}.description{color:var(--mute);font-size:13px;margin:8px 0 15px}button{appearance:none;border:0;border-radius:12px;background:var(--mint);color:#052b30;font-size:15px;font-weight:800;width:100%;padding:14px;min-height:47px;cursor:pointer}button.secondary{border:1px solid #426473;color:#eafff7;background:#213e52}button[disabled]{opacity:.45;cursor:not-allowed}button+button{margin-top:8px}.status{font-weight:700;font-size:14px;margin:12px 0 0;white-space:pre-wrap;overflow-wrap:anywhere}.quiet{color:var(--mute)}.good{color:#8dffcb}.warn{color:var(--gold)}.bad{color:var(--red)}.field{width:100%;padding:13px 12px;border-radius:10px;border:1px solid #406477;color:#fff;background:#071b2b;font-size:14px}.line{margin-top:10px;display:flex;gap:9px;align-items:flex-start;font-size:13px;color:#d5eaf4}.line input{margin-top:4px;accent-color:#57edc8;transform:scale(1.15)}.tiny{font-size:12px;color:#93b3c3}.mono,code{font:12px ui-monospace,Menlo,monospace;word-break:break-all;color:#c0f4f3}.box{background:#081b29;border:1px solid #24485d;padding:13px;border-radius:11px;font-size:12px;word-break:break-all;white-space:pre-wrap;overflow:auto;max-height:240px}a{color:#74f3d8;text-underline-offset:3px}.links{display:flex;justify-content:space-between;gap:10px;align-items:center}.links a{font-size:13px}.sep{height:1px;background:#2d4a5c;margin:16px 0}#signaturelink{display:none}footer{margin:25px 0;color:#88a8b6;font-size:12px}
+</style>
+</head>
+<body><main>
+  <div class="links"><div class="brand">IQ QUEST / DEV LAB</div><a href="./">← Back to the game</a></div>
+  <h1 class="hero">The first real<br>on-chain test.</h1>
+  <p class="sub">Connect Phantom, save a tiny test file through the <strong>official IQ Labs SDK</strong>, and read the very same bytes back from Solana Devnet.</p>
+  <div class="pill">DEVNET ONLY · NOT MAINNET</div>
+  <section class="panel">
+    <h2 class="num"><span class="round">1</span>Verify IQ Labs Devnet</h2>
+    <p class="description">Checks whether the SDK program account is executable. No wallet or SOL needed.</p>
+    <button id="check">Check IQ Labs program</button>
+    <div id="programStatus" class="status quiet" role="status">Not checked yet.</div>
+  </section>
+  <section class="panel">
+    <h2 class="num"><span class="round">2</span>Connect Phantom</h2>
+    <p class="description">Open this page <strong>inside the Phantom app browser</strong> on your iPhone. In Phantom settings, select Solana Devnet. Use a separate test wallet.</p>
+    <button class="secondary" id="connect">Connect Phantom</button>
+    <div id="walletStatus" class="status quiet" role="status">Not connected.</div>
+    <p class="tiny" id="walletDetails"></p>
+  </section>
+  <section class="panel">
+    <h2 class="num"><span class="round">3</span>Save the first test file</h2>
+    <p class="description">This writes only the harmless test text below — never your seed phrase or private key. Initial IQ Labs account setup may require multiple approvals and Devnet SOL.</p>
+    <pre class="box" id="payload"></pre>
+    <p class="tiny">Payload: <strong id="bytes">–</strong> UTF-8 bytes. Extra SDK metadata and Solana fees are not included.</p>
+    <label class="line"><input type="checkbox" id="agree"><span>I use a <strong>test wallet on Devnet</strong>, understand that transaction approvals may appear, and have reviewed the data above.</span></label>
+    <button id="save" disabled>Write test file with IQ Labs</button>
+    <div id="saveStatus" class="status quiet" role="status">Complete steps 1 and 2 first.</div>
+    <a id="signaturelink" href="#" target="_blank" rel="noopener noreferrer">View transaction on Solana Explorer ↗</a>
+    <div id="txBox"></div>
+  </section>
+  <section class="panel">
+    <h2 class="num"><span class="round">4</span>Read the saved file</h2>
+    <p class="description">After publishing, the transaction signature is filled in automatically. You can also paste a previous Devnet IQ Labs transaction signature here.</p>
+    <input class="field" id="sigInput" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="Solana transaction signature">
+    <button class="secondary" id="read">Read file via IQ Labs</button>
+    <div id="readStatus" class="status quiet" role="status">Nothing read yet.</div>
+    <pre id="readData" class="box" hidden></pre>
+  </section>
+  <footer>Development diagnostic page. It does not modify the published IQ QUEST game and is not a production creator dashboard. If any check fails, stop before signing more transactions. Never enter recovery phrases or private keys into this page or GitHub. The public Devnet RPC may be temporarily rate-limited. <a href="https://github.com/IQCoreTeam/iqlabs-solana-sdk" target="_blank" rel="noopener noreferrer">Official IQ Labs SDK</a></footer>
+</main>
+<script type="module">
+// IQ QUEST / IQ Labs official SDK devnet demo. No private keys; wallet signs locally in Phantom.
+const RPC='https://api.devnet.solana.com';
+const PROGRAM='9KLLchQVJpGkw4jPuUmnvqESdR7mtNCYr3qS4iQLabs';
+const PAYLOAD=JSON.stringify({app:'IQ-QUEST',v:1,network:'devnet',type:'hello',message:'First IQ QUEST test on IQ Labs'});
+const $=id=>document.getElementById(id);
+let programOK=false,provider=null,connection=null,iqlabs=null,walletOK=false,busy=false;
+$('payload').textContent=PAYLOAD;
+$('bytes').textContent=new TextEncoder().encode(PAYLOAD).length;
+try{const saved=localStorage.getItem('iqquest_devnet_test_sig');if(saved)$('sigInput').value=saved;}catch{}
+function status(id,msg,kind='quiet'){$(id).textContent=msg;$(id).className='status '+kind;}
+function refresh(){ $('save').disabled=!(programOK&&walletOK&&$('agree').checked&&!busy); $('check').disabled=busy;$('connect').disabled=busy;$('read').disabled=busy; }
+function err(e){return e?.message||String(e)}
+async function rpc(method,params=[]){const response=await fetch(RPC,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({jsonrpc:'2.0',id:1,method,params})});if(!response.ok)throw Error('Devnet RPC HTTP '+response.status);const result=await response.json();if(result.error)throw Error(result.error.message||JSON.stringify(result.error));return result.result;}
+function setBusy(v){busy=v;refresh();}
+$('agree').addEventListener('change',refresh);
+$('check').addEventListener('click',async()=>{programOK=false;refresh();status('programStatus','Checking Solana Devnet…');try{const result=await rpc('getAccountInfo',[PROGRAM,{encoding:'base64',commitment:'confirmed'}]);if(result?.value?.executable===true){programOK=true;status('programStatus','Executable program account found ✓','good')}else if(result?.value){status('programStatus','An account exists, but it is not executable. Do not send any transactions.','bad')}else{status('programStatus','No program account at this address on Devnet. Do not send any transactions.','bad')}}catch(e){status('programStatus','Devnet check failed: '+err(e),'bad')}refresh()});
+$('connect').addEventListener('click',async()=>{walletOK=false;refresh();try{provider=window.phantom?.solana??window.solana;if(!provider?.isPhantom||typeof provider.connect!=='function')throw Error('Phantom not found. Open this URL inside the Phantom mobile app browser, not Safari.');const resp=await provider.connect();const pk=resp?.publicKey??provider.publicKey;if(!pk)throw Error('Phantom did not return a wallet address.');const key=pk.toString();status('walletStatus','Phantom connected ✓','good');$('walletDetails').textContent='Wallet: '+key+' · Checking Devnet balance…';const bal=await rpc('getBalance',[key,{commitment:'confirmed'}]);const sol=(bal?.value??0)/1e9;$('walletDetails').textContent='Wallet: '+key+' · Devnet balance: '+sol.toFixed(5)+' SOL';if(sol<0.02){status('walletStatus','Connected, but less than 0.02 Devnet SOL. Obtain free test SOL before writing.','warn');return;}walletOK=true;status('walletStatus','Connected ✓ Devnet SOL available. Confirm Devnet in Phantom settings.','good')}catch(e){status('walletStatus','Wallet connection: '+err(e),'bad');$('walletDetails').textContent='';}finally{refresh()}});
+async function loadSDK(){if(iqlabs&&connection)return;
+  status('saveStatus','Loading official IQ Labs SDK…');
+  // Buffer shim: IQ Labs uses Node-compatible Buffer internally; esm.sh bundles the npm SDK for browsers.
+  const buf=await import('https://esm.sh/buffer@6.0.3?bundle');
+  globalThis.Buffer=buf.Buffer;
+  if(!globalThis.process)globalThis.process={env:{NODE_ENV:'production'},version:'',versions:{}};
+  const [{Connection},mod]=await Promise.all([
+    import('https://esm.sh/@solana/web3.js@1.99.0?bundle'),
+    import('https://esm.sh/@iqlabs-official/solana-sdk@0.3.6?bundle')
+  ]);
+  iqlabs=mod.default??mod;
+  if(typeof iqlabs.setRpcUrl!=='function'||typeof iqlabs.writer?.codeIn!=='function'||typeof iqlabs.reader?.readCodeIn!=='function')throw Error('SDK loaded, but expected IQ Labs API was not found.');
+  iqlabs.setRpcUrl(RPC);
+  connection=new Connection(RPC,'confirmed');
+}
+$('save').addEventListener('click',async()=>{if(busy||!programOK||!walletOK||!$('agree').checked)return;
+  const p=provider;if(!p?.publicKey||!p.signTransaction){status('saveStatus','Phantom transaction signer is unavailable.','bad');return;}
+  setBusy(true);$('signaturelink').style.display='none';$('txBox').replaceChildren();
+  try{
+    status('saveStatus','Loading SDK. Do not close this page…');
+    await loadSDK();
+    const bal=await rpc('getBalance',[p.publicKey.toString(),{commitment:'confirmed'}]);
+    if((bal?.value??0)<20000000)throw Error('Less than 0.02 Devnet SOL. Use the faucet before writing.');
+    status('saveStatus','Preparing the Devnet upload. Review every Phantom approval. First-time setup may need more than one approval…','warn');
+    const signer={publicKey:p.publicKey,signTransaction:tx=>p.signTransaction(tx),signAllTransactions:txs=>p.signAllTransactions? p.signAllTransactions(txs):Promise.all(txs.map(t=>p.signTransaction(t)))};
+    const signature=await iqlabs.writer.codeIn({connection,signer},PAYLOAD,'iq-quest-test.json');
+    $('sigInput').value=signature;
+    try{localStorage.setItem('iqquest_devnet_test_sig',signature);}catch{}
+    const link=$('signaturelink');link.href='https://explorer.solana.com/tx/'+encodeURIComponent(signature)+'?cluster=devnet';link.style.display='inline-block';
+    const code=document.createElement('div');code.className='box mono';code.textContent='Transaction signature:\n'+signature;$('txBox').replaceChildren(code);
+    status('saveStatus','SDK returned a Devnet transaction signature ✓ Now read it in step 4.','good');
+  }catch(e){status('saveStatus','Upload not completed: '+err(e)+'\nNo success is claimed. Check Phantom, RPC, SDK and transaction history before retrying.','bad');}
+  finally{setBusy(false);}
+});
+$('read').addEventListener('click',async()=>{const sig=$('sigInput').value.trim();if(!/^[1-9A-HJ-NP-Za-km-z]{70,100}$/.test(sig)){status('readStatus','Enter a valid Solana transaction signature.','warn');return}setBusy(true);$('readData').hidden=true;try{status('readStatus','Loading SDK and reading IQ Labs transaction…');await loadSDK();const result=await iqlabs.reader.readCodeIn(sig);if(typeof result?.data!=='string')throw Error('The transaction was found, but the SDK returned no text content.');$('readData').textContent=result.data;$('readData').hidden=false;if(result.data===PAYLOAD){status('readStatus','SUCCESS: the stored text exactly matches this IQ QUEST test payload ✓','good')}else{status('readStatus','Read succeeded. Text is shown below (different from the current test payload).','warn')}}catch(e){status('readStatus','Read failed: '+err(e),'bad')}finally{setBusy(false)}});
+refresh();
+</script>
+</body></html>
