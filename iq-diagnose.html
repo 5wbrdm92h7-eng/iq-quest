@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>IQ QUEST — Sicherer Devnet-Diagnosetest</title>
+<meta name="theme-color" content="#061522">
+<style>
+:root{color-scheme:dark;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;--c:#59ebcb;--bg:#061522;--panel:#102a3a;--line:#275067;--muted:#bad3df;--warn:#ffcd85;--bad:#ffa6af}
+*{box-sizing:border-box}body{background:radial-gradient(ellipse at 30% -10%,#154455,transparent 65%),var(--bg);color:#f2fffe;margin:0;line-height:1.5}main{max-width:640px;margin:auto;padding:25px 17px 72px}.eyebrow{color:var(--c);font-size:12px;letter-spacing:.15em;font-weight:800}.title{font-size:32px;line-height:1.12;margin:10px 0}.muted{color:var(--muted)}.panel{border-radius:18px;padding:18px;margin:16px 0;background:linear-gradient(140deg,#102d40,#0c2232);border:1px solid var(--line)}h2{font-size:19px;margin:0 0 7px}button{border:0;color:#06312d;background:var(--c);padding:15px;font-size:16px;font-weight:800;border-radius:13px;width:100%;cursor:pointer;margin-top:10px;min-height:50px}button:disabled{opacity:.5}button.secondary{background:#214759;color:white;border:1px solid #3a6577}.status{white-space:pre-wrap;word-break:break-word;margin-top:13px;font-size:14px}.good{color:#8bffd0}.bad{color:var(--bad)}.warn{color:var(--warn)}.box{background:#061927;border:1px solid #2c5261;border-radius:11px;padding:14px;word-break:break-word;white-space:pre-wrap;max-height:400px;overflow:auto;font:12px/1.55 ui-monospace,SFMono-Regular,Menlo,monospace}a{color:var(--c)}.important{border-left:3px solid var(--warn);padding-left:12px;color:#ffe1b3}.tag{display:inline-block;padding:4px 10px;border-radius:50px;font-size:12px;background:#153e41;color:#8cffdf;border:1px solid #34786b;font-weight:800}
+</style>
+</head>
+<body><main>
+<div class="eyebrow">IQ QUEST · DEVNET DIAGNOSE</div>
+<h1 class="title">Finde den Fehler – ohne etwas zu unterschreiben.</h1>
+<p class="muted">Diese separate Prüfseite baut mit dem offiziellen IQ-Labs-SDK eine Testtransaktion auf und simuliert sie bei Solana Devnet. Sie verschickt keine Transaktion und verlangt keine Signatur.</p>
+<div class="tag">NUR DEVNET · KEINE GEBÜHREN</div>
+<p class="important"><strong>Sicherheit:</strong> Nie eine Wiederherstellungsphrase eingeben. „Bestätigen (unsicher)“ auf der alten Testseite nicht verwenden. Hier gibt es bewusst keine Funktion zum Schreiben oder Bestätigen.</p>
+<section class="panel"><h2>1. Phantom verbinden</h2><p class="muted">Öffne diese Seite im Browser der Phantom-App. Verbinde dieselbe Devnet-Testwallet wie zuvor.</p><button id="connect">Phantom verbinden</button><p id="wallet" class="status muted" role="status">Noch nicht verbunden.</p></section>
+<section class="panel"><h2>2. Transaktion nur simulieren</h2><p class="muted">Die Seite prüft zuerst die Programm-Adresse und erstellt dann die erste IQ-Labs-Anweisung. Sie fängt den Signaturaufruf ab und zeigt stattdessen die Solana-Fehlerprotokolle an.</p><button id="simulate" disabled>Fehler kostenlos prüfen</button><p id="result" class="status muted" role="status">Zuerst Phantom verbinden.</p></section>
+<section class="panel"><h2>3. Ergebnis für ChatGPT</h2><p class="muted">Wenn du einen Fehler siehst, tippe auf „Bericht kopieren“ oder mach einen Screenshot des Kastens. Der Bericht enthält keine geheimen Wallet-Daten.</p><pre class="box" id="log">Noch keine Prüfung durchgeführt.</pre><button class="secondary" id="copy" disabled>Diagnosebericht kopieren</button></section>
+<p class="muted" style="font-size:12px">Dein bestehendes IQ-QUEST-Spiel und die bisherige Testseite werden nicht verändert. Quellcode SDK: <a href="https://github.com/IQCoreTeam/iqlabs-solana-sdk" target="_blank" rel="noopener">IQ Labs GitHub</a>. Netzwerk: https://api.devnet.solana.com.</p>
+</main>
+<script type="module">
+const RPC='https://api.devnet.solana.com';
+const PROGRAM='9KLLchQVJpGkw4jPuUmnvqESdR7mtNCYr3qS4iQLabs';
+const TEST=JSON.stringify({app:'IQ-QUEST',type:'diagnostic',v:1});
+const $=id=>document.getElementById(id);
+let provider=null,publicKey=null,working=false,report='';
+function say(id,msg,css='muted'){$(id).textContent=msg;$(id).className='status '+css;}
+function err(e){return e?.message||String(e)}
+async function rpc(method,params=[]){
+ const r=await fetch(RPC,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({jsonrpc:'2.0',id:1,method,params})});
+ if(!r.ok)throw Error('RPC HTTP '+r.status);
+ const j=await r.json();if(j.error)throw Error('RPC: '+JSON.stringify(j.error));return j.result;
+}
+function line(message){report+=(report?'\n':'')+message;$('log').textContent=report;$('copy').disabled=false;}
+function setWorking(v){working=v;$('connect').disabled=v;$('simulate').disabled=v||!publicKey;}
+$('connect').addEventListener('click',async()=>{
+ setWorking(true);
+ try{
+  provider=window.phantom?.solana??window.solana;
+  if(!provider?.isPhantom||!provider.connect)throw Error('Phantom nicht gefunden. Öffne die Seite im integrierten Phantom-Browser.');
+  const resp=await provider.connect();publicKey=resp?.publicKey??provider.publicKey;
+  if(!publicKey)throw Error('Phantom hat keine Wallet-Adresse zurückgegeben.');
+  const balance=await rpc('getBalance',[publicKey.toString(),{commitment:'confirmed'}]);
+  say('wallet','Verbunden ✓ · Devnet-Guthaben: '+((balance?.value??0)/1e9).toFixed(5)+' SOL','good');
+ }catch(e){publicKey=null;say('wallet','Verbindung fehlgeschlagen: '+err(e),'bad');}
+ finally{setWorking(false)}
+});
+$('simulate').addEventListener('click',async()=>{
+ if(!publicKey||working)return;
+ setWorking(true);report='';$('log').textContent='Prüfung läuft …';$('copy').disabled=true;
+ try{
+  say('result','IQ Labs SDK und Devnet werden überprüft …');
+  const account=await rpc('getAccountInfo',[PROGRAM,{encoding:'base64',commitment:'confirmed'}]);
+  if(!account?.value?.executable)throw Error('Das erwartete IQ-Labs-Programmkonto ist hier nicht ausführbar.');
+  line('Netzwerk: Solana Devnet');line('Programm: gefunden, executable=true');
+  const balance=await rpc('getBalance',[publicKey.toString(),{commitment:'confirmed'}]);
+  line('Guthaben: '+((balance?.value??0)/1e9).toFixed(5)+' Devnet-SOL');
+  const buf=await import('https://esm.sh/buffer@6.0.3?bundle');globalThis.Buffer=buf.Buffer;
+  if(!globalThis.process)globalThis.process={env:{NODE_ENV:'production'},version:'',versions:{}};
+  const [{Connection},mod]=await Promise.all([
+   import('https://esm.sh/@solana/web3.js@1.99.0?bundle'),
+   import('https://esm.sh/@iqlabs-official/solana-sdk@0.3.6?bundle')
+  ]);
+  const sdk=mod.default??mod;if(!sdk?.writer?.codeIn||!sdk?.setRpcUrl)throw Error('Die erwartete IQ-Labs-SDK-Funktion wurde nicht geladen.');
+  sdk.setRpcUrl(RPC);const connection=new Connection(RPC,'confirmed');
+  line('SDK: @iqlabs-official/solana-sdk@0.3.6 geladen');
+  let intercepted=false;
+  async function diagnose(tx){
+   intercepted=true;
+   const type=tx?.version===undefined?'Legacy':'Versioned';
+   line('Transaktionstyp: '+type);
+   const raw=type==='Legacy'?tx.serialize({requireAllSignatures:false,verifySignatures:false}):tx.serialize();
+   const b64=globalThis.Buffer.from(raw).toString('base64');
+   line('Transaktionsgröße: '+raw.length+' Bytes');
+   const opts={encoding:'base64',commitment:'processed',sigVerify:false,replaceRecentBlockhash:false};
+   try{
+    const sim=await rpc('simulateTransaction',[b64,opts]);
+    if(!sim?.value)throw Error('Solana RPC hat kein Simulationsresultat geliefert.');
+    line('SIMULATION RESULT: '+JSON.stringify(sim.value.err??null));
+    if(sim.value.unitsConsumed!=null)line('Compute Units: '+sim.value.unitsConsumed);
+    line('PROGRAM LOGS:\n'+(sim.value.logs??['Keine Programm-Logs vom RPC zurückgegeben.']).join('\n'));
+    if(sim.value.err) say('result','Die Simulation zeigt einen Fehler. Bitte kopiere den Diagnosebericht oder schick einen Screenshot. Es wurde nichts unterschrieben.','bad');
+    else say('result','Simulation erfolgreich ✓ Phantom selbst hat vorher trotzdem gewarnt. Bitte Bericht schicken; noch nichts unterschreiben.','good');
+   }catch(e){line('SIMULATION RPC FEHLER: '+err(e));say('result','Die Simulation konnte nicht ausgewertet werden. Bitte Bericht schicken.','bad');}
+   // Absichtlich abbrechen, bevor Phantom signieren kann oder eine Transaktion gesendet wird.
+   throw new Error('IQQUEST_DIAGNOSTIC_STOP_NO_SIGNATURE');
+  }
+  const diagnosticSigner={publicKey,signTransaction:diagnose,signAllTransactions:async txs=>{if(txs?.length)await diagnose(txs[0]);throw Error('IQQUEST_DIAGNOSTIC_STOP_NO_SIGNATURE');}};
+  try{await sdk.writer.codeIn({connection,signer:diagnosticSigner},TEST,'iq-diagnostic.json');
+      line('WARNUNG: SDK gab unerwartet Erfolg ohne Signieren zurück.');
+  }catch(e){if(!String(err(e)).includes('IQQUEST_DIAGNOSTIC_STOP_NO_SIGNATURE')){
+       line('SDK-VORBEREITUNG FEHLER: '+err(e));
+       say('result','Der SDK-Code scheitert schon vor der Phantom-Signatur. Bericht bitte kopieren.','bad');
+    }}
+  if(!intercepted&&$('result').textContent.includes('überprüft'))say('result','Keine Transaktion zum Simulieren vorbereitet. Siehe Fehlerbericht.','bad');
+ }catch(e){line('ALLGEMEINER FEHLER: '+err(e));say('result','Die Prüfung konnte nicht abgeschlossen werden. Siehe Bericht.','bad');}
+ finally{setWorking(false)}
+});
+$('copy').addEventListener('click',async()=>{if(!report)return;try{await navigator.clipboard.writeText(report);$('copy').textContent='Bericht kopiert ✓';}catch{const t=document.createElement('textarea');t.value=report;document.body.append(t);t.select();document.execCommand('copy');t.remove();$('copy').textContent='Bericht zum Kopieren ausgewählt';}});
+</script>
+</body></html>
