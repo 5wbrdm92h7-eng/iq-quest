@@ -1,0 +1,112 @@
+<!DOCTYPE html><html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#091624"><title>IQ QUEST – PDA Diagnose</title>
+<style>
+:root{color-scheme:dark;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:#071522;color:#eaf6ff}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 15% 5%,#153f53 0,transparent 50%),#071522;min-height:100vh}.wrap{max-width:650px;margin:auto;padding:25px 17px 65px}.logo{letter-spacing:3px;color:#60ebd2;font-size:13px;font-weight:900}.hero{padding:22px 6px}.hero h1{margin:12px 0 8px;font-size:28px}.muted{color:#a8c0cc;line-height:1.6}.panel{background:#102739;border:1px solid #2c5265;border-radius:22px;padding:21px;margin:17px 0}.panel h2{margin:0 0 10px;font-size:20px}.note{border-left:4px solid #58e5c8;padding:10px 13px;background:#0b303c;border-radius:4px}.alert{border-left:4px solid #f9b869;padding:11px 13px;background:#3b3028;border-radius:4px}button{font-size:16px;font-weight:800;width:100%;padding:17px;border-radius:14px;border:0;background:#58e2c5;color:#06242d;margin:7px 0;cursor:pointer}button:disabled{opacity:.55;cursor:not-allowed}.secondary{background:#254657;color:#fff}.status{margin:12px 0;font-weight:600;line-height:1.5;overflow-wrap:anywhere}.good{color:#76f6ba}.bad{color:#ff999b}.details{font-size:12px;background:#051623;border:1px solid #254453;color:#cae6f0;padding:15px;border-radius:15px;white-space:pre-wrap;overflow-wrap:anywhere;line-height:1.55;max-height:470px;overflow:auto}.small{font-size:12px;color:#9eb7c3}.nav{color:#76f3d5;text-decoration:none}
+</style></head><body><div class="wrap"><div class="hero"><div class="logo">IQ QUEST / SOLANA DEVNET</div><h1>IQ Labs – Konto-Adressen prüfen</h1><div class="muted">Diagnose für den Fehler <b>ConstraintSeeds 2006</b>. Hier wird <b>nichts unterschrieben oder an Solana gesendet</b>; die Webseite simuliert nur den ersten IQ-Labs-Schritt.</div></div>
+<div class="panel"><h2>1. Phantom verbinden</h2><p class="muted">Öffne diese Seite im Browser von Phantom auf Solana Devnet. Verwende dieselbe Test-Wallet wie beim fehlgeschlagenen Schreibversuch.</p><button id="connect">Phantom verbinden</button><p class="status muted" id="walletStatus">Noch nicht verbunden</p></div>
+<div class="panel"><h2>2. Adressen vergleichen</h2><div class="note small">Das Programm vergleicht die echten Kontoadressen in der SDK-Transaktion mit den offiziell dokumentierten PDA-Adressen. Falls sie abweichen, wird die erste Anweisung testweise nur im Speicher korrigiert und erneut simuliert. Es findet kein Netzwerk-Schreibvorgang statt.</div><button id="check" disabled>Fehler kostenlos prüfen</button><p id="runStatus" class="status muted">Zuerst Phantom verbinden.</p></div>
+<div class="panel"><h2>3. Bericht teilen</h2><button id="copy" class="secondary" disabled>Diagnosebericht kopieren</button><pre id="log" class="details">Hier erscheint der Bericht.</pre><div class="alert small">Nicht auf „Bestätigen (unsicher)“ tippen. Diese Diagnoseseite öffnet keine Transaktionsbestätigung und fordert keine privaten Schlüssel an.</div></div>
+<div class="small">Offizielle Quellen: <a class="nav" href="https://github.com/IQCoreTeam/iqlabs-solana-sdk" target="_blank" rel="noopener">IQ Labs Solana SDK</a>. Solana RPC: <code>https://api.devnet.solana.com</code>. Diese Seite ist eine unabhängige IQ-QUEST-Diagnose und noch nicht in Phantom live getestet.</div></div>
+<script type="module">
+const RPC='https://api.devnet.solana.com';
+const PROG='9KLLchQVJpGkw4jPuUmnvqESdR7mtNCYr3qS4iQLabs';
+const PAYLOAD=JSON.stringify({app:'IQ-QUEST',v:1,type:'diagnostic'});
+const $=id=>document.getElementById(id);
+let publicKey=null,working=false,report='';
+const errorText=e=>e?.message||String(e);
+function append(s){report+=(report?'\n':'')+s;$('log').textContent=report;$('copy').disabled=false;}
+function message(id,s,good){$(id).textContent=s;$(id).className='status '+(good===true?'good':good===false?'bad':'muted');}
+function busy(v){working=v;$('connect').disabled=v;$('check').disabled=v||!publicKey;}
+async function rpc(method,params=[]){const resp=await fetch(RPC,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({jsonrpc:'2.0',id:1,method,params})});if(!resp.ok)throw Error('RPC HTTP '+resp.status);const out=await resp.json();if(out.error)throw Error(JSON.stringify(out.error));return out.result;}
+$('connect').onclick=async()=>{
+ busy(true);
+ try{
+  const phantom=window.phantom?.solana??window.solana;
+  if(!phantom?.isPhantom||!phantom?.connect)throw Error('Phantom nicht erkannt. Öffne diese Seite im integrierten Phantom-Browser.');
+  const connected=await phantom.connect();publicKey=connected?.publicKey??phantom.publicKey;
+  if(!publicKey)throw Error('Keine Solana-Adresse zurückgegeben.');
+  const b=await rpc('getBalance',[publicKey.toString(),{commitment:'confirmed'}]);
+  message('walletStatus','Verbunden ✓ · '+((b.value??0)/1e9).toFixed(5)+' Devnet-SOL',true);
+ }catch(e){publicKey=null;message('walletStatus',errorText(e),false)}finally{busy(false)}
+};
+$('check').onclick=async()=>{
+ if(!publicKey||working)return;busy(true);report='';$('log').textContent='Prüfung läuft …';$('copy').disabled=true;
+ try{
+  message('runStatus','Berechne Solana PDA-Adressen …');
+  const balance=await rpc('getBalance',[publicKey.toString(),{commitment:'confirmed'}]);
+  append('Netzwerk: Solana Devnet');append('Wallet: '+publicKey.toString());append('Guthaben: '+((balance.value??0)/1e9).toFixed(5)+' Devnet SOL');
+  const bufferMod=await import('https://esm.sh/buffer@6.0.3?bundle');
+  globalThis.Buffer=bufferMod.Buffer;
+  if(!globalThis.process)globalThis.process={env:{NODE_ENV:'production'},version:'',versions:{}};
+  const [w3,mod]=await Promise.all([import('https://esm.sh/@solana/web3.js@1.99.0?bundle'),import('https://esm.sh/@iqlabs-official/solana-sdk@0.3.6?bundle')]);
+  const {PublicKey,Connection}=w3,sdk=mod.default??mod;
+  if(!sdk?.writer?.codeIn)throw Error('SDK-Funktion codeIn() konnte nicht geladen werden.');
+  sdk.setRpcUrl(RPC);const conn=new Connection(RPC,'confirmed');
+  const program=new PublicKey(PROG), user=new PublicKey(publicKey.toString());
+  const PDA=(parts)=>PublicKey.findProgramAddressSync(parts,program)[0].toBase58();
+  const expected={
+   code_account:PDA([Buffer.from('codemY}AGBJiqLabs'),user.toBuffer()]),
+   user_state:PDA([Buffer.from('usermY}AGBJiqLabs'),program.toBuffer(),user.toBuffer()]),
+   user_inventory:PDA([Buffer.from('inventorymY}AGBJiqLabs'),user.toBuffer()])
+  };
+  append('SDK: @iqlabs-official/solana-sdk@0.3.6');
+  append('Erwartet code_account: '+expected.code_account);
+  append('Erwartet user_state: '+expected.user_state);
+  append('Erwartet user_inventory: '+expected.user_inventory);
+  const account=await rpc('getAccountInfo',[PROG,{encoding:'base64',commitment:'confirmed'}]);
+  append('Programm ausführbar: '+!!account?.value?.executable);
+  if(!account?.value?.executable)throw Error('Programm auf Devnet nicht ausführbar');
+  const toBase64=tx=>{
+   const raw=tx.serialize({requireAllSignatures:false,verifySignatures:false});
+   return Buffer.from(raw).toString('base64');
+  };
+  const simulate=async(tx,label)=>{
+   const response=await rpc('simulateTransaction',[toBase64(tx),{encoding:'base64',commitment:'processed',sigVerify:false,replaceRecentBlockhash:false}]);
+   append(label+' Fehler: '+JSON.stringify(response.value?.err??null));
+   append(label+' Program Logs:\n'+(response.value?.logs??[]).join('\n'));
+   return response.value;
+  };
+  let captured=false;
+  async function intercept(tx){
+   captured=true;
+   append('Transaktionstyp: '+(tx.version===undefined?'Legacy':'Versioned'));
+   if(tx.version!==undefined)throw Error('Unerwartete Versioned-Transaktion – bitte Bericht teilen');
+   append('Transaktionsgröße: '+tx.serialize({requireAllSignatures:false,verifySignatures:false}).length+' Bytes');
+   append('Fee payer: '+(tx.feePayer?.toBase58()??'fehlend'));
+   tx.instructions.forEach((ix,j)=>{
+    append('Instruction '+j+' Program: '+ix.programId.toBase58());
+    ix.keys.forEach((k,i)=>append('  Account ['+i+']: '+k.pubkey.toBase58()+(k.isSigner?' [signer]':'')));
+   });
+   const ix=tx.instructions[0];
+   if(!ix||ix.programId.toBase58()!==PROG||ix.keys.length<5)throw Error('Unbekanntes Instruction-Format. Nicht automatisch korrigieren.');
+   const fields=[['code_account',1],['user_state',2],['user_inventory',3]];
+   for(const [name,idx] of fields){
+    const sent=ix.keys[idx].pubkey.toBase58();
+    append('VERGLEICH '+name+': '+(sent===expected[name]?'OK':'ABWEICHUNG')+' / SDK '+sent+' / Erwartet '+expected[name]);
+   }
+   const baseline=await simulate(tx,'ORIGINAL');
+   const bad=fields.filter(([n,i])=>ix.keys[i].pubkey.toBase58()!==expected[n]);
+   if(bad.length){
+    append('Vermutliche Kontozuordnungs-Abweichungen: '+bad.map(x=>x[0]).join(', '));
+    for(const [n,i] of bad)ix.keys[i].pubkey=new PublicKey(expected[n]);
+    append('TESTKORREKTUR: Nur die 3 PDA-Adressfelder im RAM korrigiert. KEINE Signatur, KEIN Senden.');
+    await simulate(tx,'KORRIGIERTE SIMULATION');
+   }else{
+    append('Alle drei PDA-Adressen stimmen mit den offiziellen Quellcode-Regeln überein.');
+    if(baseline?.err)append('Trotz korrekter Client-Adressen scheitert die Simulation. Program-/SDK-Version müssen upstream geprüft werden.');
+   }
+   message('runStatus','Diagnose abgeschlossen. Bitte Bericht kopieren und hier einfügen.',true);
+   throw new Error('IQQUEST_STOP_NO_SIGNATURE');
+  }
+  const signer={publicKey,signTransaction:intercept,signAllTransactions:async ts=>{if(ts?.length)await intercept(ts[0]);throw Error('IQQUEST_STOP_NO_SIGNATURE')}};
+  try{await sdk.writer.codeIn({connection:conn,signer},PAYLOAD,'iq-pda-diagnostic.json');append('Warnung: SDK antwortete ohne Signatur.');}
+  catch(e){if(!errorText(e).includes('IQQUEST_STOP_NO_SIGNATURE')){append('SDK VORBEREITUNGSFEHLER: '+errorText(e));message('runStatus','Fehler vor oder während der Simulation – bitte Bericht teilen.',false)}}
+  if(!captured){append('Es wurde keine Initialisierungstransaktion erzeugt.');message('runStatus','Keine Transaktion abgefangen.',false)}
+ }catch(e){append('ALLGEMEINER FEHLER: '+errorText(e));message('runStatus','Prüfung fehlgeschlagen – bitte Bericht kopieren.',false)}finally{busy(false)}
+};
+$('copy').onclick=async()=>{
+ if(!report)return;
+ try{await navigator.clipboard.writeText(report);$('copy').textContent='Bericht kopiert ✓';}
+ catch{const el=document.createElement('textarea');el.value=report;document.body.append(el);el.select();document.execCommand('copy');el.remove();$('copy').textContent='Bericht kopiert';}
+};
+</script></body></html>
