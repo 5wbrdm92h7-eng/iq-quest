@@ -20,7 +20,7 @@
   <meta name="twitter:image:alt" content="IQ QUEST mystery adventures title image with jungle ruins">
   <meta name="theme-color" content="#07120f">
   <meta name="description" content="IQ QUEST: solve a mystery in ancient ruins, beat the clock, and share your result. Free to play.">
-  <title>IQ QUEST — Onchain Devnet Preview V4.6</title>
+  <title>IQ QUEST — Onchain Preview V4.8</title>
   <style>:root{--bg:#080e14;--panel:#101b22;--panel2:#101d24;--stroke:#294043;--white:#eff7ee;--muted:#9cb5ab;--green:#56f86e;--gold:#e8c17d;--cyan:#85e2d6;--red:#ffabb1;--radius:17px;--shadow:0 18px 65px rgba(0,0,0,.4)}
 *,*::before,*::after{box-sizing:border-box}
 html{scroll-behavior:smooth}
@@ -189,6 +189,76 @@ h1,h2,h3{font-family:Georgia,"Times New Roman",serif;letter-spacing:-.015em}h1{f
 .onchain-load-status.error{border-color:#c7857e;background:#301e1b;color:#ffe5dd}
 .is-onchain .hero .hero-buttons a[href="creator.html"]{display:inline-flex}
 .is-onchain .onchain-status{border-color:#8af7a3;background:#133b22}
+
+/* IQ QUEST V4.8 — compact premium brand and mobile-friendly creator flow */
+.wordmark{font-size:clamp(33px,3vw,41px);gap:8px}
+.brand-cluster{gap:13px}
+.onchain-promise{font-size:10px;line-height:1.25;padding:6px 10px}
+.onchain-promise small{font-size:9px;letter-spacing:.045em}
+.brand-official-x{color:#bfffd0;text-decoration:underline;text-underline-offset:3px;font-size:10px;font-weight:850;white-space:nowrap}
+.quick-benefits{padding:11px 14px;gap:8px 20px}
+.quick-benefits .benefit-play,.quick-benefits .benefit-battle{font-size:14px}
+.creator-benefits{gap:10px;margin:14px 0 20px}
+.creator-benefits article{padding:13px 15px;min-height:0;border-radius:11px}
+.creator-benefits article>span{font-size:20px}
+.creator-benefits h3{font-size:18px;margin:3px 0}
+.creator-benefits p{font-size:11px;line-height:1.45;margin:4px 0}
+.hero-creator{min-height:345px}
+.hero-creator .hero-content{padding-top:35px;padding-bottom:39px}
+.mini-info{padding:10px 0;font-size:11px}
+.ai-simplified{display:grid;gap:12px}
+.ai-simple-step{border:1px solid #396a4a;background:#0d241b;border-radius:12px;padding:14px}
+.ai-simple-step h3{font-size:17px;color:#f4d79b;margin:0 0 6px}
+.ai-simple-step p{font-size:12px;color:#d1e2d4;line-height:1.5;margin:5px 0 11px}
+.ai-simple-step textarea{width:100%;min-height:120px;line-height:1.5;border:1px solid #4f8062;background:#071914;color:#eaf9eb;border-radius:9px;padding:12px;font-size:13px;resize:vertical}
+.ai-simple-step .btn{width:100%;white-space:normal;text-align:center}
+.ai-simple-step .tiny-note{display:block;margin-top:8px}
+.ai-simple-example{font-size:12px;color:#f1dbaa;line-height:1.5}
+.price-single{display:flex;justify-content:space-between;align-items:center;gap:15px;border:1.5px solid #69c27b;border-radius:14px;background:linear-gradient(145deg,#183725,#10281e);padding:16px}
+.price-single strong{font-size:16px;color:#f4e0ab}
+.price-single p{font-size:12px;color:#cde7d2;margin:6px 0 0;line-height:1.5}
+.price-single .price-main{font-size:clamp(29px,4vw,39px);white-space:nowrap;margin:0}
+.publish-simple-button{opacity:.65!important}
+#share-creator-draft{width:100%;font-size:14px}
+.share-payment-sequence{display:grid;gap:12px;margin:14px 0}
+.share-payment-sequence .flow-step{border:1px solid #3e6c4b;border-radius:10px;padding:12px;background:#0c241a}
+.share-payment-sequence .x-cover-preview{margin:0}
+.share-next-step{border:1px solid #465b4b;border-radius:10px;background:#111f1a;padding:12px}
+.share-next-step h4{margin:0 0 6px;color:#e8d4a4;font-size:15px}
+.share-next-step p{font-size:12px;color:#d0e0d0;line-height:1.55;margin:7px 0}
+.share-next-step.completed{border-color:#61ec7f}
+.publish-success{border:2px solid rgba(115,255,141,.76);border-radius:17px;padding:20px;background:linear-gradient(155deg,#1a3826,#091a16);box-shadow:0 0 24px #43ed7b29;margin:15px 0;scroll-margin-top:24px}
+.publish-success h3{font:800 31px/1.16 Georgia,serif;color:#f8deab;margin:8px 0}
+.publish-success p{font-size:13px;line-height:1.55;color:#d0e7d3}
+.publish-success .success-tag{color:#9bffb6;font-weight:900;font-size:11px;letter-spacing:.08em}
+.publish-success .success-actions{display:grid;gap:9px;margin-top:14px}
+.publish-success .success-actions .btn{width:100%}
+.publish-success .success-actions .btn:disabled{opacity:.5}
+.publish-success .success-url{font-size:12px;overflow-wrap:anywhere;color:#a1f8ae;background:#08170f;padding:10px;border-radius:9px;border:1px solid #3f654d}
+.publish-success[data-state="preview"]{border-color:#6f8265;box-shadow:none}
+@media(max-width:740px){
+ .wordmark{font-size:30px}
+ .brand-cluster{gap:7px;align-items:center}
+ .onchain-promise{font-size:9px;padding:5px 7px}
+ .onchain-promise small{font-size:8px}
+ .brand-official-x{font-size:10px}
+ .quick-benefits{gap:6px 11px;padding:8px}
+ .quick-benefits .benefit-play,.quick-benefits .benefit-battle{font-size:12px}
+ .creator-benefits{grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}
+ .creator-benefits article{padding:10px 8px;text-align:center}
+ .creator-benefits article>span{font-size:21px}
+ .creator-benefits h3{font-size:12px;line-height:1.2;margin:3px 0}
+ .creator-benefits p{display:none}
+ .hero-creator{min-height:330px}
+ .hero-creator .hero-content{padding:25px 21px 40px}
+ .mini-info{display:none}
+ .ai-simple-step{padding:12px}
+ .price-single{padding:12px}
+ .price-single .price-main{font-size:29px}
+}
+@media(max-width:360px){.wordmark{font-size:27px}.onchain-promise{font-size:8px}.brand-official-x{font-size:9px}.creator-benefits h3{font-size:11px}}
+@media(prefers-reduced-motion:reduce){.publish-success{scroll-behavior:auto}}
+
 </style>
 
 <style>
@@ -322,19 +392,19 @@ h1,h2,h3{font-family:Georgia,"Times New Roman",serif;letter-spacing:-.015em}h1{f
 <body data-page="player">
   <div class="site-shell">
     <header class="topbar">
-      <div class="brand-cluster"><a class="wordmark" href="index.html" aria-label="IQ Quest home"><span class="wordmark-iq">IQ</span><span class="wordmark-quest">QUEST</span></a><span class="onchain-promise" aria-label="100 percent fully onchain, coming soon">100% FULLY ONCHAIN<small>COMING SOON</small></span></div>
+      <div class="brand-cluster"><a class="wordmark" href="index.html" aria-label="IQ Quest home"><span class="wordmark-iq">IQ</span><span class="wordmark-quest">QUEST</span></a><span class="onchain-promise" aria-label="100 percent onchain is planned, using IQ Labs SDK">100% ONCHAIN · PLANNED<small>IQ LABS SDK · NOT LIVE</small></span><a class="brand-official-x" href="https://x.com/IQLabsOfficial" target="_blank" rel="noopener noreferrer" aria-label="Open IQ Labs official profile on X">↗ IQ LABS ON X · @IQLabsOfficial</a></div>
       <nav class="top-links" aria-label="Main navigation"><a class="nav-create preview-back-top hidden" id="preview-return-top" href="creator.html#studio">← BACK TO EDITOR</a>
         <a href="#adventure">Play</a>
         <a href="#how">How it works</a>
         <a class="nav-create" href="creator.html">Create a Quest <span aria-hidden="true">↗</span></a>
       </nav>
     </header>
-      <div class="quick-benefits" aria-label="Creator publishing from three dollars, coming soon; playing is free; challenge friends on X"><span class="benefit-creator">✦ <strong>CREATORS · BUILD &amp; PUBLISH FROM $3</strong> <small>(COMING SOON)</small></span><span class="benefit-play">✦ <strong>PLAY FOR FREE</strong></span><span class="benefit-battle">⚔ <strong>BATTLE WITH FRIENDS ON X</strong></span></div>
+      <div class="quick-benefits" aria-label="One creator publishing option: share on X, then 3 dollars and 99 cents once payment is live; playing is free"><span class="benefit-creator">✦ <strong>CREATORS · SHARE ON X &amp; PUBLISH $3.99</strong> <small>(COMING SOON)</small></span><span class="benefit-play">✦ <strong>PLAY FOR FREE</strong></span><span class="benefit-battle">⚔ <strong>BATTLE WITH FRIENDS ON X</strong></span></div>
 
     <main>
       <section class="demo-selector" id="demo-selector" aria-labelledby="difficulty-heading">
-        <div class="demo-selector-heading"><div><div class="section-kicker">FREE TEMPLE BATTLES</div><h2 id="difficulty-heading">Choose 15 or 3 questions</h2><p>First select 15 questions or 3 questions, then choose Easy, Medium or Hard. Your first clue appears only after you press Start the Clue.</p></div><span class="demo-selector-stamp">45 QUEST PUZZLES · VARIABLE LIGHTNING CODES</span></div>
-        <div class="selector-step">1 · CHOOSE GAME LENGTH</div>
+        <div class="demo-selector-heading"><div><div class="section-kicker free-battle-kicker">⚔ FREE TEMPLE BATTLES</div><h2 id="difficulty-heading">Challenge your friends. Beat their time.</h2><p>Play a quick 3-question Lightning Battle or the full 15-question quest. Pick a difficulty, race the clock and challenge friends on X. No wallet needed.</p></div><span class="demo-selector-stamp">2 MODES · 3 DIFFICULTIES · FREE TO PLAY</span></div>
+        <div class="battle-pitch" aria-label="Free friend battles"><div><strong>⚔ YOUR TIME vs. YOUR FRIEND’S TIME</strong><span>Finish a quest → share the challenge link → friends play the same puzzles.</span></div><a href="#how">HOW BATTLES WORK ↗</a></div><div class="selector-step">1 · CHOOSE GAME LENGTH</div>
         <div class="battle-mode-switch" role="group" aria-label="Choose game mode">
           <button type="button" class="mode-option" data-mode="full" aria-pressed="true"><span>✦ FULL QUEST</span><strong>15 QUESTIONS</strong><small>Discover the full temple story</small></button>
           <button type="button" class="mode-option" data-mode="lightning" aria-pressed="false"><span>⚡ LIGHTNING BATTLE</span><strong>3 QUESTIONS</strong><small>Fresh codes · challenge friends</small></button>
@@ -353,9 +423,9 @@ h1,h2,h3{font-family:Georgia,"Times New Roman",serif;letter-spacing:-.015em}h1{f
         <div class="hero-content">
           <div class="eyebrow"><span class="diamond-dot">✦</span> FREE MYSTERY ADVENTURES</div>
           <h1 id="hero-heading"><span class="green">IQ</span> QUEST <span class="hero-heading-small" id="hero-quest-name">THE RUNE KEEPER’S PATH</span></h1>
-          <p class="lead">Unlock the ruins. Beat the clock. Challenge your friends.</p>
+          <p class="lead">Can your friends beat you? Solve the mysteries, post your time on X and send the same challenge to your rivals.</p>
           <div class="hero-buttons">
-            <button type="button" class="btn btn-green" id="hero-start">GO TO GAME <span aria-hidden="true">↗</span></button>
+            <button type="button" class="btn btn-green" id="hero-start">START MY BATTLE <span aria-hidden="true">↗</span></button>
             <a href="creator.html" class="btn btn-glass">CREATE A QUEST</a>
           </div>
           
@@ -364,7 +434,7 @@ h1,h2,h3{font-family:Georgia,"Times New Roman",serif;letter-spacing:-.015em}h1{f
       </section>
 
       <div class="onchain-status" role="note" aria-label="Onchain development status"><span class="onchain-dot" aria-hidden="true"></span><strong>SOLANA-NATIVE ROADMAP</strong><span>Free browser play is live. 100% fully onchain creation, storage and play are planned — not live yet.</span></div>
-      <div class="mini-info"><span>✦ <b>FREE PLAY</b> · NO WALLET</span><span>◷ HINT +1:00 · SKIP +1:00</span><span>↗ FRIEND BATTLES ON X</span></div>
+      <div class="mini-info"><span>✦ <b>FREE PLAY</b> · NO WALLET</span><span>◷ HINT +1:00 · SKIP +1:00</span><span>⚔ SHARE YOUR TIME · CHALLENGE FRIENDS ON X</span></div>
 
       <section id="onchain-load-status" class="onchain-load-status hidden" role="status" aria-live="polite"></section>
       <section id="adventure" class="adventure-layout">
@@ -450,7 +520,7 @@ h1,h2,h3{font-family:Georgia,"Times New Roman",serif;letter-spacing:-.015em}h1{f
       </section>
       <section id="how" class="how-grid"><div class="how-item"><span>01</span><h3>Choose your battle</h3><p>Play 15 connected mysteries or a 3-puzzle Lightning Battle with new codes.</p></div><div class="how-item"><span>02</span><h3>Choose your risk</h3><p>A hint adds one minute. You can then skip for one additional minute and see the answer.</p></div><div class="how-item"><span>03</span><h3>Challenge a friend</h3><p>Share a matching puzzle set and target time. First attempts and practice are marked.</p></div></section>
     </main>
-    <footer class="footer"><span><span class="green">IQ</span> QUEST · Devnet Onchain Edition V4.6 · Free to play</span><span class="footer-iqlabs"><span><b>POWERED BY IQ LABS · COMING SOON</b> · Onchain storage &amp; more <span class="footer-soon">(integration in progress)</span></span><a href="https://x.com/IQLabsOfficial" target="_blank" rel="noopener noreferrer" aria-label="IQ Labs official X profile">X @IQLabsOfficial ↗</a></span></footer>
+    <footer class="footer"><span><span class="green">IQ</span> QUEST · Battle Edition V4.8 · Free to play</span><span class="footer-iqlabs"><span><b>POWERED BY IQ LABS · COMING SOON</b> · Onchain storage &amp; more <span class="footer-soon">(integration in progress)</span></span><a href="https://x.com/IQLabsOfficial" target="_blank" rel="noopener noreferrer" aria-label="IQ Labs official X profile">X @IQLabsOfficial ↗</a></span></footer>
   </div>
   <script>(function(){
 'use strict';

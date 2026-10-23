@@ -104,7 +104,7 @@ export async function sendDevnetPayment({provider,draft,plan,onProgress=()=>{},o
  tx.add(web3.SystemProgram.transfer({fromPubkey:wallet,toPubkey:target,lamports:DEVNET_TEST_LAMPORTS}));
  tx.add(new web3.TransactionInstruction({keys:[],programId:new web3.PublicKey(MEMO_PROGRAM),data:new TextEncoder().encode(memo)}));
  const originalMessage=new Uint8Array(tx.serializeMessage());
- onProgress('Phantom will request 0.002 DEVNET test SOL + network fee. Confirm the receiving address in your wallet. This is NOT the $3/$5 mainnet payment.');
+ onProgress('Phantom will request 0.002 DEVNET test SOL + network fee. Confirm the receiving address in your wallet. This is NOT the $3.99 mainnet payment.');
  const signed=await provider.signTransaction(tx);
  const signedMessage=new Uint8Array(signed.serializeMessage());
  if(originalMessage.length!==signedMessage.length||!originalMessage.every((b,i)=>b===signedMessage[i]))throw Error('Phantom changed the requested transaction. Nothing was broadcast.');
@@ -120,7 +120,7 @@ export async function sendDevnetPayment({provider,draft,plan,onProgress=()=>{},o
 
 // Indicative quote ONLY. Never sent to Phantom, never valid as an invoice.
 export async function indicativeMainnetQuote(usd){
- if(usd!==3&&usd!==5)throw Error('Only the $3 and $5 publishing plans are supported.');
+ if(usd!==3.99)throw Error('Only the future $3.99 publishing plan is supported.');
  const controller=new AbortController();
  const timer=setTimeout(()=>controller.abort(),9000);
  try{
