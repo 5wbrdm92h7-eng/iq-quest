@@ -20,7 +20,7 @@
   <meta name="twitter:image:alt" content="IQ QUEST mystery adventures title image with jungle ruins">
   <meta name="theme-color" content="#07120f">
   <meta name="description" content="IQ QUEST: solve a mystery in ancient ruins, beat the clock, and share your result. Free to play.">
-  <title>IQ QUEST — Mystery Adventures V3.7.3</title>
+  <title>IQ QUEST — Battle Edition V3.9.2</title>
   <style>:root{--bg:#080e14;--panel:#101b22;--panel2:#101d24;--stroke:#294043;--white:#eff7ee;--muted:#9cb5ab;--green:#56f86e;--gold:#e8c17d;--cyan:#85e2d6;--red:#ffabb1;--radius:17px;--shadow:0 18px 65px rgba(0,0,0,.4)}
 *,*::before,*::after{box-sizing:border-box}
 html{scroll-behavior:smooth}
@@ -159,6 +159,25 @@ h1,h2,h3{font-family:Georgia,"Times New Roman",serif;letter-spacing:-.015em}h1{f
 @media(max-width:640px){.demo-selector-heading .demo-selector-stamp{white-space:normal}.battle-mode-switch{gap:8px}.mode-option{padding:11px;min-height:85px}.mode-option[aria-pressed=true]{padding:10px}.mode-option strong{font-size:15px}.mode-option span{font-size:10px}.run-status-line{justify-content:flex-start}.battle-share-card #share-x,.battle-share-card #copy-challenge{width:100%;min-width:0}}
 @media(prefers-reduced-motion:reduce){.finish-area .result-total,.milestone-burst{animation:none}.milestone-burst{opacity:1}}
 
+
+/* IQ QUEST V3.9.2: mode selection up top; sealed first question until intentional start */
+.selector-step{font-size:10px;color:#aaffb9;font-weight:950;letter-spacing:.12em;margin:13px 0 9px}
+.demo-selector{margin:14px 0 21px;border:2px solid rgba(104,255,123,.57);box-shadow:0 0 18px rgba(60,255,106,.12),0 14px 45px rgba(0,0,0,.35)}
+.demo-selector-heading{margin-bottom:19px}
+.demo-selector-heading .section-kicker{color:#83ffa1}
+.battle-mode-switch{gap:13px;margin:0 0 20px}
+.mode-option{border:2px solid #3e6a51;min-height:102px}
+.mode-option[aria-pressed=true]{border-color:#7fff97;box-shadow:0 0 0 1px #6dff7b33,0 0 23px #31ff663b,inset 0 0 18px #31ff6612}
+.mode-option strong{font-size:clamp(17px,2.5vw,23px)}
+.start-gate{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:11px;min-height:308px;margin-top:12px;padding:32px 23px 30px;text-align:center;border:1px solid rgba(113,255,142,.7);border-radius:15px;background:linear-gradient(180deg,#112d23e8,#071918f2),var(--ruins-art) center/cover;box-shadow:0 0 18px #51ff6820,inset 0 0 42px #57ff6220}
+.start-gate-emblem{font-family:Georgia,serif;color:#a1ffa9;letter-spacing:.33em;font-size:33px;text-shadow:0 0 20px #6cff7cb8}
+.start-gate h3{margin:2px 0 0;font-size:clamp(25px,4vw,35px);font-family:Georgia,serif;color:#f5dca9}
+.start-gate p{margin:0;line-height:1.55}
+#start-gate-summary{font-size:14px;font-weight:900;color:#9cfba9;letter-spacing:.04em}
+.start-gate-note{max-width:420px;color:#c4d8c8;font-size:12px}
+.start-gate-button{margin-top:10px;width:min(100%,340px);font-size:15px;min-height:58px;box-shadow:0 0 0 1px #95ffac60,0 0 28px #52f96c65}
+.start-gate-button:focus-visible{outline:3px solid #f0d69e;outline-offset:4px}
+@media(max-width:740px){.demo-selector{margin:11px 0 16px}.demo-selector-heading{margin-bottom:12px}.battle-mode-switch{gap:8px;margin-bottom:11px}.mode-option{padding:12px;min-height:94px}.mode-option[aria-pressed=true]{padding:11px}.mode-option strong{font-size:17px}.demo-difficulty-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}.demo-difficulty-card{min-height:66px;align-items:center;text-align:center;justify-content:center;padding:10px 6px}.demo-difficulty-card[aria-pressed=true]{padding:9px 5px}.demo-difficulty-card strong{font-size:clamp(14px,4.7vw,19px)}.demo-difficulty-card .demo-card-label,.demo-difficulty-card>span:not(.demo-card-label),.demo-difficulty-card small{display:none}.selector-step{margin:12px 0 8px}.start-gate{min-height:285px;padding:26px 18px}.start-gate-button{width:100%}}
 </style>
 
 <style>
@@ -219,6 +238,22 @@ h1,h2,h3{font-family:Georgia,"Times New Roman",serif;letter-spacing:-.015em}h1{f
     </header>
 
     <main>
+      <section class="demo-selector" id="demo-selector" aria-labelledby="difficulty-heading">
+        <div class="demo-selector-heading"><div><div class="section-kicker">FREE TEMPLE BATTLES</div><h2 id="difficulty-heading">Choose 15 or 3 questions</h2><p>First select 15 questions or 3 questions, then choose Easy, Medium or Hard. Your first clue appears only after you press Start the Clue.</p></div><span class="demo-selector-stamp">45 QUEST PUZZLES · ENDLESS LIGHTNING COMBINATIONS</span></div>
+        <div class="selector-step">1 · CHOOSE GAME LENGTH</div>
+        <div class="battle-mode-switch" role="group" aria-label="Choose game mode">
+          <button type="button" class="mode-option" data-mode="full" aria-pressed="true"><span>✦ FULL QUEST</span><strong>15 QUESTIONS</strong><small>Discover the full temple story</small></button>
+          <button type="button" class="mode-option" data-mode="lightning" aria-pressed="false"><span>⚡ LIGHTNING BATTLE</span><strong>3 QUESTIONS</strong><small>Fresh codes · challenge friends</small></button>
+        </div>
+        <div class="selector-step">2 · CHOOSE DIFFICULTY</div>
+        <div class="demo-difficulty-grid" role="group" aria-label="Select your quest difficulty">
+          <button class="demo-difficulty-card" type="button" data-difficulty="Easy" aria-pressed="false"><span class="demo-card-label">01 · THE FIRST SEALS</span><strong>EASY</strong><span>15 unique puzzles · 5–9 min*</span><small>Discover the code language and follow clues.</small></button>
+          <button class="demo-difficulty-card" type="button" data-difficulty="Medium" aria-pressed="true"><span class="demo-card-label">02 · THE RUNE KEEPER</span><strong>MEDIUM</strong><span>15 unique puzzles · 9–18 min*</span><small>Crack ciphers and connect discoveries.</small></button>
+          <button class="demo-difficulty-card" type="button" data-difficulty="Hard" aria-pressed="false"><span class="demo-card-label">03 · THE FINAL SEAL</span><strong>HARD</strong><span>15 unique puzzles · 15–30 min*</span><small>Follow a demanding chain of cryptic seals.</small></button>
+        </div>
+        <p class="demo-selector-note">*15-puzzle time estimates. Lightning battles are roughly 1–3 minutes. First Attempt is saved on this browser as soon as a round starts; restarts become Practice. Results are not server-verified.</p>
+      </section>
+
       <section class="hero hero-player" aria-labelledby="hero-heading">
         <div class="hero-scrim"></div>
         <div class="hero-content">
@@ -226,7 +261,7 @@ h1,h2,h3{font-family:Georgia,"Times New Roman",serif;letter-spacing:-.015em}h1{f
           <h1 id="hero-heading"><span class="green">IQ</span> QUEST <span class="hero-heading-small" id="hero-quest-name">THE RUNE KEEPER’S PATH</span></h1>
           <p class="lead">Enter ancient ruins. Uncover forgotten clues. Beat the clock. Challenge your friends.</p>
           <div class="hero-buttons">
-            <button type="button" class="btn btn-green" id="hero-start">ENTER THE TEMPLE <span aria-hidden="true">↗</span></button>
+            <button type="button" class="btn btn-green" id="hero-start">GO TO GAME <span aria-hidden="true">↗</span></button>
             <a href="creator.html" class="btn btn-glass">BUILD YOUR OWN QUEST</a>
             <button type="button" class="btn btn-glass" id="preview-finale-button">▶ WATCH FINALE ANIMATION</button>
           </div>
@@ -236,20 +271,6 @@ h1,h2,h3{font-family:Georgia,"Times New Roman",serif;letter-spacing:-.015em}h1{f
       </section>
 
       <div class="mini-info"><span>✦ <b>100% free</b> for players</span><span>♢ No wallet required</span><span>◷ Hint +1:00 · Skip after hint +1:00</span><span>↗ Share your final time on X</span></div>
-
-      <section class="demo-selector" id="demo-selector" aria-labelledby="difficulty-heading">
-        <div class="demo-selector-heading"><div><div class="section-kicker">FREE TEMPLE BATTLES</div><h2 id="difficulty-heading">Choose your challenge</h2><p>Play the complete 15-mystery quest or take on a fast 3-puzzle Lightning Battle. Share a challenge link so friends solve the exact same puzzles.</p></div><span class="demo-selector-stamp">45 QUEST PUZZLES · ENDLESS LIGHTNING COMBINATIONS</span></div>
-        <div class="battle-mode-switch" role="group" aria-label="Choose game mode">
-          <button type="button" class="mode-option" data-mode="full" aria-pressed="true"><span>✦ FULL QUEST</span><strong>15 mysteries</strong><small>Discover the full temple story</small></button>
-          <button type="button" class="mode-option" data-mode="lightning" aria-pressed="false"><span>⚡ LIGHTNING BATTLE</span><strong>3 quick puzzles</strong><small>Fresh codes · challenge friends</small></button>
-        </div>
-        <div class="demo-difficulty-grid" role="group" aria-label="Select your quest difficulty">
-          <button class="demo-difficulty-card" type="button" data-difficulty="Easy" aria-pressed="false"><span class="demo-card-label">01 · THE FIRST SEALS</span><strong>EASY</strong><span>15 unique puzzles · 5–9 min*</span><small>Discover the code language and follow clues.</small></button>
-          <button class="demo-difficulty-card" type="button" data-difficulty="Medium" aria-pressed="true"><span class="demo-card-label">02 · THE RUNE KEEPER</span><strong>MEDIUM</strong><span>15 unique puzzles · 9–18 min*</span><small>Crack ciphers and connect discoveries.</small></button>
-          <button class="demo-difficulty-card" type="button" data-difficulty="Hard" aria-pressed="false"><span class="demo-card-label">03 · THE FINAL SEAL</span><strong>HARD</strong><span>15 unique puzzles · 15–30 min*</span><small>Follow a demanding chain of cryptic seals.</small></button>
-        </div>
-        <p class="demo-selector-note">*15-puzzle time estimates. Lightning battles are roughly 1–3 minutes. First Attempt is saved on this browser as soon as a round starts; restarts become Practice. Results are not server-verified.</p>
-      </section>
 
       <section id="adventure" class="adventure-layout">
         <article class="panel game-panel">
@@ -273,7 +294,15 @@ h1,h2,h3{font-family:Georgia,"Times New Roman",serif;letter-spacing:-.015em}h1{f
             <div class="timer-tile"><small>HINT PENALTY</small><strong id="hint-penalty" class="penalty">+00:00</strong></div>
             <div class="timer-tile accent-tile"><small>FINAL TIME</small><strong id="running-total">00:00</strong></div>
           </div>
-          <div id="question-area" class="question-area">
+          <section id="start-gate" class="start-gate" aria-labelledby="start-gate-title">
+            <div class="start-gate-emblem" aria-hidden="true">✧ ◇ ✧</div>
+            <div class="section-kicker">THE FIRST SEAL AWAITS</div>
+            <h3 id="start-gate-title">Ready to unlock the mystery?</h3>
+            <p id="start-gate-summary">15 chambers · Medium difficulty</p>
+            <p class="start-gate-note">Your timer and First Attempt begin only when you press Start the Clue. The first question stays hidden until then.</p>
+            <button type="button" id="start-the-clue" class="btn btn-green start-gate-button">START THE CLUE <span aria-hidden="true">→</span></button>
+          </section>
+          <div id="question-area" class="question-area hidden">
             <div class="question-subtitle"><span id="question-number">MYSTERY 01</span><span class="micro-rune" aria-hidden="true">◇ ✧ ◇</span></div>
             <h3 id="question-heading">The Hidden Door</h3>
             <p id="question-story" class="narration"></p>
@@ -353,7 +382,7 @@ h1,h2,h3{font-family:Georgia,"Times New Roman",serif;letter-spacing:-.015em}h1{f
         </div>
       </div>
     </main>
-    <footer class="footer"><span><span class="green">IQ</span> QUEST · Mystery Edition V3.9</span><span>Free to play · Creator publishing will be enabled in a later step</span></footer>
+    <footer class="footer"><span><span class="green">IQ</span> QUEST · Mystery Edition V3.9.2</span><span>Free to play · Creator publishing will be enabled in a later step</span></footer>
   </div>
   <script>(function(){
 'use strict';
@@ -486,14 +515,14 @@ function load(){
 }
 function updateURL(){if(preview)return;try{const u=new URL(location.href);u.searchParams.set('difficulty',chosenDifficulty);if(playMode==='lightning'){u.searchParams.set('mode','lightning');u.searchParams.set('seed',String(puzzleSeed));}else{u.searchParams.delete('mode');u.searchParams.delete('seed');}if(targetTime)u.searchParams.set('target',String(targetTime));else u.searchParams.delete('target');history.replaceState(null,'',u.pathname+u.search+u.hash);}catch(e){}}
 function syncSelection(){
- if(preview){$('demo-selector').classList.add('hidden');$('hero-quest-name').textContent=quest.title.toUpperCase();$('hero-start').textContent='TEST THIS QUEST ↗';return;}
+ if(preview){$('demo-selector').classList.add('hidden');$('hero-quest-name').textContent=quest.title.toUpperCase();$('hero-start').textContent='GO TO TEST QUEST ↘';return;}
  document.querySelectorAll('[data-difficulty]').forEach(b=>{
   b.setAttribute('aria-pressed',String(b.dataset.difficulty===chosenDifficulty));
   const detail=b.querySelector('span:not(.demo-card-label)');
   if(detail){if(!detail.dataset.fullLabel)detail.dataset.fullLabel=detail.textContent;detail.textContent=playMode==='lightning'?'3 changing puzzles · roughly 1–3 min':detail.dataset.fullLabel;}
  });
  document.querySelectorAll('[data-mode]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.mode===playMode)));
- $('hero-quest-name').textContent=quest.title.toUpperCase();$('hero-start').textContent=playMode==='lightning'?'⚡ START '+chosenDifficulty.toUpperCase()+' LIGHTNING ↗':'START '+chosenDifficulty.toUpperCase()+' QUEST ↗';
+ $('hero-quest-name').textContent=quest.title.toUpperCase();$('hero-start').textContent=playMode==='lightning'?'⚡ GO TO '+chosenDifficulty.toUpperCase()+' LIGHTNING ↘':'GO TO '+chosenDifficulty.toUpperCase()+' QUEST ↘';
 }
 function switchGame(nextMode,nextDifficulty,fresh=false){
  if(preview||!['full','lightning'].includes(nextMode)||!validDifficulties.includes(nextDifficulty))return;
@@ -523,7 +552,7 @@ function updateAttemptChip(){
  if(targetTime)$('challenge-target-time').textContent=time(targetTime);
 }
 function renderChapters(){
- const list=$('chapter-list');list.replaceChildren();quest.levels.forEach((l,i)=>{const item=document.createElement('li');item.className=run.skips.includes(i)?'skipped':i<run.step?'passed':i===run.step?'current':'';const label=document.createElement('span');label.textContent=l.title;item.append(label);list.append(item);});
+ const list=$('chapter-list');list.replaceChildren();quest.levels.forEach((l,i)=>{const item=document.createElement('li');item.className=run.skips.includes(i)?'skipped':i<run.step?'passed':i===run.step?'current':'';const label=document.createElement('span');label.textContent=run.startedAt?l.title:'Sealed mystery';item.append(label);list.append(item);});
  const journal=$('clue-journal');journal.replaceChildren();const unlocked=run.finishedAt?quest.levels.length:run.step;
  if(!unlocked){const tip=document.createElement('li');tip.textContent='Solve the first chamber to collect your first clue.';journal.append(tip);}
  for(let i=0;i<unlocked;i++){const clue=document.createElement('li');const name=document.createElement('span');name.textContent=`${String(i+1).padStart(2,'0')} · ${quest.levels[i].title}`;const code=document.createElement('strong');code.textContent=quest.levels[i].a.split('|')[0].trim()+(run.skips.includes(i)?' (skipped)':'');if(run.skips.includes(i))clue.classList.add('skipped');clue.append(name,code);journal.append(clue);}
@@ -536,10 +565,15 @@ function render(){
  $('solved-counter').textContent=`${(run.finishedAt?quest.levels.length:run.step)-run.skips.length} SOLVED · ${run.skips.length} SKIPPED`;
  $('progress-fill').style.width=`${(run.finishedAt?100:run.step/quest.levels.length*100).toFixed(2)}%`;
  $('game-state').textContent=run.finishedAt?'GATEWAY OPEN':run.startedAt?'RUN IN PROGRESS':'READY TO EXPLORE';
- $('question-area').classList.toggle('hidden',!!run.finishedAt);$('finish-area').classList.toggle('hidden',!run.finishedAt);
+ $('start-gate').classList.toggle('hidden',!!run.startedAt||!!run.finishedAt);
+ $('question-area').classList.toggle('hidden',!run.startedAt||!!run.finishedAt);
+ $('finish-area').classList.toggle('hidden',!run.finishedAt);
+ $('start-gate-summary').textContent=`${quest.levels.length} questions · ${quest.difficulty} difficulty${playMode==='lightning'?' · Lightning Battle':''}`;
+ $('start-gate').querySelector('.start-gate-note').textContent=preview?'Your preview timer begins only when you press Start the Clue.':'Your timer and First Attempt begin only when you press Start the Clue. The first question stays hidden until then.';
  const panel=document.querySelector('.game-panel');if(panel){panel.classList.toggle('active-run',!!run.startedAt&&!run.finishedAt);panel.classList.toggle('finish-mode',!!run.finishedAt);}
  updateAttemptChip();
  if(run.finishedAt){showFinish();renderChapters();updateClocks();return;}
+ if(!run.startedAt){renderChapters();updateClocks();return;}
  const level=quest.levels[run.step];$('question-number').textContent=`MYSTERY ${String(run.step+1).padStart(2,'0')}`;
  $('question-heading').textContent=level.title;$('question-story').textContent=level.story||'An ancient clue awaits.';$('question-text').textContent=level.q;
  $('answer-input').value='';$('answer-input').disabled=false;$('answer-input').required=true;
@@ -562,7 +596,7 @@ function advanceLevel(){
  else{run.step++;save();render();milestone();}
 }
 function submit(event){
- event.preventDefault();if(locked||run.finishedAt)return;ensureStart();
+ event.preventDefault();if(locked||run.finishedAt||!run.startedAt)return;
  if(run.skips.includes(run.step)){locked=true;$('check-answer').disabled=true;locked=false;advanceLevel();return;}
  const answer=normalize($('answer-input').value);if(!answer)return;
  const alternatives=quest.levels[run.step].a.split('|').map(normalize);
@@ -571,7 +605,7 @@ function submit(event){
  setTimeout(()=>{locked=false;$('check-answer').disabled=false;advanceLevel();},420);
 }
 function showHint(){
- if(run.finishedAt||locked||run.skips.includes(run.step))return;ensureStart();
+ if(run.finishedAt||!run.startedAt||locked||run.skips.includes(run.step))return;
  if(!run.hints.includes(run.step)){
   run.hints.push(run.step);save();$('hint-content').textContent=quest.levels[run.step].h+' · Hint penalty: +1:00. If stuck, skip for another +1:00.';$('hint-content').classList.remove('hidden');$('show-hint').innerHTML='↷ SKIP QUESTION <span class="hint-cost">+1:00</span>';
  }else{
@@ -646,7 +680,9 @@ if(run.startedAt&&!run.finishedAt)ensureStart();
 if(!preview&&playMode==='lightning'&&!params.get('seed'))updateURL();
 document.querySelectorAll('[data-difficulty]').forEach(btn=>btn.addEventListener('click',()=>switchGame(playMode,btn.dataset.difficulty)));
 document.querySelectorAll('[data-mode]').forEach(btn=>btn.addEventListener('click',()=>switchGame(btn.dataset.mode,chosenDifficulty)));
-$('hero-start').addEventListener('click',()=>{ensureStart();$('adventure').scrollIntoView({behavior:'smooth'});$('answer-input').focus({preventScroll:true});});
+function startTheClue(){ensureStart();render();$('question-area').scrollIntoView({behavior:'smooth',block:'center'});$('answer-input').focus({preventScroll:true});}
+$('hero-start').addEventListener('click',()=>{$('adventure').scrollIntoView({behavior:'smooth',block:'start'});if(run.finishedAt)$('finish-area').focus({preventScroll:true});else if(run.startedAt)$('answer-input').focus({preventScroll:true});else $('start-the-clue').focus({preventScroll:true});});
+$('start-the-clue').addEventListener('click',startTheClue);
 $('preview-finale-button').addEventListener('click',openTreasurePreview);$('treasure-preview-close').addEventListener('click',closeTreasurePreview);$('treasure-preview-replay').addEventListener('click',replayTreasurePreview);$('treasure-preview-overlay').addEventListener('click',e=>{if(e.target===$('treasure-preview-overlay'))closeTreasurePreview();});document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!$('treasure-preview-overlay').classList.contains('hidden'))closeTreasurePreview();});
 $('answer-form').addEventListener('submit',submit);$('show-hint').addEventListener('click',showHint);$('reset-run').addEventListener('click',reset);$('play-again').addEventListener('click',reset);$('new-lightning').addEventListener('click',newLightning);
 $('share-x').addEventListener('click',shareX);$('copy-challenge').addEventListener('click',copyChallenge);$('copy-result').addEventListener('click',copyResult);$('download-card').addEventListener('click',downloadCard);$('replay-treasure').addEventListener('click',playTreasureAnimation);
