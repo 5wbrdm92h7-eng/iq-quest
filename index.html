@@ -20,7 +20,7 @@
   <meta name="twitter:image:alt" content="IQ QUEST mystery adventures title image with jungle ruins">
   <meta name="theme-color" content="#07120f">
   <meta name="description" content="IQ QUEST: solve a mystery in ancient ruins, beat the clock, and share your result. Free to play.">
-  <title>IQ QUEST — Fair Play Edition V4.3</title>
+  <title>IQ QUEST — Onchain Devnet Preview V4.5</title>
   <style>:root{--bg:#080e14;--panel:#101b22;--panel2:#101d24;--stroke:#294043;--white:#eff7ee;--muted:#9cb5ab;--green:#56f86e;--gold:#e8c17d;--cyan:#85e2d6;--red:#ffabb1;--radius:17px;--shadow:0 18px 65px rgba(0,0,0,.4)}
 *,*::before,*::after{box-sizing:border-box}
 html{scroll-behavior:smooth}
@@ -183,10 +183,22 @@ h1,h2,h3{font-family:Georgia,"Times New Roman",serif;letter-spacing:-.015em}h1{f
 .quick-benefits .benefit-battle strong{color:#e2fce6}
 @media(max-width:740px){.quick-benefits{font-size:10px;gap:7px 13px;padding:10px 8px}.quick-benefits .benefit-play,.quick-benefits .benefit-battle{font-size:11.5px;letter-spacing:0}}
 @media(max-width:360px){.quick-benefits{font-size:9.5px}.quick-benefits .benefit-play,.quick-benefits .benefit-battle{font-size:10.8px}.quick-benefits .benefit-creator small{font-size:8px}}
+
+/* V4.5 – Onchain quest verification status */
+.onchain-load-status{margin:15px 0;padding:14px 18px;border:1px solid #6ddc87;background:#10291d;border-radius:12px;color:#c9f8d2;font-size:13px;line-height:1.55}
+.onchain-load-status.error{border-color:#c7857e;background:#301e1b;color:#ffe5dd}
+.is-onchain .hero .hero-buttons a[href="creator.html"]{display:inline-flex}
+.is-onchain .onchain-status{border-color:#8af7a3;background:#133b22}
 </style>
 
 <style>
 .clue-journal{padding:0;margin:14px 0 0;list-style:none;display:grid;gap:8px}.clue-journal li{padding:10px 12px;border:1px solid #3a5b4a;border-radius:10px;background:#12251b;display:flex;gap:8px;justify-content:space-between;align-items:center;flex-wrap:wrap}.clue-journal li span{font-size:11px;color:#cce4cb}.clue-journal li strong{font-size:13px;letter-spacing:.035em;color:#83ffa1;overflow-wrap:anywhere}.question-box p{white-space:pre-line}
+
+/* V4.5 – Onchain quest verification status */
+.onchain-load-status{margin:15px 0;padding:14px 18px;border:1px solid #6ddc87;background:#10291d;border-radius:12px;color:#c9f8d2;font-size:13px;line-height:1.55}
+.onchain-load-status.error{border-color:#c7857e;background:#301e1b;color:#ffe5dd}
+.is-onchain .hero .hero-buttons a[href="creator.html"]{display:inline-flex}
+.is-onchain .onchain-status{border-color:#8af7a3;background:#133b22}
 </style>
 
 <style>
@@ -197,6 +209,12 @@ h1,h2,h3{font-family:Georgia,"Times New Roman",serif;letter-spacing:-.015em}h1{f
 #check-answer:disabled{opacity:.45}
 #answer-input:disabled{background:#13211b;border-color:#586f4e;color:#b7c8ad}
 
+
+/* V4.5 – Onchain quest verification status */
+.onchain-load-status{margin:15px 0;padding:14px 18px;border:1px solid #6ddc87;background:#10291d;border-radius:12px;color:#c9f8d2;font-size:13px;line-height:1.55}
+.onchain-load-status.error{border-color:#c7857e;background:#301e1b;color:#ffe5dd}
+.is-onchain .hero .hero-buttons a[href="creator.html"]{display:inline-flex}
+.is-onchain .onchain-status{border-color:#8af7a3;background:#133b22}
 </style>
 <style>
 /* IQ QUEST V4.1: fast start, collapsible journals, accurate battle-first finale */
@@ -293,6 +311,12 @@ h1,h2,h3{font-family:Georgia,"Times New Roman",serif;letter-spacing:-.015em}h1{f
 }
 @media(max-width:350px){.game-panel .game-actions{grid-template-columns:1fr}.game-panel .question-box{max-height:17svh}}
 @media(prefers-reduced-motion:reduce){.game-panel.active-run::after{animation:none!important}}
+
+/* V4.5 – Onchain quest verification status */
+.onchain-load-status{margin:15px 0;padding:14px 18px;border:1px solid #6ddc87;background:#10291d;border-radius:12px;color:#c9f8d2;font-size:13px;line-height:1.55}
+.onchain-load-status.error{border-color:#c7857e;background:#301e1b;color:#ffe5dd}
+.is-onchain .hero .hero-buttons a[href="creator.html"]{display:inline-flex}
+.is-onchain .onchain-status{border-color:#8af7a3;background:#133b22}
 </style>
 </head>
 <body data-page="player">
@@ -342,6 +366,7 @@ h1,h2,h3{font-family:Georgia,"Times New Roman",serif;letter-spacing:-.015em}h1{f
       <div class="onchain-status" role="note" aria-label="Onchain development status"><span class="onchain-dot" aria-hidden="true"></span><strong>SOLANA-NATIVE ROADMAP</strong><span>Free browser play is live. 100% fully onchain creation, storage and play are planned — not live yet.</span></div>
       <div class="mini-info"><span>✦ <b>FREE PLAY</b> · NO WALLET</span><span>◷ HINT +1:00 · SKIP +1:00</span><span>↗ FRIEND BATTLES ON X</span></div>
 
+      <section id="onchain-load-status" class="onchain-load-status hidden" role="status" aria-live="polite"></section>
       <section id="adventure" class="adventure-layout">
         <article class="panel game-panel">
           <span class="rune-corner rune-corner-tl" aria-hidden="true">◇</span>
@@ -425,7 +450,7 @@ h1,h2,h3{font-family:Georgia,"Times New Roman",serif;letter-spacing:-.015em}h1{f
       </section>
       <section id="how" class="how-grid"><div class="how-item"><span>01</span><h3>Choose your battle</h3><p>Play 15 connected mysteries or a 3-puzzle Lightning Battle with new codes.</p></div><div class="how-item"><span>02</span><h3>Choose your risk</h3><p>A hint adds one minute. You can then skip for one additional minute and see the answer.</p></div><div class="how-item"><span>03</span><h3>Challenge a friend</h3><p>Share a matching puzzle set and target time. First attempts and practice are marked.</p></div></section>
     </main>
-    <footer class="footer"><span><span class="green">IQ</span> QUEST · Fair Play Edition V4.3 · Free to play</span><span class="footer-iqlabs"><span><b>POWERED BY IQ LABS · COMING SOON</b> · Onchain storage &amp; more <span class="footer-soon">(integration in progress)</span></span><a href="https://x.com/IQLabsOfficial" target="_blank" rel="noopener noreferrer" aria-label="IQ Labs official X profile">X @IQLabsOfficial ↗</a></span></footer>
+    <footer class="footer"><span><span class="green">IQ</span> QUEST · Devnet Onchain Edition V4.5 · Free to play</span><span class="footer-iqlabs"><span><b>POWERED BY IQ LABS · COMING SOON</b> · Onchain storage &amp; more <span class="footer-soon">(integration in progress)</span></span><a href="https://x.com/IQLabsOfficial" target="_blank" rel="noopener noreferrer" aria-label="IQ Labs official X profile">X @IQLabsOfficial ↗</a></span></footer>
   </div>
   <script>(function(){
 'use strict';
@@ -482,6 +507,11 @@ window.IQQuest={DEMO:structuredClone(DEMO),DEMO_QUESTS:{Easy:validate(EASY_DEMO)
 const $=id=>document.getElementById(id);
 const params=new URLSearchParams(location.search);
 const preview=params.get('preview')==='1';
+const onchainSignature=params.get('tx')||'';
+const onchainMode=!preview&&!!onchainSignature;
+const onchainNetwork=params.get('network')==='mainnet-beta'?'mainnet-beta':'devnet';
+let onchainReady=!onchainMode;
+const originalTargetParam=params.get('target');
 const validDifficulties=['Easy','Medium','Hard'];
 let chosenDifficulty=validDifficulties.includes(params.get('difficulty'))?params.get('difficulty'):'Medium';
 let playMode=!preview&&params.get('mode')==='lightning'?'lightning':'full';
@@ -532,7 +562,7 @@ if(!preview)quest=currentQuest();
 // A target time from another difficulty/seed is NOT a valid friend challenge.
 // Old links without a matching fingerprint intentionally lose the battle target.
 function matchesChallenge(){return !preview && params.get('match')===puzzleFingerprint(quest);}
-if(targetTime&&!matchesChallenge())targetTime=0;
+if(targetTime&&!onchainMode&&!matchesChallenge())targetTime=0;
 // The seed is only a recipe. Different seeds can generate identical questions.
 // A stable fingerprint of the actual displayed puzzle contents is the identity
 // for First Attempt, challenge matching, and per-set personal records.
@@ -545,8 +575,8 @@ function puzzleFingerprint(data){
  }
  return a.toString(36)+'-'+b.toString(36);
 }
-function puzzleKey(){return (playMode==='lightning'?'lightning':'full')+'_'+quest.difficulty+'_'+puzzleFingerprint(quest);}
-function setId(){return preview?'preview_'+encodeURIComponent(quest.title).slice(0,65):playMode+'_'+chosenDifficulty+(playMode==='lightning'?'_'+puzzleSeed:'');}
+function puzzleKey(){return (onchainMode?'onchain':playMode==='lightning'?'lightning':'full')+'_'+quest.difficulty+'_'+puzzleFingerprint(quest);}
+function setId(){return preview?'preview_'+encodeURIComponent(quest.title).slice(0,65):onchainMode?'onchain_'+onchainSignature:playMode+'_'+chosenDifficulty+(playMode==='lightning'?'_'+puzzleSeed:'');}
 function runKey(){return 'iqquest_run_v40_'+setId();}
 function attemptKey(){return 'iqquest_first_v40_'+puzzleKey();}
 function bestKey(){return 'iqquest_best_v40_'+puzzleKey();}
@@ -602,8 +632,9 @@ function load(){
     if(run.startedAt&&!preview){if(!readStore(attemptKey()))writeStore(attemptKey(),'used');}
   }else run=defaultRun();
 }
-function updateURL(){if(preview)return;try{const u=new URL(location.href);u.searchParams.set('difficulty',chosenDifficulty);if(playMode==='lightning'){u.searchParams.set('mode','lightning');u.searchParams.set('seed',String(puzzleSeed));}else{u.searchParams.delete('mode');u.searchParams.delete('seed');}if(targetTime){u.searchParams.set('target',String(targetTime));u.searchParams.set('match',puzzleFingerprint(quest));}else{u.searchParams.delete('target');u.searchParams.delete('match');}history.replaceState(null,'',u.pathname+u.search+u.hash);}catch(e){}}
+function updateURL(){if(preview||onchainMode)return;try{const u=new URL(location.href);u.searchParams.set('difficulty',chosenDifficulty);if(playMode==='lightning'){u.searchParams.set('mode','lightning');u.searchParams.set('seed',String(puzzleSeed));}else{u.searchParams.delete('mode');u.searchParams.delete('seed');}if(targetTime){u.searchParams.set('target',String(targetTime));u.searchParams.set('match',puzzleFingerprint(quest));}else{u.searchParams.delete('target');u.searchParams.delete('match');}history.replaceState(null,'',u.pathname+u.search+u.hash);}catch(e){}}
 function syncSelection(){
+ if(onchainMode){$('demo-selector').classList.add('hidden');$('hero-quest-name').textContent=onchainReady?quest.title.toUpperCase():'VERIFYING ONCHAIN QUEST…';$('hero-start').textContent='GO TO ONCHAIN QUEST ↘';return;}
  if(preview){$('demo-selector').classList.add('hidden');$('hero-quest-name').textContent=quest.title.toUpperCase();$('hero-start').textContent='GO TO TEST QUEST ↘';return;}
  document.querySelectorAll('[data-difficulty]').forEach(b=>{
   b.setAttribute('aria-pressed',String(b.dataset.difficulty===chosenDifficulty));
@@ -614,7 +645,7 @@ function syncSelection(){
  $('hero-quest-name').textContent=quest.title.toUpperCase();$('hero-start').textContent=playMode==='lightning'?'⚡ GO TO '+chosenDifficulty.toUpperCase()+' LIGHTNING ↘':'GO TO '+chosenDifficulty.toUpperCase()+' QUEST ↘';
 }
 function switchGame(nextMode,nextDifficulty,fresh=false){
- if(preview||!['full','lightning'].includes(nextMode)||!validDifficulties.includes(nextDifficulty))return;
+ if(preview||onchainMode||!['full','lightning'].includes(nextMode)||!validDifficulties.includes(nextDifficulty))return;
  if(!fresh&&nextMode===playMode&&nextDifficulty===chosenDifficulty)return;
  if(run.startedAt&&!run.finishedAt&&!confirm('Switching challenges abandons this run. An already started First Attempt cannot be restored. Continue?'))return;
  stopTimer();playMode=nextMode;chosenDifficulty=nextDifficulty;
@@ -622,6 +653,7 @@ function switchGame(nextMode,nextDifficulty,fresh=false){
  targetTime=0;quest=currentQuest();run=defaultRun();locked=false;load();syncSelection();render();updateURL();
 }
 function ensureStart(){
+ if(onchainMode&&!onchainReady)return;
  if(run.finishedAt)return;
  if(!run.startedAt){
   if(preview)run.attemptType='preview';
@@ -739,8 +771,8 @@ function showFinish(){
 }
 function challengeURL(){
  const url=new URL(location.origin+location.pathname);
- url.searchParams.set('difficulty',chosenDifficulty);
- if(playMode==='lightning'){url.searchParams.set('mode','lightning');url.searchParams.set('seed',String(puzzleSeed));}
+ if(onchainMode){url.searchParams.set('tx',onchainSignature);url.searchParams.set('network',onchainNetwork);}else url.searchParams.set('difficulty',chosenDifficulty);
+ if(!onchainMode&&playMode==='lightning'){url.searchParams.set('mode','lightning');url.searchParams.set('seed',String(puzzleSeed));}
  url.searchParams.set('target',String(totalSeconds()));url.searchParams.set('match',puzzleFingerprint(quest));return url.toString();
 }
 function shareText(){return `⚔️ IQ QUEST: Can you beat ${time(totalSeconds())}?\n${playMode==='lightning'?'⚡ Lightning Battle: same 3 puzzles':'✦ Full Quest: same 15 mysteries'} · ${quest.difficulty} · ${run.attemptType==='first'?'First Attempt':'Practice'}\n${quest.levels.length-run.skips.length}/${quest.levels.length} solved · ${run.hints.length} hints · ${run.skips.length} skips (penalties included)\nPlay the same quest: #IQQUEST #Solana`;}
@@ -761,13 +793,39 @@ async function downloadCard(){
  ctx.font='19px sans-serif';ctx.fillStyle='#b4c6bc';ctx.fillText(`${run.attemptType==='first'?'FIRST ATTEMPT':'PRACTICE'} · ${quest.levels.length-run.skips.length} solved · ${run.skips.length} skipped · Unverified`,90,991);
  canvas.toBlob(blob=>{if(!blob){alert('Could not create result image.');return;}const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='iq-quest-result.png';document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1200);},'image/png');
 }
-load();syncSelection();render();
+if(!onchainMode){load();syncSelection();render();}
+else{
+ document.body.classList.add('is-onchain');
+ const n=$('onchain-load-status');n.classList.remove('hidden');
+ n.textContent='◈ Verifying 15 questions from IQ Labs on Solana '+onchainNetwork+'… No wallet needed to play.';
+ $('demo-selector').classList.add('hidden');
+ $('start-the-clue').disabled=true;
+ syncSelection();
+ // The first question is not shown until an actual onchain readback succeeds.
+ (async()=>{try{
+   const mod=await import('./onchain-bridge.js');
+   const fetched=await mod.readQuestOnchain(onchainSignature,onchainNetwork);
+   quest=IQQuest.validate(fetched.data);
+   chosenDifficulty=quest.difficulty;playMode='full';puzzleSeed=0;
+   targetTime=Number.isInteger(Number(originalTargetParam))&&Number(originalTargetParam)>0&&Number(originalTargetParam)<=86399&&params.get('match')===puzzleFingerprint(quest)?Number(originalTargetParam):0;
+   onchainReady=true;load();syncSelection();render();
+   $('start-the-clue').disabled=false;
+   n.textContent='✓ VERIFIED ONCHAIN · IQ Labs '+onchainNetwork.toUpperCase()+' · 15 puzzles · Inscription '+onchainSignature.slice(0,12)+'…'+onchainSignature.slice(-8)+' · Players need no wallet.';
+   const status=document.querySelector('.onchain-status');if(status)status.textContent='✓ IQ LABS ONCHAIN QUEST VERIFIED · '+onchainNetwork.toUpperCase()+' · Quest and answers are publicly readable on Solana. Battle times remain browser-unverified.';
+   if(run.startedAt&&!run.finishedAt)ensureStart();
+ }catch(error){
+   onchainReady=false;
+   n.classList.add('error');n.textContent='COULD NOT VERIFY THE ONCHAIN QUEST: '+String(error?.message||error)+' · Check the transaction signature and network. No demo questions are being substituted.';
+   $('hero-quest-name').textContent='ONCHAIN QUEST UNAVAILABLE';
+   $('start-the-clue').disabled=true;
+ }})();
+}
 if(preview){document.body.classList.add('is-creator-preview');$('preview-banner').classList.remove('hidden');$('preview-return-top').classList.remove('hidden');}
 if(run.startedAt&&!run.finishedAt)ensureStart();
-if(!preview&&playMode==='lightning'&&!params.get('seed'))updateURL();
+if(!preview&&!onchainMode&&playMode==='lightning'&&!params.get('seed'))updateURL();
 document.querySelectorAll('[data-difficulty]').forEach(btn=>btn.addEventListener('click',()=>switchGame(playMode,btn.dataset.difficulty)));
 document.querySelectorAll('[data-mode]').forEach(btn=>btn.addEventListener('click',()=>switchGame(btn.dataset.mode,chosenDifficulty)));
-function startTheClue(){ensureStart();render();if(matchMedia('(max-width:740px)').matches){document.querySelector('.game-panel').scrollIntoView({behavior:'auto',block:'start'});}else{$('question-area').scrollIntoView({behavior:'smooth',block:'center'});}$('answer-input').focus({preventScroll:true});}
+function startTheClue(){if(onchainMode&&!onchainReady)return;ensureStart();render();if(matchMedia('(max-width:740px)').matches){document.querySelector('.game-panel').scrollIntoView({behavior:'auto',block:'start'});}else{$('question-area').scrollIntoView({behavior:'smooth',block:'center'});}$('answer-input').focus({preventScroll:true});}
 $('hero-start').addEventListener('click',()=>{$('adventure').scrollIntoView({behavior:'smooth',block:'start'});if(run.finishedAt)$('finish-area').focus({preventScroll:true});else if(run.startedAt)$('answer-input').focus({preventScroll:true});else $('start-the-clue').focus({preventScroll:true});});
 $('start-the-clue').addEventListener('click',startTheClue);
 $('answer-form').addEventListener('submit',submit);$('show-hint').addEventListener('click',showHint);$('reset-run').addEventListener('click',reset);$('play-again').addEventListener('click',reset);$('new-lightning').addEventListener('click',newLightning);

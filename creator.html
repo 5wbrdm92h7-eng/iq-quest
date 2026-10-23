@@ -90,6 +90,17 @@ h1,h2,h3{font-family:Georgia,"Times New Roman",serif;letter-spacing:-.015em}h1{f
 .publish-perks span{font-size:10px;line-height:1.5;border:1px solid #416b4e;border-radius:7px;background:#173323;color:#c2f7cc;padding:6px 9px;font-weight:700}
 .price-option:focus-within{outline:2px solid #56f86e;outline-offset:2px}
 .social-payment-flow{padding:13px;border:1px solid #385949;border-radius:12px;background:#10231d;margin:16px 0}
+
+/* V4.5 · Devnet IQ Labs publishing workstation */
+.iq-devnet-publisher{margin-top:18px;padding:17px;border:1px solid #65d980;border-radius:14px;background:linear-gradient(160deg,#153c29,#0a1c19);box-shadow:0 0 22px #56f86e17}
+.iq-devnet-publisher h4{margin:0 0 6px;color:#b5ffbf;font-size:17px}
+.iq-devnet-publisher p{font-size:12px;color:#c5dec9;line-height:1.55}
+.iq-devnet-publisher .btn{font-size:12px}
+.iq-devnet-publisher .publish-consent{display:flex;gap:10px;font-size:12px;line-height:1.5;color:#f1e3b6;margin:12px 0}
+.iq-devnet-publisher .publish-consent input{flex:none;align-self:flex-start;width:18px;height:18px;accent-color:#56f86e}
+.iq-devnet-publisher .publish-progress{white-space:pre-wrap;overflow-wrap:anywhere;color:#bafed0;font-size:12px;line-height:1.55;margin:8px 0}
+.iq-devnet-publisher .publish-links{display:grid;gap:8px;margin:12px 0}
+.iq-devnet-publisher .publish-links a{color:#a5ffb5;overflow-wrap:anywhere;text-decoration:underline}
 </style>
 <style>.wallet-preview{display:grid;gap:8px;margin:16px 0;padding:15px;border:1px solid #426b50;border-radius:12px;background:#101e19}.wallet-preview strong{color:#b8ffbf;font-size:13px}.wallet-preview p,.wallet-preview div{margin:0;font-size:11px;line-height:1.6;color:#bed3c4}.wallet-preview .btn{width:100%;font-size:11px}
 /* IQ QUEST V4.2 · robust ChatGPT import and verified-state messaging */
@@ -124,6 +135,17 @@ h1,h2,h3{font-family:Georgia,"Times New Roman",serif;letter-spacing:-.015em}h1{f
 .footer-iqlabs a:hover{color:#eaffea}
 @media(max-width:740px){.topbar{height:auto;min-height:68px;flex-wrap:wrap;gap:5px 10px;padding:9px 0}.brand-cluster{width:100%;gap:8px}.onchain-promise{padding:5px 7px;font-size:9px}.onchain-promise small{font-size:8px}.top-links{width:100%;justify-content:flex-start;gap:8px}.top-links .nav-create{padding:7px 10px}.quick-benefits{justify-content:center;gap:5px 12px;margin-top:8px;padding:8px;font-size:9px;letter-spacing:0}.footer-iqlabs{justify-content:flex-start;text-align:left}}
 @media(max-width:360px){.wordmark{font-size:23px}.onchain-promise{font-size:8px;padding:5px}.quick-benefits{font-size:8.7px}}
+
+/* V4.5 · Devnet IQ Labs publishing workstation */
+.iq-devnet-publisher{margin-top:18px;padding:17px;border:1px solid #65d980;border-radius:14px;background:linear-gradient(160deg,#153c29,#0a1c19);box-shadow:0 0 22px #56f86e17}
+.iq-devnet-publisher h4{margin:0 0 6px;color:#b5ffbf;font-size:17px}
+.iq-devnet-publisher p{font-size:12px;color:#c5dec9;line-height:1.55}
+.iq-devnet-publisher .btn{font-size:12px}
+.iq-devnet-publisher .publish-consent{display:flex;gap:10px;font-size:12px;line-height:1.5;color:#f1e3b6;margin:12px 0}
+.iq-devnet-publisher .publish-consent input{flex:none;align-self:flex-start;width:18px;height:18px;accent-color:#56f86e}
+.iq-devnet-publisher .publish-progress{white-space:pre-wrap;overflow-wrap:anywhere;color:#bafed0;font-size:12px;line-height:1.55;margin:8px 0}
+.iq-devnet-publisher .publish-links{display:grid;gap:8px;margin:12px 0}
+.iq-devnet-publisher .publish-links a{color:#a5ffb5;overflow-wrap:anywhere;text-decoration:underline}
 </style></head>
 <body data-page="creator">
   <div class="site-shell">
@@ -165,7 +187,7 @@ h1,h2,h3{font-family:Georgia,"Times New Roman",serif;letter-spacing:-.015em}h1{f
           <div class="panel studio-panel"><div class="panel-topline"><span class="section-kicker">03 · QUESTION EDITOR</span><span id="editor-count" class="status-dot">15 QUESTIONS</span></div><h2>Make every clue yours</h2><p class="section-intro">ChatGPT can draft and revise all fifteen puzzles, but please play-test the exact answers. Changing difficulty alone does not rewrite existing questions.</p><div class="editor-layout"><div class="level-selector" id="level-selector" aria-label="Choose a question"></div><div class="level-fields"><div class="form-group"><label for="level-title">Chapter title</label><input id="level-title" maxlength="100"></div><div class="form-group"><label for="level-story">Story / atmosphere</label><textarea id="level-story" rows="3" maxlength="500"></textarea></div><div class="form-group"><label for="level-question">Question</label><textarea id="level-question" rows="3" maxlength="600"></textarea></div><div class="form-group"><label for="level-hint">Hint <span class="muted">(costs player +1 minute)</span></label><textarea id="level-hint" rows="2" maxlength="400"></textarea></div><div class="form-group"><label for="level-answer">Accepted answer <span class="muted">(separate alternatives with |)</span></label><input id="level-answer" maxlength="180" spellcheck="false" placeholder="e.g. compass | a compass"></div><div class="tiny-note">Answers are stored as plaintext in this draft. They are not secret or prize-safe.</div></div></div></div>
         </div>
         <aside class="studio-aside"><div class="panel preview-panel"><div class="section-kicker">LIVE QUEST PREVIEW</div><div class="preview-image" role="img" aria-label="Ancient temple ruins in jungle mist"></div><div class="preview-body"><div class="preview-brand">IQ QUEST</div><h3 id="preview-title">The Lost Solana Treasure</h3><p id="preview-theme">Ancient jungle temple adventure...</p><div class="preview-tags"><span id="preview-difficulty">MEDIUM</span><span id="preview-count">15 QUESTIONS</span><span id="preview-duration">9–18 MIN</span></div><div class="stack-buttons"><button type="button" id="preview-game" class="btn btn-green">▶ TEST YOUR QUEST FREE</button><span class="preview-help-text">You can return to this editor without losing your draft.</span><button type="button" id="save-draft" class="btn btn-outline">SAVE DRAFT</button><button type="button" id="download-json" class="btn btn-outline">↓ DOWNLOAD JSON</button></div><div id="draft-status" class="small-status" role="status" aria-live="polite"></div></div></div>
-          <div class="panel publish-panel"><div class="section-kicker">04 · PUBLISHING READINESS</div><h3>Creators publish. Players play free.</h3>
+          <div class="panel publish-panel"><div class="section-kicker">04 · PUBLISHING READINESS</div><h3>Creators build free. Players play free.</h3>
             <p>Build and test your 15-question adventure for free. Later, publish once for $3 (public directory) or $5 (unlisted link). Anyone who gets its link can play free — no wallet, no per-player charges.</p>
             <div class="creator-price" aria-label="Planned one-time publishing plans">
               <div class="price-choice" role="radiogroup" aria-label="Choose how your adventure will be listed">
@@ -201,13 +223,30 @@ h1,h2,h3{font-family:Georgia,"Times New Roman",serif;letter-spacing:-.015em}h1{f
             <div class="price-micro" id="payload-headroom">Payload headroom: calculating…</div>
             <div class="price-micro">◈ Prototype only — no SOL charge or on-chain publishing. Checkout requires production configuration and security tests.</div>
             <div class="wallet-preview"><strong>Phantom wallet · read-only readiness check</strong><p>Connecting only requests your public wallet address. It does not request a signature or move SOL.</p><button type="button" id="check-wallet" class="btn btn-outline">CONNECT PHANTOM · NO PAYMENT</button><div id="wallet-readiness" role="status" aria-live="polite">Wallet not connected.</div></div><button type="button" id="start-sol-checkout" class="btn btn-gold" disabled>CHECK $3 COMMUNITY READINESS · NO PAYMENT</button>
-            <p class="share-step-status" id="checkout-status" role="status" aria-live="polite">Community Publish selected. X sharing is optional. No SOL payment or quest publication is active yet.</p>
-            <p class="tiny-note">This is only an unpaid readiness check, not a charge or publication. Public directory listings and unlisted links do not exist yet. Never approve SOL transfers based on this preview.</p></div>
+            <p class="share-step-status" id="checkout-status" role="status" aria-live="polite">Community Publish selected. X sharing is optional. No platform payment or Mainnet publication is active. The separate Devnet test upload is available below.</p>
+            <p class="tiny-note">This is only an unpaid readiness check, not a charge or publication. Public directory listings and unlisted links do not exist yet. Never approve SOL transfers based on this preview.</p>
+            <section class="iq-devnet-publisher" aria-labelledby="devnet-publish-heading">
+              <div class="section-kicker">NEW · EXPERIMENTAL REAL ONCHAIN TEST</div>
+              <h4 id="devnet-publish-heading">Publish 15 puzzles to IQ Labs Devnet</h4>
+              <p>The IQ Labs SDK writes your complete validated quest to Solana <strong>Devnet</strong>. After an exact onchain readback, you get a genuine shareable link. Friends play free, without connecting a wallet.</p>
+              <p><strong>Not a paid Mainnet release.</strong> No $3/$5 platform fee is collected. Devnet SOL has no monetary value. Phantom may still ask you to sign multiple Devnet transactions and pay Devnet network / protocol fees.</p>
+              <p>Selected plan is recorded as metadata only. A public community directory and real paid Mainnet checkout are not live yet.</p>
+              <label class="publish-consent"><input type="checkbox" id="devnet-accept"><span>I selected <strong>Solana Devnet</strong> in Phantom. I understand the questions, answers and hints are publicly readable onchain and may be permanent. I will review every wallet request.</span></label>
+              <button type="button" class="btn btn-green" id="publish-iq-devnet" disabled>◈ PUBLISH TO IQ LABS DEVNET · TEST SOL ONLY</button>
+              <button type="button" class="btn btn-outline" id="verify-iq-devnet">↻ VERIFY LAST DEVNET PUBLICATION</button>
+              <div id="devnet-publish-status" class="publish-progress" role="status" aria-live="polite">Connect Phantom above, select Devnet in the wallet, then review the consent box. No SOL transaction has been requested.</div>
+              <div class="publish-links hidden" id="devnet-links">
+                <a id="devnet-play-link" target="_blank" rel="noopener noreferrer" href="#">OPEN YOUR PUBLISHED QUEST ↗</a>
+                <button type="button" class="btn btn-outline" id="copy-devnet-link">COPY PLAYER LINK</button>
+                <a id="devnet-share-x" class="btn btn-green" target="_blank" rel="noopener noreferrer" href="https://x.com/intent/tweet">SHARE YOUR REAL QUEST ON X ↗</a>
+                <a id="devnet-explorer" target="_blank" rel="noopener noreferrer" href="#">VERIFY TRANSACTION IN SOLANA EXPLORER ↗</a>
+              </div>
+            </section></div>
           <div class="panel publish-panel"><div class="section-kicker">SHARING THAT BUILDS COMMUNITIES</div><h3>From followers to challengers</h3><p>Once your adventure is actually published, share its link on X, Discord, Telegram or WhatsApp and invite everyone to beat your time. X sharing is completely optional and does not affect the publishing price. Rankings are unverified in this demo.</p></div>
         </aside>
       </section>
     </main>
-    <footer class="footer"><span><span class="green">IQ</span> QUEST · Creator Studio V4.4 · Build &amp; test free; publication is not live</span><span class="footer-iqlabs"><span><b>POWERED BY IQ LABS · COMING SOON</b> · Onchain storage &amp; more <span class="footer-soon">(integration in progress)</span></span><a href="https://x.com/IQLabsOfficial" target="_blank" rel="noopener noreferrer" aria-label="IQ Labs official X profile">X @IQLabsOfficial ↗</a></span></footer>
+    <footer class="footer"><span><span class="green">IQ</span> QUEST · Creator Studio V4.5 · Build &amp; test free; publication is not live</span><span class="footer-iqlabs"><span><b>POWERED BY IQ LABS · COMING SOON</b> · Onchain storage &amp; more <span class="footer-soon">(integration in progress)</span></span><a href="https://x.com/IQLabsOfficial" target="_blank" rel="noopener noreferrer" aria-label="IQ Labs official X profile">X @IQLabsOfficial ↗</a></span></footer>
   </div>
   <script>(function(){
 'use strict';
@@ -616,5 +655,72 @@ try{
    readinessStatus.textContent=rows.join(' · ');
  });
 })();
+</script><script type="module">
+import {publishQuestDevnet,readQuestOnchain,isSolanaSignature} from './onchain-bridge.js';
+const $=id=>document.getElementById(id);
+const publish=$('publish-iq-devnet'),consent=$('devnet-accept'),verify=$('verify-iq-devnet');
+const progress=$('devnet-publish-status'),links=$('devnet-links');
+let busy=false,lastUrl='';
+function setStatus(text){progress.textContent=String(text);}
+function enable(){publish.disabled=busy||!consent.checked;verify.disabled=busy;}
+consent.addEventListener('change',enable);enable();
+function showPublished(sig,title,verified){
+ const u=new URL('index.html',location.href);
+ u.searchParams.set('tx',sig);u.searchParams.set('network','devnet');
+ lastUrl=u.toString();
+ $('devnet-play-link').href=lastUrl;
+ $('devnet-explorer').href='https://explorer.solana.com/tx/'+encodeURIComponent(sig)+'?cluster=devnet';
+ const share=new URL('https://x.com/intent/tweet');
+ share.searchParams.set('text','I published '+title+' on IQ QUEST using IQ Labs on Solana Devnet! Play all 15 puzzles free and try to beat my time. #IQQUEST #Solana');
+ share.searchParams.set('url',lastUrl);
+ $('devnet-share-x').href=share.toString();
+ links.classList.remove('hidden');
+ setStatus((verified?'✓ Verified all 15 puzzles from IQ Labs Devnet.':'Devnet inscription exists; verification still pending.')+' Transaction: '+sig+'\nYour player link is ready below.');
+}
+async function checkedDraft(){
+ const get=window.IQQuestEditorGetDraft;
+ if(typeof get!=='function')throw Error('Editor is not ready.');
+ const draft=get();
+ const bytes=new TextEncoder().encode(JSON.stringify(draft)).length;
+ if(bytes>7500)throw Error('Your 15 questions use '+bytes+' bytes. Shorten the quest below approximately 7.5 KB to leave space for upload metadata.');
+ if(!draft.levels.every(l=>l.q&&l.a&&l.h))throw Error('All 15 questions, answers and hints must be complete.');
+ return draft;
+}
+publish.addEventListener('click',async()=>{
+ if(busy||!consent.checked)return;
+ busy=true;enable();links.classList.add('hidden');
+ try{
+   const draft=await checkedDraft();
+   const phantom=window.phantom?.solana||window.solana;
+   if(!phantom?.isPhantom)throw Error('Open the site inside Phantom on iPhone, or install Phantom on desktop.');
+   setStatus('Connecting Phantom. Choose DEVNET, not Mainnet…');
+   const connected=await phantom.connect();
+   if(!connected?.publicKey&&!phantom.publicKey)throw Error('Phantom did not return a public address.');
+   const plan=document.querySelector('input[name="publish-plan"]:checked')?.value||'community';
+   const result=await publishQuestDevnet({draft,provider:phantom,plan,onProgress:setStatus});
+   try{localStorage.setItem('iqquest_devnet_last_title_v45',draft.title);}catch(e){}
+   showPublished(result.signature,draft.title,true);
+ }catch(error){
+   setStatus('Upload was NOT verified: '+String(error?.message||error)+'\nIf you approved any transactions, inspect Phantom history / Solana Explorer before retrying. Do not pay mainnet SOL.');
+ }finally{busy=false;enable();}
+});
+verify.addEventListener('click',async()=>{
+ if(busy)return;busy=true;enable();
+ try{
+   const sig=localStorage.getItem('iqquest_devnet_last_sig_v45')||'';
+   if(!isSolanaSignature(sig))throw Error('No valid saved Devnet inscription signature on this device.');
+   setStatus('Reading inscription from IQ Labs Devnet…');
+   const result=await readQuestOnchain(sig,'devnet');
+   if(window.IQQuest?.validate)window.IQQuest.validate(result.data);
+   const title=result.data.title||'An IQ QUEST Adventure';
+   showPublished(sig,title,true);
+ }catch(error){setStatus('Could not verify saved inscription: '+String(error?.message||error));}
+ finally{busy=false;enable();}
+});
+$('copy-devnet-link').addEventListener('click',async()=>{
+ if(!lastUrl)return;
+ try{await navigator.clipboard.writeText(lastUrl);$('copy-devnet-link').textContent='✓ LINK COPIED';}
+ catch(e){prompt('Copy this quest link:',lastUrl);}
+});
 </script></body>
 </html>
