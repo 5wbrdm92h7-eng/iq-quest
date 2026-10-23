@@ -20,7 +20,7 @@
   <meta name="twitter:image:alt" content="IQ QUEST mystery adventures title image with jungle ruins">
   <meta name="theme-color" content="#07120f">
   <meta name="description" content="IQ QUEST: solve a mystery in ancient ruins, beat the clock, and share your result. Free to play.">
-  <title>IQ QUEST — Fair Play Edition V4.1</title>
+  <title>IQ QUEST — Fair Play Edition V4.2</title>
   <style>:root{--bg:#080e14;--panel:#101b22;--panel2:#101d24;--stroke:#294043;--white:#eff7ee;--muted:#9cb5ab;--green:#56f86e;--gold:#e8c17d;--cyan:#85e2d6;--red:#ffabb1;--radius:17px;--shadow:0 18px 65px rgba(0,0,0,.4)}
 *,*::before,*::after{box-sizing:border-box}
 html{scroll-behavior:smooth}
@@ -272,6 +272,54 @@ h1,h2,h3{font-family:Georgia,"Times New Roman",serif;letter-spacing:-.015em}h1{f
 .finish-area .battle-share-card{margin-top:13px}
 @media(max-width:740px){.demo-selector{padding:14px 12px;margin-top:7px}.hero{min-height:280px;margin-top:8px}.hero-content{padding:26px 18px 29px;width:100%}.hero h1{font-size:44px}.hero-buttons{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}.hero .hero-buttons .btn{font-size:9px;min-height:42px;padding:7px}.hero #hero-start{grid-column:span 2}.demo-difficulty-grid{gap:6px}.demo-difficulty-card{min-height:59px;padding:7px}.demo-difficulty-card[aria-pressed=true]{padding:6px}.demo-difficulty-card strong{font-size:clamp(13px,4.5vw,17px)}.battle-mode-switch{gap:7px;margin-bottom:8px}.mode-option{min-height:80px;padding:9px}.mode-option[aria-pressed=true]{padding:8px}.mode-option strong{font-size:15px}.selector-bottom{display:grid;gap:8px}.selector-jump{width:100%;font-size:11px}.mini-info{gap:6px 11px}.finish-area .battle-share-card{padding:17px 12px}}
 @media(prefers-reduced-motion:reduce){.chapter-panel .fold-chevron{transition:none}}
+
+/* IQ QUEST V4.2 · truthful onchain status and compact, viewport-height mobile game */
+.onchain-status{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:12px 0 7px;padding:9px 13px;border:1px solid rgba(100,228,129,.34);border-radius:11px;background:#10251c;color:#c7e8d0;font-size:11px;line-height:1.4}
+.onchain-status strong{color:#a9ffb6;font-size:10px;letter-spacing:.08em}
+.onchain-dot{flex:none;width:7px;height:7px;border-radius:50%;background:#9ad5ad;box-shadow:0 0 7px #67ce8580}
+@media(max-width:740px){
+ .site-shell{padding:0 10px}
+ .adventure-layout{margin-top:10px;scroll-margin-top:8px}
+ .game-panel{padding:11px 12px 13px;border:2px solid #79ff90;box-shadow:0 0 14px #55ff7938,0 0 30px #55ff791b,inset 0 0 15px #55ff7912;max-height:calc(100dvh - 18px);max-height:calc(100svh - 18px);overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin;scrollbar-color:#4b9960 #10221b}
+ .game-panel::after{display:none}
+ .game-panel .rune-corner{display:none}
+ .game-panel .panel-topline{margin:0 0 4px;padding:0 4px}
+ .game-panel .panel-topline .section-kicker{font-size:9px}
+ .game-panel .status-dot{font-size:9px}
+ .game-toolbar{align-items:center;gap:6px;margin-bottom:2px}
+ .game-toolbar h2{font-size:clamp(17px,4.5vw,20px);line-height:1.13;margin:0}
+ .game-toolbar p{display:none}
+ .game-toolbar .quest-level-meta{gap:3px}
+ .game-toolbar .difficulty-tag{font-size:9px;padding:4px 5px}
+ .game-toolbar #quest-estimate{display:none}
+ .game-panel .run-status-line{margin:5px 0 4px;gap:5px;font-size:9px}
+ .game-panel #mode-description{font-size:9px}
+ .game-panel .chapter-bar{margin-top:6px;font-size:10px}
+ .game-panel .progress-track{margin:4px 0 7px;height:6px}
+ .game-panel .timer-grid{gap:5px;margin-bottom:8px}
+ .game-panel .timer-tile{padding:5px 7px;border-radius:8px}
+ .game-panel .timer-tile small{font-size:8px;line-height:1.2;letter-spacing:0}
+ .game-panel .timer-tile strong{font-size:18px;line-height:1.12;margin-top:3px}
+ .game-panel .question-area{padding:10px 10px 11px;border-radius:10px}
+ .game-panel .question-area .question-subtitle{font-size:9px}
+ .game-panel .question-area h3{font-size:20px;margin:4px 0 3px;line-height:1.2}
+ .game-panel .question-area .narration{font-size:11px;line-height:1.32;margin:4px 0;max-height:2.7em;overflow-y:auto}
+ .game-panel .question-box{padding:10px 11px;margin:8px 0;font-size:13px;line-height:1.4;max-height:min(22svh,180px);overflow-y:auto}
+ .game-panel .field-label{margin-bottom:4px;font-size:9px}
+ .game-panel .question-area input{padding:9px 11px;font-size:14px;min-height:40px}
+ .game-panel .game-actions{display:grid;grid-template-columns:minmax(0,1.32fr) minmax(0,1fr);gap:6px;margin-top:7px}
+ .game-panel .game-actions .btn{width:100%;min-width:0;min-height:39px;padding:7px 5px;font-size:10px;line-height:1.25;gap:4px;letter-spacing:0}
+ .game-panel .hint-cost{padding-left:4px}
+ .game-panel .hint-message,.game-panel .feedback{padding:8px 10px;margin-top:7px;font-size:12px}
+ .game-panel .play-footer{margin-top:8px;padding-top:6px;font-size:10px}
+ .game-panel .play-footer span{display:none}
+ .game-panel .start-gate{padding:11px}
+ .game-panel .start-gate h3{font-size:21px}
+ .game-panel .start-gate-note{font-size:11px}
+ .game-panel .finish-area{padding:8px 2px}
+}
+@media(max-width:350px){.game-panel .game-actions{grid-template-columns:1fr}.game-panel .question-box{max-height:17svh}}
+@media(prefers-reduced-motion:reduce){.game-panel.active-run::after{animation:none!important}}
 </style>
 </head>
 <body data-page="player">
@@ -311,13 +359,13 @@ h1,h2,h3{font-family:Georgia,"Times New Roman",serif;letter-spacing:-.015em}h1{f
           <div class="hero-buttons">
             <button type="button" class="btn btn-green" id="hero-start">GO TO GAME <span aria-hidden="true">↗</span></button>
             <a href="creator.html" class="btn btn-glass">CREATE A QUEST</a>
-            <button type="button" class="btn btn-glass" id="preview-finale-button">▶ WATCH FINALE ANIMATION</button>
           </div>
           
         </div>
         <div class="hero-corner">THE ADVENTURE BEGINS</div>
       </section>
 
+      <div class="onchain-status" role="note" aria-label="Onchain development status"><span class="onchain-dot" aria-hidden="true"></span><strong>SOLANA-NATIVE ROADMAP</strong><span>Free browser play is live. Fully onchain quest creation, publishing and hosting are in development — not live yet.</span></div>
       <div class="mini-info"><span>✦ <b>FREE PLAY</b> · NO WALLET</span><span>◷ HINT +1:00 · SKIP +1:00</span><span>↗ FRIEND BATTLES ON X</span></div>
 
       <section id="adventure" class="adventure-layout">
@@ -423,16 +471,8 @@ h1,h2,h3{font-family:Georgia,"Times New Roman",serif;letter-spacing:-.015em}h1{f
         </aside>
       </section>
       <section id="how" class="how-grid"><div class="how-item"><span>01</span><h3>Choose your battle</h3><p>Play 15 connected mysteries or a 3-puzzle Lightning Battle with new codes.</p></div><div class="how-item"><span>02</span><h3>Choose your risk</h3><p>A hint adds one minute. You can then skip for one additional minute and see the answer.</p></div><div class="how-item"><span>03</span><h3>Challenge a friend</h3><p>Share a matching puzzle set and target time. First attempts and practice are marked.</p></div></section>
-      <div class="treasure-preview-overlay hidden" id="treasure-preview-overlay" role="dialog" aria-modal="true" aria-label="Gateway finale animation preview" aria-hidden="true">
-        <div class="treasure-preview-dialog">
-          <div class="treasure-preview-head"><div><span class="section-kicker">FINAL SCENE DEMO</span><h3>The Glowing Gateway</h3></div><button type="button" id="treasure-preview-close" class="btn btn-outline">✕ CLOSE</button></div>
-          <p class="fineprint">Preview only: this does not advance your quest, change your time, or reveal an answer.</p>
-          <div id="treasure-preview-mount"></div>
-          <button type="button" class="btn btn-green" id="treasure-preview-replay">↻ REPLAY ANIMATION</button>
-        </div>
-      </div>
     </main>
-    <footer class="footer"><span><span class="green">IQ</span> QUEST · Fair Play Edition V4.1</span><span>Free to play · Creator publishing will be enabled in a later step</span></footer>
+    <footer class="footer"><span><span class="green">IQ</span> QUEST · Fair Play Edition V4.2</span><span>Free to play · Creator publishing will be enabled in a later step</span></footer>
   </div>
   <script>(function(){
 'use strict';
@@ -769,20 +809,15 @@ async function downloadCard(){
  ctx.font='19px sans-serif';ctx.fillStyle='#b4c6bc';ctx.fillText(`${run.attemptType==='first'?'FIRST ATTEMPT':'PRACTICE'} · ${quest.levels.length-run.skips.length} solved · ${run.skips.length} skipped · Unverified`,90,991);
  canvas.toBlob(blob=>{if(!blob){alert('Could not create result image.');return;}const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='iq-quest-result.png';document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1200);},'image/png');
 }
-let treasurePreviewFocus=null;
-function openTreasurePreview(){const overlay=$('treasure-preview-overlay'),mount=$('treasure-preview-mount'),original=$('treasure-stage');treasurePreviewFocus=document.activeElement;mount.replaceChildren();const clone=original.cloneNode(true);clone.removeAttribute('id');clone.classList.remove('play');mount.append(clone);overlay.classList.remove('hidden');overlay.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';void clone.offsetWidth;clone.classList.add('play');$('treasure-preview-close').focus();}
-function replayTreasurePreview(){const stage=$('treasure-preview-mount').querySelector('.treasure-stage');if(!stage)return;stage.classList.remove('play');void stage.offsetWidth;stage.classList.add('play');}
-function closeTreasurePreview(){const overlay=$('treasure-preview-overlay');overlay.classList.add('hidden');overlay.setAttribute('aria-hidden','true');document.body.style.overflow='';$('treasure-preview-mount').replaceChildren();if(treasurePreviewFocus&&typeof treasurePreviewFocus.focus==='function')treasurePreviewFocus.focus();}
 load();syncSelection();render();
 if(preview)$('preview-banner').classList.remove('hidden');
 if(run.startedAt&&!run.finishedAt)ensureStart();
 if(!preview&&playMode==='lightning'&&!params.get('seed'))updateURL();
 document.querySelectorAll('[data-difficulty]').forEach(btn=>btn.addEventListener('click',()=>switchGame(playMode,btn.dataset.difficulty)));
 document.querySelectorAll('[data-mode]').forEach(btn=>btn.addEventListener('click',()=>switchGame(btn.dataset.mode,chosenDifficulty)));
-function startTheClue(){ensureStart();render();$('question-area').scrollIntoView({behavior:'smooth',block:'center'});$('answer-input').focus({preventScroll:true});}
+function startTheClue(){ensureStart();render();if(matchMedia('(max-width:740px)').matches){document.querySelector('.game-panel').scrollIntoView({behavior:'auto',block:'start'});}else{$('question-area').scrollIntoView({behavior:'smooth',block:'center'});}$('answer-input').focus({preventScroll:true});}
 $('hero-start').addEventListener('click',()=>{$('adventure').scrollIntoView({behavior:'smooth',block:'start'});if(run.finishedAt)$('finish-area').focus({preventScroll:true});else if(run.startedAt)$('answer-input').focus({preventScroll:true});else $('start-the-clue').focus({preventScroll:true});});
 $('start-the-clue').addEventListener('click',startTheClue);
-$('preview-finale-button').addEventListener('click',openTreasurePreview);$('treasure-preview-close').addEventListener('click',closeTreasurePreview);$('treasure-preview-replay').addEventListener('click',replayTreasurePreview);$('treasure-preview-overlay').addEventListener('click',e=>{if(e.target===$('treasure-preview-overlay'))closeTreasurePreview();});document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!$('treasure-preview-overlay').classList.contains('hidden'))closeTreasurePreview();});
 $('answer-form').addEventListener('submit',submit);$('show-hint').addEventListener('click',showHint);$('reset-run').addEventListener('click',reset);$('play-again').addEventListener('click',reset);$('new-lightning').addEventListener('click',newLightning);
 $('share-x').addEventListener('click',shareX);$('copy-challenge').addEventListener('click',copyChallenge);$('copy-result').addEventListener('click',copyResult);$('download-card').addEventListener('click',downloadCard);$('replay-treasure').addEventListener('click',playTreasureAnimation);
 })();
