@@ -20,7 +20,7 @@
   <meta name="twitter:image:alt" content="IQ QUEST mystery adventures title image with jungle ruins">
   <meta name="theme-color" content="#07120f">
   <meta name="description" content="IQ QUEST: solve a mystery in ancient ruins, beat the clock, and share your result. Free to play.">
-  <title>IQ QUEST — Fair Play Edition V4.2</title>
+  <title>IQ QUEST — Fair Play Edition V4.3</title>
   <style>:root{--bg:#080e14;--panel:#101b22;--panel2:#101d24;--stroke:#294043;--white:#eff7ee;--muted:#9cb5ab;--green:#56f86e;--gold:#e8c17d;--cyan:#85e2d6;--red:#ffabb1;--radius:17px;--shadow:0 18px 65px rgba(0,0,0,.4)}
 *,*::before,*::after{box-sizing:border-box}
 html{scroll-behavior:smooth}
@@ -104,29 +104,6 @@ h1,h2,h3{font-family:Georgia,"Times New Roman",serif;letter-spacing:-.015em}h1{f
 .demo-selector-heading{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:17px}.demo-selector-heading h2{color:#f5d7a1;font-size:clamp(25px,3vw,34px);margin:5px 0}.demo-selector-heading p{max-width:620px;color:#b8d0c2;font-size:13px;line-height:1.6;margin:0}.demo-selector-stamp{color:#90efa0;font-size:11px;font-weight:900;letter-spacing:.12em;white-space:nowrap}
 .demo-difficulty-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:11px}.demo-difficulty-card{display:flex;flex-direction:column;align-items:flex-start;text-align:left;gap:7px;min-width:0;border:1px solid #446253;border-radius:12px;background:#0c1a18;color:#ebf9ed;padding:18px;cursor:pointer;transition:transform .16s,border-color .16s,box-shadow .16s}.demo-difficulty-card:hover{border-color:#7af491;transform:translateY(-2px)}.demo-difficulty-card[aria-pressed="true"]{border:2px solid #57f977;background:linear-gradient(140deg,#1b3a27,#102723);box-shadow:0 0 18px rgba(65,255,110,.17),inset 0 0 20px rgba(75,240,100,.08);padding:17px}.demo-difficulty-card:focus-visible{outline:3px solid #e6cb82;outline-offset:3px}.demo-card-label{font-size:9px;font-weight:900;letter-spacing:.14em;color:#b6d6bc}.demo-difficulty-card strong{font:800 clamp(23px,3.2vw,31px) Georgia,serif;color:#65fc89}.demo-difficulty-card>span:not(.demo-card-label){font-weight:800;font-size:12px;color:#f9e5bd}.demo-difficulty-card small{line-height:1.4;font-size:11px;color:#b9c9be}.demo-selector-note{font-size:11px;color:#9bb5a4;margin:12px 0 0}
 @media(max-width:740px){.demo-selector{padding:17px 14px}.demo-selector-heading{align-items:flex-start;flex-direction:column}.demo-difficulty-grid{grid-template-columns:1fr}.demo-difficulty-card{padding:13px 15px;gap:5px}.demo-difficulty-card[aria-pressed="true"]{padding:12px 14px}.demo-difficulty-card strong{font-size:22px}.demo-difficulty-card small{font-size:11px}}
-/* Gateway finale: no character. More luminous portal, light beams and glimmer. */
-.treasure-stage .treasure-gateway{left:50%;right:auto;bottom:13px;width:min(55%,260px);height:90%;transform:translateX(-50%);filter:drop-shadow(0 0 14px #ffdb8cbb) drop-shadow(0 0 36px #ffdc8355)}
-.treasure-stage .treasure-glow{left:16%;right:auto;top:-17%;width:68%;height:110%;opacity:.8;background:radial-gradient(ellipse at 50% 54%,rgba(255,255,226,.88) 0%,rgba(255,237,157,.7) 13%,rgba(255,203,92,.36) 33%,rgba(255,177,79,.1) 57%,transparent 78%);filter:blur(12px)}
-.treasure-stage .treasure-mist{left:21%;right:auto;bottom:8%;width:58%;height:37%;background:radial-gradient(ellipse at center,rgba(255,230,160,.52),transparent 72%);opacity:.68}
-.treasure-stage .gateway-rays{opacity:.7}
-.treasure-stage .portal-beam{position:absolute;left:50%;top:-5%;width:63%;height:112%;transform:translateX(-50%);z-index:3;opacity:.42;clip-path:polygon(46% 0%,54% 0%,98% 100%,2% 100%);background:linear-gradient(180deg,rgba(255,244,187,.06),rgba(255,231,139,.24) 40%,rgba(255,200,83,.05))}
-.treasure-stage .portal-halo{position:absolute;inset:5% 21% 5%;z-index:4;opacity:.85;background:radial-gradient(ellipse at 50% 53%,rgba(255,255,196,.4),rgba(255,203,88,.18) 37%,transparent 71%);filter:blur(23px);pointer-events:none}
-.treasure-stage .portal-glints{position:absolute;inset:0;z-index:7;pointer-events:none}
-.treasure-stage .portal-glints i{position:absolute;left:var(--x);top:var(--y);width:var(--s,5px);height:var(--s,5px);background:#ffefa8;border-radius:50%;box-shadow:0 0 10px 3px #ffd979ae,0 0 22px 8px #ffe58a33;opacity:.4;transform:scale(.6)}
-.treasure-stage.play .treasure-glow{animation:gateway-luminance 4s ease-in-out infinite alternate}
-.treasure-stage.play .portal-halo{animation:gateway-halo 3.3s ease-in-out infinite alternate}
-.treasure-stage.play .portal-beam{animation:gateway-beam 5s ease-in-out infinite alternate}
-.treasure-stage.play .treasure-gateway{animation:gateway-shimmer 4.2s ease-in-out infinite alternate}
-.treasure-stage.play .portal-glints i{animation:gateway-twinkle var(--d,2.5s) ease-in-out var(--lag,0s) infinite alternate}
-.treasure-stage.play .treasure-star{animation:treasure-sparkle 1.9s ease-in-out 1s infinite alternate}
-.treasure-stage.play .gateway-rays{animation:treasure-radiate 3.7s ease-in-out infinite alternate}
-@keyframes gateway-luminance{0%{opacity:.62;filter:blur(16px)}100%{opacity:1;filter:blur(8px)}}
-@keyframes gateway-halo{0%{opacity:.47;transform:scale(.91)}100%{opacity:.96;transform:scale(1.08)}}
-@keyframes gateway-beam{0%{opacity:.28}100%{opacity:.66}}
-@keyframes gateway-shimmer{0%{filter:drop-shadow(0 0 10px #ffe1a8aa) drop-shadow(0 0 26px #ffcf6166)}100%{filter:drop-shadow(0 0 22px #fff0bddd) drop-shadow(0 0 50px #ffd36a99)}}
-@keyframes gateway-twinkle{0%{opacity:.06;transform:translateY(8px) scale(.4)}100%{opacity:1;transform:translateY(-12px) scale(1.45)}}
-@media(prefers-reduced-motion:reduce){.treasure-stage.play .treasure-glow,.treasure-stage.play .portal-halo,.treasure-stage.play .portal-beam,.treasure-stage.play .treasure-gateway,.treasure-stage.play .portal-glints i,.treasure-stage.play .gateway-rays,.treasure-stage.play .treasure-star{animation:none;opacity:.9}.treasure-stage.play .treasure-gateway{transform:translateX(-50%)}}
-
 /* IQ QUEST V3.9 | first attempts, lightning friend battles, victory glow */
 .battle-mode-switch{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:0 0 16px}
 .mode-option{display:flex;flex-direction:column;gap:4px;text-align:left;cursor:pointer;border:1px solid #426754;border-radius:12px;background:#081a19;color:#d4e7d7;padding:14px 16px;min-height:92px;transition:border-color .2s,background .2s,transform .2s}
@@ -178,6 +155,34 @@ h1,h2,h3{font-family:Georgia,"Times New Roman",serif;letter-spacing:-.015em}h1{f
 .start-gate-button{margin-top:10px;width:min(100%,340px);font-size:15px;min-height:58px;box-shadow:0 0 0 1px #95ffac60,0 0 28px #52f96c65}
 .start-gate-button:focus-visible{outline:3px solid #f0d69e;outline-offset:4px}
 @media(max-width:740px){.demo-selector{margin:11px 0 16px}.demo-selector-heading{margin-bottom:12px}.battle-mode-switch{gap:8px;margin-bottom:11px}.mode-option{padding:12px;min-height:94px}.mode-option[aria-pressed=true]{padding:11px}.mode-option strong{font-size:17px}.demo-difficulty-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}.demo-difficulty-card{min-height:66px;align-items:center;text-align:center;justify-content:center;padding:10px 6px}.demo-difficulty-card[aria-pressed=true]{padding:9px 5px}.demo-difficulty-card strong{font-size:clamp(14px,4.7vw,19px)}.demo-difficulty-card .demo-card-label,.demo-difficulty-card>span:not(.demo-card-label),.demo-difficulty-card small{display:none}.selector-step{margin:12px 0 8px}.start-gate{min-height:285px;padding:26px 18px}.start-gate-button{width:100%}}
+
+.creator-preview-banner{position:sticky;top:6px;z-index:40;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;border-color:#5efa80;background:rgba(12,45,27,.97);box-shadow:0 7px 25px rgba(0,0,0,.45)}
+.creator-preview-banner .btn{padding:10px 14px;min-height:40px;font-size:11px}
+.is-creator-preview .top-links .nav-create:not(.preview-back-top){display:none}
+@media(max-width:740px){.creator-preview-banner .btn{width:100%}}
+
+/* IQ QUEST V4.3: clear positioning, small onchain roadmap badge, official X link */
+.brand-cluster{display:flex;align-items:center;gap:12px;min-width:0;flex-wrap:wrap}
+.onchain-promise{display:inline-flex;flex-direction:column;align-items:flex-start;gap:1px;line-height:1.2;padding:6px 9px;border:1px solid rgba(104,255,123,.45);border-radius:8px;background:rgba(18,50,28,.78);color:#aeffb6;font-size:10px;letter-spacing:.065em;font-weight:850;white-space:nowrap}
+.onchain-promise small{color:#f0d9a6;font-size:9px;font-weight:850;letter-spacing:.09em}
+.quick-benefits{display:flex;justify-content:center;align-items:center;gap:10px 22px;flex-wrap:wrap;margin:10px 0 0;padding:9px 12px;border:1px solid #345f46;border-radius:10px;background:rgba(10,31,21,.9);font-size:11px;font-weight:800;letter-spacing:.04em;color:#dbf5df}
+.quick-benefits strong{color:#8dffa3}
+.footer{align-items:center}
+.footer-iqlabs{display:flex;align-items:center;justify-content:flex-end;flex-wrap:wrap;gap:7px 11px;max-width:640px;line-height:1.5;text-align:right}
+.footer-iqlabs b{color:#bdfac4}
+.footer-iqlabs .footer-soon{color:#f0d397;font-size:10px;letter-spacing:.03em}
+.footer-iqlabs a{color:#98ffad;text-decoration:underline;text-underline-offset:3px;font-weight:850}
+.footer-iqlabs a:hover{color:#eaffea}
+@media(max-width:740px){.topbar{height:auto;min-height:68px;flex-wrap:wrap;gap:5px 10px;padding:9px 0}.brand-cluster{width:100%;gap:8px}.onchain-promise{padding:5px 7px;font-size:9px}.onchain-promise small{font-size:8px}.top-links{width:100%;justify-content:flex-start;gap:8px}.top-links .nav-create{padding:7px 10px}.quick-benefits{justify-content:center;gap:5px 12px;margin-top:8px;padding:8px;font-size:9px;letter-spacing:0}.footer-iqlabs{justify-content:flex-start;text-align:left}}
+@media(max-width:360px){.wordmark{font-size:23px}.onchain-promise{font-size:8px;padding:5px}.quick-benefits{font-size:8.7px}}
+
+/* V4.3.1: accurate creator pricing; clearer player and X-battle labels */
+.quick-benefits{gap:9px 18px;font-size:11.5px;line-height:1.35}
+.quick-benefits .benefit-creator small{color:#e3c991;font-size:9px;font-weight:750;white-space:nowrap}
+.quick-benefits .benefit-play,.quick-benefits .benefit-battle{font-size:13px;letter-spacing:.035em}
+.quick-benefits .benefit-battle strong{color:#e2fce6}
+@media(max-width:740px){.quick-benefits{font-size:10px;gap:7px 13px;padding:10px 8px}.quick-benefits .benefit-play,.quick-benefits .benefit-battle{font-size:11.5px;letter-spacing:0}}
+@media(max-width:360px){.quick-benefits{font-size:9.5px}.quick-benefits .benefit-play,.quick-benefits .benefit-battle{font-size:10.8px}.quick-benefits .benefit-creator small{font-size:8px}}
 </style>
 
 <style>
@@ -185,45 +190,13 @@ h1,h2,h3{font-family:Georgia,"Times New Roman",serif;letter-spacing:-.015em}h1{f
 </style>
 
 <style>
-/* V3.4 finale: animated explorer discovers a chest. Reuses the single shared ruins asset. */
-.treasure-stage{position:relative;overflow:hidden;isolation:isolate;height:clamp(235px,38vw,330px);width:100%;border-radius:17px;border:1px solid #886b37;background-image:linear-gradient(180deg,rgba(3,10,9,.18),rgba(3,8,7,.78)),var(--ruins-art);background-position:center 55%;background-size:cover;box-shadow:inset 0 0 70px #010905,0 0 26px #e5b64b25;margin:0 0 12px}
-.treasure-stage::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 78% 50%,rgba(255,225,155,.14),transparent 28%),linear-gradient(180deg,transparent 0%,rgba(0,0,0,.08) 50%,rgba(0,0,0,.36) 100%);pointer-events:none;z-index:1}
-.treasure-stage .vault-floor{position:absolute;inset:auto 0 0;height:36%;background:linear-gradient(180deg,transparent 0%,rgba(8,12,9,.12) 9%,rgba(7,13,10,.88) 100%);z-index:2}
-.treasure-stage .path-perspective{position:absolute;left:2%;right:8%;bottom:5%;height:54%;z-index:2;background:linear-gradient(180deg,transparent 0%,rgba(120,96,55,.13) 18%,rgba(133,104,60,.22) 52%,rgba(67,52,29,.42) 100%);clip-path:polygon(18% 100%,38% 75%,60% 58%,74% 46%,91% 36%,98% 41%,73% 58%,44% 78%,27% 100%);filter:blur(.6px)}
-.treasure-stage .treasure-glow{position:absolute;z-index:4;right:8%;top:7%;width:38%;height:66%;background:radial-gradient(ellipse at 50% 58%,rgba(255,239,176,.96) 0%,rgba(255,221,126,.62) 18%,rgba(255,190,80,.28) 34%,rgba(255,190,80,.10) 46%,transparent 72%);opacity:.62;filter:blur(10px);pointer-events:none}
-.treasure-stage .treasure-gateway{position:absolute;z-index:5;right:6%;bottom:18px;width:clamp(150px,39%,220px);height:clamp(165px,44%,255px);pointer-events:none}
-.treasure-stage .gateway-rays{opacity:.65}
-.treasure-stage .treasure-mist{position:absolute;z-index:4;right:11%;bottom:20%;width:28%;height:22%;background:radial-gradient(ellipse at center,rgba(255,236,180,.54),rgba(255,236,180,0));filter:blur(15px);opacity:.74;pointer-events:none}
-.treasure-stage .treasure-star{position:absolute;z-index:7;color:#ffe39a;text-shadow:0 0 14px #ffd86e;font-style:normal;font-size:clamp(22px,3vw,38px);opacity:0}
-.treasure-stage .star-one{top:14%;left:72%}.treasure-stage .star-two{top:32%;left:83%}.treasure-stage .star-three{top:43%;left:67%}.treasure-stage .star-four{top:20%;left:56%}
-.treasure-stage .treasure-caption{position:absolute;z-index:8;left:5%;right:5%;top:4%;font:800 clamp(10px,1.6vw,16px) system-ui,sans-serif;letter-spacing:.09em;text-shadow:0 2px 12px #010905;color:#ffe3a2;opacity:0;transform:translateY(-10px)}
-.treasure-stage.play .treasure-glow{animation:treasure-light-rise 5.2s ease-out forwards}
-.treasure-stage.play .treasure-mist{animation:treasure-mist-rise 5.2s ease-out forwards}
-.treasure-stage.play .gateway-rays{animation:treasure-radiate 5.2s ease-out both}
-.treasure-stage.play .treasure-star{animation:treasure-sparkle 1.9s ease-in-out 3.6s infinite alternate}
-.treasure-stage.play .treasure-caption{animation:treasure-words 5.2s ease-out forwards}
-@keyframes treasure-radiate{0%,38%{opacity:.28}72%,100%{opacity:1}}
-@keyframes treasure-light-rise{0%{opacity:.30;filter:blur(13px)}65%{opacity:.7}100%{opacity:1;filter:blur(9px)}}
-@keyframes treasure-mist-rise{0%,35%{opacity:.2;transform:scale(.88)}100%{opacity:.95;transform:scale(1.08)}}
-@keyframes treasure-sparkle{0%{opacity:0;transform:translateY(8px) scale(.55)}100%{opacity:1;transform:translateY(-10px) scale(1.2)}}
-@keyframes treasure-words{0%,55%{opacity:0;transform:translateY(-10px)}82%,100%{opacity:1;transform:translateY(0)}}
-.treasure-replay{margin:0 0 16px}
-</style>
-<style>
-/* V3.5.2 hint-to-skip and animation preview controls */
-.treasure-preview-overlay{position:fixed;inset:0;z-index:1000;background:rgba(0,8,6,.90);backdrop-filter:blur(10px);display:flex;align-items:center;justify-content:center;overflow-y:auto;padding:18px}
-.treasure-preview-dialog{width:min(870px,100%);border:1px solid #638765;border-radius:18px;background:#101c1a;padding:clamp(14px,3vw,25px);box-shadow:0 20px 80px #000c}
-.treasure-preview-head{display:flex;gap:15px;align-items:center;justify-content:space-between;flex-wrap:wrap}
-.treasure-preview-head h3{font-size:30px;color:var(--gold);margin:5px 0}
-.treasure-preview-dialog .treasure-stage{height:clamp(260px,42vw,415px);margin:16px 0 20px}
-.treasure-preview-dialog .btn{margin-top:6px}
 .chapter-list li.skipped{color:#ffdf9e;border-left:3px solid #d6a15a;background:#332717}
 .chapter-list li.skipped::after{content:'SKIPPED';color:#ffc676;font-weight:850;font-size:9px;margin-left:auto;letter-spacing:.05em}
 .clue-journal li.skipped{border-color:#95734b;background:#312617}
 .clue-journal li.skipped strong{color:#ffdda0}
 #check-answer:disabled{opacity:.45}
 #answer-input:disabled{background:#13211b;border-color:#586f4e;color:#b7c8ad}
-@media(max-width:530px){.treasure-preview-dialog .treasure-stage{height:285px}.treasure-preview-head h3{font-size:24px}}
+
 </style>
 <style>
 /* IQ QUEST V4.1: fast start, collapsible journals, accurate battle-first finale */
@@ -268,7 +241,7 @@ h1,h2,h3{font-family:Georgia,"Times New Roman",serif;letter-spacing:-.015em}h1{f
 .finale-score-lead>strong{font:900 clamp(58px,8vw,100px) Georgia,serif;color:#9dffab;font-variant-numeric:tabular-nums;line-height:1.04;text-shadow:0 0 24px #5bff7677}
 .finale-score-lead>small{color:#b5eac0;letter-spacing:.1em;font-size:10px;font-weight:900}
 .finale-score-lead-versus{color:#fff2cb;font-size:12px;letter-spacing:.06em;font-weight:900;margin-top:5px}
-.finish-area .treasure-stage{margin-top:12px}
+
 .finish-area .battle-share-card{margin-top:13px}
 @media(max-width:740px){.demo-selector{padding:14px 12px;margin-top:7px}.hero{min-height:280px;margin-top:8px}.hero-content{padding:26px 18px 29px;width:100%}.hero h1{font-size:44px}.hero-buttons{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}.hero .hero-buttons .btn{font-size:9px;min-height:42px;padding:7px}.hero #hero-start{grid-column:span 2}.demo-difficulty-grid{gap:6px}.demo-difficulty-card{min-height:59px;padding:7px}.demo-difficulty-card[aria-pressed=true]{padding:6px}.demo-difficulty-card strong{font-size:clamp(13px,4.5vw,17px)}.battle-mode-switch{gap:7px;margin-bottom:8px}.mode-option{min-height:80px;padding:9px}.mode-option[aria-pressed=true]{padding:8px}.mode-option strong{font-size:15px}.selector-bottom{display:grid;gap:8px}.selector-jump{width:100%;font-size:11px}.mini-info{gap:6px 11px}.finish-area .battle-share-card{padding:17px 12px}}
 @media(prefers-reduced-motion:reduce){.chapter-panel .fold-chevron{transition:none}}
@@ -325,13 +298,14 @@ h1,h2,h3{font-family:Georgia,"Times New Roman",serif;letter-spacing:-.015em}h1{f
 <body data-page="player">
   <div class="site-shell">
     <header class="topbar">
-      <a class="wordmark" href="index.html" aria-label="IQ Quest home"><span class="wordmark-iq">IQ</span><span class="wordmark-quest">QUEST</span></a>
-      <nav class="top-links" aria-label="Main navigation">
+      <div class="brand-cluster"><a class="wordmark" href="index.html" aria-label="IQ Quest home"><span class="wordmark-iq">IQ</span><span class="wordmark-quest">QUEST</span></a><span class="onchain-promise" aria-label="100 percent fully onchain, coming soon">100% FULLY ONCHAIN<small>COMING SOON</small></span></div>
+      <nav class="top-links" aria-label="Main navigation"><a class="nav-create preview-back-top hidden" id="preview-return-top" href="creator.html#studio">← BACK TO EDITOR</a>
         <a href="#adventure">Play</a>
         <a href="#how">How it works</a>
         <a class="nav-create" href="creator.html">Create a Quest <span aria-hidden="true">↗</span></a>
       </nav>
     </header>
+      <div class="quick-benefits" aria-label="Creator publishing from three dollars, coming soon; playing is free; challenge friends on X"><span class="benefit-creator">✦ <strong>CREATORS · BUILD &amp; PUBLISH FROM $3</strong> <small>(COMING SOON)</small></span><span class="benefit-play">✦ <strong>PLAY FOR FREE</strong></span><span class="benefit-battle">⚔ <strong>BATTLE WITH FRIENDS ON X</strong></span></div>
 
     <main>
       <section class="demo-selector" id="demo-selector" aria-labelledby="difficulty-heading">
@@ -365,7 +339,7 @@ h1,h2,h3{font-family:Georgia,"Times New Roman",serif;letter-spacing:-.015em}h1{f
         <div class="hero-corner">THE ADVENTURE BEGINS</div>
       </section>
 
-      <div class="onchain-status" role="note" aria-label="Onchain development status"><span class="onchain-dot" aria-hidden="true"></span><strong>SOLANA-NATIVE ROADMAP</strong><span>Free browser play is live. Fully onchain quest creation, publishing and hosting are in development — not live yet.</span></div>
+      <div class="onchain-status" role="note" aria-label="Onchain development status"><span class="onchain-dot" aria-hidden="true"></span><strong>SOLANA-NATIVE ROADMAP</strong><span>Free browser play is live. 100% fully onchain creation, storage and play are planned — not live yet.</span></div>
       <div class="mini-info"><span>✦ <b>FREE PLAY</b> · NO WALLET</span><span>◷ HINT +1:00 · SKIP +1:00</span><span>↗ FRIEND BATTLES ON X</span></div>
 
       <section id="adventure" class="adventure-layout">
@@ -379,7 +353,7 @@ h1,h2,h3{font-family:Georgia,"Times New Roman",serif;letter-spacing:-.015em}h1{f
             <div><h2 id="quest-title">The Lost Solana Treasure</h2><p id="quest-description">Solve all fifteen mysteries to unlock the ancient chamber.</p></div>
             <div class="quest-level-meta"><span id="quest-difficulty" class="difficulty-tag">HARD</span><span id="quest-estimate" class="difficulty-tag" style="background:#14291f;color:#d2e7d4;border-color:#47604a">EST. 15–30 MIN</span></div>
           </div>
-          <div id="preview-banner" class="notice hidden" role="status">CREATOR PREVIEW — this draft is only on your device and is not published on Solana.</div>
+          <div id="preview-banner" class="notice hidden creator-preview-banner" role="status"><span><strong>CREATOR PREVIEW</strong> · Your quest is saved locally. This test is free and not published on Solana.</span><a class="btn btn-green" id="return-to-editor" href="creator.html#studio">← BACK TO EDITOR</a></div>
           <div class="run-status-line"><span class="attempt-chip" id="attempt-chip">FIRST ATTEMPT AVAILABLE</span><span id="mode-description">15 CHAMBERS · FIRST TRY OR PRACTICE</span></div>
           <div class="challenge-target hidden" id="challenge-target" role="status"><span>⚔ FRIEND CHALLENGE</span><strong>Beat <span id="challenge-target-time">00:00</span></strong><small>Same puzzles · including penalties · unverified browser times</small></div>
           <div class="milestone-burst hidden" id="milestone-burst" role="status" aria-live="polite">✦ FIVE CHAMBERS CLEARED ✦</div>
@@ -413,35 +387,14 @@ h1,h2,h3{font-family:Georgia,"Times New Roman",serif;letter-spacing:-.015em}h1{f
             <div class="play-footer"><button type="button" class="text-button" id="reset-run">↻ Restart the run</button><span>Hint +1 minute → Skip +1 additional minute; the answer is shown.</span></div>
           </div>
           <section id="finish-area" class="finish-area hidden" aria-label="Your result">
-            <div class="finale-score-lead"><span>✦ THE GATEWAY IS OPEN ✦</span><strong id="finale-score-lead-time">00:00</strong><small>YOUR FINAL TIME · INCLUDING PENALTIES</small><div class="finale-score-lead-versus" id="finale-score-lead-versus"></div></div>
+            <div class="finale-score-lead"><span>✦ QUEST COMPLETED ✦</span><strong id="finale-score-lead-time">00:00</strong><small>YOUR FINAL TIME · INCLUDING PENALTIES</small><div class="finale-score-lead-versus" id="finale-score-lead-versus"></div></div>
 
-            <div class="finish-symbol" aria-hidden="true">✧</div>
-            <div class="finish-eyebrow">THE GATEWAY HAS OPENED</div>
+            
+            
             <div class="section-kicker" id="finish-heading">ALL MYSTERIES SOLVED</div>
             <h3>QUEST COMPLETE</h3>
             <p class="finish-area-message" id="finish-summary">You crossed every chamber. Your time is now the challenge for the next explorer.</p>
             <div class="finish-status"><span id="finish-attempt" class="finish-attempt-chip">FIRST ATTEMPT</span><span id="finish-badges" class="finish-badges"></span></div><div class="result-share-meta" style="margin:0 0 14px;font-weight:800;color:#f3dc9f">DIFFICULTY: <span id="result-difficulty">HARD</span> · <span id="result-count">15 MYSTERIES</span></div><div id="result-completion" class="fineprint" style="margin-top:-3px">15 answers solved</div><div class="result-grid"><div><span>BASE TIME</span><strong id="result-base">00:00</strong></div><div><span>HINTS / SKIPS</span><strong id="result-hints">0 / 0 (+00:00)</strong></div><div class="result-total"><span>FINAL TIME</span><strong id="result-final">00:00</strong></div></div>
-            
-            
-            <div class="treasure-stage" id="treasure-stage" role="img" aria-label="A glowing ancient temple gateway with soft golden light beams, mist and shimmering magical sparks.">
-              <div class="treasure-glow"></div><div class="portal-beam"></div><div class="portal-halo"></div>
-              <div class="treasure-mist"></div>
-              <div class="path-perspective"></div>
-              <div class="vault-floor"></div>
-              <svg class="treasure-gateway" viewBox="0 0 240 260" aria-hidden="true">
-                <ellipse cx="122" cy="232" rx="84" ry="15" fill="#020603" opacity=".58"/>
-                <g class="gateway-rays"><path d="M120 126L62 38M120 126L120 10M120 126L177 38M120 126L220 88M120 126L22 88" fill="none" stroke="#ffeaa5" stroke-width="7" stroke-linecap="round" opacity=".82"/></g>
-                <path d="M44 220V122Q44 73 79 42Q104 20 120 20Q137 20 162 42Q196 73 196 122V220" fill="#1f2c21" stroke="#8b7a4f" stroke-width="10"/>
-                <path d="M70 220V126Q70 88 94 63Q110 46 120 46Q131 46 147 63Q170 88 170 126V220" fill="url(#gateGlow)" stroke="#c0a25a" stroke-width="5"/>
-                <path d="M66 220V126Q66 86 92 59Q109 40 120 40Q132 40 149 59Q175 86 175 126V220" fill="none" stroke="#4f5b45" stroke-width="3" opacity=".8"/>
-                <path d="M36 228H204" stroke="#55462d" stroke-width="11" stroke-linecap="round"/>
-                <defs><radialGradient id="gateGlow" cx="50%" cy="44%" r="65%"><stop offset="0%" stop-color="#fff7c1"/><stop offset="35%" stop-color="#ffe28f" stop-opacity=".95"/><stop offset="62%" stop-color="#ffbd63" stop-opacity=".55"/><stop offset="100%" stop-color="#ffbd63" stop-opacity=".06"/></radialGradient></defs>
-              </svg>
-              <div class="portal-glints" aria-hidden="true"><i style="--x:33%;--y:24%;--s:6px;--lag:.2s;--d:2.6s"></i><i style="--x:61%;--y:16%;--s:5px;--lag:1s;--d:2.4s"></i><i style="--x:74%;--y:39%;--s:7px;--lag:.7s;--d:3.2s"></i><i style="--x:24%;--y:53%;--s:4px;--lag:1.4s;--d:2.8s"></i><i style="--x:65%;--y:72%;--s:7px;--lag:0s;--d:3.5s"></i><i style="--x:40%;--y:85%;--s:5px;--lag:2s;--d:2.8s"></i><i style="--x:55%;--y:45%;--s:5px;--lag:.8s;--d:2.1s"></i><i style="--x:42%;--y:39%;--s:4px;--lag:1.9s;--d:3.8s"></i></div>
-              <i class="treasure-star star-one" aria-hidden="true">✦</i><i class="treasure-star star-two" aria-hidden="true">✧</i><i class="treasure-star star-three" aria-hidden="true">✦</i><i class="treasure-star star-four" aria-hidden="true">✧</i>
-              <div class="treasure-caption">THE ANCIENT GATEWAY SHINES WITH MYSTERIOUS LIGHT</div>
-            </div>
-            <button class="text-button treasure-replay" id="replay-treasure" type="button">↻ Replay the glowing gateway</button>
             <section class="battle-share-card" aria-label="Share your community battle challenge">
               <div class="battle-share-header"><span class="battle-brand"><span class="green">IQ</span> QUEST</span><span class="battle-kicker">COMMUNITY CHALLENGE</span></div>
               <h4 class="battle-share-title">Can your community beat this?</h4>
@@ -472,7 +425,7 @@ h1,h2,h3{font-family:Georgia,"Times New Roman",serif;letter-spacing:-.015em}h1{f
       </section>
       <section id="how" class="how-grid"><div class="how-item"><span>01</span><h3>Choose your battle</h3><p>Play 15 connected mysteries or a 3-puzzle Lightning Battle with new codes.</p></div><div class="how-item"><span>02</span><h3>Choose your risk</h3><p>A hint adds one minute. You can then skip for one additional minute and see the answer.</p></div><div class="how-item"><span>03</span><h3>Challenge a friend</h3><p>Share a matching puzzle set and target time. First attempts and practice are marked.</p></div></section>
     </main>
-    <footer class="footer"><span><span class="green">IQ</span> QUEST · Fair Play Edition V4.2</span><span>Free to play · Creator publishing will be enabled in a later step</span></footer>
+    <footer class="footer"><span><span class="green">IQ</span> QUEST · Fair Play Edition V4.3 · Free to play</span><span class="footer-iqlabs"><span><b>POWERED BY IQ LABS · COMING SOON</b> · Onchain storage &amp; more <span class="footer-soon">(integration in progress)</span></span><a href="https://x.com/IQLabsOfficial" target="_blank" rel="noopener noreferrer" aria-label="IQ Labs official X profile">X @IQLabsOfficial ↗</a></span></footer>
   </div>
   <script>(function(){
 'use strict';
@@ -702,7 +655,7 @@ function render(){
  $('chapter-counter').textContent=`CHAMBER ${Math.min(quest.levels.length,run.step+1)} / ${quest.levels.length}`;
  $('solved-counter').textContent=`${(run.finishedAt?quest.levels.length:run.step)-run.skips.length} SOLVED · ${run.skips.length} SKIPPED`;
  $('progress-fill').style.width=`${(run.finishedAt?100:run.step/quest.levels.length*100).toFixed(2)}%`;
- $('game-state').textContent=run.finishedAt?'GATEWAY OPEN':run.startedAt?'RUN IN PROGRESS':'READY TO EXPLORE';
+ $('game-state').textContent=run.finishedAt?'QUEST COMPLETE':run.startedAt?'RUN IN PROGRESS':'READY TO EXPLORE';
  $('start-gate').classList.toggle('hidden',!!run.startedAt||!!run.finishedAt);
  $('question-area').classList.toggle('hidden',!run.startedAt||!!run.finishedAt);
  $('finish-area').classList.toggle('hidden',!run.finishedAt);
@@ -715,7 +668,7 @@ function render(){
  const level=quest.levels[run.step];$('question-number').textContent=`MYSTERY ${String(run.step+1).padStart(2,'0')}`;
  $('question-heading').textContent=level.title;$('question-story').textContent=level.story||'An ancient clue awaits.';$('question-text').textContent=level.q;
  $('answer-input').value='';$('answer-input').disabled=false;$('answer-input').required=true;
- $('check-answer').disabled=false;$('check-answer').textContent=run.step+1>=quest.levels.length?'UNLOCK FINAL GATEWAY →':'UNLOCK NEXT CLUE →';
+ $('check-answer').disabled=false;$('check-answer').textContent=run.step+1>=quest.levels.length?'COMPLETE THE QUEST →':'UNLOCK NEXT CLUE →';
  $('answer-message').className='feedback hidden';$('show-hint').disabled=false;
  if(run.skips.includes(run.step)){
   $('hint-content').textContent=level.h+' · Hint +1:00. Question skipped +1:00. Correct answer: '+level.a.split('|')[0].trim();$('hint-content').classList.remove('hidden');
@@ -758,7 +711,6 @@ function reset(){
  stopTimer();run=defaultRun();locked=false;$('check-answer').disabled=false;save();render();
 }
 function newLightning(){switchGame('lightning',chosenDifficulty,true);$('demo-selector').scrollIntoView({behavior:'smooth'});}
-function playTreasureAnimation(){const stage=$('treasure-stage');if(!stage)return;stage.classList.remove('play');void stage.offsetWidth;stage.classList.add('play');}
 function readBest(){try{return JSON.parse(readStore(bestKey())||'null')||{};}catch(e){return {};}}
 function saveResultOnce(){
  if(preview||run.resultCommitted)return;
@@ -783,7 +735,7 @@ function showFinish(){
  if(targetTime&&!preview){const delta=total-targetTime;const v=$('versus-result');v.classList.toggle('win',delta<0);v.classList.toggle('loss',delta>0);$('versus-result-heading').textContent=delta<0?'YOU BEAT THE CHALLENGE!':delta>0?'THE CHALLENGE WINS':'EXACT TIE!';$('versus-result-detail').textContent=delta===0?'Same time, including penalties.':`${Math.abs(delta)} seconds ${delta<0?'faster':'slower'} than your friend · unverified`;}
  $('new-lightning').classList.toggle('hidden',preview||playMode!=='lightning');
  $('play-again').textContent=preview?'↻ Test again':'↻ Replay these puzzles (Practice)';
- playTreasureAnimation();$('share-x').disabled=preview;$('copy-challenge').disabled=preview;
+ $('share-x').disabled=preview;$('copy-challenge').disabled=preview;
 }
 function challengeURL(){
  const url=new URL(location.origin+location.pathname);
@@ -801,7 +753,7 @@ async function downloadCard(){
  try{const image=new Image();image.src=getComputedStyle(document.documentElement).getPropertyValue('--ruins-art').trim().slice(4,-1).replace(/^["']|["']$/g,'');await image.decode();const ratio=Math.max(1080/image.width,1080/image.height);const w=image.width*ratio,h=image.height*ratio;ctx.drawImage(image,(1080-w)/2,(1080-h)/2,w,h);}catch(e){}
  const gradient=ctx.createLinearGradient(0,0,0,1080);gradient.addColorStop(0,'rgba(4,15,11,0.4)');gradient.addColorStop(.5,'rgba(4,12,9,0.82)');gradient.addColorStop(1,'rgba(4,12,9,0.96)');ctx.fillStyle=gradient;ctx.fillRect(0,0,1080,1080);
  ctx.lineWidth=4;ctx.strokeStyle='#4aff73';ctx.strokeRect(42,42,996,996);ctx.fillStyle='#56f86e';ctx.font='bold 76px Georgia';ctx.fillText('IQ',90,162);ctx.fillStyle='#f3dfb0';ctx.fillText(' QUEST',175,162);
- ctx.font='bold 30px sans-serif';ctx.fillStyle='#d0dabb';ctx.fillText(playMode==='lightning'?'LIGHTNING BATTLE':'GATEWAY UNLOCKED',90,376);
+ ctx.font='bold 30px sans-serif';ctx.fillStyle='#d0dabb';ctx.fillText(playMode==='lightning'?'LIGHTNING BATTLE':'QUEST COMPLETE',90,376);
  ctx.fillStyle='#f2d8a2';ctx.font='bold 54px Georgia';wrap(ctx,quest.title,880,90,460,63,2);
  ctx.fillStyle='#c8d7c9';ctx.font='bold 24px sans-serif';ctx.fillText('DIFFICULTY',90,620);ctx.fillText('BASE TIME',430,620);ctx.fillText('PENALTIES',730,620);
  ctx.fillStyle='#fff2d1';ctx.font='bold 43px sans-serif';ctx.fillText(quest.difficulty,90,683);ctx.fillText(time(baseSeconds()),430,683);ctx.fillText('+'+time(penaltySeconds()),730,683);
@@ -810,7 +762,7 @@ async function downloadCard(){
  canvas.toBlob(blob=>{if(!blob){alert('Could not create result image.');return;}const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='iq-quest-result.png';document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1200);},'image/png');
 }
 load();syncSelection();render();
-if(preview)$('preview-banner').classList.remove('hidden');
+if(preview){document.body.classList.add('is-creator-preview');$('preview-banner').classList.remove('hidden');$('preview-return-top').classList.remove('hidden');}
 if(run.startedAt&&!run.finishedAt)ensureStart();
 if(!preview&&playMode==='lightning'&&!params.get('seed'))updateURL();
 document.querySelectorAll('[data-difficulty]').forEach(btn=>btn.addEventListener('click',()=>switchGame(playMode,btn.dataset.difficulty)));
@@ -819,7 +771,7 @@ function startTheClue(){ensureStart();render();if(matchMedia('(max-width:740px)'
 $('hero-start').addEventListener('click',()=>{$('adventure').scrollIntoView({behavior:'smooth',block:'start'});if(run.finishedAt)$('finish-area').focus({preventScroll:true});else if(run.startedAt)$('answer-input').focus({preventScroll:true});else $('start-the-clue').focus({preventScroll:true});});
 $('start-the-clue').addEventListener('click',startTheClue);
 $('answer-form').addEventListener('submit',submit);$('show-hint').addEventListener('click',showHint);$('reset-run').addEventListener('click',reset);$('play-again').addEventListener('click',reset);$('new-lightning').addEventListener('click',newLightning);
-$('share-x').addEventListener('click',shareX);$('copy-challenge').addEventListener('click',copyChallenge);$('copy-result').addEventListener('click',copyResult);$('download-card').addEventListener('click',downloadCard);$('replay-treasure').addEventListener('click',playTreasureAnimation);
+$('share-x').addEventListener('click',shareX);$('copy-challenge').addEventListener('click',copyChallenge);$('copy-result').addEventListener('click',copyResult);$('download-card').addEventListener('click',downloadCard);
 })();
 </script>
 </body>
