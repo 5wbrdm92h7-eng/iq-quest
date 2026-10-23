@@ -1,4 +1,4 @@
-/* IQ QUEST V4.5 — Solana Devnet bridge. Independently built with the published IQ Labs SDK. */
+/* IQ QUEST V4.6 — Solana Devnet bridge. Independently built with the published IQ Labs SDK. */
 const DEVNET_RPC='https://api.devnet.solana.com';
 const MAINNET_RPC='https://api.mainnet-beta.solana.com';
 const IQ_PROGRAM='9KLLchQVJpGkw4jPuUmnvqESdR7mtNCYr3qS4iQLabs';
@@ -40,14 +40,15 @@ export async function readQuestOnchain(signature,network='devnet'){
 }
 
 function same(a,b){if(a.length!==b.length)return false;for(let i=0;i<a.length;i++)if(a[i]!==b[i])return false;return true;}
-export async function publishQuestDevnet({draft,provider,plan='community',onProgress=()=>{}}){
+export async function publishQuestDevnet({draft,provider,plan='community',paymentTestSignature,onProgress=()=>{}}){
  if(!draft||draft.levels?.length!==15)throw Error('Validate 15 complete puzzles first.');
  if(!['community','unlisted'].includes(plan))throw Error('Invalid listing plan.');
+ if(!isSolanaSignature(paymentTestSignature))throw Error('Verified Devnet test payment receipt is required for the V4.6 rehearsal.');
  if(!provider?.isPhantom||!provider?.signTransaction)throw Error('Open in the Phantom wallet browser and connect a Solana Devnet wallet.');
  const wallet=provider.publicKey;
  if(!wallet?.toBase58)throw Error('Connect Phantom first.');
  const {sdk,connection,web3,BufferClass}=await runtime('devnet');
- const payload=JSON.stringify({...draft,iqquest:{format:'IQ-QUEST-ONCHAIN-V1',network:'devnet',plan,publisher:wallet.toBase58()}});
+ const payload=JSON.stringify({...draft,iqquest:{format:'IQ-QUEST-ONCHAIN-V1',network:'devnet',plan,publisher:wallet.toBase58(),testPaymentSignature:paymentTestSignature,testPaymentNetwork:'devnet'}});
  const byteSize=new TextEncoder().encode(payload).length;
  if(byteSize>8000)throw Error('The quest is '+byteSize+' bytes. Please shorten it below 8,000 bytes before this experimental Devnet upload.');
  const program=new web3.PublicKey(IQ_PROGRAM);
