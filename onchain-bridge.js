@@ -40,14 +40,15 @@ export async function readQuestOnchain(signature,network='devnet'){
 }
 
 function same(a,b){if(a.length!==b.length)return false;for(let i=0;i<a.length;i++)if(a[i]!==b[i])return false;return true;}
-export async function publishQuestDevnet({draft,provider,plan='community',onProgress=()=>{}}){
+export async function publishQuestDevnet({draft,provider,plan='community',paymentTestSignature,onProgress=()=>{}}){
  if(!draft||draft.levels?.length!==15)throw Error('Validate 15 complete puzzles first.');
  if(!['community','unlisted'].includes(plan))throw Error('Invalid listing plan.');
- if(!provider?.isPhantom||!provider?.signTransaction)throw Error('Open in the Phantom wallet browser and connect a Solana Devnet wallet.');
+ if(!isSolanaSignature(paymentTestSignature))throw Error('A verified Devnet test-payment signature is required before publication.');
+ if(typeof provider?.signTransaction!=='function'||!provider.publicKey?.toBase58)throw Error('Choose and connect a supported Solana Devnet wallet at publication.');
  const wallet=provider.publicKey;
- if(!wallet?.toBase58)throw Error('Connect Phantom first.');
+ if(!wallet?.toBase58)throw Error('Connect your selected Solana wallet first.');
  const {sdk,connection,web3,BufferClass}=await runtime('devnet');
- const payload=JSON.stringify({...draft,iqquest:{format:'IQ-QUEST-ONCHAIN-V1',network:'devnet',plan,publisher:wallet.toBase58()}});
+ const payload=JSON.stringify({...draft,iqquest:{format:'IQ-QUEST-ONCHAIN-V1',network:'devnet',plan,publisher:wallet.toBase58(),testPaymentSignature:paymentTestSignature}});
  const byteSize=new TextEncoder().encode(payload).length;
  if(byteSize>8000)throw Error('The quest is '+byteSize+' bytes. Please shorten it below 8,000 bytes before this experimental Devnet upload.');
  const program=new web3.PublicKey(IQ_PROGRAM);
@@ -71,7 +72,7 @@ export async function publishQuestDevnet({draft,provider,plan='community',onProg
    }
    if(!iqCount)throw Error('The transaction does not invoke the IQ Labs program.');
    const budgetTags=new Set(tx.instructions.filter(ix=>ix.programId.equals(budget)).map(ix=>ix.data[0]));
-   // Both explicit compute-budget instructions prevent Phantom from prepending
+   // Both explicit compute-budget instructions prevent wallet software from prepending
    // a different instruction and silently changing the signed message.
    if(!budgetTags.has(3))tx.instructions.unshift(web3.ComputeBudgetProgram.setComputeUnitPrice({microLamports:1000}));
    if(!budgetTags.has(2))tx.instructions.unshift(web3.ComputeBudgetProgram.setComputeUnitLimit({units:400000}));
@@ -84,16 +85,16 @@ export async function publishQuestDevnet({draft,provider,plan='community',onProg
    async signTransaction(tx){
      const prepared=inspect(tx),message=new Uint8Array(prepared.serializeMessage());
      signaturePrompts++;
-     onProgress('Phantom signing request '+signaturePrompts+'. DEVNET transaction only. Review every request.');
+     onProgress('Wallet signing request '+signaturePrompts+'. DEVNET transaction only. Review every request.');
      const signed=await provider.signTransaction(prepared);
-     if(!same(message,new Uint8Array(signed.serializeMessage())))throw Error('Phantom changed the signed transaction message. Upload stopped.');
+     if(!same(message,new Uint8Array(signed.serializeMessage())))throw Error('The wallet changed the signed transaction message. Upload stopped.');
      return signed;
    },
    async signAllTransactions(txs){
      if(!Array.isArray(txs)||txs.length>70)throw Error('Unexpected transaction batch size.');
      const prepared=txs.map(inspect),messages=prepared.map(tx=>new Uint8Array(tx.serializeMessage()));
      signaturePrompts+=txs.length;
-     onProgress('Phantom will review a Devnet batch of '+txs.length+' IQ Labs transactions.');
+     onProgress('Your wallet will review a Devnet batch of '+txs.length+' IQ Labs transactions.');
      if(typeof provider.signAllTransactions!=='function'){
        const signed=[];
        for(const tx of prepared)signed.push(await provider.signTransaction(tx));
@@ -108,12 +109,13 @@ export async function publishQuestDevnet({draft,provider,plan='community',onProg
  };
  onProgress('Uploading '+byteSize+' bytes through the official IQ Labs SDK on Solana DEVNET.');
  const signature=await sdk.writer.codeIn({connection,signer},payload,'iq-quest-15.json',0,'application/json',(percent)=>onProgress('IQ Labs upload: '+Math.round(Number(percent)||0)+'%'));
- if(!isSolanaSignature(signature))throw Error('The SDK did not return a valid transaction signature. Review Phantom history before retrying.');
+ if(!isSolanaSignature(signature))throw Error('The SDK did not return a valid transaction signature. Review wallet history before retrying.');
  onProgress('Written on Devnet. Reading all 15 questions back for verification…');
  // Save the recovery signature before attempting a potentially slow read.
  try{localStorage.setItem('iqquest_devnet_last_sig_v45',signature);}catch(e){}
  const read=await readQuestOnchain(signature,'devnet');
  if(read.raw!==payload)throw Error('The SDK readback does not match the submitted questions. Transaction: '+signature);
+ if(read.data.iqquest?.testPaymentSignature!==paymentTestSignature)throw Error('The saved quest is missing its verified Devnet test-payment reference. Transaction: '+signature);
  onProgress('Verified: all 15 questions and answers match IQ Labs Devnet storage.');
  return {signature,network:'devnet',bytes:byteSize,data:read.data};
 }

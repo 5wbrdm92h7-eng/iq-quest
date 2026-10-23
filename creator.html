@@ -189,6 +189,17 @@ h1,h2,h3{font-family:Georgia,"Times New Roman",serif;letter-spacing:-.015em}h1{f
 
 </style>
 <style>.wallet-preview{display:grid;gap:8px;margin:16px 0;padding:15px;border:1px solid #426b50;border-radius:12px;background:#101e19}.wallet-preview strong{color:#b8ffbf;font-size:13px}.wallet-preview p,.wallet-preview div{margin:0;font-size:11px;line-height:1.6;color:#bed3c4}.wallet-preview .btn{width:100%;font-size:11px}
+.wallet-checkout{padding:15px;margin:14px 0;border:1px solid #74dc86;border-radius:13px;background:#132c21;scroll-margin-top:18px}
+.wallet-checkout h4{font-size:18px;color:#b3ffbe;margin:0 0 6px}
+.wallet-checkout p{font-size:12px;line-height:1.55;color:#c5dec9;margin:8px 0}
+.wallet-choice-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;padding:0;border:0;margin:12px 0}
+.wallet-choice-grid label{display:flex;align-items:center;gap:7px;justify-content:center;cursor:pointer;padding:12px 8px;border:1px solid #4f7d61;border-radius:10px;background:#0a1c18;color:#e4fbe7;font-size:12px;font-weight:800}
+.wallet-choice-grid label:has(input:checked){background:#225339;border-color:#67f381;box-shadow:inset 0 0 0 1px #67f381}
+.wallet-choice-grid input{accent-color:#5ef47b}
+.wallet-checkout-actions{display:grid;grid-template-columns:2fr 1fr;gap:8px}
+.wallet-checkout-actions .btn{width:100%;font-size:11px}
+.wallet-checkout .wallet-choice-status{min-height:26px;color:#f2dba7;overflow-wrap:anywhere}
+@media(max-width:470px){.wallet-choice-grid{grid-template-columns:1fr}.wallet-choice-grid label{justify-content:flex-start}.wallet-checkout-actions{grid-template-columns:1fr}}
 /* IQ QUEST V4.2 · robust ChatGPT import and verified-state messaging */
 .onchain-status{display:flex;align-items:center;flex-wrap:wrap;gap:9px;padding:10px 13px;margin:12px 0 8px;border:1px solid rgba(100,228,129,.34);border-radius:11px;background:#10251c;color:#c7e8d0;font-size:11px;line-height:1.5}
 .onchain-status strong{color:#a9ffb6;letter-spacing:.08em;font-size:10px}
@@ -392,22 +403,32 @@ details.advanced-box[open]>summary{color:#adffb8;margin-bottom:13px}
             <details class="advanced-box"><summary>Fees &amp; how publication will work</summary><p class="tiny-note">The planned platform price is $3.99, settled in SOL using a verified quote, plus separately displayed IQ Labs storage and Solana network fees. No live quote, invoice or Mainnet transfer is available yet. Real success requires both a verified payment and an independently verified onchain publication.</p><span class="price-label">Planned creator fee</span><strong id="plan-breakdown">$3.99 USD equivalent in SOL</strong></details>
             <p id="checkout-status" class="share-step-status" role="status" aria-live="polite">Checkout not live. Your 15-question adventure can be edited and tested without a wallet.</p>
             <button type="button" id="start-sol-checkout" class="hidden" disabled>CHECK READINESS · NO PAYMENT</button>
-            <details class="advanced-box" id="developer-tests"><summary>Developer testing only · Phantom / Devnet / IQ Labs</summary>
-            <p class="tiny-note">These tools are experimental. They are not needed for creating or testing a quest. Do not send real SOL here.</p>
+            <details class="advanced-box" id="developer-tests"><summary>Developer testing only · Wallet checkout / Devnet / IQ Labs</summary>
+            <p class="tiny-note">Build and preview your quest for free without connecting any wallet. Only the Devnet payment/publication step will ask you to choose Phantom, Solflare or Backpack. Do not send real SOL here.</p>
             <div class="price-micro" id="byte-estimate">Quest size: calculating…</div>
             <div class="price-micro" id="storage-estimate">Estimated IQ Labs storage tier: calculating…</div>
             <div class="price-micro" id="payload-headroom">Payload headroom: calculating…</div>
             <div class="price-micro">◈ Mainnet checkout is disabled. The Devnet-only IQ Labs publishing prototype and separate test-SOL transfer are available below.</div>
-            <div class="wallet-preview"><strong>Phantom wallet · read-only readiness check</strong><p>Connecting only requests your public wallet address. It does not request a signature or move SOL.</p><button type="button" id="check-wallet" class="btn btn-outline">CONNECT PHANTOM · NO PAYMENT</button><div id="wallet-readiness" role="status" aria-live="polite">Wallet not connected.</div></div>
             <section class="iq-payment-lab" aria-labelledby="lab-heading">
               <h4 id="lab-heading">◈ PAYMENT SETUP · DEVNET CHECK</h4>
               <p>The public IQ QUEST payout wallet is now configured. The recipient below will be the planned destination for creator platform fees when secure Mainnet checkout is enabled.</p>
               <code id="lab-recipient" class="lab-address">BbMdFqpXfkJeKLvoT8W7QSFZmVeLV35gp6At2MbZF377</code>
-              <p class="lab-notice"><strong>IMPORTANT:</strong> Real $3.99 Mainnet payments are OFF. This is only an optional rehearsal using <strong>0.002 worthless Devnet test SOL</strong> plus network fees. It does not buy or publish a quest.</p>
+              <p class="lab-notice"><strong>IMPORTANT:</strong> Real $3.99 Mainnet payments are OFF. This is only an optional rehearsal using <strong>0.002 worthless Devnet test SOL</strong> plus network fees. The transfer alone does not buy or publish a quest. With separate auto-publish consent, a verified transfer can start the upload. Your selected wallet must still approve every signing request.</p>
               <div class="lab-actions"><button type="button" class="btn btn-outline" id="lab-quote">VIEW INDICATIVE SOL PRICE · NO PAYMENT</button></div>
               <div id="lab-price" class="lab-status" role="status" aria-live="polite">Only the $3.99 Share on X plan is available. SOL conversion is informational only; Mainnet payments are off.</div>
-              <label class="lab-check"><input id="lab-consent" type="checkbox"><span>I understand this is a <strong>Devnet-only test transfer</strong>, not the $3.99 Mainnet fee. I have switched Phantom to Devnet, I approve sending 0.002 test SOL to the address displayed above and I understand that a transfer does not publish my quest.</span></label>
+              <label class="lab-check"><input id="lab-consent" type="checkbox"><span>I understand this is a <strong>Devnet-only test transfer</strong>, not the $3.99 Mainnet fee. I will use a wallet supporting Devnet, review the recipient address, approve 0.002 test SOL only if correct, and understand a transfer alone does not publish my quest.</span></label>
               <div class="lab-actions"><button type="button" id="lab-send" class="btn btn-gold" disabled>TEST PAYMENT ON DEVNET · 0.002 TEST SOL</button><button type="button" id="lab-verify" class="btn btn-outline">VERIFY LAST DEVNET TEST PAYMENT</button></div>
+              <div id="wallet-choice-panel" class="wallet-checkout hidden" role="region" aria-labelledby="wallet-choice-heading">
+                <h4 id="wallet-choice-heading">Choose your wallet just before payment</h4>
+                <p>Creating and testing a quest requires no wallet. Connect one now only to approve the Devnet payment or to finish a previously verified publication.</p>
+                <fieldset class="wallet-choice-grid" aria-label="Choose a Solana wallet">
+                  <label><input type="radio" name="checkout-wallet" value="phantom" checked> 👻 Phantom</label>
+                  <label><input type="radio" name="checkout-wallet" value="solflare"> ☀️ Solflare</label>
+                  <label><input type="radio" name="checkout-wallet" value="backpack"> 🎒 Backpack</label>
+                </fieldset>
+                <div class="wallet-checkout-actions"><button id="wallet-choice-confirm" type="button" class="btn btn-green">CONNECT WALLET &amp; CONTINUE</button><button id="wallet-choice-cancel" type="button" class="btn btn-outline">CANCEL</button></div>
+                <p id="wallet-choice-status" class="wallet-choice-status" role="status" aria-live="polite">No wallet has been contacted.</p>
+              </div>
               <div id="lab-status" class="lab-status" role="status" aria-live="polite">No Devnet payment test started. Nothing has been sent.</div>
               <div id="lab-result" class="lab-result hidden"><a id="lab-explorer" class="lab-explorer" target="_blank" rel="noopener noreferrer" href="#">View confirmed Devnet payment in Solana Explorer ↗</a></div>
               <p><strong>What is still missing for actual sales:</strong> a trustworthy USD→SOL checkout quote, independently enforced payment-to-quest validation, live IQ Labs Mainnet publication and the Community directory. Nobody should send real SOL before these checks pass.</p>
@@ -417,13 +438,14 @@ details.advanced-box[open]>summary{color:#adffb8;margin-bottom:13px}
             <section class="iq-devnet-publisher" aria-labelledby="devnet-publish-heading">
               <div class="section-kicker">NEW · EXPERIMENTAL REAL ONCHAIN TEST</div>
               <h4 id="devnet-publish-heading">Publish 15 puzzles to IQ Labs Devnet</h4>
-              <p><strong>Step 2 of the test:</strong> After the Devnet-only payment rehearsal above succeeds, the IQ Labs SDK writes your complete validated quest to Solana <strong>Devnet</strong>, recording the test receipt. After exact onchain readback and test-payment verification, you get a shareable player link. Friends play free, without connecting a wallet.</p>
-              <p><strong>Not a paid Mainnet release.</strong> The 0.002 Devnet test SOL is not a real $3.99 platform payment. Devnet SOL has no monetary value. Phantom may still ask you to sign multiple Devnet transactions and pay Devnet network / protocol fees.</p>
+              <p><strong>Step 2 of the test:</strong> After the Devnet-only payment rehearsal above succeeds, the IQ Labs SDK can write your complete validated quest to Solana <strong>Devnet</strong>, recording the test receipt. You can opt in below to start the upload automatically after verification. Your selected wallet will still ask you to approve the necessary Devnet transactions. After exact onchain readback and test-payment verification, you get a shareable player link. Friends play free, without connecting a wallet.</p>
+              <p><strong>Not a paid Mainnet release.</strong> The 0.002 Devnet test SOL is not a real $3.99 platform payment. Devnet SOL has no monetary value. Your wallet may still ask you to sign multiple Devnet transactions and pay Devnet network / protocol fees.</p>
               <p>Selected plan is recorded as metadata only. A public community directory and real paid Mainnet checkout are not live yet.</p>
-              <label class="publish-consent"><input type="checkbox" id="devnet-accept"><span>I selected <strong>Solana Devnet</strong> in Phantom. I understand the questions, answers and hints are publicly readable onchain and may be permanent. I will review every wallet request.</span></label>
+              <label class="publish-consent"><input type="checkbox" id="devnet-accept"><span>I will use <strong>Solana Devnet</strong> in my chosen wallet. I understand the questions, answers and hints are publicly readable onchain and may be permanent. I will review every wallet request.</span></label>
+              <label class="publish-consent"><input type="checkbox" id="devnet-auto-publish"><span><strong>Automatically start publication after a verified Devnet test payment.</strong> I authorize IQ QUEST to begin the public upload without another page-button click. Every wallet signing request still needs my approval. This setting applies to this page session only.</span></label>
               <button type="button" class="btn btn-green" id="publish-iq-devnet" disabled>◈ PUBLISH TO IQ LABS DEVNET · TEST SOL ONLY</button>
               <button type="button" class="btn btn-outline" id="verify-iq-devnet">↻ VERIFY LAST DEVNET PUBLICATION</button>
-              <div id="devnet-publish-status" class="publish-progress" role="status" aria-live="polite">First complete and verify the 0.002 test SOL payment above. Then connect Phantom, select Devnet in the wallet and review the upload consent box.</div>
+              <div id="devnet-publish-status" class="publish-progress" role="status" aria-live="polite">First complete and verify the 0.002 test SOL payment above. Choose a wallet only at checkout, then review the Devnet upload consent box.</div>
               <div class="publish-links hidden" id="devnet-links">
                 <a id="devnet-play-link" target="_blank" rel="noopener noreferrer" href="#">OPEN YOUR PUBLISHED QUEST ↗</a>
                 <button type="button" class="btn btn-outline" id="copy-devnet-link">COPY PLAYER LINK</button>
@@ -435,7 +457,7 @@ details.advanced-box[open]>summary{color:#adffb8;margin-bottom:13px}
         </aside>
       </section>
     </main>
-    <footer class="footer"><span><span class="green">IQ</span> QUEST · Creator Studio V4.9 · Build &amp; test free; Mainnet publishing is not live</span><span class="footer-iqlabs"><span><b>POWERED BY IQ LABS · COMING SOON</b> · Onchain storage &amp; more <span class="footer-soon">(integration in progress)</span></span><a href="https://x.com/IQLabsOfficial" target="_blank" rel="noopener noreferrer" aria-label="IQ Labs official X profile">X @IQLabsOfficial ↗</a></span></footer>
+    <footer class="footer"><span><span class="green">IQ</span> QUEST · Creator Studio V5.1 · Wallet only at checkout; Mainnet publishing is not live</span><span class="footer-iqlabs"><span><b>POWERED BY IQ LABS · COMING SOON</b> · Onchain storage &amp; more <span class="footer-soon">(integration in progress)</span></span><a href="https://x.com/IQLabsOfficial" target="_blank" rel="noopener noreferrer" aria-label="IQ Labs official X profile">X @IQLabsOfficial ↗</a></span></footer>
   </div>
   <script>(function(){
 'use strict';
@@ -833,7 +855,7 @@ try{
  function refresh(){
    const ok=shared();
    payment.classList.toggle('completed',ok);
-   paymentMessage.textContent=ok ? '✓ X opened for this adventure. The next step will be secure Phantom payment and verified IQ Labs publication when Mainnet is available.' : 'Open the X teaser to reach Step 2. Checkout is not live yet.';
+   paymentMessage.textContent=ok ? '✓ X opened for this adventure. When Mainnet checkout is ready, you will choose a Solana wallet only at payment, followed by verified IQ Labs publication.' : 'Open the X teaser to reach Step 2. Checkout is not live yet.';
    if(ok)status.textContent='✓ X share window opened. Posting was not verified. The $3.99 Mainnet payment is not available yet.';
  }
  share.addEventListener('click',()=>{
@@ -885,11 +907,13 @@ try{
 })();
 </script><script type="module">
 import {publishQuestDevnet,readQuestOnchain,isSolanaSignature} from './onchain-bridge.js';
-import {verifyDevnetPayment} from './checkout-bridge.js';
+import {verifyDevnetPayment,questFingerprint} from './checkout-bridge.js';
+import {requestCheckoutWallet} from './wallet-bridge.js';
 const $=id=>document.getElementById(id);
-const publish=$('publish-iq-devnet'),consent=$('devnet-accept'),verify=$('verify-iq-devnet');
+const publish=$('publish-iq-devnet'),consent=$('devnet-accept'),auto=$('devnet-auto-publish'),verify=$('verify-iq-devnet');
 const progress=$('devnet-publish-status'),links=$('devnet-links');
 let busy=false,lastUrl='';
+const completionKey='iqquest_devnet_completed_v50';
 function setStatus(text){progress.textContent=String(text);}
 function enable(){publish.disabled=busy||!consent.checked;verify.disabled=busy;}
 consent.addEventListener('change',enable);enable();
@@ -916,29 +940,60 @@ async function checkedDraft(){
  if(!draft.levels.every(l=>l.q&&l.a&&l.h))throw Error('All 15 questions, answers and hints must be complete.');
  return draft;
 }
-publish.addEventListener('click',async()=>{
- if(busy||!consent.checked)return;
+async function publishAfterVerifiedPayment(autoStarted=false){
+ if(busy||!consent.checked){
+   if(autoStarted&&!consent.checked)setStatus('Automatic publication was not started: first consent to public Devnet storage of questions, hints and answers. You can publish manually afterwards.');
+   return;
+ }
  busy=true;enable();links.classList.add('hidden');
  try{
    const draft=await checkedDraft();
-   const phantom=window.phantom?.solana||window.solana;
-   if(!phantom?.isPhantom)throw Error('Open the site inside Phantom on iPhone, or install Phantom on desktop.');
-   setStatus('Connecting Phantom. Choose DEVNET, not Mainnet…');
-   const connected=await phantom.connect();
-   if(!connected?.publicKey&&!phantom.publicKey)throw Error('Phantom did not return a public address.');
    const plan=document.querySelector('input[name="publish-plan"]:checked')?.value||'community';
    const saved=JSON.parse(localStorage.getItem('iqquest_devnet_payment_v46')||'null');
    if(!saved?.signature||!saved?.payer||saved.plan!==plan)throw Error('Complete Step 1: verify the Devnet test payment above for this publishing plan before uploading.');
-   const payer=phantom.publicKey?.toBase58?.()||connected.publicKey?.toBase58?.()||'';
-   if(payer!==saved.payer)throw Error('The connected Phantom wallet must be the same creator wallet that paid the Devnet test.');
-   setStatus('Verifying actual Devnet test payment amount, recipient and quest fingerprint before storage…');
+   const payer=saved.payer;
+   setStatus('Checking the saved Devnet test payment without connecting a wallet…');
    await verifyDevnetPayment({signature:saved.signature,draft,plan,payer,onProgress:setStatus});
-   const result=await publishQuestDevnet({draft,provider:phantom,plan,paymentTestSignature:saved.signature,onProgress:setStatus});
-   try{localStorage.setItem('iqquest_devnet_last_title_v45',draft.title);}catch(e){}
+   const fingerprint=await questFingerprint(draft,plan);
+   let completed=null;
+   try{completed=JSON.parse(localStorage.getItem(completionKey)||'null');}catch(e){}
+   const sameCompletedPayment=completed?.paymentSignature===saved.signature&&completed.fingerprint===fingerprint;
+   const recoverySig=sameCompletedPayment?completed.signature:localStorage.getItem('iqquest_devnet_last_sig_v45');
+   if(sameCompletedPayment&&!isSolanaSignature(recoverySig))throw Error('A previously completed publication has no recoverable signature. Check transaction history before retrying.');
+   if(isSolanaSignature(recoverySig)){
+     setStatus('Checking the last saved Devnet publication before starting a new upload, to avoid duplicates…');
+     let existing;
+     try{existing=await readQuestOnchain(recoverySig,'devnet');}
+     catch(error){throw Error('The previous publication could not be checked ('+String(error?.message||error)+'). Use Verify Last Devnet Publication before starting another upload. No duplicate was started.');}
+     const meta=existing.data.iqquest||{};
+     const existingFingerprint=await questFingerprint(existing.data,meta.plan||plan);
+     if(meta.testPaymentSignature===saved.signature){
+       if(meta.publisher!==payer||existingFingerprint!==fingerprint)throw Error('A publication for this payment exists but does not match this wallet or draft. No duplicate was started.');
+       try{localStorage.setItem(completionKey,JSON.stringify({signature:recoverySig,paymentSignature:saved.signature,fingerprint,payer}));}catch(e){}
+       showPublished(recoverySig,draft.title,true);
+       return;
+     }
+     if(meta.publisher===payer&&existingFingerprint===fingerprint&&!meta.testPaymentSignature)
+       throw Error('An earlier publication with these questions exists without a recorded payment reference. Verify it manually before another upload.');
+     if(sameCompletedPayment)throw Error('The saved publication points to a different payment. No duplicate was started.');
+   }
+   setStatus('Payment verified. Choose the same wallet that made the payment to sign the Devnet upload.');
+   const provider=await requestCheckoutWallet({purpose:'publication',onProgress:setStatus});
+   if(provider.publicKey?.toBase58?.()!==payer)throw Error('The selected wallet must be the same creator wallet that paid this Devnet test. No upload was started.');
+   setStatus('Starting '+(autoStarted?'automatically requested ':'')+'Devnet publication. Approve each IQ Labs signing request in your wallet…');
+   const result=await publishQuestDevnet({draft,provider,plan,paymentTestSignature:saved.signature,onProgress:setStatus});
+   try{
+     localStorage.setItem('iqquest_devnet_last_title_v45',draft.title);
+     localStorage.setItem(completionKey,JSON.stringify({signature:result.signature,paymentSignature:saved.signature,fingerprint,payer}));
+   }catch(e){console.warn('Publication recovery data could not be saved',e);}
    showPublished(result.signature,draft.title,true);
  }catch(error){
-   setStatus('Upload was NOT verified: '+String(error?.message||error)+'\nIf you approved any transactions, inspect Phantom history / Solana Explorer before retrying. Do not pay mainnet SOL.');
+   setStatus('Upload was NOT verified: '+String(error?.message||error)+'\nIf you approved any transactions, inspect your wallet history / Solana Explorer before retrying. Do not pay mainnet SOL.');
  }finally{busy=false;enable();}
+}
+publish.addEventListener('click',()=>{void publishAfterVerifiedPayment(false);});
+window.addEventListener('iqquest:devnet-payment-verified',()=>{
+ if(auto.checked)void publishAfterVerifiedPayment(true);
 });
 verify.addEventListener('click',async()=>{
  if(busy)return;busy=true;enable();
@@ -952,6 +1007,7 @@ verify.addEventListener('click',async()=>{
    if(meta.testPaymentSignature){
      setStatus('Checking saved Devnet test-payment receipt from onchain metadata…');
      await verifyDevnetPayment({signature:meta.testPaymentSignature,draft:result.data,plan:meta.plan,payer:meta.publisher,onProgress:setStatus});
+     try{localStorage.setItem(completionKey,JSON.stringify({signature:sig,paymentSignature:meta.testPaymentSignature,fingerprint:await questFingerprint(result.data,meta.plan),payer:meta.publisher}));}catch(e){}
    }
    const title=result.data.title||'An IQ QUEST Adventure';
    showPublished(sig,title,true);
@@ -965,7 +1021,8 @@ $('copy-devnet-link').addEventListener('click',async()=>{
 });
 </script>
 <script type="module">
-import {TREASURY_ADDRESS,DEVNET_TEST_LAMPORTS,sendDevnetPayment,verifyDevnetPayment,indicativeMainnetQuote} from './checkout-bridge.js';
+import {TREASURY_ADDRESS,DEVNET_TEST_LAMPORTS,isValidSignature,sendDevnetPayment,verifyDevnetPayment,questFingerprint,indicativeMainnetQuote} from './checkout-bridge.js';
+import {requestCheckoutWallet} from './wallet-bridge.js';
 const lookup=id=>document.getElementById(id);
 const testButton=lookup('lab-send'),verifyButton=lookup('lab-verify'),consent=lookup('lab-consent');
 const status=lookup('lab-status'),quoteStatus=lookup('lab-price'),resultBox=lookup('lab-result');
@@ -982,10 +1039,20 @@ function getDraft(){
  if(!Array.isArray(draft.levels)||draft.levels.length!==15)throw Error('Exactly 15 complete questions are required.');
  return draft;
 }
+function showPending(signature){
+ if(!isValidSignature(signature))return;
+ const a=lookup('lab-explorer');
+ a.href='https://explorer.solana.com/tx/'+encodeURIComponent(signature)+'?cluster=devnet';
+ a.textContent='Check saved transaction in Solana Explorer (may still be pending) ↗';
+ resultBox.classList.remove('hidden');
+}
 function showVerified(receipt){
  setStatus('✓ REAL DEVNET BLOCKCHAIN RECEIPT VERIFIED.\n0.002 test SOL received by the configured wallet. The memo matches these 15 questions and the selected plan.\nThis is NOT a real $3.99 payment and DOES NOT publish your quest.');
  lookup('lab-explorer').href='https://explorer.solana.com/tx/'+encodeURIComponent(receipt.signature)+'?cluster=devnet';
+ lookup('lab-explorer').textContent='View confirmed Devnet payment in Solana Explorer ↗';
  resultBox.classList.remove('hidden');
+ // The publishing panel independently checks the saved receipt again before any upload.
+ window.dispatchEvent(new CustomEvent('iqquest:devnet-payment-verified',{detail:{signature:receipt.signature}}));
 }
 lookup('lab-quote').addEventListener('click',async()=>{
  const plan=selectedPlan(),usd=3.99;
@@ -1004,18 +1071,32 @@ testButton.addEventListener('click',async()=>{
  busy=true;enable();resultBox.classList.add('hidden');
  let submitted=null;
  try{
-  const draft=getDraft(),plan=selectedPlan(),provider=window.phantom?.solana||window.solana;
-  if(!provider?.isPhantom)throw Error('Open this page in Phantom or install Phantom. Select DEVNET.');
-  setStatus('Connecting Phantom on Devnet…');
-  const connected=await provider.connect();
-  if(!connected?.publicKey&&!provider.publicKey)throw Error('Phantom has not connected.');
+  const draft=getDraft(),plan=selectedPlan();
+  const fingerprint=await questFingerprint(draft,plan);
+  let prior=null;
+  try{prior=JSON.parse(localStorage.getItem('iqquest_devnet_payment_v46')||'null');}catch(e){}
+  if(prior?.signature&&prior.plan===plan&&prior.fingerprint===fingerprint){
+   submitted=prior;
+   showPending(prior.signature);
+   setStatus('Found an earlier signed transaction for these exact 15 questions. Checking it without connecting a wallet or charging again…');
+   const existing=await verifyDevnetPayment({signature:prior.signature,draft,plan,payer:prior.payer,onProgress:setStatus});
+   showVerified(existing);
+   return;
+  }
+  setStatus('Your quest is ready. Choose a wallet only now, at the test payment step.');
+  const provider=await requestCheckoutWallet({purpose:'payment',forceChoice:true,onProgress:setStatus});
+  if(!consent.checked)throw Error('Payment consent was withdrawn. Nothing was sent.');
+  if(await questFingerprint(getDraft(),plan)!==fingerprint)throw Error('The quest changed while choosing a wallet. Review and restart checkout; nothing was sent.');
+  setStatus('Wallet connected. Review the Devnet recipient and 0.002 test SOL request carefully…');
   const payment=await sendDevnetPayment({provider,draft,plan,onProgress:setStatus,onSubmitted:info=>{
    submitted=info;
-   try{localStorage.setItem('iqquest_devnet_payment_v46',JSON.stringify(info));}catch(e){}
+    // Do not broadcast if browser storage cannot retain the exact transaction ID.
+    localStorage.setItem('iqquest_devnet_payment_v46',JSON.stringify(info));
+   showPending(info.signature);
   }});
   showVerified(payment);
  }catch(error){
-  setStatus('Devnet test was NOT verified: '+String(error?.message||error)+(submitted?'\nA transaction may already have been submitted. Use VERIFY LAST DEVNET TEST PAYMENT before trying again.':'\nNo confirmed payment receipt. Inspect Phantom history if you approved a request.'));
+  setStatus('Devnet test was NOT verified: '+String(error?.message||error)+(submitted?'\nA signed transaction was saved; it may already have been submitted. Use VERIFY LAST DEVNET TEST PAYMENT and inspect Solana Explorer before trying again.':'\nNo saved signed transaction. Inspect your wallet history if you approved a request.'));
  }finally{busy=false;enable();}
 });
 verifyButton.addEventListener('click',async()=>{
@@ -1024,6 +1105,7 @@ verifyButton.addEventListener('click',async()=>{
  try{
   const saved=JSON.parse(localStorage.getItem('iqquest_devnet_payment_v46')||'null');
   if(!saved?.signature||!saved?.payer)throw Error('No previous submitted Devnet payment signature saved on this browser.');
+  showPending(saved.signature);
   const draft=getDraft(),plan=selectedPlan();
   if(saved.plan!==plan)throw Error('Select the same plan used for the test payment, then verify again.');
   const receipt=await verifyDevnetPayment({signature:saved.signature,draft,plan,payer:saved.payer,onProgress:setStatus});

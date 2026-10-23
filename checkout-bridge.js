@@ -1,5 +1,5 @@
-/* IQ QUEST V4.6 — DEVNET-ONLY payment rehearsal. Mainnet transfers are deliberately disabled.
- * This module never has access to a private key or seed phrase. Phantom must approve any transaction.
+/* IQ QUEST V5.1 — DEVNET-ONLY payment rehearsal. Mainnet transfers are deliberately disabled.
+ * This module never has access to a private key or seed phrase. The selected wallet must approve each transaction.
  */
 export const TREASURY_ADDRESS='BbMdFqpXfkJeKLvoT8W7QSFZmVeLV35gp6At2MbZF377';
 export const DEVNET_TEST_LAMPORTS=2_000_000; // 0.002 test SOL; helps initialize the recipient on devnet if needed.
@@ -9,6 +9,17 @@ export const DEVNET_RPC='https://api.devnet.solana.com';
 export const MAINNET_PAYMENTS_ENABLED=false;
 const ALPHABET=/^[1-9A-HJ-NP-Za-km-z]{80,100}$/;
 export function isValidSignature(signature){return typeof signature==='string'&&ALPHABET.test(signature);}
+const BASE58='123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz';
+function encodeSignature(bytes){
+ if(!(bytes instanceof Uint8Array)||bytes.length!==64)throw Error('The wallet did not return a valid signed transaction. Nothing was broadcast.');
+ let value=0n;
+ for(const byte of bytes)value=(value<<8n)+BigInt(byte);
+ let encoded='';
+ while(value>0n){encoded=BASE58[Number(value%58n)]+encoded;value/=58n;}
+ let leadingZeros=0;
+ while(leadingZeros<bytes.length&&bytes[leadingZeros]===0)leadingZeros++;
+ return '1'.repeat(leadingZeros)+encoded;
+}
 export function canonicalQuest(draft,plan){
  if(!['community','unlisted'].includes(plan))throw Error('Select a valid publishing plan.');
  if(!draft||!Array.isArray(draft.levels)||draft.levels.length!==15)throw Error('The quest must contain exactly 15 valid questions.');
@@ -79,18 +90,27 @@ export async function verifyDevnetPayment({signature,draft,plan,payer,onProgress
  const memo=await devnetMemo(draft,plan);
  const connection=new web3.Connection(DEVNET_RPC,'confirmed');
  onProgress('Checking the payment receipt using Solana Devnet RPC…');
+ let lastRpcError=null;
  for(let i=0;i<6;i++){
-   const tx=await connection.getParsedTransaction(signature,{commitment:'confirmed',maxSupportedTransactionVersion:0});
+   let tx=null;
+   try{
+     tx=await connection.getParsedTransaction(signature,{commitment:'confirmed',maxSupportedTransactionVersion:0});
+   }catch(error){
+     // A temporarily rate-limited or unavailable RPC must not cause another payment.
+     lastRpcError=error;
+     onProgress('Devnet receipt lookup delayed. Retrying the SAME transaction ('+(i+1)+'/6)…');
+   }
    if(tx)return inspectDevnetReceipt(tx,{signature,from:payerAddress,memo});
-   await new Promise(resolve=>setTimeout(resolve,1200));
+   if(i<5)await new Promise(resolve=>setTimeout(resolve,1200));
  }
- throw Error('Transaction not indexed yet. Try Verify Last Payment again later; do not send another payment.');
+ throw Error((lastRpcError?'Devnet RPC is temporarily unavailable or the receipt is not indexed yet. ':'Transaction not indexed yet. ')+
+  'Use Verify Last Devnet Test Payment again later; do not send another payment.');
 }
 
 export async function sendDevnetPayment({provider,draft,plan,onProgress=()=>{},onSubmitted=()=>{}}){
  if(MAINNET_PAYMENTS_ENABLED)throw Error('Unexpected payment configuration. Refusing to sign.');
- if(!provider?.isPhantom||!provider?.signTransaction)throw Error('Open the Phantom wallet browser and connect Phantom.');
- if(!provider.publicKey)throw Error('Connect Phantom first.');
+ if(typeof provider?.signTransaction!=='function')throw Error('Choose and connect Phantom, Solflare or Backpack at the payment step.');
+ if(!provider.publicKey?.toBase58)throw Error('Connect your selected Solana wallet first.');
  const web3=await loadWeb3();
  const wallet=new web3.PublicKey(provider.publicKey.toBase58());
  const target=new web3.PublicKey(TREASURY_ADDRESS);
@@ -104,21 +124,26 @@ export async function sendDevnetPayment({provider,draft,plan,onProgress=()=>{},o
  tx.add(web3.SystemProgram.transfer({fromPubkey:wallet,toPubkey:target,lamports:DEVNET_TEST_LAMPORTS}));
  tx.add(new web3.TransactionInstruction({keys:[],programId:new web3.PublicKey(MEMO_PROGRAM),data:new TextEncoder().encode(memo)}));
  const originalMessage=new Uint8Array(tx.serializeMessage());
- onProgress('Phantom will request 0.002 DEVNET test SOL + network fee. Confirm the receiving address in your wallet. This is NOT the $3.99 mainnet payment.');
+ onProgress('Your selected wallet will request 0.002 DEVNET test SOL + network fee. Confirm the receiving address in your wallet. This is NOT the $3.99 mainnet payment.');
  const signed=await provider.signTransaction(tx);
  const signedMessage=new Uint8Array(signed.serializeMessage());
- if(originalMessage.length!==signedMessage.length||!originalMessage.every((b,i)=>b===signedMessage[i]))throw Error('Phantom changed the requested transaction. Nothing was broadcast.');
- onProgress('Submitting the signed Devnet transaction…');
- const signature=await connection.sendRawTransaction(signed.serialize(),{skipPreflight:false,maxRetries:3});
+ if(originalMessage.length!==signedMessage.length||!originalMessage.every((b,i)=>b===signedMessage[i]))throw Error('The wallet changed the requested transaction. Nothing was broadcast.');
+ const serialized=signed.serialize();
+ const signature=encodeSignature(signed.signature);
  if(!isValidSignature(signature))throw Error('No valid transaction signature returned.');
+ // Save the signed transaction ID *before* broadcasting. Even if the RPC times out
+ // after accepting it, the creator can check this exact receipt without paying twice.
  onSubmitted({signature,payer:wallet.toBase58(),plan,fingerprint:await questFingerprint(draft,plan)});
+ onProgress('Signed transaction saved for recovery. Submitting '+signature+' to Devnet…');
+ const submittedSignature=await connection.sendRawTransaction(serialized,{skipPreflight:false,maxRetries:3});
+ if(submittedSignature!==signature)throw Error('RPC returned an unexpected transaction signature. Verify the saved signed transaction before retrying.');
  onProgress('Submitted '+signature+'. Waiting for blockchain confirmation…');
  const confirmation=await connection.confirmTransaction({signature,blockhash:latest.blockhash,lastValidBlockHeight:latest.lastValidBlockHeight},'confirmed');
  if(confirmation.value.err)throw Error('Devnet transaction failed. View signature '+signature+' in Explorer.');
  return verifyDevnetPayment({signature,draft,plan,payer:wallet.toBase58(),onProgress});
 }
 
-// Indicative quote ONLY. Never sent to Phantom, never valid as an invoice.
+// Indicative quote ONLY. Never sent to a wallet, never valid as an invoice.
 export async function indicativeMainnetQuote(usd){
  if(usd!==3.99)throw Error('Only the future $3.99 publishing plan is supported.');
  const controller=new AbortController();
