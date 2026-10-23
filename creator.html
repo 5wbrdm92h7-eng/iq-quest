@@ -77,7 +77,7 @@ h1,h2,h3{font-family:Georgia,"Times New Roman",serif;letter-spacing:-.015em}h1{f
 .x-cover-preview strong{color:#a5ffaf}
 .social-payment-flow[hidden]{display:none}.social-payment-flow{display:grid;gap:10px;margin:14px 0 16px}.flow-step{display:flex;align-items:flex-start;gap:11px;color:#eef5e7}.flow-step strong{display:block;font-size:13px}.flow-step small{display:block;color:#b5ceb9;font-size:11px;line-height:1.5;margin-top:3px}.flow-number{display:grid;place-items:center;flex:0 0 28px;height:28px;border-radius:50%;background:#244a31;color:#a6ffb9;font-size:13px;font-weight:900;border:1px solid #56a46b}.social-payment-flow>a{width:100%}.share-step-status{font-size:12px;color:#c8d5b8;line-height:1.5;margin:4px 0 10px}.share-step-status.done{color:#81fa98}.price-choice{display:grid;gap:10px;margin-bottom:15px}.price-option{display:flex;align-items:flex-start;gap:11px;padding:13px;border:1px solid #4a6957;background:#0b1919;border-radius:11px;cursor:pointer}.price-option:has(input:checked){border-color:var(--green);background:#142e20}.price-option input{margin-top:4px;accent-color:#56f86e;flex:0 0 auto}.price-option strong{display:block;color:#ebf7e9;font-size:13px}.price-option small{display:block;color:#b6cbba;font-size:11px;line-height:1.5;margin-top:3px}.price-choice-note{font-size:12px;color:#c4dfcd;margin-top:2px}
 </style>
-</head>
+<style>.wallet-preview{display:grid;gap:8px;margin:16px 0;padding:15px;border:1px solid #426b50;border-radius:12px;background:#101e19}.wallet-preview strong{color:#b8ffbf;font-size:13px}.wallet-preview p,.wallet-preview div{margin:0;font-size:11px;line-height:1.6;color:#bed3c4}.wallet-preview .btn{width:100%;font-size:11px}</style></head>
 <body data-page="creator">
   <div class="site-shell">
     <header class="topbar"><a class="wordmark" href="index.html" aria-label="IQ Quest home"><span class="wordmark-iq">IQ</span><span class="wordmark-quest">QUEST</span></a><nav class="top-links" aria-label="Main navigation"><a href="index.html">Play a Quest</a><a href="#studio">Creator Studio</a><a class="nav-create" href="#studio">BUILD YOUR QUEST <span aria-hidden="true">↗</span></a></nav></header>
@@ -113,14 +113,14 @@ h1,h2,h3{font-family:Georgia,"Times New Roman",serif;letter-spacing:-.015em}h1{f
           <div class="panel studio-panel"><div class="panel-topline"><span class="section-kicker">03 · QUESTION EDITOR</span><span id="editor-count" class="status-dot">15 QUESTIONS</span></div><h2>Make every clue yours</h2><p class="section-intro">ChatGPT can draft and revise all fifteen puzzles, but please play-test the exact answers. Changing difficulty alone does not rewrite existing questions.</p><div class="editor-layout"><div class="level-selector" id="level-selector" aria-label="Choose a question"></div><div class="level-fields"><div class="form-group"><label for="level-title">Chapter title</label><input id="level-title" maxlength="100"></div><div class="form-group"><label for="level-story">Story / atmosphere</label><textarea id="level-story" rows="3" maxlength="500"></textarea></div><div class="form-group"><label for="level-question">Question</label><textarea id="level-question" rows="3" maxlength="600"></textarea></div><div class="form-group"><label for="level-hint">Hint <span class="muted">(costs player +1 minute)</span></label><textarea id="level-hint" rows="2" maxlength="400"></textarea></div><div class="form-group"><label for="level-answer">Accepted answer <span class="muted">(separate alternatives with |)</span></label><input id="level-answer" maxlength="180" spellcheck="false" placeholder="e.g. compass | a compass"></div><div class="tiny-note">Answers are stored as plaintext in this draft. They are not secret or prize-safe.</div></div></div></div>
         </div>
         <aside class="studio-aside"><div class="panel preview-panel"><div class="section-kicker">LIVE QUEST PREVIEW</div><div class="preview-image" role="img" aria-label="Ancient temple ruins in jungle mist"></div><div class="preview-body"><div class="preview-brand">IQ QUEST</div><h3 id="preview-title">The Lost Solana Treasure</h3><p id="preview-theme">Ancient jungle temple adventure...</p><div class="preview-tags"><span id="preview-difficulty">MEDIUM</span><span id="preview-count">15 QUESTIONS</span><span id="preview-duration">9–18 MIN</span></div><div class="stack-buttons"><button type="button" id="preview-game" class="btn btn-green">▶ TEST YOUR QUEST FREE</button><button type="button" id="save-draft" class="btn btn-outline">SAVE DRAFT</button><button type="button" id="download-json" class="btn btn-outline">↓ DOWNLOAD JSON</button></div><div id="draft-status" class="small-status" role="status" aria-live="polite"></div></div></div>
-          <div class="panel publish-panel"><div class="section-kicker">04 · ON-CHAIN PUBLISHING</div><h3>Creator pays. Players play free.</h3>
+          <div class="panel publish-panel"><div class="section-kicker">04 · PUBLISHING READINESS</div><h3>Creators publish. Players play free.</h3>
             <p>Create and test your 15-question quest for free. The following charges are planned only when you publish it on Solana.</p>
             <div class="creator-price" aria-label="Creator publishing cost breakdown">
               <div class="price-choice" role="radiogroup" aria-label="Publishing option">
                 <label class="price-option"><input type="radio" name="publish-plan" value="social" checked><span><strong>Social Launch · $3 USD</strong><small>Share your finished quest on X. No automatic verification — trust-based discount.</small></span></label>
                 <label class="price-option"><input type="radio" name="publish-plan" value="standard"><span><strong>Standard Publish · $5 USD</strong><small>Publish without any social sharing.</small></span></label>
               </div>
-              <p class="price-choice-note" id="selected-plan-note">Social Launch: open X first, then continue to the $3 SOL payment step.</p>
+              <p class="price-choice-note" id="selected-plan-note">Social Launch: open X first, then check your $3 publishing readiness. No transfer is active.</p>
               <div class="social-payment-flow" id="social-payment-flow">
                 <div class="flow-step" id="share-step"><span class="flow-number">1</span><div><strong>Share on X with the IQ QUEST cover</strong><small>Opens a post with your adventure title and a public IQ QUEST link. X can display the title image as a large link preview.</small></div></div>
                 <figure class="x-cover-preview" aria-label="Title image intended for your X link preview">
@@ -129,9 +129,9 @@ h1,h2,h3{font-family:Georgia,"Times New Roman",serif;letter-spacing:-.015em}h1{f
                 </figure>
                 <a class="btn btn-green" id="share-creator-draft" href="https://x.com/intent/tweet" target="_blank" rel="noopener noreferrer">↗ SHARE ON X WITH COVER</a>
                 <p class="share-step-status" id="share-step-status" role="status" aria-live="polite">Share step not started — $3 checkout stays locked.</p>
-                <div class="flow-step"><span class="flow-number">2</span><div><strong>Pay $3 in SOL</strong><small>Enabled after you open the X post composer. The real payment integration is coming next.</small></div></div>
+                <div class="flow-step"><span class="flow-number">2</span><div><strong>Publishing readiness check</strong><small>After opening X, check the draft and wallet. The planned $3 SOL payment is not live.</small></div></div>
               </div>
-              <p class="tiny-note">X displays the cover as a link preview only if the public IQ QUEST page and <code>social-cover.jpg</code> are available. This does not attach an image file to the post. No X verification is used: opening X unlocks the $3 step, even if you do not publish. The link goes to the public demo, not to your private draft. The actual SOL checkout is not live yet.</p>
+              <p class="tiny-note">X displays the cover as a link preview only if the public IQ QUEST page and <code>social-cover.jpg</code> are available. This does not attach an image file to the post. No X verification is used: opening X unlocks the $3 step, even if you do not publish. The link goes to the public demo, not to your private draft. The public adventure link can be created only after a verified write and successful read-back; checkout is not live yet.</p>
               <span class="price-label">Platform publishing price</span>
               <strong class="price-main" id="plan-price">$3.00 USD</strong>
               <div class="price-settlement">Paid in SOL — not in USD</div>
@@ -145,15 +145,15 @@ h1,h2,h3{font-family:Georgia,"Times New Roman",serif;letter-spacing:-.015em}h1{f
             <div class="price-micro" id="byte-estimate">Quest size: calculating…</div>
             <div class="price-micro" id="storage-estimate">Estimated IQ Labs storage tier: calculating…</div>
             <div class="price-micro" id="payload-headroom">Payload headroom: calculating…</div>
-            <div class="price-micro">◈ Checkout preview only — no SOL payment or on-chain publishing is active yet.</div>
-            <button type="button" id="start-sol-checkout" class="btn btn-gold" disabled>LOCKED · SHARE ON X FIRST</button>
-            <p class="share-step-status" id="checkout-status" role="status" aria-live="polite">The Social Launch payment step is locked until you open X.</p>
-            <p class="tiny-note">This button is a preview of the checkout sequence, not a real wallet payment. IQ Labs Devnet writes have been tested separately; this editor cannot charge SOL or publish a quest yet.</p></div>
+            <div class="price-micro">◈ Prototype only — no SOL charge or on-chain publishing. Checkout requires production configuration and security tests.</div>
+            <div class="wallet-preview"><strong>Phantom wallet · read-only readiness check</strong><p>Connecting only requests your public wallet address. It does not request a signature or move SOL.</p><button type="button" id="check-wallet" class="btn btn-outline">CONNECT PHANTOM · NO PAYMENT</button><div id="wallet-readiness" role="status" aria-live="polite">Wallet not connected.</div></div><button type="button" id="start-sol-checkout" class="btn btn-gold" disabled>LOCKED · SHARE ON X FIRST</button>
+            <p class="share-step-status" id="checkout-status" role="status" aria-live="polite">The Social Launch readiness step is locked until you open X.</p>
+            <p class="tiny-note">The next step is an unpaid readiness check, not a charge. Your quest cannot be sold or published on mainnet yet. Never approve SOL transfers based on this preview.</p></div>
           <div class="panel publish-panel"><div class="section-kicker">SHARING THAT BUILDS COMMUNITIES</div><h3>From followers to challengers</h3><p>Post your quest link on X, Discord or Telegram so people feel challenged to join. Encourage players to share their final time on social for more hype, more motivation and battle-style competition. Rankings are not verified in this demo.</p></div>
         </aside>
       </section>
     </main>
-    <footer class="footer"><span><span class="green">IQ</span> QUEST · Creator Studio V3.7.1</span><span>Drafts & ChatGPT import work locally · Payments and blockchain publication are not live yet</span></footer>
+    <footer class="footer"><span><span class="green">IQ</span> QUEST · Creator Studio V4.0</span><span>Drafts & ChatGPT import work locally · Payments and blockchain publication are not live yet</span></footer>
   </div>
   <script>(function(){
 'use strict';
@@ -172,7 +172,7 @@ const q=[
 {"title":"The Three Masks","story":"Three stone masks guard locked passages A, B and C. The wall says that EXACTLY TWO of the masks speak the truth.","q":"Mask A says: “The gem is behind B.” Mask B says: “The gem is NOT behind B.” Mask C says: “The gem is behind C.” Exactly TWO statements are true. Which passage hides the gem? Enter A, B or C.","h":"Test A, B and C as the hiding place. For each possibility count how many masks would be telling the truth.","a":"C"},
 {"title":"The Astral Index","story":"An astronomy ring connects an early sky clue to the old navigator’s compass digits.","q":"Take the 4th letter of the sky word discovered in Chamber 4. Convert that letter to its alphabet position (A=1). SUBTRACT the 2nd digit of the four-digit compass code from Chamber 2. What number remains?","h":"The sky word was STAR: its fourth letter is R, worth 18. The compass code was 2795: its second digit is 7.","a":"11"},
 {"title":"The Architect’s Shift","story":"A final stone dial has four slots. Next to it: “Return to the mirror, then rotate every letter TWO places forward.”","q":"Take the four-letter answer from Chamber 10 (the mirrored Atbash inscription). Apply a Caesar shift of +2 to EVERY letter, wrapping Z back to A. What four-letter code opens the dial?","h":"The Chapter 10 answer is TALE. Shift each letter forward twice; for example, T becomes V.","a":"VCNG"},
-{"title":"The Last Treasure Seal","story":"The explorer approaches a sealed chest. Four glowing rings demand proof from distant rooms in the temple. This is the last challenge.","q":"Unlock the chest with FOUR earlier discoveries, joined by hyphens and no spaces: (1) Chamber 11’s decoded five-letter word; (2) Chamber 13’s calculated number; (3) Chamber 12’s correct passage letter; (4) Chamber 14’s rotated code. Enter the exact vault key.","h":"Read the Discovery Journal for Chambers 11, 13, 12 and 14. Combine those four discoveries in exactly that order with hyphens.","a":"LIGHT-11-C-VCNG"}
+{"title":"The Last Treasure Seal","story":"The explorer approaches a sealed gateway. Four glowing rings demand proof from distant rooms in the temple. This is the final gateway challenge.","q":"Unlock the gateway with FOUR earlier discoveries, joined by hyphens and no spaces: (1) Chamber 11’s decoded five-letter word; (2) Chamber 13’s calculated number; (3) Chamber 12’s correct passage letter; (4) Chamber 14’s rotated code. Enter the exact vault key.","h":"Read the Discovery Journal for Chambers 11, 13, 12 and 14. Combine those four discoveries in exactly that order with hyphens.","a":"LIGHT-11-C-VCNG"}
 ];
 const DEMO={v:1,title:'The Lost Solana Treasure',creator:'IQ QUEST',theme:'Decode fifteen connected mysteries hidden in ancient jungle ruins. Keep the clues from each chamber for the final vault.',difficulty:'Hard',levels:q};
 function normalizeAnswer(value){return String(value||'').trim().normalize('NFKC').toLocaleLowerCase('en-US').replace(/\s+/g,' ')}
@@ -228,6 +228,8 @@ function updateLevel(){const level=quest.levels[current];for(const [id,key] of [
 function refreshPreview(){const draft=safeDraft();$('preview-title').textContent=draft.title;$('preview-theme').textContent=draft.theme;$('preview-difficulty').textContent=draft.difficulty.toUpperCase();$('preview-count').textContent=draft.levels.length+' QUESTIONS';$('preview-duration').textContent=times[draft.difficulty]||times.Medium;updateFeeEstimate();}
 function loadData(data,announce=true){quest=clone(IQQuest.validate(data));$('quest-name').value=quest.title;$('community-name').value=quest.creator;$('quest-theme').value=quest.theme;current=0;count=15;difficultySelect(quest.difficulty);$('editor-count').textContent='15 QUESTIONS';renderSelector();renderFields();refreshPreview();saveSilent();if(announce)status('import-status',`${count} questions loaded. Review answers and hints before sharing.`);}
 function validateDraft(){return IQQuest.validate(safeDraft());}
+// Validation-only bridge for the separate publishing readiness panel.
+window.IQQuestEditorGetDraft=validateDraft;
 async function downloadJson(){try{const clean=validateDraft();const json=JSON.stringify(clean,null,2);const blob=new Blob([json],{type:'application/json'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='iq-quest-'+clean.title.toLowerCase().replace(/[^a-z0-9]+/g,'-').slice(0,35)+'.json';document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);status('draft-status',`Downloaded ${new TextEncoder().encode(JSON.stringify(clean)).length} UTF-8 bytes of quest data (excluding IQ Labs metadata).`);}catch(err){status('draft-status',err.message,true)}}
 function copyPromptText(){
  const d=safeDraft();
@@ -289,7 +291,7 @@ function updateFeeEstimate(){
  }catch(e){console.warn('Could not estimate payload size',e)}
 }
 function importResponse(){try{const data=IQQuest.readImport($('chatgpt-json').value);loadData(data);$('chatgpt-json').value='';}catch(e){status('import-status',e.message,true);}}
-function previewGame(){try{const clean=validateDraft();localStorage.setItem(PREVIEW_KEY,JSON.stringify(clean));localStorage.removeItem('iqquest_run_v32_preview_'+encodeURIComponent(clean.title).slice(0,80));status('draft-status','Opening local quest preview…');location.href='index.html?preview=1';}catch(e){status('draft-status',e.message,true)}}
+function previewGame(){try{const clean=validateDraft();localStorage.setItem(PREVIEW_KEY,JSON.stringify(clean));localStorage.removeItem('iqquest_run_v40_preview_'+encodeURIComponent(clean.title).slice(0,65));localStorage.removeItem('iqquest_run_v39_preview_'+encodeURIComponent(clean.title).slice(0,65));status('draft-status','Opening local quest preview…');location.href='index.html?preview=1';}catch(e){status('draft-status',e.message,true)}}
 function manualSave(){try{validateDraft();saveSilent();status('draft-status','Draft saved on this device. Export the JSON for a portable backup.');}catch(e){status('draft-status',e.message,true)}}
 for(const id of ['quest-name','community-name','quest-theme'])$(id).addEventListener('input',updateBasics);
 for(const id of ['level-title','level-story','level-question','level-hint','level-answer'])$(id).addEventListener('input',updateLevel);
@@ -338,6 +340,20 @@ try{
  const checkoutBtn=document.getElementById('start-sol-checkout');
  const checkoutStatus=document.getElementById('checkout-status');
  let shareOpened=false;
+ let walletAddress='';
+ const walletBtn=document.getElementById('check-wallet');
+ const walletStatus=document.getElementById('wallet-readiness');
+ walletBtn.addEventListener('click',async()=>{
+   try{
+     const phantom=window.phantom?.solana || window.solana;
+     if(!phantom?.isPhantom||!phantom?.connect)throw Error('Open IQ QUEST in the Phantom in-app browser or install Phantom.');
+     walletStatus.textContent='Requesting wallet access (no transaction)…';
+     const result=await phantom.connect();
+     walletAddress=(result?.publicKey||phantom.publicKey)?.toString()||'';
+     if(!walletAddress)throw Error('No public wallet address returned.');
+     walletStatus.textContent='✓ Wallet connected: '+walletAddress.slice(0,6)+'…'+walletAddress.slice(-5)+'. No SOL was sent.';
+   }catch(e){walletStatus.textContent='Wallet connection not completed: '+String(e?.message||e);}
+ });
  // This is intentionally a trust-based click gate, NOT X post verification.
  const selectedPlan=()=>radios.find(r=>r.checked)?.value||'social';
  function update(){
@@ -348,15 +364,15 @@ try{
    breakdown.textContent=`$${amount} worth of SOL`;
    document.getElementById('social-payment-flow').hidden=!isSocial;
    note.textContent=isSocial
-     ? 'Social Launch — first open the X post composer, then continue to the $3 SOL payment step (preview).'
-     : 'Standard Publish — no X share required. Continue to the $5 SOL payment step (preview).';
+     ? 'Social Launch — open X first, then check wallet and quest readiness. No SOL transfer is active.'
+     : 'Standard Publish — no X share required. Check wallet and quest readiness; no charge is active.';
    checkoutBtn.disabled=isSocial&&!shareOpened;
    checkoutBtn.textContent=isSocial
-     ? (shareOpened?'CONTINUE TO $3 SOL PAYMENT · PREVIEW':'LOCKED · SHARE ON X FIRST')
-     : 'CONTINUE TO $5 SOL PAYMENT · PREVIEW';
+     ? (shareOpened?'CHECK $3 PUBLISH READINESS':'LOCKED · SHARE ON X FIRST')
+     : 'CHECK $5 PUBLISH READINESS';
    checkoutStatus.textContent=isSocial
-     ? (shareOpened?'X was opened. The $3 payment step is now unlocked (no post verification).':'The Social Launch payment step is locked until you open X.')
-     : 'Standard Publish is available without an X share. No SOL transfer is possible in this preview.';
+     ? (shareOpened?'X was opened. The $3 readiness step is unlocked (no post verification).':'The Social Launch readiness step is locked until you open X.')
+     : 'Standard Publish readiness is available without X. No SOL transfer is possible yet.';
  }
  radios.forEach(r=>r.addEventListener('change',update));
  update();
@@ -380,7 +396,19 @@ try{
  checkoutBtn.addEventListener('click',()=>{
    if(checkoutBtn.disabled)return;
    const selected=selectedPlan();
-   checkoutStatus.textContent=`$${prices[selected]} SOL payment step selected. Checkout is not live yet; no wallet connection, payment or on-chain publishing has happened.`;
+   let draft=null,validationMessage='';
+   try{draft=window.IQQuestEditorGetDraft();}
+   catch(error){validationMessage=String(error?.message||error);}
+   const title=draft?.title||document.getElementById('quest-name')?.value?.trim()||'';
+   const bytes=draft?new TextEncoder().encode(JSON.stringify(draft)).length:0;
+   const rows=[`Plan: $${prices[selected]} USD platform fee (would be converted to SOL).`,
+    `Adventure title: ${title||'MISSING'}.`,
+    draft?`Quest validated: ${draft.levels.length} questions, ${bytes.toLocaleString('en-US')} UTF-8 bytes. Manually review each answer and hint.`:`QUEST INVALID: ${validationMessage}. Fix the adventure before a real release.`,
+    `Wallet: ${walletAddress||'NOT CONNECTED'}.`,
+    `IQ Labs SDK: Devnet small-write tested separately; 15-question upload and public read-back NOT YET VALIDATED.`,
+    `Payment: DISABLED. A platform treasury address, secure SOL/USD quote, transaction verification and production hosting are required.`,
+    `Publish status: NOT PUBLISHED. No URL has been issued.`];
+   checkoutStatus.textContent=rows.join(' · ');
  });
 })();
 </script></body>
