@@ -113,7 +113,7 @@ h1,h2,h3{font-family:Georgia,"Times New Roman",serif;letter-spacing:-.015em}h1{f
             <div class="form-group"><span class="field-label">Difficulty</span><div class="choice-grid" id="difficulty-options" role="group" aria-label="Quest difficulty"><button type="button" data-difficulty="Easy"><strong>✧ EASY</strong><small>5–9 min · real puzzles</small></button><button type="button" data-difficulty="Medium" class="selected"><strong>◇ MEDIUM</strong><small>9–18 min · two-step logic</small></button><button type="button" data-difficulty="Hard"><strong>✦ HARD</strong><small>15–30 min · linked ciphers</small></button></div></div>
             <div class="form-group"><span class="field-label">Questions per quest</span><div class="notice" style="display:block;position:static;padding:14px 16px;border-radius:10px;background:#152b23;color:#e5f4d5;border:1px solid #416c4d"><strong>15 MYSTERIES · FIXED</strong><br><span style="font-size:12px">Fifteen levels, one non-trivial puzzle each. Estimates depend on difficulty; hints add +1 minute. ChatGPT builds difficulty when you generate or revise, not by simply tapping a different setting.</span></div></div>
           </div>
-          <div class="panel studio-panel ai-panel"><div class="panel-topline"><span class="section-kicker">02 · CHATGPT QUEST BUILDER</span><span class="ai-glow">✧ AI ASSIST</span></div><h2>Let ChatGPT fill your 15 clues</h2><p class="section-intro">Existing example answers do not block AI import. Generate your 15 puzzles in ChatGPT, then replace all 15 editor fields in one step. No API key needed.</p><div class="ai-howto" aria-label="Example and step by step ChatGPT guide">
+          <div class="panel studio-panel ai-panel"><div class="panel-topline"><span class="section-kicker">02 · CHATGPT QUEST BUILDER</span><span class="ai-glow">✧ AI ASSIST</span></div><h2>Let ChatGPT fill your 15 clues</h2><p class="section-intro">Existing example answers do not block AI import. Generate your 15 puzzles in ChatGPT, then replace all 15 editor fields in one step. No API key needed. This updated importer also fixes common iPhone copy errors such as an accidental backslash before a closing bracket.</p><div class="ai-howto" aria-label="Example and step by step ChatGPT guide">
   <h3>New to ChatGPT? Start with this example</h3>
   <p class="example-caption">In the field <strong>“Your mystery theme”</strong> above, you can write just a short idea, for example:</p>
   <div class="example-text" id="theme-example">An ancient jungle temple. Create 15 clever puzzles using secret symbols, hidden codes and mysterious doors. Medium difficulty. The last puzzle must combine earlier clues.</div>
@@ -128,7 +128,7 @@ h1,h2,h3{font-family:Georgia,"Times New Roman",serif;letter-spacing:-.015em}h1{f
   </ol>
 </div><div class="stack-buttons"><button type="button" id="copy-prompt" class="btn btn-green">✧ GENERATE 15 PUZZLES WITH CHATGPT · COPY PROMPT</button><a href="https://chatgpt.com/" target="_blank" rel="noopener noreferrer" class="btn btn-outline">OPEN CHATGPT ↗</a></div><div class="form-group"><label for="chatgpt-json">ChatGPT response · Paste JSON or Markdown</label><textarea id="chatgpt-json" rows="7" spellcheck="false" autocapitalize="off" autocomplete="off" placeholder='Paste the entire ChatGPT response here — JSON, a ```json code block, or 15 objects in an array.'></textarea><div class="tiny-note">Accepts common ChatGPT wrappers and field names. Imports must contain exactly 15 complete questions. The current adventure name, theme and difficulty are preserved unless you explicitly choose to replace them.</div></div>
 <div class="stack-buttons import-assist-actions"><button type="button" id="paste-ai" class="btn btn-outline">↘ PASTE FROM CLIPBOARD</button><label class="btn btn-outline import-file-label" for="upload-ai-json">↑ LOAD A JSON FILE <input id="upload-ai-json" type="file" accept=".json,.txt,application/json,text/plain" aria-label="Load a ChatGPT JSON file"></label></div>
-<div class="stack-buttons"><button type="button" id="import-ai" class="btn btn-gold">✓ REPLACE ALL 15 EDITOR QUESTIONS</button><button type="button" id="undo-ai-import" class="btn btn-outline hidden">↶ UNDO LAST IMPORT</button><button type="button" id="review-with-chatgpt" class="btn btn-outline">✦ IMPROVE DIFFICULTY WITH CHATGPT</button><button type="button" id="load-example" class="btn btn-outline">LOAD EXAMPLE MYSTERY</button></div>
+<div class="stack-buttons"><button type="button" id="check-ai-json" class="btn btn-outline">✓ CHECK 15 QUESTIONS FIRST</button><button type="button" id="import-ai" class="btn btn-gold">✓ REPLACE ALL 15 EDITOR QUESTIONS</button><button type="button" id="undo-ai-import" class="btn btn-outline hidden">↶ UNDO LAST IMPORT</button><button type="button" id="review-with-chatgpt" class="btn btn-outline">✦ IMPROVE DIFFICULTY WITH CHATGPT</button><button type="button" id="load-example" class="btn btn-outline">LOAD EXAMPLE MYSTERY</button></div>
 <div id="import-status" class="small-status" role="status" aria-live="polite"></div><div class="prompt-fallback hidden" id="prompt-fallback"><label for="manual-ai-prompt">Prompt for ChatGPT — manually select and copy if your iPhone blocks automatic copying:</label><textarea id="manual-ai-prompt" rows="6" readonly></textarea><button type="button" id="select-ai-prompt" class="btn btn-outline">SELECT PROMPT TEXT</button></div></div>
           <div class="panel studio-panel"><div class="panel-topline"><span class="section-kicker">03 · QUESTION EDITOR</span><span id="editor-count" class="status-dot">15 QUESTIONS</span></div><h2>Make every clue yours</h2><p class="section-intro">ChatGPT can draft and revise all fifteen puzzles, but please play-test the exact answers. Changing difficulty alone does not rewrite existing questions.</p><div class="editor-layout"><div class="level-selector" id="level-selector" aria-label="Choose a question"></div><div class="level-fields"><div class="form-group"><label for="level-title">Chapter title</label><input id="level-title" maxlength="100"></div><div class="form-group"><label for="level-story">Story / atmosphere</label><textarea id="level-story" rows="3" maxlength="500"></textarea></div><div class="form-group"><label for="level-question">Question</label><textarea id="level-question" rows="3" maxlength="600"></textarea></div><div class="form-group"><label for="level-hint">Hint <span class="muted">(costs player +1 minute)</span></label><textarea id="level-hint" rows="2" maxlength="400"></textarea></div><div class="form-group"><label for="level-answer">Accepted answer <span class="muted">(separate alternatives with |)</span></label><input id="level-answer" maxlength="180" spellcheck="false" placeholder="e.g. compass | a compass"></div><div class="tiny-note">Answers are stored as plaintext in this draft. They are not secret or prize-safe.</div></div></div></div>
         </div>
@@ -173,7 +173,7 @@ h1,h2,h3{font-family:Georgia,"Times New Roman",serif;letter-spacing:-.015em}h1{f
         </aside>
       </section>
     </main>
-    <footer class="footer"><span><span class="green">IQ</span> QUEST · Creator Studio V4.2</span><span>Drafts & ChatGPT import work locally · Payments and blockchain publication are not live yet</span></footer>
+    <footer class="footer"><span><span class="green">IQ</span> QUEST · Creator Studio V4.2.1</span><span>Drafts & ChatGPT import work locally · Payments and blockchain publication are not live yet</span></footer>
   </div>
   <script>(function(){
 'use strict';
@@ -219,39 +219,114 @@ function validate(raw){
   if(!title)throw Error('Quest title is required.');
   return {v:1,title,creator,theme,difficulty,levels};
 }
+function repairPastedJson(source){
+  // Repairs COPY/PASTE formatting, not puzzle meaning: stray \\ before brackets,
+  // backslash escapes unknown to JSON, trailing commas, and literal line breaks.
+  let out='',inside=false,fixes=0;
+  for(let i=0;i<source.length;i++){
+    const ch=source[i],next=source[i+1];
+    if(!inside){
+      if(ch==='\\' && (next===']'||next==='}'||next==='['||next==='{'||next===','||next===':')){
+        fixes++;continue;
+      }
+      if(ch==='\\' && (next==='n'||next==='r') && (source[i+2]==='{'||source[i+2]==='['||source[i+2]==='"'||source[i+2]===' '||source[i+2]==='\\')){
+        out+=' ';i++;fixes++;continue;
+      }
+      if(ch==='“'||ch==='”'){out+='"';inside=!inside;fixes++;continue;}
+      if(ch==='"')inside=true;
+      if(ch===','){
+        let j=i+1;while(j<source.length && /\s/.test(source[j]))j++;
+        if(source[j]===']'||source[j]==='}'){fixes++;continue;}
+      }
+      out+=ch;
+    }else{
+      if(ch==='\\'){
+        if(next===undefined){out+='\\';continue;}
+        if('"\\/bfnrt'.includes(next) || (next==='u' && /^[0-9a-fA-F]{4}$/.test(source.slice(i+2,i+6)))){
+          out+=ch+next;i++;continue;
+        }
+        // Common AI-copy mistake: invalid escapes such as \\| or \\].
+        // Remove only the invalid escape slash; keep the actual text.
+        out+=next;i++;fixes++;continue;
+      }
+      if(ch==='"')inside=false;
+      if(ch==='\n'||ch==='\r'){out+='\\n';if(ch==='\r'&&next==='\n')i++;fixes++;continue;}
+      if(ch==='\t'){out+='\\t';fixes++;continue;}
+      out+=ch;
+    }
+  }
+  return {text:out,fixes};
+}
 function readImport(text, defaults={}){
   const raw=String(text||'').replace(/^\uFEFF/,'').trim();
   if(!raw)throw Error('Paste ChatGPT’s JSON answer first. It must contain 15 puzzles.');
-  const options=[raw];
-  for(const fence of raw.matchAll(/```(?:json|javascript|js)?\s*([\s\S]*?)```/gi))options.push(fence[1].trim());
-  // Extract well-balanced objects or arrays while respecting quoted strings.
+  const candidates=[raw];
+  for(const fence of raw.matchAll(/```(?:json|javascript|js)?\s*([\s\S]*?)```/gi))candidates.push(fence[1].trim());
+  // Extract top-level JSON even when ChatGPT adds text before or after it.
   function balancedPieces(source){
-    let start=-1,depth=0,quoted=false,esc=false;
+    let start=-1,depth=0,quoted=false,escaped=false;
     for(let i=0;i<source.length;i++){
-      const c=source[i];
-      if(start<0){if(c==='{'||c==='['){start=i;depth=1;}continue;}
-      if(quoted){if(esc)esc=false;else if(c==='\\')esc=true;else if(c==='"')quoted=false;continue;}
-      if(c==='"'){quoted=true;continue;}
-      if(c==='{'||c==='[')depth++;
-      if(c==='}'||c===']')depth--;
-      if(depth===0){options.push(source.slice(start,i+1));start=-1;}
+      const ch=source[i];
+      if(start<0){if(ch==='{'||ch==='['){start=i;depth=1;}continue;}
+      if(quoted){if(escaped)escaped=false;else if(ch==='\\')escaped=true;else if(ch==='"')quoted=false;continue;}
+      if(ch==='"'){quoted=true;continue;}
+      if(ch==='{'||ch==='[')depth++;
+      if(ch==='}'||ch===']')depth--;
+      if(depth===0){candidates.push(source.slice(start,i+1));start=-1;}
     }
   }
   balancedPieces(raw);
-  let parsed=null, lastError=null;
-  for(const option of options){try{
-    const item=JSON.parse(option);
-    if(Array.isArray(item)|| (item&&typeof item==='object')){parsed=item;break;}
-  }catch(e){lastError=e;}}
-  if(!parsed)throw Error('Could not read valid JSON. Ask ChatGPT to return a single JSON object or an array of exactly 15 questions. '+(lastError?.message||''));
-  let object=Array.isArray(parsed)?{levels:parsed}:parsed;
-  if(object.quest&&typeof object.quest==='object')object=object.quest;
-  else if(object.adventure&&typeof object.adventure==='object')object=object.adventure;
-  else if(object.data&&typeof object.data==='object'&&!Array.isArray(object.data))object=object.data;
-  const levels=object.levels||object.questions||object.puzzles||object.chapters||object.items;
-  if(!Array.isArray(levels))throw Error('JSON found, but no questions array. ChatGPT must return 15 entries under levels, questions, puzzles or chapters.');
-  const imported={...defaults,...object,levels:levels.map((x,i)=>({title:x?.title||x?.name||x?.chapter||'Mystery '+(i+1),story:x?.story||x?.intro||x?.narrative||x?.context||'',q:x?.q||x?.question||x?.puzzle||x?.prompt||x?.text||'',h:x?.h||x?.hint||x?.help||x?.clue||'',a:x?.a||x?.answer||x?.solution||x?.correctAnswer||''}))};
-  return validate(imported);
+  // One error in a copied answer should not make us select an unrelated JSON
+  // snippet. Every candidate must validate as a full 15-question adventure.
+  const tries=[];const seen=new Set();
+  for(const candidate of candidates){
+    const cleaned=candidate.trim();
+    if(!cleaned)continue;
+    tries.push({text:cleaned,fixes:0});
+    const repaired=repairPastedJson(cleaned);
+    if(repaired.fixes)tries.push(repaired);
+    // Some chat apps copy a JSON *string* instead of the JSON it describes.
+    if(/^"[\s\S]*"$/.test(cleaned)){
+      try{const unwrapped=JSON.parse(cleaned);if(typeof unwrapped==='string')tries.push({text:unwrapped,fixes:1});}catch(e){}
+    }
+    // Some exports escape every quote (e.g. {\\"levels\\": ...}).
+    if(/^[\[{]\s*\\"/.test(cleaned)){
+      const deescaped=cleaned.replace(/\\"/g,'"');
+      tries.push({text:deescaped,fixes:1});
+      const fixed=repairPastedJson(deescaped);
+      if(fixed.fixes)tries.push({text:fixed.text,fixes:1+fixed.fixes});
+    }
+  }
+  let bestError=null;
+  for(const candidate of tries){
+    if(seen.has(candidate.text))continue;seen.add(candidate.text);
+    try{
+      let obj=JSON.parse(candidate.text);
+      if(typeof obj==='string')obj=JSON.parse(obj);
+      if(!obj || typeof obj!=='object')continue;
+      let object=Array.isArray(obj)?{levels:obj}:obj;
+      if(object.quest&&typeof object.quest==='object')object=object.quest;
+      else if(object.adventure&&typeof object.adventure==='object')object=object.adventure;
+      else if(object.data&&typeof object.data==='object'&&!Array.isArray(object.data))object=object.data;
+      const levels=object.levels||object.questions||object.puzzles||object.chapters||object.items;
+      if(!Array.isArray(levels))throw Error('No question list found. It must be called levels, questions, puzzles or chapters.');
+      const imported={...defaults,...object,levels:levels.map((x,i)=>({
+        title:x?.title||x?.name||x?.chapter||'Mystery '+(i+1),
+        story:x?.story||x?.intro||x?.narrative||x?.context||'',
+        q:x?.q||x?.question||x?.puzzle||x?.prompt||x?.text||'',
+        h:x?.h||x?.hint||x?.help||x?.clue||'',
+        a:x?.a||x?.answer||x?.solution||x?.correctAnswer||''
+      }))};
+      const valid=validate(imported);
+      if(window.IQQuest)window.IQQuest.importNotice=candidate.fixes?'Minor copied-text JSON formatting was automatically repaired.':'';
+      return valid;
+    }catch(e){
+      // Prefer a meaningful schema error over a raw JSON parser error.
+      if(!bestError || !/SyntaxError/.test(String(e)))bestError=e;
+    }
+  }
+  if(bestError && !/SyntaxError/.test(String(bestError)))throw bestError;
+  throw Error('Could not read the ChatGPT response. A stray backslash such as \\] or missing quote may be the cause. Try copying the full JSON code block again, or use LOAD A JSON FILE. Your existing questions are safe.');
 }
 window.IQQuest={DEMO:structuredClone(DEMO),validate,readImport,normalizeAnswer};
 })();
@@ -345,6 +420,14 @@ function updateFeeEstimate(){
  }catch(e){console.warn('Could not estimate payload size',e)}
 }
 const IMPORT_BACKUP_KEY=DRAFT_KEY+'_before_ai_import';
+function checkAiResponse(){
+ try{
+  const parsed=IQQuest.readImport($('chatgpt-json').value,safeDraft());
+  const notice=IQQuest.importNotice?' '+IQQuest.importNotice:'';
+  status('import-status','✓ VALID: '+parsed.levels.length+' questions found, from “'+parsed.levels[0].title+'” to “'+parsed.levels[14].title+'”.'+notice+' Existing editor questions have NOT been changed. You can now tap REPLACE ALL 15 EDITOR QUESTIONS.');
+ }catch(e){status('import-status','NOT READY · '+String(e?.message||e)+' Your existing editor questions have NOT been changed.',true);}
+}
+
 let importUndo=null;
 function importResponse(){
  try{
@@ -354,14 +437,14 @@ function importResponse(){
   // Keep the creator's current title, community, theme and selected difficulty.
   // This button specifically replaces 15 occupied chapter fields, never the site branding.
   const data={...parsed,title:existing.title,creator:existing.creator,theme:existing.theme,difficulty:existing.difficulty};
-  if(!confirm('Replace the 15 existing question fields with ChatGPT’s 15 new questions? The previous questions will be backed up so you can undo.'))return;
+  if(!confirm('Replace the 15 existing question fields with the new questions?\n\nFirst: '+parsed.levels[0].title+'\nLast: '+parsed.levels[14].title+'\n\nThe previous 15 questions will be backed up for Undo.'))return;
   importUndo=clone(existing);
   try{localStorage.setItem(IMPORT_BACKUP_KEY,JSON.stringify(existing));}catch(e){console.warn('Import backup could not be persisted',e)}
   loadData(data,false);
   $('chatgpt-json').value='';
   $('undo-ai-import').classList.remove('hidden');
   $('editor-count').textContent='✓ 15 AI QUESTIONS IMPORTED';
-  status('import-status','✓ SUCCESS! All 15 previous questions were replaced. Chapter 01 is open in the editor below. Your earlier 15 questions were backed up.');
+  status('import-status','✓ SUCCESS! All 15 previous questions were replaced. '+(IQQuest.importNotice?IQQuest.importNotice+' ':'')+'Chapter 01 is open in the editor below. Your earlier questions were backed up.');
   document.getElementById('level-question').closest('.studio-panel').scrollIntoView({behavior:'smooth',block:'start'});
  }catch(e){status('import-status','IMPORT NOT APPLIED · '+String(e?.message||e)+' Your existing 15 questions are unchanged.',true);}
 }
@@ -403,7 +486,7 @@ $('use-theme-example').addEventListener('click',()=>{
   $('copy-prompt').scrollIntoView({behavior:'smooth',block:'center'});
 });
 $('copy-prompt').addEventListener('click',copyPrompt);$('review-with-chatgpt').addEventListener('click',improveWithChatGPT);
-$('import-ai').addEventListener('click',importResponse);
+$('check-ai-json').addEventListener('click',checkAiResponse);$('import-ai').addEventListener('click',importResponse);
 $('paste-ai').addEventListener('click',pasteAi);$('upload-ai-json').addEventListener('change',importFile);$('undo-ai-import').addEventListener('click',undoAiImport);$('select-ai-prompt').addEventListener('click',()=>{$('manual-ai-prompt').focus();$('manual-ai-prompt').select();});
 $('load-example').addEventListener('click',()=>loadData(IQQuest.DEMO));
 $('save-draft').addEventListener('click',manualSave);
