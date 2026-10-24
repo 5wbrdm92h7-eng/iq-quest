@@ -1,4 +1,4 @@
-/* IQ QUEST V5.5 — official IQ Labs SDK: Devnet testing, gated Mainnet publishing. */
+/* IQ QUEST V5.10 — official IQ Labs SDK: Devnet preflight, gated Mainnet publishing. */
 import {MAINNET_CLIENT_ENABLED} from './payments/client-bridge.mjs';
 import {sha256Hex,verifyOrderInputs} from './payments/order-core.mjs';
 const DEVNET_RPC='https://api.devnet.solana.com';
@@ -44,6 +44,24 @@ export async function readQuestOnchain(signature,network='devnet'){
 }
 
 function same(a,b){if(a.length!==b.length)return false;for(let i=0;i<a.length;i++)if(a[i]!==b[i])return false;return true;}
+export async function simulateFirstUploadOnDevnet({connection,web3,tx,onProgress=()=>{}}){
+ const estimatedWireBytes=tx.serializeMessage().length+65;
+ if(estimatedWireBytes>1232)throw Error('The IQ Labs transaction is too large for Solana ('+estimatedWireBytes+' bytes). No wallet approval was requested.');
+ onProgress('Checking the first IQ Labs upload transaction on Devnet before wallet approval (free simulation)…');
+ let simulated;
+ try{
+   const unsigned=new web3.VersionedTransaction(tx.compileMessage());
+   simulated=await connection.simulateTransaction(unsigned,{commitment:'confirmed',sigVerify:false,replaceRecentBlockhash:true});
+ }catch(e){
+   throw Error('Devnet preflight could not run: '+String(e?.message||e).slice(0,300)+'. No wallet approval was requested.');
+ }
+ if(!simulated?.value)throw Error('Devnet RPC returned no simulation result. No wallet approval was requested.');
+ if(simulated.value.err){
+   const logs=(simulated.value.logs||[]).filter(line=>/Program log:|failed|error|insufficient|invoke/.test(line)).slice(-5).join(' | ').slice(0,750);
+   throw Error('IQ Labs Devnet preflight rejected the upload: '+JSON.stringify(simulated.value.err)+(logs?' — '+logs:'')+'. No wallet approval was requested.');
+ }
+ onProgress('Devnet RPC simulated the first upload transaction successfully. Review the wallet request carefully.');
+}
 export async function publishQuestOnchain({draft,provider,plan='community',network='devnet',paymentTestSignature,paymentSignature,orderId,fingerprint,onSignature=()=>{},onProgress=()=>{}}){
  if(!['devnet','mainnet-beta'].includes(network))throw Error('Unsupported publishing network.');
  if(network==='mainnet-beta'&&!MAINNET_CLIENT_ENABLED)throw Error('Real Mainnet IQ Labs publishing is disabled pending launch verification.');
@@ -99,10 +117,22 @@ export async function publishQuestOnchain({draft,provider,plan='community',netwo
    tx.feePayer=wallet;
    return tx;
  };
+ // Check the actual first upload instruction with Devnet RPC before Phantom
+ // shows a signing dialog. A failed simulation must never be overridden by a
+ // wallet's "confirm anyway" option. This is read-only and costs no SOL.
+ let preflightPromise=null;
+ const preflight=async tx=>{
+   if(network!=='devnet')return;
+   if(preflightPromise)return preflightPromise;
+   preflightPromise=simulateFirstUploadOnDevnet({connection,web3,tx,onProgress});
+   return preflightPromise;
+ };
  const signer={
    publicKey:wallet,
    async signTransaction(tx){
-     const prepared=inspect(tx),message=new Uint8Array(prepared.serializeMessage());
+     const prepared=inspect(tx);
+     await preflight(prepared);
+     const message=new Uint8Array(prepared.serializeMessage());
      signaturePrompts++;
      onProgress('Wallet signing request '+signaturePrompts+'. '+network.toUpperCase()+' transaction. Review every request and storage fee.');
      const signed=await provider.signTransaction(prepared);
@@ -112,6 +142,7 @@ export async function publishQuestOnchain({draft,provider,plan='community',netwo
    async signAllTransactions(txs){
      if(!Array.isArray(txs)||txs.length>70)throw Error('Unexpected transaction batch size.');
      const prepared=txs.map(inspect),messages=prepared.map(tx=>new Uint8Array(tx.serializeMessage()));
+     if(prepared.length)await preflight(prepared[0]);
      signaturePrompts+=txs.length;
      onProgress('Your wallet will review a '+network+' batch of '+txs.length+' IQ Labs transactions.');
      if(typeof provider.signAllTransactions!=='function'){
