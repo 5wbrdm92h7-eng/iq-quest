@@ -319,7 +319,7 @@ details.advanced-box[open]>summary{color:#adffb8;margin-bottom:13px}
 </style></head>
 <body data-page="creator">
   <div class="site-shell">
-    <header class="topbar"><div class="brand-cluster"><a class="wordmark" href="index.html" aria-label="IQ Quest home"><span class="wordmark-iq">IQ</span><span class="wordmark-quest">QUEST</span></a><span class="onchain-promise" aria-label="100 percent onchain is planned, using IQ Labs SDK">100% ONCHAIN · PLANNED<small>IQ LABS SDK · NOT LIVE</small></span><a class="brand-official-x" href="https://x.com/IQLabsOfficial" target="_blank" rel="noopener noreferrer" aria-label="Open IQ Labs official profile on X">↗ IQ LABS ON X · @IQLabsOfficial</a></div><nav class="top-links" aria-label="Main navigation"><a href="index.html">Play a Quest</a><a href="#studio">Creator Studio</a><a class="nav-create" href="#studio">BUILD YOUR QUEST <span aria-hidden="true">↗</span></a></nav></header>
+    <header class="topbar"><div class="brand-cluster"><a class="wordmark" href="index.html" aria-label="IQ Quest home"><span class="wordmark-iq">IQ</span><span class="wordmark-quest">QUEST</span></a><span class="onchain-promise" aria-label="100 percent onchain is planned, using IQ Labs SDK">100% ONCHAIN · PLANNED<small>IQ LABS SDK · NOT LIVE</small></span><a class="brand-official-x" href="https://x.com/IQLabsOfficial" target="_blank" rel="noopener noreferrer" aria-label="Open IQ Labs official profile on X">↗ IQ LABS ON X · @IQLabsOfficial</a></div><nav class="top-links" aria-label="Main navigation"><a href="index.html">Play a Quest</a><a href="#studio">Creator Studio</a><a href="imprint.html">Imprint</a><a class="nav-create" href="#studio">BUILD YOUR QUEST <span aria-hidden="true">↗</span></a></nav></header>
     <div class="quick-benefits" aria-label="One creator publishing option: share on X, then 3 dollars and 99 cents once payment is live; playing is free"><span class="benefit-creator">✦ <strong>CREATORS · SHARE ON X &amp; PUBLISH $3.99</strong> <small>(COMING SOON)</small></span><span class="benefit-play">✦ <strong>PLAY FOR FREE</strong></span><span class="benefit-battle">⚔ <strong>BATTLE WITH FRIENDS ON X</strong></span></div>
     <main>
       <section class="hero hero-creator" aria-labelledby="creator-heading"><div class="hero-scrim"></div><div class="hero-content"><div class="eyebrow"><span class="diamond-dot">✦</span> BUILT FOR DEVS · CREATORS · COMMUNITIES</div><h1 id="creator-heading">CREATE YOUR <span class="gold">MYSTERY,</span><span class="creator-hero-subtitle">ENTERTAIN YOUR COMMUNITY!</span></h1><p class="lead">Create 15 mysteries. Challenge your community to beat the clock and share their results on X.</p><div class="hero-buttons"><a class="btn btn-green" href="#studio">START CREATING <span aria-hidden="true">↗</span></a><a class="btn btn-glass" href="index.html">PLAY FREE</a></div><div class="hero-facts"><span>✧ AI-assisted content</span><span>◇ 3 difficulty levels</span><span>♢ Players free</span></div></div><div class="hero-corner">BUILD THE NEXT LEGEND</div></section>
@@ -390,17 +390,25 @@ details.advanced-box[open]>summary{color:#adffb8;margin-bottom:13px}
               <figure class="x-cover-preview" aria-label="IQ QUEST cover for X link preview"><img src="social-cover.jpg" alt="IQ QUEST cover over ancient jungle ruins" width="1200" height="630" loading="lazy"><figcaption>IQ QUEST cover preview · X controls whether the link image appears.</figcaption></figure>
               <a class="btn btn-green" id="share-creator-draft" href="https://x.com/intent/tweet" target="_blank" rel="noopener noreferrer">↗ SHARE ON X · STEP 1</a>
               <p class="share-step-status" id="share-step-status" role="status" aria-live="polite">Open X to continue. Clicking does not prove a post was published.</p>
-              <div class="share-next-step" id="payment-next-step"><h4>2 · Pay $3.99 &amp; publish</h4><p id="payment-step-message">First open the X share step. A real Mainnet checkout is not available yet.</p><button id="simple-publish" type="button" class="btn btn-green publish-simple-button" disabled aria-disabled="true">PAY $3.99 &amp; PUBLISH · NOT LIVE YET</button><p class="tiny-note">Mainnet payments are OFF. Nobody will be charged. Storage and Solana fees would be shown before approving a future payment.</p></div>
+              <div class="share-next-step" id="payment-next-step"><h4>2 · Pay $3.99 &amp; publish</h4><p id="payment-step-message">First open the X share step. A real Mainnet checkout is not available yet.</p><button id="simple-publish" type="button" class="btn btn-green publish-simple-button" disabled aria-disabled="true">PAY $3.99 &amp; PUBLISH · NOT LIVE YET</button><p class="tiny-note">Mainnet payments are OFF. Nobody will be charged. A future paid publication delivers a public IQ QUEST database game link, not an IQ Labs onchain inscription.</p>
+              <div id="mainnet-quote-panel" class="hidden" aria-live="polite" style="padding:14px;border:1px solid #4b9162;border-radius:11px;background:#12291d;margin:14px 0">
+                <p id="mainnet-invoice" style="white-space:pre-line;overflow-wrap:anywhere;color:#e6f3df;font-size:13px;line-height:1.7"></p>
+                <label class="publish-consent" style="display:flex;gap:9px;align-items:flex-start;font-size:12px;line-height:1.5"><input id="mainnet-order-consent" type="checkbox" style="margin-top:4px"><span>I have checked the amount, Mainnet network and recipient. I understand the 15 questions, answers and hints will be publicly available in IQ QUEST after confirmed payment, <strong>not onchain</strong>, and additional wallet/network fees apply. I have read the <a href="withdrawal.html" target="_blank" rel="noopener" style="text-decoration:underline">withdrawal information</a> and <a href="privacy.html" target="_blank" rel="noopener" style="text-decoration:underline">privacy information</a>.</span></label>
+                <button id="mainnet-confirm" type="button" class="btn btn-gold" disabled style="width:100%;margin:12px 0">ORDER WITH OBLIGATION TO PAY · REVIEW SOL AMOUNT</button>
+              </div>
+              <button id="mainnet-recover" type="button" class="btn btn-outline hidden" style="width:100%;margin:8px 0">↻ VERIFY SAVED SOL TRANSACTION · DO NOT PAY AGAIN</button>
+              <div id="mainnet-status" role="status" aria-live="polite" style="white-space:pre-wrap;overflow-wrap:anywhere;font-size:12px;color:#c5e9cd;line-height:1.6"></div></div>
             </div>
             <div class="publish-success hidden" id="publish-success" data-state="preview" aria-live="polite" aria-label="Publication result">
               <div class="success-tag" id="publish-success-tag">DESIGN PREVIEW · NOT PUBLISHED</div>
               <h3 id="publish-success-title">Your adventure is ready to share</h3>
-              <p id="publish-success-detail">After a verified payment and successful IQ Labs upload, your real game link will appear here.</p>
+              <p id="publish-success-detail">After a verified payment and confirmed public IQ QUEST publication, your real game link will appear here.</p>
               <div class="success-url" id="publish-success-url">No public link exists yet.</div>
               <div class="success-actions"><a class="btn btn-green" id="success-play" href="#" target="_blank" rel="noopener noreferrer" aria-disabled="true">▶ PLAY NOW</a><button type="button" id="success-copy" class="btn btn-outline" disabled>⧉ COPY PLAYABLE LINK</button><a class="btn btn-outline" id="success-share-x" href="#" target="_blank" rel="noopener noreferrer" aria-disabled="true">↗ SHARE ON X</a><a class="btn btn-outline" href="#studio">BACK TO CREATOR</a></div>
             </div>
             <button type="button" id="preview-publish-success" class="text-button" style="margin:8px 0">SEE THE POST-PAYMENT SCREEN · PREVIEW ONLY</button>
-            <details class="advanced-box"><summary>Fees &amp; how publication will work</summary><p class="tiny-note">The planned platform price is $3.99, settled in SOL using a verified quote, plus separately displayed IQ Labs storage and Solana network fees. No live quote, invoice or Mainnet transfer is available yet. Real success requires both a verified payment and an independently verified onchain publication.</p><span class="price-label">Planned creator fee</span><strong id="plan-breakdown">$3.99 USD equivalent in SOL</strong></details>
+            <details class="advanced-box"><summary>Fees &amp; how publication will work</summary><p class="tiny-note">The planned platform price is $3.99, settled in SOL using a five-minute server quote. Additional wallet and Solana network fees apply. The payment server stores the exact 15-question draft and releases it publicly through the IQ QUEST database only after independently verifying a finalized Mainnet payment. This <strong>does not</strong> upload a quest to IQ Labs or make it onchain. A final legal review of withdrawal, taxes and support is pending, so no Mainnet transfer is available yet.</p><span class="price-label">Planned creator fee</span><strong id="plan-breakdown">$3.99 USD equivalent in SOL</strong></details>
+            <p class="tiny-note">Before any real paid launch, review our <a href="imprint.html" style="color:#aeffbd;text-decoration:underline">imprint</a>, <a href="privacy.html" style="color:#aeffbd;text-decoration:underline">privacy information</a> and <a href="withdrawal.html" style="color:#aeffbd;text-decoration:underline">withdrawal information</a>. These legal pages are still drafts and the Mainnet checkout remains disabled.</p>
             <p id="checkout-status" class="share-step-status" role="status" aria-live="polite">Checkout not live. Your 15-question adventure can be edited and tested without a wallet.</p>
             <button type="button" id="start-sol-checkout" class="hidden" disabled>CHECK READINESS · NO PAYMENT</button>
             <details class="advanced-box" id="developer-tests"><summary>Developer testing only · Wallet checkout / Devnet / IQ Labs</summary>
@@ -457,7 +465,7 @@ details.advanced-box[open]>summary{color:#adffb8;margin-bottom:13px}
         </aside>
       </section>
     </main>
-    <footer class="footer"><span><span class="green">IQ</span> QUEST · Creator Studio V5.1 · Wallet only at checkout; Mainnet publishing is not live</span><span class="footer-iqlabs"><span><b>POWERED BY IQ LABS · COMING SOON</b> · Onchain storage &amp; more <span class="footer-soon">(integration in progress)</span></span><a href="https://x.com/IQLabsOfficial" target="_blank" rel="noopener noreferrer" aria-label="IQ Labs official X profile">X @IQLabsOfficial ↗</a></span></footer>
+    <footer class="footer"><span><span class="green">IQ</span> QUEST · Creator Studio V5.3 · SOL checkout groundwork; Mainnet not live</span><nav aria-label="Legal information" style="display:flex;gap:13px;flex-wrap:wrap"><a href="imprint.html" style="color:#b5fbc1;text-decoration:underline">Imprint</a><a href="privacy.html" style="color:#b5fbc1;text-decoration:underline">Privacy</a><a href="withdrawal.html" style="color:#b5fbc1;text-decoration:underline">Withdrawal info</a></nav><span class="footer-iqlabs"><span><b>IQ LABS SDK · COMING SOON</b> · Onchain storage &amp; more <span class="footer-soon">(integration in progress)</span></span><a href="https://x.com/IQLabsOfficial" target="_blank" rel="noopener noreferrer" aria-label="IQ Labs official X profile">X @IQLabsOfficial ↗</a></span></footer>
   </div>
   <script>(function(){
 'use strict';
@@ -875,7 +883,7 @@ try{
    preview.dataset.state='preview';
    $('publish-success-tag').textContent='DESIGN PREVIEW · NO PAYMENT OR PUBLICATION';
    $('publish-success-title').textContent='This is your future success screen';
-   $('publish-success-detail').textContent='Only after a confirmed SOL payment AND a successful, verified IQ Labs upload will the buttons below link to a real playable adventure.';
+   $('publish-success-detail').textContent='Only after a confirmed SOL payment and verified public IQ QUEST delivery will these buttons link to your playable adventure. The paid D1 publication is not yet onchain.';
    $('publish-success-url').textContent='A verified player URL will appear here after publication.';
    const play=$('success-play'),x=$('success-share-x');
    for(const a of [play,x]){a.setAttribute('aria-disabled','true');a.removeAttribute('href');}
@@ -888,9 +896,9 @@ try{
    const u=new URL(url);
    if(u.origin!==location.origin||u.pathname.replace(/index\.html$/,'')!==new URL('index.html',location.href).pathname.replace(/index\.html$/,''))return;
    preview.dataset.state='verified';
-   $('publish-success-tag').textContent='✓ IQ LABS '+(network==='devnet'?'DEVNET TEST':'ONCHAIN')+' · VERIFIED';
+   $('publish-success-tag').textContent=network==='cloud'?'✓ IQ QUEST PUBLIC QUEST · PAYMENT VERIFIED':'✓ IQ LABS '+(network==='devnet'?'DEVNET TEST':'ONCHAIN')+' · VERIFIED';
    $('publish-success-title').textContent='Your quest is published!';
-   $('publish-success-detail').textContent=network==='devnet'?'15 questions were verified on Solana Devnet. This is a test publication, NOT a paid Mainnet quest. Friends can play using the link below.':'Your game is live and ready to share.';
+   $('publish-success-detail').textContent=network==='devnet'?'15 questions were verified on Solana Devnet. This is a test publication, NOT a paid Mainnet quest. Friends can play using the link below.':network==='cloud'?'Your SOL payment was confirmed. The game is now public in IQ QUEST (Cloudflare database, not onchain). Share the link below.':'Your game is live and ready to share.';
    $('publish-success-url').textContent=url;
    const play=$('success-play'),x=$('success-share-x');
    play.href=url;play.removeAttribute('aria-disabled');
@@ -1114,5 +1122,6 @@ verifyButton.addEventListener('click',async()=>{
  finally{busy=false;enable();}
 });
 </script>
+<script type="module" src="./payments/checkout-ui.mjs"></script>
 </body>
 </html>
