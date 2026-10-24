@@ -1,10 +1,11 @@
 /* IQ QUEST V5.5 — official IQ Labs SDK: Devnet testing, gated Mainnet publishing. */
 import {MAINNET_CLIENT_ENABLED} from './payments/client-bridge.mjs';
 import {sha256Hex,verifyOrderInputs} from './payments/order-core.mjs';
-import {mainnetPublicationPayload,IQ_LABS_PROGRAM} from './payments/publication-core.mjs';
 const DEVNET_RPC='https://api.devnet.solana.com';
 const MAINNET_RPC='https://api.mainnet-beta.solana.com';
-const IQ_PROGRAM=IQ_LABS_PROGRAM;
+// Devnet must not depend on the server-only Mainnet publication module.
+// That module is imported only inside the disabled Mainnet branch below.
+const IQ_PROGRAM='9KLLchQVJpGkw4jPuUmnvqESdR7mtNCYr3qS4iQLabs';
 export const isSolanaSignature=value=>typeof value==='string' && /^[1-9A-HJ-NP-Za-km-z]{80,100}$/.test(value);
 let sdkPromise=null;
 async function runtime(network='devnet'){
@@ -56,6 +57,7 @@ export async function publishQuestOnchain({draft,provider,plan='community',netwo
  const {sdk,connection,web3,BufferClass}=await runtime(network);
  let payload;
  if(network==='mainnet-beta'){
+  const {mainnetPublicationPayload}=await import('./payments/publication-core.mjs');
   const canonical=verifyOrderInputs({payer:wallet.toBase58(),plan,draft});
   if(await sha256Hex(JSON.stringify(canonical))!==fingerprint)
    throw Error('The quest changed since payment. Restore the paid 15-question draft before uploading.');
