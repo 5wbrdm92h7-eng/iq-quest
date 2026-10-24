@@ -390,7 +390,7 @@ details.advanced-box[open]>summary{color:#adffb8;margin-bottom:13px}
               <figure class="x-cover-preview" aria-label="IQ QUEST cover for X link preview"><img src="social-cover.jpg" alt="IQ QUEST cover over ancient jungle ruins" width="1200" height="630" loading="lazy"><figcaption>IQ QUEST cover preview · X controls whether the link image appears.</figcaption></figure>
               <a class="btn btn-green" id="share-creator-draft" href="https://x.com/intent/tweet" target="_blank" rel="noopener noreferrer">↗ SHARE ON X · STEP 1</a>
               <p class="share-step-status" id="share-step-status" role="status" aria-live="polite">Open X to continue. Clicking does not prove a post was published.</p>
-              <div class="share-next-step" id="payment-next-step"><h4>2 · Pay $3.99 &amp; publish onchain</h4><p id="payment-step-message">First open the X share step. A real Mainnet checkout is not available yet.</p><button id="simple-publish" type="button" class="btn btn-green publish-simple-button" disabled aria-disabled="true">PAY $3.99 &amp; PUBLISH · NOT LIVE YET</button><p class="tiny-note">Mainnet payments are OFF. Nobody will be charged. After a verified payment, a separate wallet-approved IQ Labs Mainnet upload (additional storage/network fees) is required for a public onchain link.</p>
+              <div class="share-next-step" id="payment-next-step"><h4>2 · Try publishing on Solana Devnet</h4><p id="payment-step-message">Real $3.99 Mainnet payments are not available yet. You can test the complete flow with Phantom and worthless Devnet SOL.</p><button id="beta-payment-shortcut" type="button" class="btn btn-gold">👻 TEST PAYMENT WITH PHANTOM · DEVNET ONLY</button><p class="tiny-note">This button opens the Devnet test settings. You will need 15 valid questions, must check the test-consent box, and must separately approve every wallet transaction. <strong>No real SOL payment.</strong></p><button id="simple-publish" type="button" class="btn btn-green publish-simple-button" disabled aria-disabled="true">REAL $3.99 PAYMENT · NOT LIVE YET</button><p class="tiny-note">Mainnet payments are OFF. Nobody will be charged. Real onchain publication will require a verified SOL payment and a separate wallet-approved IQ Labs upload with additional storage/network fees.</p>
               <div id="mainnet-quote-panel" class="hidden" aria-live="polite" style="padding:14px;border:1px solid #4b9162;border-radius:11px;background:#12291d;margin:14px 0">
                 <p id="mainnet-invoice" style="white-space:pre-line;overflow-wrap:anywhere;color:#e6f3df;font-size:13px;line-height:1.7"></p>
                 <label class="publish-consent" style="display:flex;gap:9px;align-items:flex-start;font-size:12px;line-height:1.5"><input id="mainnet-order-consent" type="checkbox" style="margin-top:4px"><span>I checked the amount, Mainnet network and recipient. Payment alone does not publish. After payment, I must approve separate IQ Labs storage transactions in my wallet and pay their additional fees; the 15 questions, answers and hints become publicly readable on Solana. I have read the <a href="withdrawal.html" target="_blank" rel="noopener" style="text-decoration:underline">withdrawal information</a> and <a href="privacy.html" target="_blank" rel="noopener" style="text-decoration:underline">privacy information</a>.</span></label>
@@ -470,7 +470,7 @@ details.advanced-box[open]>summary{color:#adffb8;margin-bottom:13px}
         </aside>
       </section>
     </main>
-    <footer class="footer"><span><span class="green">IQ</span> QUEST · Creator Studio V5.3 · SOL checkout groundwork; Mainnet not live</span><nav aria-label="Legal information" style="display:flex;gap:13px;flex-wrap:wrap"><a href="imprint.html" style="color:#b5fbc1;text-decoration:underline">Imprint</a><a href="privacy.html" style="color:#b5fbc1;text-decoration:underline">Privacy</a><a href="withdrawal.html" style="color:#b5fbc1;text-decoration:underline">Withdrawal info</a></nav><span class="footer-iqlabs"><span><b>IQ LABS SDK · COMING SOON</b> · Onchain storage &amp; more <span class="footer-soon">(integration in progress)</span></span><a href="https://x.com/IQLabsOfficial" target="_blank" rel="noopener noreferrer" aria-label="IQ Labs official X profile">X @IQLabsOfficial ↗</a></span></footer>
+    <footer class="footer"><span><span class="green">IQ</span> QUEST · Creator Studio <strong>V5.7 BETA</strong> · Phantom Devnet test; Mainnet payments OFF</span><nav aria-label="Legal information" style="display:flex;gap:13px;flex-wrap:wrap"><a href="imprint.html" style="color:#b5fbc1;text-decoration:underline">Imprint</a><a href="privacy.html" style="color:#b5fbc1;text-decoration:underline">Privacy</a><a href="withdrawal.html" style="color:#b5fbc1;text-decoration:underline">Withdrawal info</a></nav><span class="footer-iqlabs"><span><b>IQ LABS SDK · COMING SOON</b> · Onchain storage &amp; more <span class="footer-soon">(integration in progress)</span></span><a href="https://x.com/IQLabsOfficial" target="_blank" rel="noopener noreferrer" aria-label="IQ Labs official X profile">X @IQLabsOfficial ↗</a></span></footer>
   </div>
   <script>(function(){
 'use strict';
@@ -516,7 +516,7 @@ function validate(raw){
   if(!title)throw Error('Quest title is required.');
   return {v:1,title,creator,theme,difficulty,levels};
 }
-function repairPastedJson(source){
+function repairPastedJson(source,{relaxedQuotes=false}={}){
   // Repairs COPY/PASTE formatting, not puzzle meaning: stray \\ before brackets,
   // backslash escapes unknown to JSON, trailing commas, and literal line breaks.
   let out='',inside=false,fixes=0;
@@ -546,7 +546,18 @@ function repairPastedJson(source){
         // Remove only the invalid escape slash; keep the actual text.
         out+=next;i++;fixes++;continue;
       }
-      if(ch==='"')inside=false;
+      if(ch==='"'){
+        // ChatGPT occasionally writes dialogue quotes inside a JSON value
+        // without escaping them. Only the relaxed fallback repairs those.
+        // Do not alter the normal, standards-compliant JSON parsing path.
+        if(relaxedQuotes){
+          let j=i+1;while(j<source.length&&/\s/.test(source[j]))j++;
+          if(j<source.length&&!(',}]'.includes(source[j])||source[j]===':')){
+            out+='\\"';fixes++;continue;
+          }
+        }
+        inside=false;
+      }
       if(ch==='\n'||ch==='\r'){out+='\\n';if(ch==='\r'&&next==='\n')i++;fixes++;continue;}
       if(ch==='\t'){out+='\\t';fixes++;continue;}
       out+=ch;
@@ -573,6 +584,10 @@ function readImport(text, defaults={}){
     }
   }
   balancedPieces(raw);
+  // A repaired outer object may become balanceable only AFTER stray copied
+  // slashes and quote errors have been corrected. Re-scan that variant too.
+  const tolerant=repairPastedJson(raw,{relaxedQuotes:true});
+  if(tolerant.fixes){candidates.push(tolerant.text);balancedPieces(tolerant.text);}
   // One error in a copied answer should not make us select an unrelated JSON
   // snippet. Every candidate must validate as a full 15-question adventure.
   const tries=[];const seen=new Set();
@@ -582,6 +597,8 @@ function readImport(text, defaults={}){
     tries.push({text:cleaned,fixes:0});
     const repaired=repairPastedJson(cleaned);
     if(repaired.fixes)tries.push(repaired);
+    const relaxed=repairPastedJson(cleaned,{relaxedQuotes:true});
+    if(relaxed.fixes)tries.push(relaxed);
     // Some chat apps copy a JSON *string* instead of the JSON it describes.
     if(/^"[\s\S]*"$/.test(cleaned)){
       try{const unwrapped=JSON.parse(cleaned);if(typeof unwrapped==='string')tries.push({text:unwrapped,fixes:1});}catch(e){}
@@ -647,7 +664,7 @@ function readImport(text, defaults={}){
   const markdown=parseNumberedAnswer(raw);
   if(markdown){if(window.IQQuest)window.IQQuest.importNotice='Formatted 15-question ChatGPT text was recognised automatically.';return markdown;}
   if(bestError && !/SyntaxError/.test(String(bestError)))throw bestError;
-  throw Error('Could not read the ChatGPT response. A stray backslash such as \\] or missing quote may be the cause. Try copying the full JSON code block again, or use LOAD A JSON FILE. Your existing questions are safe.');
+  throw Error('The copied ChatGPT text still has invalid JSON after automatic formatting repair. Please copy the whole answer again (from the first { to the last }), or send me the complete text so I can repair it. Your existing 15 questions have not been changed.');
 }
 window.IQQuest={DEMO:structuredClone(DEMO),validate,readImport,normalizeAnswer};
 })();
@@ -856,6 +873,7 @@ try{
  'use strict';
  const $=id=>document.getElementById(id);
  const share=$('share-creator-draft');
+ const betaTest=$('beta-payment-shortcut');
  const status=$('share-step-status');
  const payment=$('payment-next-step');
  const paymentMessage=$('payment-step-message');
@@ -868,7 +886,7 @@ try{
  function refresh(){
    const ok=shared();
    payment.classList.toggle('completed',ok);
-   paymentMessage.textContent=ok ? '✓ X opened for this adventure. When Mainnet checkout is ready, you will choose a Solana wallet only at payment, followed by verified IQ Labs publication.' : 'Open the X teaser to reach Step 2. Checkout is not live yet.';
+   paymentMessage.textContent=ok ? '✓ X teaser opened. You can now try the Phantom Devnet test below. Real $3.99 payments remain unavailable.' : 'Phantom Devnet testing is available below without paying real SOL. X sharing is optional for the test.';
    if(ok)status.textContent='✓ X share window opened. Posting was not verified. The $3.99 Mainnet payment is not available yet.';
  }
  share.addEventListener('click',()=>{
@@ -881,6 +899,12 @@ try{
    currentShareTitle=title;
    try{localStorage.setItem(shareKey,JSON.stringify({title,openedAt:Date.now()}));}catch(e){}
    refresh();
+ });
+ betaTest.addEventListener('click',()=>{
+   const details=$('developer-tests');
+   details.open=true;
+   $('lab-status').textContent='Phantom Devnet test selected. First finish your 15 questions, then check the Devnet consent box. Only then does TEST PAYMENT ON DEVNET become clickable.';
+   $('lab-consent').scrollIntoView({behavior:'smooth',block:'center'});
  });
  $('quest-name')?.addEventListener('input',()=>{status.textContent='Share the current adventure title on X to continue.';refresh();});
  // This is intentionally a PREVIEW only, not a fake payment or published URL.

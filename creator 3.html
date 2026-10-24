@@ -1,0 +1,1156 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <!-- X / Open Graph preview: static IQ QUEST cover, served directly by GitHub Pages. -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="IQ QUEST">
+  <meta property="og:title" content="IQ QUEST — Mystery Adventures">
+  <meta property="og:description" content="Explore 15 ancient mysteries, beat the clock and challenge your friends on X. Free for players.">
+  <meta property="og:url" content="https://5wbrdm92h7-eng.github.io/iq-quest/">
+  <meta property="og:image" content="https://5wbrdm92h7-eng.github.io/iq-quest/social-cover.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="IQ QUEST mystery adventures title image over ancient jungle ruins">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="IQ QUEST — Mystery Adventures">
+  <meta name="twitter:description" content="15 connected mysteries. Beat the clock. Share your time and challenge friends.">
+  <meta name="twitter:image" content="https://5wbrdm92h7-eng.github.io/iq-quest/social-cover.jpg">
+  <meta name="twitter:image:alt" content="IQ QUEST mystery adventures title image with jungle ruins">
+  <meta name="theme-color" content="#07120f">
+  <meta name="description" content="Turn your community into challengers. Draft mystery quests with ChatGPT, edit them and preview your experience.">
+  <title>IQ QUEST — Creator Studio</title>
+  <style>:root{--bg:#080e14;--panel:#101b22;--panel2:#101d24;--stroke:#294043;--white:#eff7ee;--muted:#9cb5ab;--green:#56f86e;--gold:#e8c17d;--cyan:#85e2d6;--red:#ffabb1;--radius:17px;--shadow:0 18px 65px rgba(0,0,0,.4)}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:radial-gradient(ellipse at 30% 0,#12302d 0%,transparent 34%),linear-gradient(180deg,#07110e 0%,#080e14 37%,#070e13 100%);color:var(--white);font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;font-size:15px;line-height:1.55}
+a{color:inherit;text-decoration:none}button,input,textarea{font:inherit}button{cursor:pointer}button:disabled{cursor:not-allowed;opacity:.45}button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid var(--green);outline-offset:3px}
+.site-shell{max-width:1320px;margin:auto;padding:0 25px}.topbar{height:74px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #26413980;gap:18px}
+.wordmark{display:flex;align-items:baseline;gap:7px;font-family:Georgia,"Times New Roman",serif;font-size:30px;font-weight:900;white-space:nowrap}.wordmark-iq,.green{color:var(--green);text-shadow:0 0 21px #21ee594d}.wordmark-quest{color:#e9d8b5}
+.top-links{display:flex;gap:27px;align-items:center;font-weight:650;font-size:13px;color:#d7e8d9}.top-links>a:hover{color:var(--green)}.nav-create{padding:11px 15px;border:1px solid #4afa63a3;border-radius:11px;color:var(--green);white-space:nowrap}
+.hero{position:relative;overflow:hidden;min-height:465px;display:flex;align-items:center;margin-top:22px;border-radius:22px;border:1px solid #33534a;box-shadow:0 16px 65px #0008;background:#19342c}.hero-player{background-image:var(--ruins-art);background-size:cover;background-position:center}.hero-creator{background-image:var(--ruins-art);background-size:cover;background-position:center}
+.hero-scrim{position:absolute;inset:0;background:linear-gradient(90deg,#07120edb 0%,#07120eb8 34%,#07120e5c 67%,#09140e18 100%),linear-gradient(0deg,#020c07b8,transparent 37%)}.hero::after{content:"";pointer-events:none;position:absolute;inset:12px;border:1px solid #b7cf9866;border-radius:12px}
+.hero-content{position:relative;z-index:1;padding:52px 52px 60px;width:min(720px,80%)}.eyebrow,.section-kicker{letter-spacing:.14em;font-size:11px;font-weight:900;color:var(--gold);text-transform:uppercase}.diamond-dot{color:var(--green);font-size:16px;margin-right:8px}
+h1,h2,h3{font-family:Georgia,"Times New Roman",serif;letter-spacing:-.015em}h1{font-size:clamp(43px,5.1vw,73px);line-height:1.02;margin:17px 0 15px;color:#eedbbb;text-shadow:0 3px 20px #000a}h1 .hero-heading-small{display:block;font-size:clamp(19px,2.5vw,33px);line-height:1.28;letter-spacing:.02em;margin-top:9px}h1 .gold{color:var(--gold)}
+.lead{font-size:17px;line-height:1.65;color:#e5ebdf;max-width:535px;text-shadow:0 2px 9px #000}.hero-buttons,.stack-buttons,.share-actions{display:flex;gap:11px;flex-wrap:wrap;margin-top:23px}.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:14px 18px;border-radius:11px;font-weight:850;font-size:12px;letter-spacing:.035em;transition:transform .12s,filter .12s;min-height:47px}.btn:hover:not(:disabled){transform:translateY(-1px);filter:brightness(1.07)}.btn-green{border:1px solid #9afa9a;background:linear-gradient(135deg,#61fe7e,#20c84c);color:#061710;box-shadow:0 8px 28px #18f04b36}.btn-glass{border:1px solid #b4c4adb3;background:#102621a8;color:#f1f6e7}.btn-outline{border:1px solid #3e5d55;background:#15241f;color:#e3f2e6}.btn-hint{border:1px solid #9b7548;background:#322616;color:#fce0ae}.hint-cost{display:inline-block;border-left:1px solid #8f744c;padding-left:7px;color:var(--gold)}.btn-gold{border:1px solid #ffedae;background:linear-gradient(135deg,#f2d58d,#cc9440);color:#1d170b}
+.hero-facts{display:flex;gap:18px;margin-top:28px;flex-wrap:wrap;color:#dfedd7;font-size:12px}.hero-facts span::first-letter{color:var(--green)}.hero-corner{position:absolute;bottom:20px;right:25px;z-index:1;color:#ffe7bb99;font-size:10px;font-weight:800;letter-spacing:.2em}
+.mini-info{display:flex;justify-content:space-around;flex-wrap:wrap;gap:10px;color:#cde3ca;font-size:12px;padding:20px 0;border-bottom:1px solid #29443980}.mini-info b{color:var(--green)}
+.adventure-layout,.studio-layout{display:grid;grid-template-columns:minmax(0,1.52fr) minmax(320px,.8fr);gap:21px;margin-top:28px;align-items:start}.panel{background:linear-gradient(160deg,#14231f 0%,#0b181a 100%);border:1px solid #31534c;border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden}.game-panel,.studio-panel{padding:24px}.panel-topline{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px}.status-dot{font-size:10px;font-weight:850;letter-spacing:.07em;color:#8eecab;white-space:nowrap}.status-dot::before{content:"●";font-size:9px;margin-right:6px}.game-toolbar{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}.game-toolbar h2{margin:0;font-size:29px;color:#f3dfaf}.game-toolbar p{margin:5px 0 0;color:var(--muted);font-size:13px}.difficulty-tag{border:1px solid #e2b76769;color:var(--gold);background:#eac07118;border-radius:8px;padding:6px 9px;font-size:10px;letter-spacing:.08em;font-weight:800}.notice{background:#342813;border:1px solid #cda064;border-radius:9px;color:#f3dfab;padding:12px;margin:14px 0;font-size:12px}.chapter-bar{display:flex;justify-content:space-between;font-size:11px;letter-spacing:.07em;font-weight:800;color:#b5d4c7;margin-top:21px}.progress-track{height:9px;background:#0b1214;border:1px solid #33554a;border-radius:30px;overflow:hidden;margin:9px 0 17px}.progress-fill{height:100%;width:0;background:linear-gradient(90deg,#34c753,#a2fe80);transition:width .25s;box-shadow:0 0 16px #52ff7560}.timer-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;margin-bottom:22px}.timer-tile{background:#071415;border:1px solid #2e4c48;border-radius:12px;padding:11px 13px}.timer-tile small{display:block;white-space:nowrap;color:#a8bdb0;font-size:10px;font-weight:800;letter-spacing:.06em}.timer-tile strong{display:block;font-family:Georgia,serif;font-size:25px;margin-top:4px;font-variant-numeric:tabular-nums;color:#ddf5e4}.timer-tile strong.penalty{color:#f9aaaf}.timer-tile.accent-tile{border-color:#58cb7799;background:#15341f}.accent-tile strong{color:var(--green)}
+.question-area{padding:22px;border-radius:13px;border:1px solid #496b50;background:linear-gradient(#0e201ac8,#091716e8),var(--ruins-art) center/cover}.question-subtitle{display:flex;justify-content:space-between;align-items:center;color:#bbccab;letter-spacing:.1em;font-size:11px;font-weight:900}.micro-rune{color:var(--gold)}.question-area h3{font-size:30px;margin:11px 0 9px;color:var(--gold)}.narration{font-size:14px;font-style:italic;color:#d2dec4}.question-box{margin:18px 0;background:#061412c9;border:1px solid #48635a;border-radius:12px;padding:18px;color:#f1f4e9;font-size:16px;font-weight:650}.question-box p{margin:0}
+.field-label,.form-group label{display:block;font-size:11px;letter-spacing:.09em;font-weight:900;color:#b3d4c0;text-transform:uppercase;margin-bottom:8px}.question-area input,.form-group input,.form-group textarea{display:block;outline:0;width:100%;background:#071319;color:#f2f5ef;border:1px solid #41685f;border-radius:9px;padding:13px 14px;font-size:14px;resize:vertical}.form-group textarea{min-height:80px}.question-area input:focus,.form-group input:focus,.form-group textarea:focus{border-color:var(--green);box-shadow:0 0 0 2px #42ee5f28}.game-actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:12px}.game-actions .btn:first-child{flex:1}.hint-message,.feedback{margin-top:14px;padding:14px;border-radius:10px;border:1px solid #64754b;background:#26321c;color:#f1e2a6}.feedback.success{border-color:#3d8e52;background:#12301c;color:#afffc0}.feedback.error{border-color:#9c5664;background:#351c27;color:#ffd5dc}.play-footer{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;margin-top:16px;border-top:1px solid #486156;padding-top:12px;color:#aebbae;font-size:11px}.text-button{color:var(--gold);border:0;background:none;padding:2px 0;font-weight:800;text-decoration:underline;text-underline-offset:3px}.hidden{display:none!important}
+.side-rail,.studio-aside{display:grid;gap:20px}.story-panel,.chapter-panel,.battle-panel,.preview-panel,.publish-panel{padding:20px}.story-panel h3,.chapter-panel h3,.battle-panel h3,.publish-panel h3{font-size:25px;color:var(--gold);margin:10px 0 6px}.story-panel p,.battle-panel p,.publish-panel p{font-size:13px;line-height:1.65;color:#b9cfc2}.scene-image{height:190px;background:var(--ruins-art) 70% 45%/cover;border-radius:10px;border:1px solid #385d4a;margin-top:12px}.chapter-list{list-style:none;counter-reset:chapter;margin:14px 0 0;padding:0;display:grid;gap:5px}.chapter-list li{display:flex;align-items:center;gap:10px;padding:8px 10px;background:#0e1e1b;border-radius:8px;color:#aac2b4;font-size:12px}.chapter-list li::before{counter-increment:chapter;content:counter(chapter,decimal-leading-zero);width:28px;color:#7aa08f;font-size:10px;font-weight:900}.chapter-list li.current{color:#e4ffda;background:#1f3a29;box-shadow:inset 3px 0 var(--green)}.chapter-list li.passed{color:#6fd986}.highlight-chip{display:inline-block;font-size:10px;font-weight:900;color:var(--green);border:1px solid #4b8c5c;border-radius:5px;padding:7px 9px;margin-top:9px}
+.finish-area{text-align:center;padding:18px 7px}.finish-symbol{font-size:72px;color:var(--gold);text-shadow:0 0 24px #e8c17d5e}.finish-area h3{font-size:39px;color:var(--gold);margin:6px 0 10px}.finish-area>p{color:#c7dbcd}.result-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:22px 0}.result-grid>div{border:1px solid #4b6552;border-radius:9px;background:#15231a;padding:14px 7px}.result-grid>div span{display:block;font-size:10px;letter-spacing:.07em;color:#aac2af}.result-grid>div strong{display:block;font-family:Georgia,serif;font-size:25px;margin-top:7px;font-variant-numeric:tabular-nums}.result-total strong{color:var(--green)}.share-actions{justify-content:center}.fineprint{font-size:11px;color:#a6b8ae}.how-grid,.creator-benefits{display:grid;grid-template-columns:repeat(3,1fr);gap:15px;margin:22px 0 32px}.how-item,.creator-benefits article{padding:20px;border:1px solid #27463c;border-radius:13px;background:#11211c}.how-item span,.creator-benefits article>span{font-size:28px;color:var(--green);font-family:Georgia,serif}.how-item h3,.creator-benefits h3{color:var(--gold);font-size:22px;margin:5px 0}.how-item p,.creator-benefits p{font-size:13px;color:#b6cabe;margin:7px 0}
+.footer{display:flex;justify-content:space-between;gap:15px;flex-wrap:wrap;border-top:1px solid #274038;padding:24px 0 34px;margin-top:12px;color:#9bada4;font-size:11px}
+.studio-layout{grid-template-columns:minmax(0,1.5fr) minmax(340px,.76fr)}.studio-main{display:grid;gap:19px}.studio-panel h2{color:var(--gold);font-size:29px;margin:0 0 3px}.section-intro{font-size:13px;color:#aec0b5;margin:5px 0 21px}.form-group{margin:17px 0}.form-group:last-child{margin-bottom:0}.choice-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}.choice-grid button,.choice-inline button{color:#dfece4;text-align:left;background:#0e211d;border:1px solid #385347;border-radius:10px;padding:12px;transition:background .15s}.choice-grid button.selected,.choice-inline button.selected{border-color:var(--green);background:#193923;box-shadow:inset 0 0 0 1px #3bd15a50}.choice-grid button strong{display:block;font-size:12px;color:#e5f3e3}.choice-grid button small{display:block;color:#a9bdac;margin-top:5px;font-size:10px}.choice-inline{display:flex;gap:10px}.choice-inline button{min-width:78px;text-align:center;font-weight:850}
+.ai-panel{background:linear-gradient(150deg,#11272a,#111b20)}.ai-glow{color:#ded2ff;font-size:11px;font-weight:900;letter-spacing:.08em}.ai-steps{display:flex;flex-wrap:wrap;gap:7px;margin:16px 0}.ai-steps span{font-size:10px;font-weight:900;color:#d9dbef;background:#2b2b4633;border:1px solid #605e7a75;border-radius:8px;padding:7px}.ai-panel .stack-buttons{margin:12px 0}.small-status{font-size:12px;min-height:20px;margin-top:12px;color:var(--green)}.small-status.bad{color:var(--red)}
+.editor-layout{display:grid;grid-template-columns:190px minmax(0,1fr);gap:15px}.level-selector{max-height:570px;overflow:auto;display:grid;align-content:start;gap:6px}.level-selector button{display:block;text-align:left;background:#0e1e1a;color:#c5d7c7;border:1px solid #2d463b;padding:10px;border-radius:8px;font-size:12px;line-height:1.35;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}.level-selector button.active{border-color:var(--green);background:#1e3d25;color:white}.level-fields{min-width:0}.level-fields .form-group{margin:0 0 13px}.muted{font-size:10px;color:#839d92;text-transform:none;letter-spacing:0}.tiny-note{font-size:11px;color:#9fb5a7;line-height:1.6}.preview-image{height:205px;margin:13px -5px 0;background:var(--ruins-art) 63% center/cover;border:1px solid #3d604e;border-radius:10px}.preview-body{padding-top:12px}.preview-body h3{font-size:25px;margin:0 0 6px;color:var(--gold)}.preview-body p{font-size:12px;line-height:1.6;color:#b4d0c0}.preview-tags{display:flex;flex-wrap:wrap;gap:6px;margin:14px 0}.preview-tags span{font-size:10px;color:#e9dcb3;background:#292719;padding:6px 8px;border:1px solid #685d36;border-radius:6px}.preview-panel .btn{width:100%}.publish-panel .btn{width:100%;margin:7px 0}.price-micro{font-size:11px;color:#e4d299;margin-bottom:8px}
+.creator-price{margin:15px 0 16px;border:1px solid #697a4a;border-radius:13px;background:linear-gradient(145deg,#17251a,#101f1b);padding:16px}
+.creator-price .price-label{display:block;color:#c8dccb;font-size:11px;font-weight:900;letter-spacing:.07em;text-transform:uppercase}
+.creator-price .price-main{display:block;color:var(--green);font:800 37px/1.2 Georgia,serif;margin:4px 0}
+.creator-price .price-settlement{font-size:13px;color:#eef4e2;font-weight:800}
+.creator-price .price-breakdown{margin:16px 0 0;padding:0;list-style:none;display:grid;gap:10px}
+.creator-price .price-breakdown li{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;border-top:1px solid #3a5441;padding-top:10px;font-size:12px;color:#d0e1d0}
+.creator-price .price-breakdown strong{color:#f5e3ad;font-weight:850}
+.creator-price .price-footnote{margin:12px 0 0;font-size:11px;color:#b4c9b4;line-height:1.55}
+
+
+.ai-howto{background:#0b1b1d;border:1px solid #3c6b5c;border-radius:13px;padding:17px;margin:14px 0 17px}
+.ai-howto h3{margin:0 0 9px;color:#ebdcaa;font-size:20px}
+.ai-howto .example-text{padding:13px 15px;margin:8px 0 10px;border-left:3px solid var(--green);border-radius:8px;background:#182a25;color:#e7f6df;line-height:1.58;font-size:14px}
+.ai-howto .example-caption{color:#a9cbbb;font-size:12px;line-height:1.55;margin:8px 0}
+.ai-howto .example-actions{display:flex;gap:9px;flex-wrap:wrap;margin:11px 0}
+.ai-howto .example-actions button{font-size:12px}
+.ai-howto ol{padding-left:21px;margin:12px 0 0;color:#cfe3d7;font-size:13px;line-height:1.85}
+.ai-howto ol strong{color:#e9f9d9}
+
+@media(max-width:1000px){.adventure-layout,.studio-layout{grid-template-columns:1fr}.side-rail{grid-template-columns:repeat(3,minmax(0,1fr));align-items:start}.side-rail .story-panel,.side-rail .battle-panel,.side-rail .chapter-panel{height:100%}.studio-aside{grid-template-columns:1fr 1fr;align-items:start}.preview-panel{grid-row:span 2}}
+@media(max-width:740px){.site-shell{padding:0 13px}.topbar{height:auto;min-height:68px}.wordmark{font-size:24px}.top-links{gap:8px}.top-links>a:not(.nav-create){display:none}.nav-create{font-size:11px;padding:8px}.hero{min-height:500px;margin-top:12px;background-position:64% center}.hero-content{padding:38px 21px 62px;width:100%}.hero-scrim{background:linear-gradient(90deg,#06120ef0 0%,#06120ee0 45%,#06120e93 100%),linear-gradient(0deg,#020c07d9,transparent 55%)}.hero-corner{right:19px;bottom:21px;font-size:8px}.hero-buttons{flex-direction:column;align-items:stretch}.hero-buttons .btn{width:100%}.mini-info{justify-content:flex-start;gap:10px 18px}.adventure-layout,.studio-layout{margin-top:18px}.game-panel,.studio-panel{padding:17px}.game-toolbar h2{font-size:24px}.timer-tile{padding:11px 8px}.timer-tile small{font-size:8px}.timer-tile strong{font-size:19px}.question-area{padding:16px}.question-area h3{font-size:26px}.game-actions .btn{width:100%}.side-rail,.studio-aside,.how-grid,.creator-benefits{grid-template-columns:1fr}.preview-panel{grid-row:auto}.result-grid>div strong{font-size:18px}.result-grid>div span{font-size:8px}.editor-layout{grid-template-columns:1fr}.level-selector{display:flex;gap:6px;overflow-x:auto;max-height:none;padding-bottom:6px}.level-selector button{flex:0 0 130px}.choice-grid{grid-template-columns:1fr}.share-actions .btn{width:100%}.hero-facts{gap:9px 12px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+
+:root{--ruins-art:url('./temple-ruins.webp');}
+
+/* Creator X cover card: displays the same public image used by X link previews. */
+.x-cover-preview{border:1px solid #4a855a;border-radius:13px;background:linear-gradient(165deg,#10271d,#0c1a19);padding:10px;overflow:hidden;box-shadow:0 0 20px #51ed7520}
+.x-cover-preview img{display:block;width:100%;height:auto;aspect-ratio:1200/630;object-fit:cover;border-radius:9px;background:#081710}
+.x-cover-preview figcaption{margin-top:10px;font-size:11px;line-height:1.55;color:#c7ddc9}
+.x-cover-preview strong{color:#a5ffaf}
+.social-payment-flow[hidden]{display:none}.social-payment-flow{display:grid;gap:10px;margin:14px 0 16px}.flow-step{display:flex;align-items:flex-start;gap:11px;color:#eef5e7}.flow-step strong{display:block;font-size:13px}.flow-step small{display:block;color:#b5ceb9;font-size:11px;line-height:1.5;margin-top:3px}.flow-number{display:grid;place-items:center;flex:0 0 28px;height:28px;border-radius:50%;background:#244a31;color:#a6ffb9;font-size:13px;font-weight:900;border:1px solid #56a46b}.social-payment-flow>a{width:100%}.share-step-status{font-size:12px;color:#c8d5b8;line-height:1.5;margin:4px 0 10px}.share-step-status.done{color:#81fa98}.price-choice{display:grid;gap:10px;margin-bottom:15px}.price-option{display:flex;align-items:flex-start;gap:11px;padding:13px;border:1px solid #4a6957;background:#0b1919;border-radius:11px;cursor:pointer}.price-option:has(input:checked){border-color:var(--green);background:#142e20}.price-option input{margin-top:4px;accent-color:#56f86e;flex:0 0 auto}.price-option strong{display:block;color:#ebf7e9;font-size:13px}.price-option small{display:block;color:#b6cbba;font-size:11px;line-height:1.5;margin-top:3px}.price-choice-note{font-size:12px;color:#c4dfcd;margin-top:2px}
+
+/* V4.3.1: accurate creator pricing; clearer player and X-battle labels */
+.quick-benefits{gap:9px 18px;font-size:11.5px;line-height:1.35}
+.quick-benefits .benefit-creator small{color:#e3c991;font-size:9px;font-weight:750;white-space:nowrap}
+.quick-benefits .benefit-play,.quick-benefits .benefit-battle{font-size:13px;letter-spacing:.035em}
+.quick-benefits .benefit-battle strong{color:#e2fce6}
+@media(max-width:740px){.quick-benefits{font-size:10px;gap:7px 13px;padding:10px 8px}.quick-benefits .benefit-play,.quick-benefits .benefit-battle{font-size:11.5px;letter-spacing:0}}
+@media(max-width:360px){.quick-benefits{font-size:9.5px}.quick-benefits .benefit-play,.quick-benefits .benefit-battle{font-size:10.8px}.quick-benefits .benefit-creator small{font-size:8px}}
+
+/* V4.4: clear paid publishing tiers and optional sharing. */
+.publish-perks{display:flex;flex-wrap:wrap;gap:7px;margin:10px 0 14px}
+.publish-perks span{font-size:10px;line-height:1.5;border:1px solid #416b4e;border-radius:7px;background:#173323;color:#c2f7cc;padding:6px 9px;font-weight:700}
+.price-option:focus-within{outline:2px solid #56f86e;outline-offset:2px}
+.social-payment-flow{padding:13px;border:1px solid #385949;border-radius:12px;background:#10231d;margin:16px 0}
+
+/* V4.6 · Devnet IQ Labs publishing workstation */
+.iq-devnet-publisher{margin-top:18px;padding:17px;border:1px solid #65d980;border-radius:14px;background:linear-gradient(160deg,#153c29,#0a1c19);box-shadow:0 0 22px #56f86e17}
+.iq-devnet-publisher h4{margin:0 0 6px;color:#b5ffbf;font-size:17px}
+.iq-devnet-publisher p{font-size:12px;color:#c5dec9;line-height:1.55}
+.iq-devnet-publisher .btn{font-size:12px}
+.iq-devnet-publisher .publish-consent{display:flex;gap:10px;font-size:12px;line-height:1.5;color:#f1e3b6;margin:12px 0}
+.iq-devnet-publisher .publish-consent input{flex:none;align-self:flex-start;width:18px;height:18px;accent-color:#56f86e}
+.iq-devnet-publisher .publish-progress{white-space:pre-wrap;overflow-wrap:anywhere;color:#bafed0;font-size:12px;line-height:1.55;margin:8px 0}
+.iq-devnet-publisher .publish-links{display:grid;gap:8px;margin:12px 0}
+.iq-devnet-publisher .publish-links a{color:#a5ffb5;overflow-wrap:anywhere;text-decoration:underline}
+
+/* V4.6 · recipient configuration & safe devnet-only checkout rehearsal */
+.iq-payment-lab{margin:17px 0;padding:18px;border:1px solid rgba(93,243,135,.56);border-radius:14px;background:linear-gradient(155deg,#102d22,#091d1b);box-shadow:0 0 18px #56f86e18}
+.iq-payment-lab h4{margin:0 0 6px;color:#b6ffbf;font-size:18px}
+.iq-payment-lab p{color:#c7dccc;font-size:12px;line-height:1.6;margin:8px 0}
+.iq-payment-lab .lab-address{display:block;overflow-wrap:anywhere;background:#081510;border:1px solid #365943;padding:11px;border-radius:8px;color:#baffc1;font-size:11px;line-height:1.55;user-select:all}
+.iq-payment-lab .lab-notice{border-left:3px solid #ddbf78;background:#32291b85;padding:10px 12px;color:#f4e0b6}
+.iq-payment-lab .lab-status{white-space:pre-wrap;overflow-wrap:anywhere;font-size:12px;color:#b7f5c6;line-height:1.6;padding:9px 0;min-height:34px}
+.iq-payment-lab .lab-check{display:flex;gap:10px;align-items:flex-start;color:#d9e8d5;font-size:12px;line-height:1.5;margin:12px 0}
+.iq-payment-lab .lab-check input{width:18px;height:18px;flex:none;accent-color:#56f86e;margin-top:2px}
+.iq-payment-lab .lab-actions{display:grid;gap:10px;margin:12px 0}
+.iq-payment-lab .lab-actions .btn{width:100%;white-space:normal;text-align:center}
+.iq-payment-lab .lab-result{overflow-wrap:anywhere;color:#a8fabe;font-size:11px}
+.iq-payment-lab .lab-explorer{color:#baffc1;text-decoration:underline}
+.iq-payment-lab .lab-disabled{opacity:.85}
+@media(max-width:740px){.iq-payment-lab{padding:13px}.iq-payment-lab h4{font-size:16px}.iq-payment-lab .lab-address{font-size:10px}}
+
+/* IQ QUEST V4.9 — compact premium brand and mobile-friendly creator flow */
+.wordmark{font-size:clamp(33px,3vw,41px);gap:8px}
+.brand-cluster{gap:13px}
+.onchain-promise{font-size:10px;line-height:1.25;padding:6px 10px}
+.onchain-promise small{font-size:9px;letter-spacing:.045em}
+.brand-official-x{color:#bfffd0;text-decoration:underline;text-underline-offset:3px;font-size:10px;font-weight:850;white-space:nowrap}
+.quick-benefits{padding:11px 14px;gap:8px 20px}
+.quick-benefits .benefit-play,.quick-benefits .benefit-battle{font-size:14px}
+.creator-benefits{gap:10px;margin:14px 0 20px}
+.creator-benefits article{padding:13px 15px;min-height:0;border-radius:11px}
+.creator-benefits article>span{font-size:20px}
+.creator-benefits h3{font-size:18px;margin:3px 0}
+.creator-benefits p{font-size:11px;line-height:1.45;margin:4px 0}
+.hero-creator{min-height:345px}
+.hero-creator .hero-content{padding-top:35px;padding-bottom:39px}
+.mini-info{padding:10px 0;font-size:11px}
+.ai-simplified{display:grid;gap:12px}
+.ai-simple-step{border:1px solid #396a4a;background:#0d241b;border-radius:12px;padding:14px}
+.ai-simple-step h3{font-size:17px;color:#f4d79b;margin:0 0 6px}
+.ai-simple-step p{font-size:12px;color:#d1e2d4;line-height:1.5;margin:5px 0 11px}
+.ai-simple-step textarea{width:100%;min-height:120px;line-height:1.5;border:1px solid #4f8062;background:#071914;color:#eaf9eb;border-radius:9px;padding:12px;font-size:13px;resize:vertical}
+.ai-simple-step .btn{width:100%;white-space:normal;text-align:center}
+.ai-simple-step .tiny-note{display:block;margin-top:8px}
+.ai-simple-example{font-size:12px;color:#f1dbaa;line-height:1.5}
+.price-single{display:flex;justify-content:space-between;align-items:center;gap:15px;border:1.5px solid #69c27b;border-radius:14px;background:linear-gradient(145deg,#183725,#10281e);padding:16px}
+.price-single strong{font-size:16px;color:#f4e0ab}
+.price-single p{font-size:12px;color:#cde7d2;margin:6px 0 0;line-height:1.5}
+.price-single .price-main{font-size:clamp(29px,4vw,39px);white-space:nowrap;margin:0}
+.publish-simple-button{opacity:.65!important}
+#share-creator-draft{width:100%;font-size:14px}
+.share-payment-sequence{display:grid;gap:12px;margin:14px 0}
+.share-payment-sequence .flow-step{border:1px solid #3e6c4b;border-radius:10px;padding:12px;background:#0c241a}
+.share-payment-sequence .x-cover-preview{margin:0}
+.share-next-step{border:1px solid #465b4b;border-radius:10px;background:#111f1a;padding:12px}
+.share-next-step h4{margin:0 0 6px;color:#e8d4a4;font-size:15px}
+.share-next-step p{font-size:12px;color:#d0e0d0;line-height:1.55;margin:7px 0}
+.share-next-step.completed{border-color:#61ec7f}
+.publish-success{border:2px solid rgba(115,255,141,.76);border-radius:17px;padding:20px;background:linear-gradient(155deg,#1a3826,#091a16);box-shadow:0 0 24px #43ed7b29;margin:15px 0;scroll-margin-top:24px}
+.publish-success h3{font:800 31px/1.16 Georgia,serif;color:#f8deab;margin:8px 0}
+.publish-success p{font-size:13px;line-height:1.55;color:#d0e7d3}
+.publish-success .success-tag{color:#9bffb6;font-weight:900;font-size:11px;letter-spacing:.08em}
+.publish-success .success-actions{display:grid;gap:9px;margin-top:14px}
+.publish-success .success-actions .btn{width:100%}
+.publish-success .success-actions .btn:disabled{opacity:.5}
+.publish-success .success-url{font-size:12px;overflow-wrap:anywhere;color:#a1f8ae;background:#08170f;padding:10px;border-radius:9px;border:1px solid #3f654d}
+.publish-success[data-state="preview"]{border-color:#6f8265;box-shadow:none}
+@media(max-width:740px){
+ .wordmark{font-size:30px}
+ .brand-cluster{gap:7px;align-items:center}
+ .onchain-promise{font-size:9px;padding:5px 7px}
+ .onchain-promise small{font-size:8px}
+ .brand-official-x{font-size:10px}
+ .quick-benefits{gap:6px 11px;padding:8px}
+ .quick-benefits .benefit-play,.quick-benefits .benefit-battle{font-size:12px}
+ .creator-benefits{grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}
+ .creator-benefits article{padding:10px 8px;text-align:center}
+ .creator-benefits article>span{font-size:21px}
+ .creator-benefits h3{font-size:12px;line-height:1.2;margin:3px 0}
+ .creator-benefits p{display:none}
+ .hero-creator{min-height:330px}
+ .hero-creator .hero-content{padding:25px 21px 40px}
+ .mini-info{display:none}
+ .ai-simple-step{padding:12px}
+ .price-single{padding:12px}
+ .price-single .price-main{font-size:29px}
+}
+@media(max-width:360px){.wordmark{font-size:27px}.onchain-promise{font-size:8px}.brand-official-x{font-size:9px}.creator-benefits h3{font-size:11px}}
+@media(prefers-reduced-motion:reduce){.publish-success{scroll-behavior:auto}}
+
+</style>
+<style>.wallet-preview{display:grid;gap:8px;margin:16px 0;padding:15px;border:1px solid #426b50;border-radius:12px;background:#101e19}.wallet-preview strong{color:#b8ffbf;font-size:13px}.wallet-preview p,.wallet-preview div{margin:0;font-size:11px;line-height:1.6;color:#bed3c4}.wallet-preview .btn{width:100%;font-size:11px}
+.wallet-checkout{padding:15px;margin:14px 0;border:1px solid #74dc86;border-radius:13px;background:#132c21;scroll-margin-top:18px}
+.wallet-checkout h4{font-size:18px;color:#b3ffbe;margin:0 0 6px}
+.wallet-checkout p{font-size:12px;line-height:1.55;color:#c5dec9;margin:8px 0}
+.wallet-choice-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;padding:0;border:0;margin:12px 0}
+.wallet-choice-grid label{display:flex;align-items:center;gap:7px;justify-content:center;cursor:pointer;padding:12px 8px;border:1px solid #4f7d61;border-radius:10px;background:#0a1c18;color:#e4fbe7;font-size:12px;font-weight:800}
+.wallet-choice-grid label:has(input:checked){background:#225339;border-color:#67f381;box-shadow:inset 0 0 0 1px #67f381}
+.wallet-choice-grid input{accent-color:#5ef47b}
+.wallet-checkout-actions{display:grid;grid-template-columns:2fr 1fr;gap:8px}
+.wallet-checkout-actions .btn{width:100%;font-size:11px}
+.wallet-checkout .wallet-choice-status{min-height:26px;color:#f2dba7;overflow-wrap:anywhere}
+@media(max-width:470px){.wallet-choice-grid{grid-template-columns:1fr}.wallet-choice-grid label{justify-content:flex-start}.wallet-checkout-actions{grid-template-columns:1fr}}
+/* IQ QUEST V4.2 · robust ChatGPT import and verified-state messaging */
+.onchain-status{display:flex;align-items:center;flex-wrap:wrap;gap:9px;padding:10px 13px;margin:12px 0 8px;border:1px solid rgba(100,228,129,.34);border-radius:11px;background:#10251c;color:#c7e8d0;font-size:11px;line-height:1.5}
+.onchain-status strong{color:#a9ffb6;letter-spacing:.08em;font-size:10px}
+.onchain-dot{width:7px;height:7px;flex:none;border-radius:50%;background:#9ad5ad;box-shadow:0 0 7px #67ce8580}
+.import-assist-actions{margin:6px 0 13px}
+.import-file-label{cursor:pointer;position:relative}
+.import-file-label input{position:absolute;width:1px;height:1px;opacity:0;inset:0}
+.import-file-label:focus-within{outline:2px solid var(--green);outline-offset:3px}
+#chatgpt-json{font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:12px;line-height:1.5;min-height:150px;overflow-wrap:anywhere}
+#chatgpt-json:focus{box-shadow:0 0 0 2px #42ee5f28}
+.prompt-fallback{display:grid;gap:9px;padding:12px;border:1px solid #547d6a;border-radius:10px;background:#101f1b;margin-top:12px}
+.prompt-fallback label{font-size:12px;color:#d3eada}
+.prompt-fallback textarea{width:100%;padding:10px;color:#e5f3e6;background:#071319;border:1px solid #41685f;border-radius:8px;font-size:12px;resize:vertical}
+#import-status{white-space:pre-wrap;overflow-wrap:anywhere;line-height:1.55}
+@media(max-width:740px){.import-assist-actions>*{flex:1 1 100%}.ai-panel .stack-buttons #import-ai{width:100%}.ai-panel .form-group textarea{font-size:13px}}
+
+.preview-help-text{display:block;margin:0 0 7px;color:#b7cfbd;font-size:11px;line-height:1.5}
+
+/* IQ QUEST V4.3: clear positioning, small onchain roadmap badge, official X link */
+.brand-cluster{display:flex;align-items:center;gap:12px;min-width:0;flex-wrap:wrap}
+.onchain-promise{display:inline-flex;flex-direction:column;align-items:flex-start;gap:1px;line-height:1.2;padding:6px 9px;border:1px solid rgba(104,255,123,.45);border-radius:8px;background:rgba(18,50,28,.78);color:#aeffb6;font-size:10px;letter-spacing:.065em;font-weight:850;white-space:nowrap}
+.onchain-promise small{color:#f0d9a6;font-size:9px;font-weight:850;letter-spacing:.09em}
+.quick-benefits{display:flex;justify-content:center;align-items:center;gap:10px 22px;flex-wrap:wrap;margin:10px 0 0;padding:9px 12px;border:1px solid #345f46;border-radius:10px;background:rgba(10,31,21,.9);font-size:11px;font-weight:800;letter-spacing:.04em;color:#dbf5df}
+.quick-benefits strong{color:#8dffa3}
+.footer{align-items:center}
+.footer-iqlabs{display:flex;align-items:center;justify-content:flex-end;flex-wrap:wrap;gap:7px 11px;max-width:640px;line-height:1.5;text-align:right}
+.footer-iqlabs b{color:#bdfac4}
+.footer-iqlabs .footer-soon{color:#f0d397;font-size:10px;letter-spacing:.03em}
+.footer-iqlabs a{color:#98ffad;text-decoration:underline;text-underline-offset:3px;font-weight:850}
+.footer-iqlabs a:hover{color:#eaffea}
+@media(max-width:740px){.topbar{height:auto;min-height:68px;flex-wrap:wrap;gap:5px 10px;padding:9px 0}.brand-cluster{width:100%;gap:8px}.onchain-promise{padding:5px 7px;font-size:9px}.onchain-promise small{font-size:8px}.top-links{width:100%;justify-content:flex-start;gap:8px}.top-links .nav-create{padding:7px 10px}.quick-benefits{justify-content:center;gap:5px 12px;margin-top:8px;padding:8px;font-size:9px;letter-spacing:0}.footer-iqlabs{justify-content:flex-start;text-align:left}}
+@media(max-width:360px){.wordmark{font-size:23px}.onchain-promise{font-size:8px;padding:5px}.quick-benefits{font-size:8.7px}}
+
+/* V4.6 · Devnet IQ Labs publishing workstation */
+.iq-devnet-publisher{margin-top:18px;padding:17px;border:1px solid #65d980;border-radius:14px;background:linear-gradient(160deg,#153c29,#0a1c19);box-shadow:0 0 22px #56f86e17}
+.iq-devnet-publisher h4{margin:0 0 6px;color:#b5ffbf;font-size:17px}
+.iq-devnet-publisher p{font-size:12px;color:#c5dec9;line-height:1.55}
+.iq-devnet-publisher .btn{font-size:12px}
+.iq-devnet-publisher .publish-consent{display:flex;gap:10px;font-size:12px;line-height:1.5;color:#f1e3b6;margin:12px 0}
+.iq-devnet-publisher .publish-consent input{flex:none;align-self:flex-start;width:18px;height:18px;accent-color:#56f86e}
+.iq-devnet-publisher .publish-progress{white-space:pre-wrap;overflow-wrap:anywhere;color:#bafed0;font-size:12px;line-height:1.55;margin:8px 0}
+.iq-devnet-publisher .publish-links{display:grid;gap:8px;margin:12px 0}
+.iq-devnet-publisher .publish-links a{color:#a5ffb5;overflow-wrap:anywhere;text-decoration:underline}
+
+/* V4.7 · simple customer journey; technical Devnet workstation remains opt-in */
+.simple-journey{padding:20px 22px;border:1px solid #5fbf72;border-radius:15px;background:linear-gradient(145deg,#163b2b,#10231f);box-shadow:0 0 21px #56f86e16;margin-bottom:18px}
+.simple-journey h2{font-size:26px;color:#e9e3ba;margin:5px 0 7px}
+.simple-journey p{color:#c9dfcc;font-size:13px;line-height:1.6;margin:0}
+.simple-journey .flow-tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:17px}
+.simple-journey .flow-tile{border:1px solid #426d4d;border-radius:10px;padding:13px 11px;background:#0b2019;color:#dcf1df;font-weight:850;font-size:12px;line-height:1.5}
+.simple-journey .flow-tile b{display:block;color:#93ffab;font-size:18px;margin-bottom:5px}
+.ai-quick-way{padding:16px;border:1px solid #365f49;border-radius:12px;background:#12241e;margin:14px 0}
+.ai-quick-way h3{margin:0 0 8px;font-size:18px;color:#e9dda9}
+.ai-quick-way p{margin:0 0 12px;color:#c6decd;font-size:12px;line-height:1.6}
+.ai-quick-way .btn{width:100%;white-space:normal;text-align:center}
+.ai-step{padding:15px 14px;margin:12px 0;border:1px solid #496e52;border-radius:11px;background:#0c211b}
+.ai-step-head{display:flex;gap:10px;align-items:center;font-size:15px;color:#f0e7c7;font-weight:850;margin-bottom:10px}
+.ai-step-num{display:grid;place-items:center;width:29px;height:29px;flex:none;background:#28663b;border:1px solid #7cdd91;border-radius:50%;color:#fff;font-weight:900}
+.ai-step .btn{width:100%;white-space:normal;text-align:center}
+.ai-step .stack-buttons{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin:8px 0}
+.ai-step textarea{width:100%;min-height:145px;border:1px solid #4a815a;background:#061611;color:#eef8ee;border-radius:9px;padding:12px;font:13px/1.6 ui-monospace,Consolas,monospace}
+.ai-step p,.ai-step small{display:block;color:#b3d0b8;line-height:1.55;margin:8px 0;font-size:12px}
+details.advanced-box{border:1px solid #355a45;border-radius:11px;padding:11px 13px;margin:14px 0;background:#0b1b16}
+details.advanced-box>summary{cursor:pointer;color:#b9dfc2;font-size:12px;font-weight:800;line-height:1.5;padding:3px 0;list-style:revert}
+details.advanced-box[open]>summary{color:#adffb8;margin-bottom:13px}
+.publish-simple-note{border:1px solid #56794b;border-radius:10px;background:#1a2d20;padding:12px;margin:14px 0 8px;color:#e5e3b8;font-size:12px;line-height:1.6}
+.publish-simple-button{width:100%;margin:9px 0;font-size:13px;opacity:.75!important;cursor:not-allowed!important}
+.simple-plan-head{font-size:14px;font-weight:850;color:#deebd8;margin:12px 0 5px}
+#quick-ai-status{font-size:12px;color:#a9f8b6;min-height:20px;line-height:1.5;margin:10px 0}
+#quick-ai-status.bad{color:#ffbec1}
+@media(max-width:740px){.simple-journey{padding:15px}.simple-journey h2{font-size:23px}.simple-journey .flow-tiles{gap:5px}.simple-journey .flow-tile{padding:9px 7px;font-size:10px}.ai-step{padding:13px 10px}.ai-step .stack-buttons{grid-template-columns:1fr}.ai-step textarea{font-size:12px}}
+
+/* IQ QUEST V4.9 · visible brand / partner X link and cleaner navigation */
+.wordmark{font-size:clamp(36px,3.6vw,49px);line-height:1.06;letter-spacing:-.025em}
+.brand-cluster{gap:10px 13px;align-items:center}
+.brand-official-x{display:inline-flex!important;align-items:center;justify-content:center;min-height:36px;padding:7px 12px;border:1px solid #71e58a;border-radius:9px;background:#153725;color:#ceffd6!important;font-size:12px!important;font-weight:900;letter-spacing:.015em;text-decoration:none;box-shadow:0 0 12px rgba(72,255,116,.16)}
+.brand-official-x:hover,.brand-official-x:focus-visible{background:#245537;box-shadow:0 0 20px rgba(82,255,114,.27)}
+.onchain-promise{font-size:11px}
+@media(max-width:740px){
+ .brand-cluster{width:100%;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:7px 9px}
+ .brand-cluster .wordmark{grid-column:1;grid-row:1;font-size:clamp(32px,8.4vw,40px)}
+ .brand-cluster .onchain-promise{grid-column:2;grid-row:1;font-size:9px;white-space:nowrap}
+ .brand-cluster .brand-official-x{grid-column:1 / -1;grid-row:2;justify-self:start;font-size:11.5px!important;min-height:35px;padding:6px 10px}
+ .top-links{width:100%}
+}
+@media(max-width:360px){.brand-cluster .wordmark{font-size:30px}.brand-cluster .onchain-promise{font-size:8px}.brand-official-x{font-size:11px!important}}
+
+/* V4.9 · compact creator / explicit iPhone-safe ChatGPT handoff */
+.creator-hero-subtitle{display:block;font-size:.55em;line-height:1.28;letter-spacing:.045em;margin-top:12px;color:#c0ffcb;text-shadow:0 0 19px rgba(92,255,116,.16)}
+.creator-benefits{margin:9px 0 14px;gap:8px}
+.creator-benefits article{padding:11px 12px;min-height:0}
+.creator-benefits h3{font-size:16px}
+.creator-benefits article>span{font-size:18px}
+.creator-benefits p{font-size:11px}
+.ai-next-step{margin:14px 0 6px;padding:14px 12px;border:1px solid #437454;border-radius:10px;background:#11271c}
+.ai-next-step h3{color:#f2d69c;font-size:17px;margin:0 0 7px}
+.ai-next-step p{font-size:12px;line-height:1.65;margin:0 0 9px;color:#d4ebd8}
+.ai-open-link{width:100%;white-space:normal;display:flex}
+.ai-safety-note{display:block;margin-top:9px;color:#bce3c4;font-size:11px;line-height:1.5}
+.draft-autosave-message{display:block;color:#c0e8c8;font-size:11px;line-height:1.5;margin:6px 0}
+#chatgpt-json{font-size:13px;line-height:1.58;min-height:156px}
+@media(max-width:740px){
+ .hero-creator{min-height:300px}
+ .hero-creator .hero-content{padding:22px 18px 24px}
+ .hero-creator .lead{font-size:14px;line-height:1.5}
+ .hero-creator .hero-buttons{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:16px}
+ .hero-creator .hero-buttons .btn{width:auto;min-width:0;min-height:43px;padding:10px 8px;font-size:10px}
+ .hero-creator .hero-facts{display:none}
+ .hero-creator h1{font-size:clamp(32px,8.5vw,44px)}
+ .creator-hero-subtitle{font-size:.58em;margin-top:8px}
+ .creator-benefits{grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+ .creator-benefits article{padding:9px 5px}
+ .creator-benefits h3{font-size:clamp(11px,3.15vw,14px)}
+ .creator-benefits p{display:none}
+ .ai-next-step{padding:12px 10px}
+}
+</style></head>
+<body data-page="creator">
+  <div class="site-shell">
+    <header class="topbar"><div class="brand-cluster"><a class="wordmark" href="index.html" aria-label="IQ Quest home"><span class="wordmark-iq">IQ</span><span class="wordmark-quest">QUEST</span></a><span class="onchain-promise" aria-label="100 percent onchain is planned, using IQ Labs SDK">100% ONCHAIN · PLANNED<small>IQ LABS SDK · NOT LIVE</small></span><a class="brand-official-x" href="https://x.com/IQLabsOfficial" target="_blank" rel="noopener noreferrer" aria-label="Open IQ Labs official profile on X">↗ IQ LABS ON X · @IQLabsOfficial</a></div><nav class="top-links" aria-label="Main navigation"><a href="index.html">Play a Quest</a><a href="#studio">Creator Studio</a><a href="imprint.html">Imprint</a><a class="nav-create" href="#studio">BUILD YOUR QUEST <span aria-hidden="true">↗</span></a></nav></header>
+    <div class="quick-benefits" aria-label="One creator publishing option: share on X, then 3 dollars and 99 cents once payment is live; playing is free"><span class="benefit-creator">✦ <strong>CREATORS · SHARE ON X &amp; PUBLISH $3.99</strong> <small>(COMING SOON)</small></span><span class="benefit-play">✦ <strong>PLAY FOR FREE</strong></span><span class="benefit-battle">⚔ <strong>BATTLE WITH FRIENDS ON X</strong></span></div>
+    <main>
+      <section class="hero hero-creator" aria-labelledby="creator-heading"><div class="hero-scrim"></div><div class="hero-content"><div class="eyebrow"><span class="diamond-dot">✦</span> BUILT FOR DEVS · CREATORS · COMMUNITIES</div><h1 id="creator-heading">CREATE YOUR <span class="gold">MYSTERY,</span><span class="creator-hero-subtitle">ENTERTAIN YOUR COMMUNITY!</span></h1><p class="lead">Create 15 mysteries. Challenge your community to beat the clock and share their results on X.</p><div class="hero-buttons"><a class="btn btn-green" href="#studio">START CREATING <span aria-hidden="true">↗</span></a><a class="btn btn-glass" href="index.html">PLAY FREE</a></div><div class="hero-facts"><span>✧ AI-assisted content</span><span>◇ 3 difficulty levels</span><span>♢ Players free</span></div></div><div class="hero-corner">BUILD THE NEXT LEGEND</div></section>
+      <div class="onchain-status" role="note" aria-label="Onchain development status"><span class="onchain-dot" aria-hidden="true"></span><strong>SOLANA-NATIVE ROADMAP</strong><span>The quest editor works locally. 100% fully onchain creation, storage and play are goals, not live features yet. Paid Mainnet publishing is not live. Devnet payment and IQ Labs publishing tests are available below.</span></div>
+      
+      <section class="creator-benefits" aria-label="Why create a quest"><article><span>✧</span><h3>Bring friends</h3><p>Invite your community.</p></article><article><span>◷</span><h3>Beat the clock</h3><p>Friendly time battles.</p></article><article><span>♢</span><h3>Share on X</h3><p>Bring in challengers.</p></article></section>
+      <section id="studio" class="studio-layout">
+        <div class="studio-main">
+          <div class="simple-journey" aria-label="Build your adventure in three steps">
+            <div class="section-kicker">IQ QUEST · SIMPLE CREATOR</div>
+            <h2>Create · Test · Share</h2>
+            <p>Create and test free. When the onchain checkout is ready: share on X, pay $3.99 once and receive a real game link.</p>
+            <div class="flow-tiles"><div class="flow-tile"><b>1</b>Describe</div><div class="flow-tile"><b>2</b>Create 15 puzzles</div><div class="flow-tile"><b>3</b>Test &amp; publish</div></div>
+          </div>
+          <div class="panel studio-panel">
+            <div class="panel-topline"><span class="section-kicker">01 · YOUR ADVENTURE</span><span class="status-dot">DRAFT · NO PAYMENT</span></div>
+            <h2>Describe your mystery</h2><p class="section-intro">Name your adventure, describe its idea and choose Easy, Medium or Hard. You can edit everything after ChatGPT creates the puzzles.</p>
+            <div class="form-group"><label for="quest-name">Adventure title</label><input id="quest-name" maxlength="100" value="The Lost Solana Treasure"></div>
+            <div class="form-group"><label for="community-name">Creator / community name</label><input id="community-name" maxlength="70" placeholder="e.g. Solana Builders Club" value="Solana Adventurers"></div>
+            <div class="form-group"><label for="quest-theme">Your mystery theme</label><textarea id="quest-theme" rows="3" maxlength="500">An ancient jungle temple filled with forgotten runes, mysterious doors and the lost Solana treasure.</textarea></div>
+            <div class="form-group"><span class="field-label">Difficulty</span><div class="choice-grid" id="difficulty-options" role="group" aria-label="Quest difficulty"><button type="button" data-difficulty="Easy"><strong>✧ EASY</strong><small>5–9 min · real puzzles</small></button><button type="button" data-difficulty="Medium" class="selected"><strong>◇ MEDIUM</strong><small>9–18 min · two-step logic</small></button><button type="button" data-difficulty="Hard"><strong>✦ HARD</strong><small>15–30 min · linked ciphers</small></button></div></div>
+            <div class="form-group"><span class="field-label">Questions per quest</span><div class="notice" style="display:block;position:static;padding:14px 16px;border-radius:10px;background:#152b23;color:#e5f4d5;border:1px solid #416c4d"><strong>15 MYSTERIES · FIXED</strong><br><span style="font-size:12px">Fifteen levels, one non-trivial puzzle each. Estimates depend on difficulty; hints add +1 minute. ChatGPT builds difficulty when you generate or revise, not by simply tapping a different setting.</span></div></div>
+          </div>
+          <div class="panel studio-panel ai-panel" id="ai-builder">
+            <div class="panel-topline"><span class="section-kicker">02 · CREATE 15 QUESTIONS</span><span class="ai-glow">CHATGPT ASSISTED</span></div>
+            <h2>ChatGPT — three simple steps</h2>
+            <p class="section-intro">No coding or JSON knowledge needed. Copy the task, send it to ChatGPT, and bring its answer back. We fill all 15 editor questions for you.</p>
+            <div class="ai-simplified">
+              <div class="ai-simple-step">
+                <h3>1 · Copy your ready-made request</h3>
+                <p>We prepare the request from your title, theme and difficulty. Tap below to copy it.</p>
+                <button type="button" id="ai-generate-one" class="btn btn-green">1 · COPY REQUEST FOR CHATGPT</button>
+                <div id="quick-ai-status" role="status" aria-live="polite"></div>
+                <div class="ai-next-step"><h3>2 · Open ChatGPT</h3><p>Tap the button. In ChatGPT, <strong>hold the message box → Paste → Send</strong>. When all 15 questions appear, copy the <strong>whole reply</strong>. Then come back to this page.</p>
+                <a id="open-chatgpt-step" href="https://chatgpt.com/" target="_blank" rel="noopener noreferrer" class="btn btn-outline ai-open-link">2 · OPEN CHATGPT ↗</a><span class="ai-safety-note">Tip: Leave this IQ QUEST tab open so your adventure stays here.</span></div><button type="button" id="copy-prompt" class="btn btn-outline hidden">COPY TASK AGAIN</button>
+              </div>
+              <div class="ai-simple-step">
+                <h3>3 · Paste the answer &amp; fill all 15</h3>
+                <p>Back on this page, <strong>press and hold in the box → Paste</strong>. Then tap the green-gold button. Your existing questions will be backed up.</p>
+                <label class="field-label" for="chatgpt-json">ChatGPT answer (paste everything)</label>
+                <textarea id="chatgpt-json" rows="5" spellcheck="false" autocapitalize="off" autocomplete="off" placeholder="Tap and hold here → Paste your entire ChatGPT reply. We detect the questions automatically."></textarea>
+                <button type="button" id="ai-import-one" class="btn btn-gold" style="margin-top:10px">3 · FILL MY 15 QUESTIONS</button>
+                <div id="import-status" class="small-status" role="status" aria-live="polite"></div>
+                <button type="button" id="undo-ai-import" class="btn btn-outline hidden">↶ UNDO LAST IMPORT</button>
+              </div>
+              <details class="advanced-box"><summary>Examples &amp; extra import options</summary>
+                <button type="button" id="load-example" class="btn btn-outline">LOAD 15 EXAMPLE QUESTIONS</button>
+                <div class="stack-buttons"><button type="button" id="paste-ai" class="btn btn-outline">PASTE FROM CLIPBOARD</button><button type="button" id="import-ai" class="btn btn-outline">FILL FROM TEXT BOX</button></div>
+                <div class="stack-buttons"><button type="button" id="check-ai-json" class="btn btn-outline">CHECK 15 QUESTIONS FIRST</button><button type="button" id="review-with-chatgpt" class="btn btn-outline">IMPROVE DIFFICULTY</button></div>
+                <label class="btn btn-outline import-file-label" for="upload-ai-json">↑ CHOOSE TEXT FILE<input id="upload-ai-json" type="file" accept=".json,.txt,application/json,text/plain" aria-label="Load ChatGPT text file"></label>
+                <div class="ai-howto"><h3>Idea to try</h3><div class="example-text" id="theme-example">An ancient jungle temple. Create 15 clever puzzles using secret symbols, hidden codes and mysterious doors. Medium difficulty. The last puzzle must combine earlier clues.</div><button type="button" id="use-theme-example" class="btn btn-outline">USE THIS IDEA</button></div>
+              </details>
+            </div>
+            <div class="prompt-fallback hidden" id="prompt-fallback"><label for="manual-ai-prompt">If your browser couldn't copy the task, select and copy this text manually:</label><textarea id="manual-ai-prompt" rows="6" readonly></textarea><button type="button" id="select-ai-prompt" class="btn btn-outline">SELECT TASK TEXT</button></div>
+          </div>
+          <div class="panel studio-panel"><div class="panel-topline"><span class="section-kicker">03 · QUESTION EDITOR</span><span id="editor-count" class="status-dot">15 QUESTIONS</span></div><h2>Make every clue yours</h2><p class="section-intro">ChatGPT can draft and revise all fifteen puzzles, but please play-test the exact answers. Changing difficulty alone does not rewrite existing questions.</p><div class="editor-layout"><div class="level-selector" id="level-selector" aria-label="Choose a question"></div><div class="level-fields"><div class="form-group"><label for="level-title">Chapter title</label><input id="level-title" maxlength="100"></div><div class="form-group"><label for="level-story">Story / atmosphere</label><textarea id="level-story" rows="3" maxlength="500"></textarea></div><div class="form-group"><label for="level-question">Question</label><textarea id="level-question" rows="3" maxlength="600"></textarea></div><div class="form-group"><label for="level-hint">Hint <span class="muted">(costs player +1 minute)</span></label><textarea id="level-hint" rows="2" maxlength="400"></textarea></div><div class="form-group"><label for="level-answer">Accepted answer <span class="muted">(separate alternatives with |)</span></label><input id="level-answer" maxlength="180" spellcheck="false" placeholder="e.g. compass | a compass"></div><div class="tiny-note">Answers are stored as plaintext in this draft. They are not secret or prize-safe.</div></div></div></div>
+        </div>
+        <aside class="studio-aside"><div class="panel preview-panel"><div class="section-kicker">LIVE QUEST PREVIEW</div><div class="preview-image" role="img" aria-label="Ancient temple ruins in jungle mist"></div><div class="preview-body"><div class="preview-brand">IQ QUEST</div><h3 id="preview-title">The Lost Solana Treasure</h3><p id="preview-theme">Ancient jungle temple adventure...</p><div class="preview-tags"><span id="preview-difficulty">MEDIUM</span><span id="preview-count">15 QUESTIONS</span><span id="preview-duration">9–18 MIN</span></div><div class="stack-buttons"><button type="button" id="preview-game" class="btn btn-green">▶ TEST YOUR QUEST FREE</button><span class="preview-help-text">You can return to this editor without losing your draft.</span><span class="draft-autosave-message">✓ Your draft saves automatically on this device.</span></div><div id="draft-status" class="small-status" role="status" aria-live="polite"></div></div></div>
+          <div class="panel publish-panel" id="publish-card">
+            <div class="section-kicker">04 · SHARE &amp; PUBLISH</div>
+            <h3>One price. One link.</h3>
+            <p>Build and test free. When payment is live, sharing on X unlocks one-time publishing for <strong>$3.99</strong>. Your players never pay.</p>
+            <input type="radio" name="publish-plan" value="community" checked hidden aria-label="One publishing plan">
+            <div class="price-single"><div><strong>SHARE ON X · PUBLISH</strong><p>One published adventure · 15 questions · shareable game link · free players.</p></div><strong class="price-main" id="plan-price">$3.99</strong></div>
+            <p class="tiny-note" id="selected-plan-note">Single planned publishing option. The initial X post is a teaser; the actual game link is available only after a verified onchain upload.</p>
+            <div class="share-payment-sequence" id="social-payment-flow">
+              <div class="flow-step"><span class="flow-number">1</span><div><strong>Share on X first</strong><small>X opens with your adventure title and the IQ QUEST link. It can display the IQ QUEST cover image as a preview.</small></div></div>
+              <figure class="x-cover-preview" aria-label="IQ QUEST cover for X link preview"><img src="social-cover.jpg" alt="IQ QUEST cover over ancient jungle ruins" width="1200" height="630" loading="lazy"><figcaption>IQ QUEST cover preview · X controls whether the link image appears.</figcaption></figure>
+              <a class="btn btn-green" id="share-creator-draft" href="https://x.com/intent/tweet" target="_blank" rel="noopener noreferrer">↗ SHARE ON X · STEP 1</a>
+              <p class="share-step-status" id="share-step-status" role="status" aria-live="polite">Open X to continue. Clicking does not prove a post was published.</p>
+              <div class="share-next-step" id="payment-next-step"><h4>2 · Try publishing on Solana Devnet</h4><p id="payment-step-message">Real $3.99 Mainnet payments are not available yet. You can test the complete flow with Phantom and worthless Devnet SOL.</p><button id="beta-payment-shortcut" type="button" class="btn btn-gold">👻 TEST PAYMENT WITH PHANTOM · DEVNET ONLY</button><p class="tiny-note">This button opens the Devnet test settings. You will need 15 valid questions, must check the test-consent box, and must separately approve every wallet transaction. <strong>No real SOL payment.</strong></p><button id="simple-publish" type="button" class="btn btn-green publish-simple-button" disabled aria-disabled="true">REAL $3.99 PAYMENT · NOT LIVE YET</button><p class="tiny-note">Mainnet payments are OFF. Nobody will be charged. Real onchain publication will require a verified SOL payment and a separate wallet-approved IQ Labs upload with additional storage/network fees.</p>
+              <div id="mainnet-quote-panel" class="hidden" aria-live="polite" style="padding:14px;border:1px solid #4b9162;border-radius:11px;background:#12291d;margin:14px 0">
+                <p id="mainnet-invoice" style="white-space:pre-line;overflow-wrap:anywhere;color:#e6f3df;font-size:13px;line-height:1.7"></p>
+                <label class="publish-consent" style="display:flex;gap:9px;align-items:flex-start;font-size:12px;line-height:1.5"><input id="mainnet-order-consent" type="checkbox" style="margin-top:4px"><span>I checked the amount, Mainnet network and recipient. Payment alone does not publish. After payment, I must approve separate IQ Labs storage transactions in my wallet and pay their additional fees; the 15 questions, answers and hints become publicly readable on Solana. I have read the <a href="withdrawal.html" target="_blank" rel="noopener" style="text-decoration:underline">withdrawal information</a> and <a href="privacy.html" target="_blank" rel="noopener" style="text-decoration:underline">privacy information</a>.</span></label>
+                <button id="mainnet-confirm" type="button" class="btn btn-gold" disabled style="width:100%;margin:12px 0">ORDER WITH OBLIGATION TO PAY · REVIEW SOL AMOUNT</button>
+              </div>
+              <button id="mainnet-recover" type="button" class="btn btn-outline hidden" style="width:100%;margin:8px 0">↻ VERIFY SAVED SOL TRANSACTION · DO NOT PAY AGAIN</button>
+              <div id="mainnet-onchain-panel" class="hidden" style="padding:14px;border:1px solid #4b9162;border-radius:11px;background:#12291d;margin:14px 0">
+                <h4 style="margin:0 0 8px;color:#b5ffbf">3 · Publish on IQ Labs Mainnet</h4>
+                <p style="font-size:12px;line-height:1.6">Your SOL payment is verified, but your quest is NOT published yet. The wallet will ask you to approve additional real Mainnet IQ Labs transactions and protocol/storage costs. Your public game link appears only after independent onchain readback.</p>
+                <label style="display:flex;gap:9px;align-items:flex-start;font-size:12px;line-height:1.55"><input id="mainnet-upload-consent" type="checkbox" style="margin-top:4px"><span>I understand the extra Mainnet IQ Labs fees and the permanent public availability of all answers.</span></label>
+                <button id="mainnet-upload" type="button" class="btn btn-gold" disabled style="width:100%;margin:12px 0">UPLOAD QUEST TO IQ LABS MAINNET</button>
+                <button id="mainnet-verify-upload" type="button" class="btn btn-outline hidden" style="width:100%">↻ VERIFY SAVED IQ LABS ONCHAIN SIGNATURE</button>
+              </div>
+              <div id="mainnet-status" role="status" aria-live="polite" style="white-space:pre-wrap;overflow-wrap:anywhere;font-size:12px;color:#c5e9cd;line-height:1.6"></div></div>
+            </div>
+            <div class="publish-success hidden" id="publish-success" data-state="preview" aria-live="polite" aria-label="Publication result">
+              <div class="success-tag" id="publish-success-tag">DESIGN PREVIEW · NOT PUBLISHED</div>
+              <h3 id="publish-success-title">Your adventure is ready to share</h3>
+              <p id="publish-success-detail">After a verified payment and independent IQ Labs Mainnet readback, your real onchain game link will appear here.</p>
+              <div class="success-url" id="publish-success-url">No public link exists yet.</div>
+              <div class="success-actions"><a class="btn btn-green" id="success-play" href="#" target="_blank" rel="noopener noreferrer" aria-disabled="true">▶ PLAY NOW</a><button type="button" id="success-copy" class="btn btn-outline" disabled>⧉ COPY PLAYABLE LINK</button><a class="btn btn-outline" id="success-share-x" href="#" target="_blank" rel="noopener noreferrer" aria-disabled="true">↗ SHARE ON X</a><a class="btn btn-outline" href="#studio">BACK TO CREATOR</a></div>
+            </div>
+            <button type="button" id="preview-publish-success" class="text-button" style="margin:8px 0">SEE THE POST-PAYMENT SCREEN · PREVIEW ONLY</button>
+            <details class="advanced-box"><summary>Fees &amp; how publication will work</summary><p class="tiny-note">The planned platform price is $3.99, settled in SOL using a five-minute server quote. Additional IQ Labs protocol/storage and Solana network fees apply and must be approved by the creator's wallet. A finalized payment enables a separate official IQ Labs SDK inscription of the exact paid 15-question draft. The backend must independently read it back before marking the order published. Browser-local scores/timers are not written onchain. Legal review of withdrawal, taxes and support is pending, so real Mainnet payment remains disabled.</p><span class="price-label">Planned creator fee</span><strong id="plan-breakdown">$3.99 USD equivalent in SOL</strong></details>
+            <p class="tiny-note">Before any real paid launch, review our <a href="imprint.html" style="color:#aeffbd;text-decoration:underline">imprint</a>, <a href="privacy.html" style="color:#aeffbd;text-decoration:underline">privacy information</a> and <a href="withdrawal.html" style="color:#aeffbd;text-decoration:underline">withdrawal information</a>. These legal pages are still drafts and the Mainnet checkout remains disabled.</p>
+            <p id="checkout-status" class="share-step-status" role="status" aria-live="polite">Checkout not live. Your 15-question adventure can be edited and tested without a wallet.</p>
+            <button type="button" id="start-sol-checkout" class="hidden" disabled>CHECK READINESS · NO PAYMENT</button>
+            <details class="advanced-box" id="developer-tests"><summary>Developer testing only · Wallet checkout / Devnet / IQ Labs</summary>
+            <p class="tiny-note"><strong>Phantom-only beta.</strong> On a phone, open this page in Phantom's built-in browser; in Phantom Settings → Developer Settings → Testnet Mode choose <strong>Solana Devnet</strong>. Use only free Devnet test SOL. Build and preview your quest without connecting any wallet; Phantom is requested only just before the test transfer or onchain upload.</p>
+            <div class="price-micro" id="byte-estimate">Quest size: calculating…</div>
+            <div class="price-micro" id="storage-estimate">Estimated IQ Labs storage tier: calculating…</div>
+            <div class="price-micro" id="payload-headroom">Payload headroom: calculating…</div>
+            <div class="price-micro">◈ Mainnet checkout is disabled. The Devnet-only IQ Labs publishing prototype and separate test-SOL transfer are available below.</div>
+            <section class="iq-payment-lab" aria-labelledby="lab-heading">
+              <h4 id="lab-heading">◈ PAYMENT SETUP · DEVNET CHECK</h4>
+              <p>The public IQ QUEST payout wallet is now configured. The recipient below will be the planned destination for creator platform fees when secure Mainnet checkout is enabled.</p>
+              <code id="lab-recipient" class="lab-address">BbMdFqpXfkJeKLvoT8W7QSFZmVeLV35gp6At2MbZF377</code>
+              <p class="lab-notice"><strong>IMPORTANT:</strong> Real $3.99 Mainnet payments are OFF. This is only an optional rehearsal using <strong>0.002 worthless Devnet test SOL</strong> plus network fees. The transfer alone does not buy or publish a quest. With separate auto-publish consent, a verified transfer can start the upload. Your selected wallet must still approve every signing request.</p>
+              <div class="lab-actions"><button type="button" class="btn btn-outline" id="lab-quote">VIEW INDICATIVE SOL PRICE · NO PAYMENT</button></div>
+              <div id="lab-price" class="lab-status" role="status" aria-live="polite">Only the $3.99 Share on X plan is available. SOL conversion is informational only; Mainnet payments are off.</div>
+              <label class="lab-check"><input id="lab-consent" type="checkbox"><span>I understand this is a <strong>Devnet-only test transfer</strong>, not the $3.99 Mainnet fee. I will use a wallet supporting Devnet, review the recipient address, approve 0.002 test SOL only if correct, and understand a transfer alone does not publish my quest.</span></label>
+              <div class="lab-actions"><button type="button" id="lab-send" class="btn btn-gold" disabled>TEST PAYMENT ON DEVNET · 0.002 TEST SOL</button><button type="button" id="lab-verify" class="btn btn-outline">VERIFY LAST DEVNET TEST PAYMENT</button></div>
+              <div id="wallet-choice-panel" class="wallet-checkout hidden" role="region" aria-labelledby="wallet-choice-heading">
+                <h4 id="wallet-choice-heading">Connect Phantom just before the test transfer</h4>
+                <p>Creating and testing a quest requires no wallet. Connect one now only to approve the Devnet payment or to finish a previously verified publication.</p>
+                <fieldset class="wallet-choice-grid" aria-label="Choose Phantom wallet">
+                  <label><input type="radio" name="checkout-wallet" value="phantom" checked> 👻 Phantom</label>
+                </fieldset>
+                <div class="wallet-checkout-actions"><button id="wallet-choice-confirm" type="button" class="btn btn-green">CONNECT WALLET &amp; CONTINUE</button><button id="wallet-choice-cancel" type="button" class="btn btn-outline">CANCEL</button></div>
+                <p id="wallet-choice-status" class="wallet-choice-status" role="status" aria-live="polite">No wallet has been contacted.</p>
+              </div>
+              <div id="lab-status" class="lab-status" role="status" aria-live="polite">No Devnet payment test started. Nothing has been sent.</div>
+              <div id="lab-result" class="lab-result hidden"><a id="lab-explorer" class="lab-explorer" target="_blank" rel="noopener noreferrer" href="#">View confirmed Devnet payment in Solana Explorer ↗</a></div>
+              <p><strong>What is still missing for actual sales:</strong> a trustworthy USD→SOL checkout quote, independently enforced payment-to-quest validation, live IQ Labs Mainnet publication and the Community directory. Nobody should send real SOL before these checks pass.</p>
+            </section><button type="button" id="developer-start-sol-checkout" class="btn btn-gold" disabled>DEVELOPER CHECK · NO PAYMENT</button>
+            <p class="share-step-status" id="developer-checkout-status" role="status" aria-live="polite">Share on X · Publish $3.99 selected. Mainnet checkout is off; developer-only tests below are not real payments.</p>
+            <p class="tiny-note">This is only an unpaid readiness check, not a charge or publication. The planned public quest directory does not exist yet. Never approve SOL transfers based on this preview.</p>
+            <section class="iq-devnet-publisher" aria-labelledby="devnet-publish-heading">
+              <div class="section-kicker">NEW · EXPERIMENTAL REAL ONCHAIN TEST</div>
+              <h4 id="devnet-publish-heading">Publish 15 puzzles to IQ Labs Devnet</h4>
+              <p><strong>Step 2 of the test:</strong> After the Devnet-only payment rehearsal above succeeds, the IQ Labs SDK can write your complete validated quest to Solana <strong>Devnet</strong>, recording the test receipt. You can opt in below to start the upload automatically after verification. Your selected wallet will still ask you to approve the necessary Devnet transactions. After exact onchain readback and test-payment verification, you get a shareable player link. Friends play free, without connecting a wallet.</p>
+              <p><strong>Not a paid Mainnet release.</strong> The 0.002 Devnet test SOL is not a real $3.99 platform payment. Devnet SOL has no monetary value. Your wallet may still ask you to sign multiple Devnet transactions and pay Devnet network / protocol fees.</p>
+              <p>Selected plan is recorded as metadata only. A public community directory and real paid Mainnet checkout are not live yet.</p>
+              <label class="publish-consent"><input type="checkbox" id="devnet-accept"><span>I will use <strong>Solana Devnet</strong> in my chosen wallet. I understand the questions, answers and hints are publicly readable onchain and may be permanent. I will review every wallet request.</span></label>
+              <label class="publish-consent"><input type="checkbox" id="devnet-auto-publish"><span><strong>Automatically start publication after a verified Devnet test payment.</strong> I authorize IQ QUEST to begin the public upload without another page-button click. Every wallet signing request still needs my approval. This setting applies to this page session only.</span></label>
+              <button type="button" class="btn btn-green" id="publish-iq-devnet" disabled>◈ PUBLISH TO IQ LABS DEVNET · TEST SOL ONLY</button>
+              <button type="button" class="btn btn-outline" id="verify-iq-devnet">↻ VERIFY LAST DEVNET PUBLICATION</button>
+              <div id="devnet-publish-status" class="publish-progress" role="status" aria-live="polite">First complete and verify the 0.002 test SOL payment above. Choose a wallet only at checkout, then review the Devnet upload consent box.</div>
+              <div class="publish-links hidden" id="devnet-links">
+                <a id="devnet-play-link" target="_blank" rel="noopener noreferrer" href="#">OPEN YOUR PUBLISHED QUEST ↗</a>
+                <button type="button" class="btn btn-outline" id="copy-devnet-link">COPY PLAYER LINK</button>
+                <a id="devnet-share-x" class="btn btn-green" target="_blank" rel="noopener noreferrer" href="https://x.com/intent/tweet">SHARE YOUR REAL QUEST ON X ↗</a>
+                <a id="devnet-explorer" target="_blank" rel="noopener noreferrer" href="#">VERIFY TRANSACTION IN SOLANA EXPLORER ↗</a>
+              </div>
+            </section></details></div>
+          <div class="panel publish-panel"><div class="section-kicker">AFTER PUBLISHING</div><h3>Let the battles begin</h3><p>One real player link for X, Discord, Telegram and WhatsApp. Friends play without a wallet. Times are friendly, unverified comparisons.</p></div>
+        </aside>
+      </section>
+    </main>
+    <footer class="footer"><span><span class="green">IQ</span> QUEST · Creator Studio <strong>V5.7 BETA</strong> · Phantom Devnet test; Mainnet payments OFF</span><nav aria-label="Legal information" style="display:flex;gap:13px;flex-wrap:wrap"><a href="imprint.html" style="color:#b5fbc1;text-decoration:underline">Imprint</a><a href="privacy.html" style="color:#b5fbc1;text-decoration:underline">Privacy</a><a href="withdrawal.html" style="color:#b5fbc1;text-decoration:underline">Withdrawal info</a></nav><span class="footer-iqlabs"><span><b>IQ LABS SDK · COMING SOON</b> · Onchain storage &amp; more <span class="footer-soon">(integration in progress)</span></span><a href="https://x.com/IQLabsOfficial" target="_blank" rel="noopener noreferrer" aria-label="IQ Labs official X profile">X @IQLabsOfficial ↗</a></span></footer>
+  </div>
+  <script>(function(){
+'use strict';
+const q=[
+{"title":"The Moon Seal","story":"The entrance slab is covered in moss. Beneath four glowing letters, a scribe has carved: \"I shifted every letter three places FORWARD.\"","q":"The slab reads PRRQ. Reverse the scribe’s shift to discover the four-letter key word. What is it?","h":"Shift P→M, R→O, R→O, Q→N. The key is something seen at night.","a":"MOON"},
+{"title":"The Mirror Compass","story":"Inside the gate, the navigator left a compass key and a mirrored route on a bronze plate.","q":"The wind tiles read N=7, E=2, S=5, W=9. The mirror displays S-W-N-E. Read that route BACKWARDS, then change the directions to digits. Enter the four-digit code.","h":"Read the sequence as E-N-W-S. Convert each letter using the numbers on the tiles.","a":"2795"},
+{"title":"The Five-Row Cipher","story":"A library wall displays five rows of letters. A brass plaque says, \"The first digit is the row, the second the column.\"","q":"Rows 1–5 are: ABCDE / FGHIJ / KLMNO / PQRST / UVWXY. Decode 35-41-15-34. What four-letter command is written?","h":"35 is row 3, column 5: O. Then find 41, 15, and 34.","a":"OPEN"},
+{"title":"The Stargazer’s Cipher","story":"A fallen astronomer recorded a strange message, EHOE. Nearby is an instruction: \"Use the first seal as your repeating key.\"","q":"Decode EHOE with the Vigenère method: A=0 through Z=25. SUBTRACT the positions of the four-letter key from Chamber 1, wrapping around the alphabet. What sky word appears?","h":"The key is MOON. E(4)−M(12) wraps to S(18). Decode the other three letters the same way.","a":"STAR"},
+{"title":"The Four Guardians","story":"Four stone figures stand on moveable plinths. Each figure carries one letter: G, A, T or E.","q":"Arrange the four letters from left to right: E stands LAST; A is immediately to the RIGHT of G; and G stands LEFT of T. Which four-letter word appears?","h":"Put E fourth. The pair G-A must be together, and T must come after G.","a":"GATE"},
+{"title":"The Lantern Sequence","story":"Four lamps illuminate a stone number machine. A fifth lamp is dark.","q":"The machine shows INPUT→OUTPUT: 2→5, 3→10, 4→17, 5→?. Find the rule and enter the missing OUTPUT.","h":"Square each input, then add 1. For example 4² + 1 = 17.","a":"26"},
+{"title":"The Binary Crypt","story":"Within a chamber of metal plates, four groups of eight glowing bits pulse like distant stars.","q":"Decode these 8-bit binary ASCII values into capital letters: 01000100 01010101 01010011 01001011. What four-letter word do they spell?","h":"Each group is an ASCII character. 01000100 is decimal 68, which is D.","a":"DUSK"},
+{"title":"The Three Pedestals","story":"Three pedestals stand in the hall. Exactly ONE of their inscriptions tells the truth. Only one pedestal hides the key.","q":"LEFT says: \"The key is not under LEFT.\" MIDDLE says: \"The key is under RIGHT.\" RIGHT says: \"The key is not under RIGHT.\" Which pedestal has the key: LEFT, MIDDLE or RIGHT?","h":"Test each possible location and count the true sentences. Only one location makes exactly one statement true.","a":"LEFT"},
+{"title":"The Lost Fragments","story":"A torn map has four empty slots. The nearby inscription refers to discoveries you have already made.","q":"Build the crossing word: take the 1st letter of Chamber 1’s key, the 1st letter of Chamber 3’s command, the 3rd letter of Chamber 4’s sky word, and the 3rd letter of Chamber 5’s guardian word. What do they spell?","h":"Use your Discovery Journal: MOON[1], OPEN[1], STAR[3], GATE[3].","a":"MOAT"},
+{"title":"The Inverted Inscription","story":"A cracked mirror reveals four glyphs that are the exact opposites of their letters in the alphabet.","q":"Use the Atbash alphabet (A↔Z, B↔Y, C↔X, and so on). Decode GZOV. Enter the four-letter English word.","h":"Atbash pairs the first and last letters of the alphabet. Work out the opposing letter for each glyph.","a":"TALE"},
+{"title":"The Five Flames","story":"Five crystal flames flicker above the altar. Each flame reveals a hex byte of an old message.","q":"Decode the hexadecimal ASCII sequence 4C 49 47 48 54. What five-letter word appears? The letters form something the dark crypt needs.","h":"Hex 4C equals decimal 76, which represents L in ASCII. Convert each two-digit byte.","a":"LIGHT"},
+{"title":"The Three Masks","story":"Three stone masks guard locked passages A, B and C. The wall says that EXACTLY TWO of the masks speak the truth.","q":"Mask A says: “The gem is behind B.” Mask B says: “The gem is NOT behind B.” Mask C says: “The gem is behind C.” Exactly TWO statements are true. Which passage hides the gem? Enter A, B or C.","h":"Test A, B and C as the hiding place. For each possibility count how many masks would be telling the truth.","a":"C"},
+{"title":"The Astral Index","story":"An astronomy ring connects an early sky clue to the old navigator’s compass digits.","q":"Take the 4th letter of the sky word discovered in Chamber 4. Convert that letter to its alphabet position (A=1). SUBTRACT the 2nd digit of the four-digit compass code from Chamber 2. What number remains?","h":"The sky word was STAR: its fourth letter is R, worth 18. The compass code was 2795: its second digit is 7.","a":"11"},
+{"title":"The Architect’s Shift","story":"A final stone dial has four slots. Next to it: “Return to the mirror, then rotate every letter TWO places forward.”","q":"Take the four-letter answer from Chamber 10 (the mirrored Atbash inscription). Apply a Caesar shift of +2 to EVERY letter, wrapping Z back to A. What four-letter code opens the dial?","h":"The Chapter 10 answer is TALE. Shift each letter forward twice; for example, T becomes V.","a":"VCNG"},
+{"title":"The Last Treasure Seal","story":"The explorer approaches a sealed gateway. Four glowing rings demand proof from distant rooms in the temple. This is the final gateway challenge.","q":"Unlock the gateway with FOUR earlier discoveries, joined by hyphens and no spaces: (1) Chamber 11’s decoded five-letter word; (2) Chamber 13’s calculated number; (3) Chamber 12’s correct passage letter; (4) Chamber 14’s rotated code. Enter the exact vault key.","h":"Read the Discovery Journal for Chambers 11, 13, 12 and 14. Combine those four discoveries in exactly that order with hyphens.","a":"LIGHT-11-C-VCNG"}
+];
+const DEMO={v:1,title:'The Lost Solana Treasure',creator:'IQ QUEST',theme:'Decode fifteen connected mysteries hidden in ancient jungle ruins. Keep the clues from each chamber for the final vault.',difficulty:'Hard',levels:q};
+function normalizeAnswer(value){return String(value||'').trim().normalize('NFKC').toLocaleLowerCase('en-US').replace(/\s+/g,' ')}
+function validate(raw){
+  const data=typeof raw==='string'?JSON.parse(raw):raw;
+  if(!data||typeof data!=='object'||Array.isArray(data))throw Error('The quest must be one JSON object.');
+  const rawLevels=data.levels||data.questions;
+  if(!Array.isArray(rawLevels)||rawLevels.length!==15)throw Error('Every IQ QUEST adventure must contain exactly 15 questions. Your import has '+(Array.isArray(rawLevels)?rawLevels.length:0)+'.');
+  const levels=rawLevels.map((x,i)=>{
+    if(!x||typeof x!=='object')throw Error('Question '+(i+1)+' is not an object.');
+    const title=String(x.title||x.name||'Mystery '+(i+1)).trim().slice(0,100);
+    const story=String(x.story||x.intro||'').trim().slice(0,500);
+    const question=String(x.q||x.question||'').trim().slice(0,600);
+    const hint=String(x.h||x.hint||'').trim().slice(0,400);
+    const arr=Array.isArray(x.a||x.answer)?(x.a||x.answer):[x.a||x.answer||''];
+    const answer=arr.map(a=>String(a).trim()).filter(Boolean).join(' | ').slice(0,180);
+    if(!title||!question||!hint||!answer)throw Error('Question '+(i+1)+' needs title, question, hint and answer.');
+    return {title,story,q:question,h:hint,a:answer};
+  });
+  const difficulty=['Easy','Medium','Hard'].includes(data.difficulty)?data.difficulty:'Medium';
+  const title=String(data.title||data.questName||'Untitled Mystery').trim().slice(0,100);
+  const creator=String(data.creator||data.communityName||'Community').trim().slice(0,70);
+  const theme=String(data.theme||data.description||'A mysterious adventure awaits.').trim().slice(0,500);
+  if(!title)throw Error('Quest title is required.');
+  return {v:1,title,creator,theme,difficulty,levels};
+}
+function repairPastedJson(source,{relaxedQuotes=false}={}){
+  // Repairs COPY/PASTE formatting, not puzzle meaning: stray \\ before brackets,
+  // backslash escapes unknown to JSON, trailing commas, and literal line breaks.
+  let out='',inside=false,fixes=0;
+  for(let i=0;i<source.length;i++){
+    const ch=source[i],next=source[i+1];
+    if(!inside){
+      if(ch==='\\' && (next===']'||next==='}'||next==='['||next==='{'||next===','||next===':')){
+        fixes++;continue;
+      }
+      if(ch==='\\' && (next==='n'||next==='r') && (source[i+2]==='{'||source[i+2]==='['||source[i+2]==='"'||source[i+2]===' '||source[i+2]==='\\')){
+        out+=' ';i++;fixes++;continue;
+      }
+      if(ch==='“'||ch==='”'){out+='"';inside=!inside;fixes++;continue;}
+      if(ch==='"')inside=true;
+      if(ch===','){
+        let j=i+1;while(j<source.length && /\s/.test(source[j]))j++;
+        if(source[j]===']'||source[j]==='}'){fixes++;continue;}
+      }
+      out+=ch;
+    }else{
+      if(ch==='\\'){
+        if(next===undefined){out+='\\';continue;}
+        if('"\\/bfnrt'.includes(next) || (next==='u' && /^[0-9a-fA-F]{4}$/.test(source.slice(i+2,i+6)))){
+          out+=ch+next;i++;continue;
+        }
+        // Common AI-copy mistake: invalid escapes such as \\| or \\].
+        // Remove only the invalid escape slash; keep the actual text.
+        out+=next;i++;fixes++;continue;
+      }
+      if(ch==='"'){
+        // ChatGPT occasionally writes dialogue quotes inside a JSON value
+        // without escaping them. Only the relaxed fallback repairs those.
+        // Do not alter the normal, standards-compliant JSON parsing path.
+        if(relaxedQuotes){
+          let j=i+1;while(j<source.length&&/\s/.test(source[j]))j++;
+          if(j<source.length&&!(',}]'.includes(source[j])||source[j]===':')){
+            out+='\\"';fixes++;continue;
+          }
+        }
+        inside=false;
+      }
+      if(ch==='\n'||ch==='\r'){out+='\\n';if(ch==='\r'&&next==='\n')i++;fixes++;continue;}
+      if(ch==='\t'){out+='\\t';fixes++;continue;}
+      out+=ch;
+    }
+  }
+  return {text:out,fixes};
+}
+function readImport(text, defaults={}){
+  const raw=String(text||'').replace(/^\uFEFF/,'').trim();
+  if(!raw)throw Error('Paste ChatGPT’s JSON answer first. It must contain 15 puzzles.');
+  const candidates=[raw];
+  for(const fence of raw.matchAll(/```(?:json|javascript|js)?\s*([\s\S]*?)```/gi))candidates.push(fence[1].trim());
+  // Extract top-level JSON even when ChatGPT adds text before or after it.
+  function balancedPieces(source){
+    let start=-1,depth=0,quoted=false,escaped=false;
+    for(let i=0;i<source.length;i++){
+      const ch=source[i];
+      if(start<0){if(ch==='{'||ch==='['){start=i;depth=1;}continue;}
+      if(quoted){if(escaped)escaped=false;else if(ch==='\\')escaped=true;else if(ch==='"')quoted=false;continue;}
+      if(ch==='"'){quoted=true;continue;}
+      if(ch==='{'||ch==='[')depth++;
+      if(ch==='}'||ch===']')depth--;
+      if(depth===0){candidates.push(source.slice(start,i+1));start=-1;}
+    }
+  }
+  balancedPieces(raw);
+  // A repaired outer object may become balanceable only AFTER stray copied
+  // slashes and quote errors have been corrected. Re-scan that variant too.
+  const tolerant=repairPastedJson(raw,{relaxedQuotes:true});
+  if(tolerant.fixes){candidates.push(tolerant.text);balancedPieces(tolerant.text);}
+  // One error in a copied answer should not make us select an unrelated JSON
+  // snippet. Every candidate must validate as a full 15-question adventure.
+  const tries=[];const seen=new Set();
+  for(const candidate of candidates){
+    const cleaned=candidate.trim();
+    if(!cleaned)continue;
+    tries.push({text:cleaned,fixes:0});
+    const repaired=repairPastedJson(cleaned);
+    if(repaired.fixes)tries.push(repaired);
+    const relaxed=repairPastedJson(cleaned,{relaxedQuotes:true});
+    if(relaxed.fixes)tries.push(relaxed);
+    // Some chat apps copy a JSON *string* instead of the JSON it describes.
+    if(/^"[\s\S]*"$/.test(cleaned)){
+      try{const unwrapped=JSON.parse(cleaned);if(typeof unwrapped==='string')tries.push({text:unwrapped,fixes:1});}catch(e){}
+    }
+    // Some exports escape every quote (e.g. {\\"levels\\": ...}).
+    if(/^[\[{]\s*\\"/.test(cleaned)){
+      const deescaped=cleaned.replace(/\\"/g,'"');
+      tries.push({text:deescaped,fixes:1});
+      const fixed=repairPastedJson(deescaped);
+      if(fixed.fixes)tries.push({text:fixed.text,fixes:1+fixed.fixes});
+    }
+  }
+  let bestError=null;
+  for(const candidate of tries){
+    if(seen.has(candidate.text))continue;seen.add(candidate.text);
+    try{
+      let obj=JSON.parse(candidate.text);
+      if(typeof obj==='string')obj=JSON.parse(obj);
+      if(!obj || typeof obj!=='object')continue;
+      let object=Array.isArray(obj)?{levels:obj}:obj;
+      if(object.quest&&typeof object.quest==='object')object=object.quest;
+      else if(object.adventure&&typeof object.adventure==='object')object=object.adventure;
+      else if(object.data&&typeof object.data==='object'&&!Array.isArray(object.data))object=object.data;
+      const levels=object.levels||object.questions||object.puzzles||object.chapters||object.items;
+      if(!Array.isArray(levels))throw Error('No question list found. It must be called levels, questions, puzzles or chapters.');
+      const imported={...defaults,...object,levels:levels.map((x,i)=>({
+        title:x?.title||x?.name||x?.chapter||'Mystery '+(i+1),
+        story:x?.story||x?.intro||x?.narrative||x?.context||'',
+        q:x?.q||x?.question||x?.puzzle||x?.prompt||x?.text||'',
+        h:x?.h||x?.hint||x?.help||x?.clue||'',
+        a:x?.a||x?.answer||x?.solution||x?.correctAnswer||''
+      }))};
+      const valid=validate(imported);
+      if(window.IQQuest)window.IQQuest.importNotice=candidate.fixes?'Minor copied-text JSON formatting was automatically repaired.':'';
+      return valid;
+    }catch(e){
+      // Prefer a meaningful schema error over a raw JSON parser error.
+      if(!bestError || !/SyntaxError/.test(String(e)))bestError=e;
+    }
+  }
+  // Plain ChatGPT numbered markdown is accepted too, provided every chapter
+  // has a real question, hint and answer. Never invent missing answers.
+  function parseNumberedAnswer(body){
+    const clean=body.replace(/\r\n?/g,'\n').replace(/^[ \t]*```(?:markdown|text)?\s*\n?/gmi,'').replace(/^[ \t]*```[ \t]*$/gm,'');
+    const parts=[];
+    const heading=/^\s*(?:#{1,5}\s*)?(?:\*\*)?(?:chapter|level|mystery|question|puzzle)?\s*#?\s*(\d{1,2})\s*[.):–-]\s*(.*?)\s*\*{0,2}\s*$/gmi;
+    const matches=[...clean.matchAll(heading)];
+    if(matches.length!==15 || matches.some((m,i)=>Number(m[1])!==i+1))return null;
+    for(let i=0;i<15;i++){
+      const part=clean.slice(matches[i].index+matches[i][0].length,i+1<15?matches[i+1].index:clean.length);
+      const obj={title:matches[i][2].replace(/\*\*/g,'').trim() || 'Mystery '+(i+1),story:'',q:'',h:'',a:''};
+      let active='';
+      for(const line of part.split('\n')){
+        const m=line.match(/^\s*(?:[-*]\s*)?(?:\*\*)?(story|intro|narrative|question|puzzle|hint|clue|answer|solution)(?:\*\*)?\s*:\s*(.*)$/i);
+        if(m){const key={story:'story',intro:'story',narrative:'story',question:'q',puzzle:'q',hint:'h',clue:'h',answer:'a',solution:'a'}[m[1].toLowerCase()];active=key;obj[key]=(obj[key]?obj[key]+' ':'')+m[2].replace(/\*\*/g,'').trim();}
+        else if(active && line.trim() && !/^\s*(?:---|```)/.test(line))obj[active]+=' '+line.replace(/\*\*/g,'').trim();
+      }
+      if(!obj.q || !obj.h || !obj.a)return null;
+      parts.push(obj);
+    }
+    try {return validate({...defaults,levels:parts});}catch(e){return null;}
+  }
+  const markdown=parseNumberedAnswer(raw);
+  if(markdown){if(window.IQQuest)window.IQQuest.importNotice='Formatted 15-question ChatGPT text was recognised automatically.';return markdown;}
+  if(bestError && !/SyntaxError/.test(String(bestError)))throw bestError;
+  throw Error('The copied ChatGPT text still has invalid JSON after automatic formatting repair. Please copy the whole answer again (from the first { to the last }), or send me the complete text so I can repair it. Your existing 15 questions have not been changed.');
+}
+window.IQQuest={DEMO:structuredClone(DEMO),validate,readImport,normalizeAnswer};
+})();
+</script>
+  <script>(function(){
+'use strict';
+const $=id=>document.getElementById(id);
+const DRAFT_KEY='iqquest_v34_creator_draft';
+const PREVIEW_KEY='iqquest_v31_preview';
+const times={Easy:'5–9 MIN',Medium:'9–18 MIN',Hard:'15–30 MIN'};
+let quest=structuredClone(IQQuest.DEMO);
+let current=0;
+let count=15;
+let lastSave=0;
+let autosaveTimer=0;
+function defaultLevel(i){return {title:'Mystery '+String(i+1).padStart(2,'0'),story:'A forgotten chamber opens in the ancient ruins.',q:'What is the secret answer?',h:'Replace this hint with a helpful clue.',a:'answer'};}
+function clone(x){return JSON.parse(JSON.stringify(x));}
+function status(id,msg,bad=false){const el=$(id);el.textContent=msg;el.className='small-status'+(bad?' bad':'');}
+function safeDraft(){return {v:1,title:$('quest-name').value.trim()||'Untitled Mystery',creator:$('community-name').value.trim()||'Community',theme:$('quest-theme').value.trim()||'A mysterious adventure awaits.',difficulty:quest.difficulty,levels:quest.levels.map(x=>({...x}))};}
+function saveSilent(){try{localStorage.setItem(DRAFT_KEY,JSON.stringify(safeDraft()));}catch(e){console.warn('Could not autosave',e)}}
+function queueSave(){clearTimeout(autosaveTimer);autosaveTimer=setTimeout(saveSilent,300);}
+function updateBasics(){quest.title=$('quest-name').value;quest.creator=$('community-name').value;quest.theme=$('quest-theme').value;refreshPreview();queueSave();}
+function difficultySelect(diff){quest.difficulty=diff;document.querySelectorAll('[data-difficulty]').forEach(b=>{const active=b.dataset.difficulty===diff;b.classList.toggle('selected',active);b.setAttribute('aria-pressed',String(active));});refreshPreview();queueSave();}
+function renderSelector(){const root=$('level-selector');root.replaceChildren();quest.levels.forEach((l,i)=>{const b=document.createElement('button');b.type='button';b.textContent=`${String(i+1).padStart(2,'0')} · ${l.title||'Untitled'}`;b.className=i===current?'active':'';b.setAttribute('aria-current',i===current?'true':'false');b.addEventListener('click',()=>{current=i;renderSelector();renderFields();});root.append(b);});}
+function renderFields(){const l=quest.levels[current];for(const [id,key] of [['level-title','title'],['level-story','story'],['level-question','q'],['level-hint','h'],['level-answer','a']]){$(id).value=l[key]||'';}}
+function updateLevel(){const level=quest.levels[current];for(const [id,key] of [['level-title','title'],['level-story','story'],['level-question','q'],['level-hint','h'],['level-answer','a']]){level[key]=$(id).value;}renderSelector();refreshPreview();queueSave();}
+function refreshPreview(){const draft=safeDraft();$('preview-title').textContent=draft.title;$('preview-theme').textContent=draft.theme;$('preview-difficulty').textContent=draft.difficulty.toUpperCase();$('preview-count').textContent=draft.levels.length+' QUESTIONS';$('preview-duration').textContent=times[draft.difficulty]||times.Medium;updateFeeEstimate();}
+function loadData(data,announce=true){quest=clone(IQQuest.validate(data));$('quest-name').value=quest.title;$('community-name').value=quest.creator;$('quest-theme').value=quest.theme;current=0;count=15;difficultySelect(quest.difficulty);$('editor-count').textContent='15 QUESTIONS';renderSelector();renderFields();refreshPreview();saveSilent();if(announce)status('import-status',`${count} questions loaded. Review answers and hints before sharing.`);}
+function validateDraft(){return IQQuest.validate(safeDraft());}
+// Validation-only bridge for the separate publishing readiness panel.
+window.IQQuestEditorGetDraft=validateDraft;
+async function downloadJson(){try{const clean=validateDraft();const json=JSON.stringify(clean,null,2);const blob=new Blob([json],{type:'application/json'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='iq-quest-'+clean.title.toLowerCase().replace(/[^a-z0-9]+/g,'-').slice(0,35)+'.json';document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);status('draft-status',`Downloaded ${new TextEncoder().encode(JSON.stringify(clean)).length} UTF-8 bytes of quest data (excluding IQ Labs metadata).`);}catch(err){status('draft-status',err.message,true)}}
+function copyPromptText(){
+ const d=safeDraft();
+ const rulebook={
+   Easy:'15 approachable but genuine logic puzzles. Each requires one meaningful deduction (not recall, not simple arithmetic). Aim for a 5–9 minute completion by a practiced player. Give visible clues and short answers. At least 3 puzzle mechanisms across 15 levels.',
+   Medium:'15 substantial logic/cipher puzzles with 1–2 reasoning steps each. Aim for 9–18 minutes for a practiced player. Use at least 4 different mechanisms and 2 connections between earlier and later levels. Never simple trivia.',
+   Hard:'15 demanding yet fair escape-room puzzles: 2–4 reasoning steps each, at least 5 different mechanisms and 3 cross-level clue dependencies. Aim for 15–30 minutes for a practiced solver. Each puzzle must provide everything needed; no obscure external knowledge.'
+ };
+ return `Act as an expert escape-room designer, puzzle solver and critical editor. Create a COMPLETE English-language IQ QUEST adventure and independently TEST each answer.
+
+QUEST TITLE: ${d.title}
+CREATOR: ${d.creator}
+THEME: ${d.theme}
+DIFFICULTY: ${d.difficulty}
+EXACTLY 15 LEVELS, 1 PUZZLE PER LEVEL.
+DIFFICULTY CONTRACT: ${rulebook[d.difficulty]}
+
+GLOBAL QUALITY GATE (REWRITE UNTIL ALL PASS):
+1. Every level is a genuinely solvable reasoning puzzle, NOT a general-knowledge quiz or an obvious question. Even Easy must make players think.
+2. Use explicit data and exact mechanics (codes, spatial logic, constraints, logic grids, substitutions, number patterns, cross-level clues). Distribute mechanisms across levels, and increase complexity toward the final vault.
+3. For each puzzle, privately solve it FROM SCRATCH using only displayed clues and earlier unlocked levels. Check that exactly ONE intended answer exists (or add accepted alternatives). Fix contradictory/ambiguous questions by changing the clues. Don't show the private audit.
+4. Never ask 2+2, obvious alphabet completions, the name of a blockchain, generic trivia, or vague riddle answers such as 'what has keys but no locks'. Never require web searches, insider crypto knowledge, a wallet, or code execution.
+5. Level 15 MUST use at least two previously discovered answers to solve a meaningful final lock. All dependencies must refer to earlier levels only.
+6. Story, question, hint and answer must be ENGLISH. Each hint nudges the approach WITHOUT giving away the answer; in the game it adds a 60-second penalty.
+7. Keep each story 1–2 sentences and every puzzle readable on a mobile phone. Difficulty comes from clever deductions, not excessively long text.
+8. Avoid duplicate answers unless genuinely required by an explicit mechanic. Avoid questions answerable by simply reading the title or seeing an obvious pattern.
+9. Create exactly fifteen levels with diverse challenges and an atmospheric ruin/temple narrative. Critically revise your first draft until all 15 pass the quality gate.
+10. Make the expected play time realistic for a practiced player. Avoid artificial waiting or impossible puzzles.
+
+RETURN ONLY ONE VALID JSON OBJECT, with NO Markdown fence or additional text. Exactly this shape:
+{
+"v":1,
+"title":"${d.title.replace(/"/g,"'")}",
+"creator":"${d.creator.replace(/"/g,"'")}",
+"theme":"${d.theme.replace(/"/g,"'").replace(/\n/g,' ')}",
+"difficulty":"${d.difficulty}",
+"levels":[{"title":"Chapter title","story":"Atmospheric scene","q":"Complete solvable puzzle with all information","h":"Useful hint without answer","a":"EXACT ANSWER"}]
+}
+
+The levels array MUST contain exactly 15 objects. If accepted answers have synonyms, put them into a single string separated by |, e.g. 'bronze | the bronze statue'. No extra JSON keys. Valid JSON escaping only, no literal line breaks inside string values. Aim to keep the entire compact JSON below 7,500 UTF-8 bytes, without making the puzzles trivial. Every story should be concise and all answer keys should be unambiguous. The creator will review before publication.`;
+}
+function offerManualPrompt(prompt){$('manual-ai-prompt').value=prompt;$('prompt-fallback').classList.remove('hidden');$('manual-ai-prompt').focus();$('manual-ai-prompt').select();}
+async function copyPrompt(){const text=copyPromptText();try{if(!navigator.clipboard?.writeText)throw Error('Clipboard is unavailable');await navigator.clipboard.writeText(text);$('prompt-fallback').classList.add('hidden');status('import-status','✓ Copied! Tap 2 · OPEN CHATGPT below, paste and send. Copy all 15 answers, then return to step 3.');$('quick-ai-status').classList.remove('bad');$('quick-ai-status').textContent='✓ Request copied! Now tap 2 · OPEN CHATGPT below. In ChatGPT, Paste → Send, then copy the entire reply.';}catch(e){offerManualPrompt(text);status('import-status','Your browser blocked automatic copying. Select and copy the task shown below, then open ChatGPT.',true);$('quick-ai-status').classList.add('bad');$('quick-ai-status').textContent='Clipboard blocked. Copy the request from the opened text box below, then tap 2 · OPEN CHATGPT.';}}
+async function improveWithChatGPT(){
+ const d=safeDraft();
+ const difficultyRule={Easy:'5–9 min, real one-step logic; never trivial',Medium:'9–18 min, 1–2 steps, 3 cross-level clues',Hard:'15–30 min, 2–4 steps, 4+ cross-level dependencies'}[d.difficulty];
+ const prompt='Act as a senior escape-room editor and strict puzzle verifier. Audit and IMPROVE the following IQ QUEST JSON. The creator chose '+d.difficulty+' difficulty ('+difficultyRule+'). All 15 puzzles must fit this standard. For EVERY chapter, independently recompute the intended answer using only its text and prior chapters. Fix ambiguous or unsolvable riddles; replace simplistic trivia, obvious arithmetic and repeat mechanisms. Preserve the overarching mystery story but improve progression, logic and fairness. Ensure Chapter 15 combines at least two earlier solved clues. Hints help without revealing solutions and cost +60 seconds in play. Return ONLY the complete, valid, corrected JSON with exactly 15 levels and keys v,title,creator,theme,difficulty,levels (each level: title,story,q,h,a). Do not add extra keys or any explanation. Difficulty must remain '+d.difficulty+'.\n\nQUEST TO REVISE:\n'+JSON.stringify(d);
+ try {await navigator.clipboard.writeText(prompt);status('import-status','Difficulty review prompt copied! Open ChatGPT, paste it and import the improved JSON below.');}
+ catch(e){offerManualPrompt(prompt);status('import-status','Select and copy the review prompt from the box below; the JSON import field is untouched.',true);}
+}
+function updateFeeEstimate(){
+ try{
+ const d=safeDraft();
+ const bytes=new TextEncoder().encode(JSON.stringify(d)).length;
+ // Approximate tier, no on-chain fee quote. SDK metadata and chunk overhead may affect exact tier.
+ const tier=bytes<850?0.001:bytes<=8500?0.003:0.005;
+ $('byte-estimate').textContent='Draft payload: '+bytes.toLocaleString('en-US')+' UTF-8 bytes (metadata not included)';
+ $('payload-headroom').textContent='Headroom to 8,500 bytes: '+Math.max(0,8500-bytes).toLocaleString('en-US')+' bytes'+(bytes>8000?' · Keep the JSON shorter before publishing.':' · Plenty of room for this draft.');
+ $('storage-estimate').textContent='Estimated IQ Labs protocol tier for this draft: ~'+tier.toFixed(3)+' SOL'+(tier>0.003?' · Larger than the usual 0.003–0.004 SOL allowance.':' · Usually within the 0.003–0.004 SOL storage allowance.')+(bytes>=8000?' · WARNING: near/over 8 KB; shorten text before publishing.':' · Recommended: keep below 8,000 bytes')+' (SDK metadata, network fees and first-wallet setup not included)';
+ }catch(e){console.warn('Could not estimate payload size',e)}
+}
+const IMPORT_BACKUP_KEY=DRAFT_KEY+'_before_ai_import';
+function checkAiResponse(){
+ try{
+  const parsed=IQQuest.readImport($('chatgpt-json').value,safeDraft());
+  const notice=IQQuest.importNotice?' '+IQQuest.importNotice:'';
+  status('import-status','✓ VALID: '+parsed.levels.length+' questions found, from “'+parsed.levels[0].title+'” to “'+parsed.levels[14].title+'”.'+notice+' Existing editor questions have NOT been changed. You can now tap FILL MY 15 QUESTIONS.');
+ }catch(e){status('import-status','NOT READY · '+String(e?.message||e)+' Your existing editor questions have NOT been changed.',true);}
+}
+
+let importUndo=null;
+function importResponse(){
+ try{
+  const text=$('chatgpt-json').value;
+  const existing=safeDraft();
+  const parsed=IQQuest.readImport(text,existing);
+  // Keep the creator's current title, community, theme and selected difficulty.
+  // This button specifically replaces 15 occupied chapter fields, never the site branding.
+  const data={...parsed,title:existing.title,creator:existing.creator,theme:existing.theme,difficulty:existing.difficulty};
+  // The user requested a one-tap import. The full previous draft is backed up for Undo before replacing anything.
+  importUndo=clone(existing);
+  try{localStorage.setItem(IMPORT_BACKUP_KEY,JSON.stringify(existing));}catch(e){console.warn('Import backup could not be persisted',e)}
+  loadData(data,false);
+  $('chatgpt-json').value='';
+  $('undo-ai-import').classList.remove('hidden');
+  $('editor-count').textContent='✓ 15 AI QUESTIONS IMPORTED';
+  status('import-status','✓ SUCCESS! All 15 previous questions were replaced. '+(IQQuest.importNotice?IQQuest.importNotice+' ':'')+'Chapter 01 is open in the editor below. Your earlier questions were backed up.');
+  document.getElementById('level-question').closest('.studio-panel').scrollIntoView({behavior:'smooth',block:'start'});
+ }catch(e){status('import-status','Could not import yet. Check that ChatGPT finished all 15 questions and copy its complete answer. Your previous questions were not changed. Details: '+String(e?.message||e),true);}
+}
+async function pasteAi(){try{
+ if(!navigator.clipboard?.readText)throw Error('Clipboard read is unsupported on this browser');
+ const text=await navigator.clipboard.readText();
+ if(!text.trim())throw Error('The clipboard is empty');
+ $('chatgpt-json').value=text;
+ status('import-status','✓ Response pasted. Now tap FILL MY 15 QUESTIONS.');
+}catch(e){status('import-status','Automatic paste blocked by your browser. Tap and hold inside the JSON field, then choose Paste, or load a JSON file. '+String(e?.message||''),true);$('chatgpt-json').focus();}}
+async function importFile(event){
+ const file=event.target.files?.[0];if(!file)return;
+ try{if(file.size>400000)throw Error('File is too large. Choose a JSON text file under 400 KB.');
+ $('chatgpt-json').value=await file.text();
+ status('import-status','✓ Loaded '+file.name+'. Now tap FILL MY 15 QUESTIONS.');
+ }catch(e){status('import-status','Could not load the JSON file: '+String(e?.message||e),true);}finally{event.target.value='';}
+}
+function undoAiImport(){
+ try{const backup=importUndo||JSON.parse(localStorage.getItem(IMPORT_BACKUP_KEY)||'null');
+ if(!backup)throw Error('No import backup is available');
+ loadData(backup,false);importUndo=null;
+ $('undo-ai-import').classList.add('hidden');
+ status('import-status','✓ Your original 15 questions have been restored.');
+ }catch(e){status('import-status','Restore failed: '+String(e?.message||e),true);}
+}
+
+function previewGame(){try{const clean=validateDraft();saveSilent();localStorage.setItem(PREVIEW_KEY,JSON.stringify(clean));localStorage.removeItem('iqquest_run_v40_preview_'+encodeURIComponent(clean.title).slice(0,65));localStorage.removeItem('iqquest_run_v39_preview_'+encodeURIComponent(clean.title).slice(0,65));status('draft-status','Opening local quest preview…');location.href='index.html?preview=1&from=creator';}catch(e){status('draft-status',e.message,true)}}
+function manualSave(){try{validateDraft();saveSilent();status('draft-status','Draft saved on this device. Export the JSON for a portable backup.');}catch(e){status('draft-status',e.message,true)}}
+for(const id of ['quest-name','community-name','quest-theme'])$(id).addEventListener('input',updateBasics);
+for(const id of ['level-title','level-story','level-question','level-hint','level-answer'])$(id).addEventListener('input',updateLevel);
+for(const b of document.querySelectorAll('[data-difficulty]'))b.addEventListener('click',()=>difficultySelect(b.dataset.difficulty));
+
+$('use-theme-example').addEventListener('click',()=>{
+  $('quest-theme').value=$('theme-example').textContent.trim();
+  $('quest-name').value='The Lost Temple';
+  difficultySelect('Medium');
+  updateBasics();
+  status('import-status','Example ready! Tap 1 · COPY REQUEST FOR CHATGPT, then 2 · OPEN CHATGPT.');
+  $('ai-generate-one').scrollIntoView({behavior:'smooth',block:'center'});
+});
+$('ai-generate-one').addEventListener('click',copyPrompt);
+$('ai-import-one').addEventListener('click',async()=>{
+  if($('chatgpt-json').value.trim()){importResponse();return;}
+  try{
+    if(!navigator.clipboard?.readText)throw Error('Clipboard access unavailable');
+    const copied=await navigator.clipboard.readText();
+    if(!copied?.trim())throw Error('Clipboard empty');
+    $('chatgpt-json').value=copied;
+    importResponse();
+  }catch(e){
+    status('import-status','On iPhone: touch and hold the box above, choose Paste, then tap this button again. Your existing questions are safe.',true);
+    $('chatgpt-json').focus();
+  }
+});
+$('copy-prompt').addEventListener('click',copyPrompt);$('review-with-chatgpt').addEventListener('click',improveWithChatGPT);
+$('check-ai-json').addEventListener('click',checkAiResponse);$('import-ai').addEventListener('click',importResponse);
+$('paste-ai').addEventListener('click',pasteAi);$('upload-ai-json').addEventListener('change',importFile);$('undo-ai-import').addEventListener('click',undoAiImport);$('select-ai-prompt').addEventListener('click',()=>{$('manual-ai-prompt').focus();$('manual-ai-prompt').select();});
+$('load-example').addEventListener('click',()=>{
+ const previous=safeDraft();
+ importUndo=clone(previous);
+ try{localStorage.setItem(IMPORT_BACKUP_KEY,JSON.stringify(previous));}catch(e){console.warn('Example backup unavailable',e)}
+ loadData(IQQuest.DEMO,false);
+ $('undo-ai-import').classList.remove('hidden');
+ status('import-status','✓ 15 example puzzles loaded. Your previous draft has been saved for Undo.');
+ document.getElementById('level-question').closest('.studio-panel').scrollIntoView({behavior:'smooth',block:'start'});
+});
+// The editor auto-saves. Manual download/save controls are intentionally not shown.
+$('preview-game').addEventListener('click',previewGame);
+try{if(localStorage.getItem(IMPORT_BACKUP_KEY))$('undo-ai-import').classList.remove('hidden');}catch(e){}
+try{
+ const saved=localStorage.getItem(DRAFT_KEY)||localStorage.getItem('iqquest_v31_creator_draft');
+ if(saved){
+   const legacy=JSON.parse(saved);
+   if(Array.isArray(legacy.levels)&&legacy.levels.length!==15){
+     localStorage.setItem(DRAFT_KEY+'_backup_before_15_questions',saved);
+     const rebuilt=structuredClone(legacy);
+     rebuilt.levels=rebuilt.levels.slice(0,15);
+     while(rebuilt.levels.length<15)rebuilt.levels.push(defaultLevel(rebuilt.levels.length));
+     loadData(rebuilt,false);
+     status('draft-status','Your previous draft was backed up locally before adapting it to the new fixed 15-question format. Please review and export your draft.');
+   } else loadData(legacy,false);
+ } else loadData(IQQuest.DEMO,false);
+}catch(e){console.warn('Draft could not be restored',e);loadData(IQQuest.DEMO,false);status('draft-status','Previous draft could not be loaded: '+e.message,true)}
+})();
+</script>
+<script>
+(() => {
+ 'use strict';
+ const $=id=>document.getElementById(id);
+ const share=$('share-creator-draft');
+ const betaTest=$('beta-payment-shortcut');
+ const status=$('share-step-status');
+ const payment=$('payment-next-step');
+ const paymentMessage=$('payment-step-message');
+ const preview=$('publish-success');
+ const btnPreview=$('preview-publish-success');
+ const shareKey='iqquest_v48_share_opened';
+ let currentShareTitle='';
+ function currentTitle(){return ($('quest-name')?.value||'Mystery Adventure').trim();}
+ function shared(){if(currentShareTitle===currentTitle()&&currentShareTitle)return true;try{return JSON.parse(localStorage.getItem(shareKey)||'null')?.title===currentTitle();}catch(e){return false;}}
+ function refresh(){
+   const ok=shared();
+   payment.classList.toggle('completed',ok);
+   paymentMessage.textContent=ok ? '✓ X teaser opened. You can now try the Phantom Devnet test below. Real $3.99 payments remain unavailable.' : 'Phantom Devnet testing is available below without paying real SOL. X sharing is optional for the test.';
+   if(ok)status.textContent='✓ X share window opened. Posting was not verified. The $3.99 Mainnet payment is not available yet.';
+ }
+ share.addEventListener('click',()=>{
+   const title=currentTitle();
+   const teaser=`I'm building “${title}” on IQ QUEST! Play the free puzzles and get ready for our community challenge. #IQQUEST #Solana`;
+   const intent=new URL('https://x.com/intent/tweet');
+   intent.searchParams.set('text',teaser);
+   intent.searchParams.set('url','https://5wbrdm92h7-eng.github.io/iq-quest/');
+   share.href=intent.toString();
+   currentShareTitle=title;
+   try{localStorage.setItem(shareKey,JSON.stringify({title,openedAt:Date.now()}));}catch(e){}
+   refresh();
+ });
+ betaTest.addEventListener('click',()=>{
+   const details=$('developer-tests');
+   details.open=true;
+   $('lab-status').textContent='Phantom Devnet test selected. First finish your 15 questions, then check the Devnet consent box. Only then does TEST PAYMENT ON DEVNET become clickable.';
+   $('lab-consent').scrollIntoView({behavior:'smooth',block:'center'});
+ });
+ $('quest-name')?.addEventListener('input',()=>{status.textContent='Share the current adventure title on X to continue.';refresh();});
+ // This is intentionally a PREVIEW only, not a fake payment or published URL.
+ btnPreview.addEventListener('click',()=>{
+   preview.dataset.state='preview';
+   $('publish-success-tag').textContent='DESIGN PREVIEW · NO PAYMENT OR PUBLICATION';
+   $('publish-success-title').textContent='This is your future success screen';
+   $('publish-success-detail').textContent='Only after a confirmed SOL payment, a separate IQ Labs Mainnet upload and independent onchain readback will these buttons link to a published quest.';
+   $('publish-success-url').textContent='A verified player URL will appear here after publication.';
+   const play=$('success-play'),x=$('success-share-x');
+   for(const a of [play,x]){a.setAttribute('aria-disabled','true');a.removeAttribute('href');}
+   $('success-copy').disabled=true;
+   preview.classList.remove('hidden');
+   preview.scrollIntoView({behavior:'smooth',block:'start'});
+ });
+ window.IQQuestShowVerifiedPublication=({url,title,network})=>{
+   if(typeof url!=='string'||!/^https:\/\//.test(url))return;
+   const u=new URL(url);
+   if(u.origin!==location.origin||u.pathname.replace(/index\.html$/,'')!==new URL('index.html',location.href).pathname.replace(/index\.html$/,''))return;
+   preview.dataset.state='verified';
+   $('publish-success-tag').textContent='✓ IQ LABS '+(network==='devnet'?'DEVNET TEST':'MAINNET ONCHAIN')+' · VERIFIED';
+   $('publish-success-title').textContent='Your quest is published!';
+   $('publish-success-detail').textContent=network==='devnet'?'15 questions were verified on Solana Devnet. This is a test publication, NOT a paid Mainnet quest. Friends can play using the link below.':'Your 15-question quest was independently verified on IQ Labs Mainnet. Players can open the onchain link without a wallet.';
+   $('publish-success-url').textContent=url;
+   const play=$('success-play'),x=$('success-share-x');
+   play.href=url;play.removeAttribute('aria-disabled');
+   const intent=new URL('https://x.com/intent/tweet');
+   intent.searchParams.set('text',`Play “${title}” on IQ QUEST! Beat my time in all 15 mysteries. ${network==='devnet'?'(Devnet test) ':''}#IQQUEST`);
+   intent.searchParams.set('url',url);
+   x.href=intent.toString();x.removeAttribute('aria-disabled');
+   $('success-copy').disabled=false;
+   $('success-copy').onclick=async()=>{try{await navigator.clipboard.writeText(url);$('success-copy').textContent='✓ LINK COPIED';}catch(e){prompt('Copy your playable link:',url);}};
+   preview.classList.remove('hidden');
+   preview.scrollIntoView({behavior:'smooth',block:'start'});
+ };
+ refresh();
+})();
+</script><script type="module">
+import {publishQuestDevnet,readQuestOnchain,isSolanaSignature} from './onchain-bridge.js';
+import {verifyDevnetPayment,questFingerprint} from './checkout-bridge.js';
+import {requestCheckoutWallet} from './wallet-bridge.js';
+const $=id=>document.getElementById(id);
+const publish=$('publish-iq-devnet'),consent=$('devnet-accept'),auto=$('devnet-auto-publish'),verify=$('verify-iq-devnet');
+const progress=$('devnet-publish-status'),links=$('devnet-links');
+let busy=false,lastUrl='';
+const completionKey='iqquest_devnet_completed_v50';
+function setStatus(text){progress.textContent=String(text);}
+function enable(){publish.disabled=busy||!consent.checked;verify.disabled=busy;}
+consent.addEventListener('change',enable);enable();
+function showPublished(sig,title,verified){
+ const u=new URL('index.html',location.href);
+ u.searchParams.set('tx',sig);u.searchParams.set('network','devnet');
+ lastUrl=u.toString();
+ $('devnet-play-link').href=lastUrl;
+ $('devnet-explorer').href='https://explorer.solana.com/tx/'+encodeURIComponent(sig)+'?cluster=devnet';
+ const share=new URL('https://x.com/intent/tweet');
+ share.searchParams.set('text','I published '+title+' on IQ QUEST using IQ Labs on Solana Devnet! Play all 15 puzzles free and try to beat my time. #IQQUEST #Solana');
+ share.searchParams.set('url',lastUrl);
+ $('devnet-share-x').href=share.toString();
+ links.classList.remove('hidden');
+ window.IQQuestShowVerifiedPublication?.({url:lastUrl,title,network:'devnet'});
+ setStatus((verified?'✓ Verified all 15 puzzles from IQ Labs Devnet.':'Devnet inscription exists; verification still pending.')+' Transaction: '+sig+'\nYour player link is ready below.');
+}
+async function checkedDraft(){
+ const get=window.IQQuestEditorGetDraft;
+ if(typeof get!=='function')throw Error('Editor is not ready.');
+ const draft=get();
+ const bytes=new TextEncoder().encode(JSON.stringify(draft)).length;
+ if(bytes>7500)throw Error('Your 15 questions use '+bytes+' bytes. Shorten the quest below approximately 7.5 KB to leave space for upload metadata.');
+ if(!draft.levels.every(l=>l.q&&l.a&&l.h))throw Error('All 15 questions, answers and hints must be complete.');
+ return draft;
+}
+async function publishAfterVerifiedPayment(autoStarted=false){
+ if(busy||!consent.checked){
+   if(autoStarted&&!consent.checked)setStatus('Automatic publication was not started: first consent to public Devnet storage of questions, hints and answers. You can publish manually afterwards.');
+   return;
+ }
+ busy=true;enable();links.classList.add('hidden');
+ try{
+   const draft=await checkedDraft();
+   const plan=document.querySelector('input[name="publish-plan"]:checked')?.value||'community';
+   const saved=JSON.parse(localStorage.getItem('iqquest_devnet_payment_v46')||'null');
+   if(!saved?.signature||!saved?.payer||saved.plan!==plan)throw Error('Complete Step 1: verify the Devnet test payment above for this publishing plan before uploading.');
+   const payer=saved.payer;
+   setStatus('Checking the saved Devnet test payment without connecting a wallet…');
+   await verifyDevnetPayment({signature:saved.signature,draft,plan,payer,onProgress:setStatus});
+   const fingerprint=await questFingerprint(draft,plan);
+   let completed=null;
+   try{completed=JSON.parse(localStorage.getItem(completionKey)||'null');}catch(e){}
+   const sameCompletedPayment=completed?.paymentSignature===saved.signature&&completed.fingerprint===fingerprint;
+   const recoverySig=sameCompletedPayment?completed.signature:localStorage.getItem('iqquest_devnet_last_sig_v45');
+   if(sameCompletedPayment&&!isSolanaSignature(recoverySig))throw Error('A previously completed publication has no recoverable signature. Check transaction history before retrying.');
+   if(isSolanaSignature(recoverySig)){
+     setStatus('Checking the last saved Devnet publication before starting a new upload, to avoid duplicates…');
+     let existing;
+     try{existing=await readQuestOnchain(recoverySig,'devnet');}
+     catch(error){throw Error('The previous publication could not be checked ('+String(error?.message||error)+'). Use Verify Last Devnet Publication before starting another upload. No duplicate was started.');}
+     const meta=existing.data.iqquest||{};
+     const existingFingerprint=await questFingerprint(existing.data,meta.plan||plan);
+     if(meta.testPaymentSignature===saved.signature){
+       if(meta.publisher!==payer||existingFingerprint!==fingerprint)throw Error('A publication for this payment exists but does not match this wallet or draft. No duplicate was started.');
+       try{localStorage.setItem(completionKey,JSON.stringify({signature:recoverySig,paymentSignature:saved.signature,fingerprint,payer}));}catch(e){}
+       showPublished(recoverySig,draft.title,true);
+       return;
+     }
+     if(meta.publisher===payer&&existingFingerprint===fingerprint&&!meta.testPaymentSignature)
+       throw Error('An earlier publication with these questions exists without a recorded payment reference. Verify it manually before another upload.');
+     if(sameCompletedPayment)throw Error('The saved publication points to a different payment. No duplicate was started.');
+   }
+   setStatus('Payment verified. Choose the same wallet that made the payment to sign the Devnet upload.');
+   const provider=await requestCheckoutWallet({purpose:'publication',onProgress:setStatus});
+   if(provider.publicKey?.toBase58?.()!==payer)throw Error('The selected wallet must be the same creator wallet that paid this Devnet test. No upload was started.');
+   setStatus('Starting '+(autoStarted?'automatically requested ':'')+'Devnet publication. Approve each IQ Labs signing request in your wallet…');
+   const result=await publishQuestDevnet({draft,provider,plan,paymentTestSignature:saved.signature,onProgress:setStatus});
+   try{
+     localStorage.setItem('iqquest_devnet_last_title_v45',draft.title);
+     localStorage.setItem(completionKey,JSON.stringify({signature:result.signature,paymentSignature:saved.signature,fingerprint,payer}));
+   }catch(e){console.warn('Publication recovery data could not be saved',e);}
+   showPublished(result.signature,draft.title,true);
+ }catch(error){
+   setStatus('Upload was NOT verified: '+String(error?.message||error)+'\nIf you approved any transactions, inspect your wallet history / Solana Explorer before retrying. Do not pay mainnet SOL.');
+ }finally{busy=false;enable();}
+}
+publish.addEventListener('click',()=>{void publishAfterVerifiedPayment(false);});
+window.addEventListener('iqquest:devnet-payment-verified',()=>{
+ if(auto.checked)void publishAfterVerifiedPayment(true);
+});
+verify.addEventListener('click',async()=>{
+ if(busy)return;busy=true;enable();
+ try{
+   const sig=localStorage.getItem('iqquest_devnet_last_sig_v45')||'';
+   if(!isSolanaSignature(sig))throw Error('No valid saved Devnet inscription signature on this device.');
+   setStatus('Reading inscription from IQ Labs Devnet…');
+   const result=await readQuestOnchain(sig,'devnet');
+   if(window.IQQuest?.validate)window.IQQuest.validate(result.data);
+   const meta=result.data.iqquest||{};
+   if(meta.testPaymentSignature){
+     setStatus('Checking saved Devnet test-payment receipt from onchain metadata…');
+     await verifyDevnetPayment({signature:meta.testPaymentSignature,draft:result.data,plan:meta.plan,payer:meta.publisher,onProgress:setStatus});
+     try{localStorage.setItem(completionKey,JSON.stringify({signature:sig,paymentSignature:meta.testPaymentSignature,fingerprint:await questFingerprint(result.data,meta.plan),payer:meta.publisher}));}catch(e){}
+   }
+   const title=result.data.title||'An IQ QUEST Adventure';
+   showPublished(sig,title,true);
+ }catch(error){setStatus('Could not verify saved inscription: '+String(error?.message||error));}
+ finally{busy=false;enable();}
+});
+$('copy-devnet-link').addEventListener('click',async()=>{
+ if(!lastUrl)return;
+ try{await navigator.clipboard.writeText(lastUrl);$('copy-devnet-link').textContent='✓ LINK COPIED';}
+ catch(e){prompt('Copy this quest link:',lastUrl);}
+});
+</script>
+<script type="module">
+import {TREASURY_ADDRESS,DEVNET_TEST_LAMPORTS,isValidSignature,sendDevnetPayment,verifyDevnetPayment,questFingerprint,indicativeMainnetQuote} from './checkout-bridge.js';
+import {requestCheckoutWallet} from './wallet-bridge.js';
+const lookup=id=>document.getElementById(id);
+const testButton=lookup('lab-send'),verifyButton=lookup('lab-verify'),consent=lookup('lab-consent');
+const status=lookup('lab-status'),quoteStatus=lookup('lab-price'),resultBox=lookup('lab-result');
+let busy=false;
+lookup('lab-recipient').textContent=TREASURY_ADDRESS;
+function selectedPlan(){return document.querySelector('input[name="publish-plan"]:checked')?.value||'community';}
+function setStatus(t){status.textContent=String(t);}
+function enable(){testButton.disabled=busy||!consent.checked;verifyButton.disabled=busy;lookup('lab-quote').disabled=busy;}
+consent.addEventListener('change',enable);enable();
+function getDraft(){
+ const get=window.IQQuestEditorGetDraft;
+ if(typeof get!=='function')throw Error('The editor is not ready. Refresh the creator page.');
+ const draft=get();
+ if(!Array.isArray(draft.levels)||draft.levels.length!==15)throw Error('Exactly 15 complete questions are required.');
+ return draft;
+}
+function showPending(signature){
+ if(!isValidSignature(signature))return;
+ const a=lookup('lab-explorer');
+ a.href='https://explorer.solana.com/tx/'+encodeURIComponent(signature)+'?cluster=devnet';
+ a.textContent='Check saved transaction in Solana Explorer (may still be pending) ↗';
+ resultBox.classList.remove('hidden');
+}
+function showVerified(receipt){
+ setStatus('✓ REAL DEVNET BLOCKCHAIN RECEIPT VERIFIED.\n0.002 test SOL received by the configured wallet. The memo matches these 15 questions and the selected plan.\nThis is NOT a real $3.99 payment and DOES NOT publish your quest.');
+ lookup('lab-explorer').href='https://explorer.solana.com/tx/'+encodeURIComponent(receipt.signature)+'?cluster=devnet';
+ lookup('lab-explorer').textContent='View confirmed Devnet payment in Solana Explorer ↗';
+ resultBox.classList.remove('hidden');
+ // The publishing panel independently checks the saved receipt again before any upload.
+ window.dispatchEvent(new CustomEvent('iqquest:devnet-payment-verified',{detail:{signature:receipt.signature}}));
+}
+lookup('lab-quote').addEventListener('click',async()=>{
+ const plan=selectedPlan(),usd=3.99;
+ quoteStatus.textContent='Checking public SOL/USD market price (illustrative only)…';
+ try{
+  const quote=await indicativeMainnetQuote(usd);
+  quoteStatus.textContent=`$${usd} ≈ ${quote.sol.toFixed(6)} SOL at $${quote.usdPerSol.toFixed(2)}/SOL (${new Date(quote.retrievedAt).toLocaleTimeString()}). ESTIMATE ONLY · never a payable invoice · storage/network costs extra · Mainnet payment disabled.`;
+ }catch(e){quoteStatus.textContent='Indicative quote unavailable: '+String(e?.message||e)+'. No SOL transaction was requested.';}
+});
+for(const input of document.querySelectorAll('input[name="publish-plan"]'))input.addEventListener('change',()=>{
+ quoteStatus.textContent='Plan changed. Request a fresh indicative quote if wanted; Mainnet payments remain disabled.';
+ resultBox.classList.add('hidden');
+});
+testButton.addEventListener('click',async()=>{
+ if(!consent.checked||busy)return;
+ busy=true;enable();resultBox.classList.add('hidden');
+ let submitted=null;
+ try{
+  const draft=getDraft(),plan=selectedPlan();
+  const fingerprint=await questFingerprint(draft,plan);
+  let prior=null;
+  try{prior=JSON.parse(localStorage.getItem('iqquest_devnet_payment_v46')||'null');}catch(e){}
+  if(prior?.signature&&prior.plan===plan&&prior.fingerprint===fingerprint){
+   submitted=prior;
+   showPending(prior.signature);
+   setStatus('Found an earlier signed transaction for these exact 15 questions. Checking it without connecting a wallet or charging again…');
+   const existing=await verifyDevnetPayment({signature:prior.signature,draft,plan,payer:prior.payer,onProgress:setStatus});
+   showVerified(existing);
+   return;
+  }
+  setStatus('Your quest is ready. Choose a wallet only now, at the test payment step.');
+  const provider=await requestCheckoutWallet({purpose:'payment',forceChoice:true,onProgress:setStatus});
+  if(!consent.checked)throw Error('Payment consent was withdrawn. Nothing was sent.');
+  if(await questFingerprint(getDraft(),plan)!==fingerprint)throw Error('The quest changed while choosing a wallet. Review and restart checkout; nothing was sent.');
+  setStatus('Wallet connected. Review the Devnet recipient and 0.002 test SOL request carefully…');
+  const payment=await sendDevnetPayment({provider,draft,plan,onProgress:setStatus,onSubmitted:info=>{
+   submitted=info;
+    // Do not broadcast if browser storage cannot retain the exact transaction ID.
+    localStorage.setItem('iqquest_devnet_payment_v46',JSON.stringify(info));
+   showPending(info.signature);
+  }});
+  showVerified(payment);
+ }catch(error){
+  setStatus('Devnet test was NOT verified: '+String(error?.message||error)+(submitted?'\nA signed transaction was saved; it may already have been submitted. Use VERIFY LAST DEVNET TEST PAYMENT and inspect Solana Explorer before trying again.':'\nNo saved signed transaction. Inspect your wallet history if you approved a request.'));
+ }finally{busy=false;enable();}
+});
+verifyButton.addEventListener('click',async()=>{
+ if(busy)return;
+ busy=true;enable();resultBox.classList.add('hidden');
+ try{
+  const saved=JSON.parse(localStorage.getItem('iqquest_devnet_payment_v46')||'null');
+  if(!saved?.signature||!saved?.payer)throw Error('No previous submitted Devnet payment signature saved on this browser.');
+  showPending(saved.signature);
+  const draft=getDraft(),plan=selectedPlan();
+  if(saved.plan!==plan)throw Error('Select the same plan used for the test payment, then verify again.');
+  const receipt=await verifyDevnetPayment({signature:saved.signature,draft,plan,payer:saved.payer,onProgress:setStatus});
+  showVerified(receipt);
+ }catch(error){setStatus('Receipt not verified: '+String(error?.message||error)+'\nIf the quest has changed, restore your earlier draft and plan. Never pay twice without checking the previous signature.');}
+ finally{busy=false;enable();}
+});
+</script>
+<script type="module" src="./payments/checkout-ui.mjs"></script>
+</body>
+</html>
