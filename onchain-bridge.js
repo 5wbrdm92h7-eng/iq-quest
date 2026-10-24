@@ -1,4 +1,4 @@
-/* IQ QUEST V5.11 — lossless Devnet packing and safe IQ Labs preflight. */
+/* IQ QUEST V5.12 — normalized Phantom wallet keys and IQ Labs PDA verification. */
 import {MAINNET_CLIENT_ENABLED} from './payments/client-bridge.mjs';
 import {sha256Hex,verifyOrderInputs} from './payments/order-core.mjs';
 const DEVNET_RPC='https://api.devnet.solana.com';
@@ -109,6 +109,24 @@ export async function simulateFirstUploadOnDevnet({connection,web3,tx,onProgress
  }
  onProgress('Devnet RPC simulated this upload transaction successfully. Review the wallet request carefully.');
 }
+export async function verifyDevnetIqPdas({tx,program,expectedCodeAccount,expectedUserState,BufferClass,connection,checkedAccounts=new Set(),wallet}){
+ for(const ix of tx.instructions){
+   if(!ix.programId.equals(program))continue;
+   const tag=BufferClass.from(ix.data).subarray(0,8).toString('hex');
+   // Official IQ Labs 0.3.6 IDL discriminators for SendCode and CreateSession.
+   const expected=tag==='ef8123d03ea86ec9'?expectedCodeAccount:tag==='f2c18fb396197ae3'?expectedUserState:null;
+   if(!expected)continue;
+   const name=tag==='ef8123d03ea86ec9'?'code_account':'user_state';
+   const actual=ix.keys?.[1]?.pubkey;
+   if(!actual?.equals(expected))throw Error('IQ Labs SDK used unexpected '+name+' for wallet '+wallet.toBase58()+'. Got '+String(actual?.toBase58?.()||'missing')+', expected '+expected.toBase58()+'. No transaction was signed.');
+   if(!checkedAccounts.has(name)){
+     const account=await connection.getAccountInfo(expected,'confirmed');
+     if(!account||!account.owner.equals(program)||account.data.length<8)
+       throw Error('IQ Labs '+name+' was not initialized at expected address '+expected.toBase58()+' on Devnet. No transaction was signed.');
+     checkedAccounts.add(name);
+   }
+ }
+}
 export async function publishQuestOnchain({draft,provider,plan='community',network='devnet',paymentTestSignature,paymentSignature,orderId,fingerprint,onSignature=()=>{},onProgress=()=>{}}){
  if(!['devnet','mainnet-beta'].includes(network))throw Error('Unsupported publishing network.');
  if(network==='mainnet-beta'&&!MAINNET_CLIENT_ENABLED)throw Error('Real Mainnet IQ Labs publishing is disabled pending launch verification.');
@@ -117,9 +135,12 @@ export async function publishQuestOnchain({draft,provider,plan='community',netwo
  if(network==='devnet'&&!isSolanaSignature(paymentTestSignature))throw Error('A verified Devnet test-payment signature is required before publication.');
  if(network==='mainnet-beta'&&!isSolanaSignature(paymentSignature))throw Error('A verified Mainnet payment signature is required before uploading.');
  if(typeof provider?.signTransaction!=='function'||!provider.publicKey?.toBase58)throw Error('Choose and connect a supported Solana wallet at publication.');
- const wallet=provider.publicKey;
- if(!wallet?.toBase58)throw Error('Connect your selected Solana wallet first.');
+ const walletAddress=provider.publicKey.toBase58();
+ if(!walletAddress)throw Error('Connect your selected Solana wallet first.');
  const {sdk,connection,web3,BufferClass}=await runtime(network);
+ // Phantom, Wallet Standard and the SDK may bundle different PublicKey classes.
+ // Derive PDAs and serialize instructions from one normalized public key.
+ const wallet=new web3.PublicKey(walletAddress);
  let payload;
  if(network==='mainnet-beta'){
   const {mainnetPublicationPayload}=await import('./payments/publication-core.mjs');
@@ -138,6 +159,9 @@ export async function publishQuestOnchain({draft,provider,plan='community',netwo
  if(byteSize>uploadLimit)throw Error('The quest payload is '+byteSize+' bytes, above the '+uploadLimit+'-byte '+network+' limit. No upload was started.');
  const program=new web3.PublicKey(IQ_PROGRAM);
  const budget=web3.ComputeBudgetProgram.programId;
+ const expectedCodeAccount=web3.PublicKey.findProgramAddressSync([BufferClass.from('codemY}AGBJiqLabs'),wallet.toBuffer()],program)[0];
+ const expectedUserState=web3.PublicKey.findProgramAddressSync([BufferClass.from('usermY}AGBJiqLabs'),program.toBuffer(),wallet.toBuffer()],program)[0];
+ const checkedAccounts=new Set();
  let signaturePrompts=0;
  const inspect=tx=>{
    if(!tx||!Array.isArray(tx.instructions)||!tx.instructions.length)throw Error('SDK supplied no transaction instructions.');
@@ -168,7 +192,10 @@ export async function publishQuestOnchain({draft,provider,plan='community',netwo
  // Check each sequential Devnet chunk before Phantom sees it, including the
  // final inventory transaction. No risky approval is requested on an RPC error.
  const preflight=async tx=>{
-   if(network==='devnet')await simulateFirstUploadOnDevnet({connection,web3,tx,onProgress});
+   if(network==='devnet'){
+     await verifyDevnetIqPdas({tx,program,expectedCodeAccount,expectedUserState,BufferClass,connection,checkedAccounts,wallet});
+     await simulateFirstUploadOnDevnet({connection,web3,tx,onProgress});
+   }
  };
  const signer={
    publicKey:wallet,
