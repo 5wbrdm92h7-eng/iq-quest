@@ -66,7 +66,10 @@ export async function publishQuestOnchain({draft,provider,plan='community',netwo
   payload=JSON.stringify({...draft,iqquest:{format:'IQ-QUEST-ONCHAIN-V1',network:'devnet',plan,publisher:wallet.toBase58(),testPaymentSignature:paymentTestSignature}});
  }
  const byteSize=new TextEncoder().encode(payload).length;
- if(byteSize>8000)throw Error('The quest is '+byteSize+' bytes. Please shorten it below 8,000 bytes before uploading.');
+ // IQ Labs codeIn supports larger Devnet payloads through parallel writes.
+ // Keep a conservative 8 KB Mainnet gate until the paid flow has been tested.
+ const uploadLimit=network==='devnet'?12000:8000;
+ if(byteSize>uploadLimit)throw Error('The quest payload is '+byteSize+' bytes, above the '+uploadLimit+'-byte '+network+' limit. No upload was started.');
  const program=new web3.PublicKey(IQ_PROGRAM);
  const budget=web3.ComputeBudgetProgram.programId;
  let signaturePrompts=0;
