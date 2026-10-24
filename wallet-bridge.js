@@ -106,6 +106,11 @@ export async function connectSelectedWallet(id,{network='devnet',root=globalThis
    publicKey:key,
    signTransaction:tx=>injected.signTransaction(tx)
   };
+  // Phantom mobile may reload the dapp after approval. Asking Phantom itself
+  // to broadcast avoids losing an already-approved transaction in that gap.
+  // Only the Devnet IQ Labs publisher uses this extra capability.
+  if(id==='phantom'&&typeof injected.signAndSendTransaction==='function')
+   provider.signAndSendTransaction=tx=>injected.signAndSendTransaction(tx);
   if(typeof injected.signAllTransactions==='function')
    provider.signAllTransactions=txs=>injected.signAllTransactions(txs);
  }else{

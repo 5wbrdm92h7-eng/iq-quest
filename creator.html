@@ -470,7 +470,7 @@ details.advanced-box[open]>summary{color:#adffb8;margin-bottom:13px}
         </aside>
       </section>
     </main>
-    <footer class="footer"><span><span class="green">IQ</span> QUEST · Creator Studio <strong>V5.13 BETA</strong> · Phantom Devnet test; Mainnet payments OFF</span><nav aria-label="Legal information" style="display:flex;gap:13px;flex-wrap:wrap"><a href="imprint.html" style="color:#b5fbc1;text-decoration:underline">Imprint</a><a href="privacy.html" style="color:#b5fbc1;text-decoration:underline">Privacy</a><a href="withdrawal.html" style="color:#b5fbc1;text-decoration:underline">Withdrawal info</a></nav><span class="footer-iqlabs"><span><b>IQ LABS SDK · DEVNET TEST</b> · Onchain storage &amp; more <span class="footer-soon">(integration in progress)</span></span><a href="https://x.com/IQLabsOfficial" target="_blank" rel="noopener noreferrer" aria-label="IQ Labs official X profile">X @IQLabsOfficial ↗</a></span></footer>
+    <footer class="footer"><span><span class="green">IQ</span> QUEST · Creator Studio <strong>V5.14 BETA</strong> · Phantom Devnet test; Mainnet payments OFF</span><nav aria-label="Legal information" style="display:flex;gap:13px;flex-wrap:wrap"><a href="imprint.html" style="color:#b5fbc1;text-decoration:underline">Imprint</a><a href="privacy.html" style="color:#b5fbc1;text-decoration:underline">Privacy</a><a href="withdrawal.html" style="color:#b5fbc1;text-decoration:underline">Withdrawal info</a></nav><span class="footer-iqlabs"><span><b>IQ LABS SDK · DEVNET TEST</b> · Onchain storage &amp; more <span class="footer-soon">(integration in progress)</span></span><a href="https://x.com/IQLabsOfficial" target="_blank" rel="noopener noreferrer" aria-label="IQ Labs official X profile">X @IQLabsOfficial ↗</a></span></footer>
   </div>
   <script>(function(){
 'use strict';
@@ -942,9 +942,10 @@ try{
 })();
 </script><script type="module">
 // Explicit release query avoids a stale cached module in Phantom's in-app browser.
-import {publishQuestDevnet,readQuestOnchain,isSolanaSignature} from './onchain-bridge.js?v=513';
+import {publishQuestDevnet,readQuestOnchain,isSolanaSignature} from './onchain-bridge.js?v=514';
 import {verifyDevnetPayment,questFingerprint} from './checkout-bridge.js';
-import {requestCheckoutWallet} from './wallet-bridge.js';
+import {requestCheckoutWallet} from './wallet-bridge.js?v=514';
+import {getSavedMobileJob} from './devnet-resumable.mjs';
 const $=id=>document.getElementById(id);
 const publish=$('publish-iq-devnet'),consent=$('devnet-accept'),auto=$('devnet-auto-publish'),verify=$('verify-iq-devnet');
 const progress=$('devnet-publish-status'),links=$('devnet-links');
@@ -953,6 +954,11 @@ const completionKey='iqquest_devnet_completed_v50';
 function setStatus(text){progress.textContent=String(text);}
 function enable(){publish.disabled=busy||!consent.checked;verify.disabled=busy;}
 consent.addEventListener('change',enable);enable();
+try{
+ const job=getSavedMobileJob();
+ if(job&&!job.finalSignature)
+  setStatus('An earlier Phantom Devnet upload may be unfinished ('+job.index+' confirmed chunks saved). First VERIFY LAST DEVNET TEST PAYMENT above. After checking the Devnet consent box, Publish will safely CHECK THE CHAIN AND RESUME; do not make a second test payment.');
+}catch(_e){}
 function showPublished(sig,title,verified){
  const u=new URL('index.html',location.href);
  u.searchParams.set('tx',sig);u.searchParams.set('network','devnet');
@@ -1058,7 +1064,7 @@ $('copy-devnet-link').addEventListener('click',async()=>{
 </script>
 <script type="module">
 import {TREASURY_ADDRESS,DEVNET_TEST_LAMPORTS,isValidSignature,sendDevnetPayment,verifyDevnetPayment,questFingerprint,indicativeMainnetQuote} from './checkout-bridge.js';
-import {requestCheckoutWallet} from './wallet-bridge.js';
+import {requestCheckoutWallet} from './wallet-bridge.js?v=514';
 const lookup=id=>document.getElementById(id);
 const testButton=lookup('lab-send'),verifyButton=lookup('lab-verify'),consent=lookup('lab-consent');
 const status=lookup('lab-status'),quoteStatus=lookup('lab-price'),resultBox=lookup('lab-result');

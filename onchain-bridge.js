@@ -1,4 +1,4 @@
-/* IQ QUEST V5.13 — Devnet-only correction of SDK SendCode account metas, with guarded simulation. */
+/* IQ QUEST V5.14 — recoverable Phantom Devnet sign-and-send + independently checked IQ Labs PDAs. */
 import {MAINNET_CLIENT_ENABLED} from './payments/client-bridge.mjs';
 import {sha256Hex,verifyOrderInputs} from './payments/order-core.mjs';
 const DEVNET_RPC='https://api.devnet.solana.com';
@@ -262,7 +262,21 @@ export async function publishQuestOnchain({draft,provider,plan='community',netwo
    }
  };
  onProgress('Uploading '+byteSize+' losslessly packed bytes through the official IQ Labs SDK on Solana '+network+'.');
- const signature=await sdk.writer.codeIn({connection,signer},payload,'iq-quest-15.json',0,'application/json',(percent)=>onProgress('IQ Labs upload: '+Math.round(Number(percent)||0)+'%'));
+ let signature;
+ if(network==='devnet'&&provider.walletName==='Phantom'&&typeof provider.signAndSendTransaction!=='function'&&
+    typeof navigator!=='undefined'&&/iPhone|iPad|iPod|Android/i.test(navigator.userAgent||''))
+   throw Error('Phantom mobile did not expose its sign-and-send capability. Update Phantom and reload IQ QUEST V5.14 before publishing. No wallet approval was requested.');
+ if(network==='devnet'&&typeof provider.signAndSendTransaction==='function'){
+   // Phantom mobile can reload the in-app page after signing. By letting the
+   // wallet broadcast, then recording/recovering each SDK-built chunk onchain,
+   // a page reset cannot silently discard a signed-but-unsent transaction.
+   const {publishResumableDevnet}=await import('./devnet-resumable.mjs');
+   onProgress('Using Phantom’s recoverable Devnet sign-and-send route. IQ Labs instructions are verified before wallet approval.');
+   signature=await publishResumableDevnet({sdk,web3,BufferClass,connection,wallet,provider,payload,
+     preflight:async tx=>{inspect(tx);await preflight(tx);},onProgress});
+ }else{
+   signature=await sdk.writer.codeIn({connection,signer},payload,'iq-quest-15.json',0,'application/json',(percent)=>onProgress('IQ Labs upload: '+Math.round(Number(percent)||0)+'%'));
+ }
  if(!isSolanaSignature(signature))throw Error('The SDK did not return a valid transaction signature. Review wallet history before retrying.');
  onProgress('Written on Devnet. Reading all 15 questions back for verification…');
  // Save the recovery signature before attempting a potentially slow read.
