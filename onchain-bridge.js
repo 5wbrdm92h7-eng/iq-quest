@@ -1,4 +1,4 @@
-/* IQ QUEST V5.14 — recoverable Phantom Devnet sign-and-send + independently checked IQ Labs PDAs. */
+/* IQ QUEST V5.15 — recoverable Phantom Devnet storage-only test, with paid publishing unchanged. */
 import {MAINNET_CLIENT_ENABLED} from './payments/client-bridge.mjs';
 import {sha256Hex,verifyOrderInputs} from './payments/order-core.mjs';
 const DEVNET_RPC='https://api.devnet.solana.com';
@@ -51,6 +51,22 @@ export async function unpackDevnetQuestPayload(stored){
  const raw=new TextDecoder('utf-8',{fatal:true}).decode(rawBytes);
  if(await sha256Hex(raw)!==packed.sha256)throw Error('The onchain quest failed its SHA-256 integrity check.');
  return raw;
+}
+// The storage-only test is deliberately a different kind of Devnet inscription:
+// no test payment is accepted, claimed, or fabricated. Mainnet never uses this.
+export function buildDevnetQuestEnvelope({draft,plan,publisher,paymentTestSignature,storageOnly=false}){
+ if(!draft||!Array.isArray(draft.levels)||draft.levels.length!==15)throw Error('Exactly 15 validated puzzles are needed.');
+ if(!['community','unlisted'].includes(plan))throw Error('Invalid publishing plan.');
+ if(typeof publisher!=='string'||!publisher.trim())throw Error('A connected publisher wallet is required.');
+ const metadata={format:'IQ-QUEST-ONCHAIN-V1',network:'devnet',plan,publisher};
+ if(storageOnly){
+  if(paymentTestSignature!=null)throw Error('Storage-only testing must not claim an earlier Devnet payment.');
+  metadata.testMode='storage-only';
+ }else{
+  if(!isSolanaSignature(paymentTestSignature))throw Error('A verified Devnet test-payment signature is required for the payment-gated test.');
+  metadata.testPaymentSignature=paymentTestSignature;
+ }
+ return {...draft,iqquest:metadata};
 }
 let sdkPromise=null;
 async function runtime(network='devnet'){
@@ -159,12 +175,13 @@ export async function correctDevnetSendCodeAccount({tx,program,wallet,expectedCo
    onProgress('Corrected the IQ Labs SDK Devnet code-account address. Simulating the corrected transaction before asking Phantom…');
  }
 }
-export async function publishQuestOnchain({draft,provider,plan='community',network='devnet',paymentTestSignature,paymentSignature,orderId,fingerprint,onSignature=()=>{},onProgress=()=>{}}){
+export async function publishQuestOnchain({draft,provider,plan='community',network='devnet',paymentTestSignature,paymentSignature,orderId,fingerprint,devnetStorageOnly=false,onSignature=()=>{},onProgress=()=>{}}){
  if(!['devnet','mainnet-beta'].includes(network))throw Error('Unsupported publishing network.');
+ if(network!=='devnet'&&devnetStorageOnly)throw Error('Storage-only publication is prohibited on Mainnet.');
  if(network==='mainnet-beta'&&!MAINNET_CLIENT_ENABLED)throw Error('Real Mainnet IQ Labs publishing is disabled pending launch verification.');
  if(!draft||draft.levels?.length!==15)throw Error('Validate 15 complete puzzles first.');
  if(!['community','unlisted'].includes(plan)||network==='mainnet-beta'&&plan!=='community')throw Error('Invalid listing plan.');
- if(network==='devnet'&&!isSolanaSignature(paymentTestSignature))throw Error('A verified Devnet test-payment signature is required before publication.');
+ if(network==='devnet'&&!devnetStorageOnly&&!isSolanaSignature(paymentTestSignature))throw Error('A verified Devnet test-payment signature is required before publication.');
  if(network==='mainnet-beta'&&!isSolanaSignature(paymentSignature))throw Error('A verified Mainnet payment signature is required before uploading.');
  if(typeof provider?.signTransaction!=='function'||!provider.publicKey?.toBase58)throw Error('Choose and connect a supported Solana wallet at publication.');
  const walletAddress=provider.publicKey.toBase58();
@@ -181,7 +198,7 @@ export async function publishQuestOnchain({draft,provider,plan='community',netwo
    throw Error('The quest changed since payment. Restore the paid 15-question draft before uploading.');
   payload=mainnetPublicationPayload({canonical,payer:wallet.toBase58(),orderId,fingerprint,paymentSignature});
  }else{
-  const uncompressed=JSON.stringify({...draft,iqquest:{format:'IQ-QUEST-ONCHAIN-V1',network:'devnet',plan,publisher:wallet.toBase58(),testPaymentSignature:paymentTestSignature}});
+  const uncompressed=JSON.stringify(buildDevnetQuestEnvelope({draft,plan,publisher:wallet.toBase58(),paymentTestSignature,storageOnly:devnetStorageOnly}));
   payload=await packDevnetQuestPayload(uncompressed);
  }
  const byteSize=new TextEncoder().encode(payload).length;
@@ -265,14 +282,15 @@ export async function publishQuestOnchain({draft,provider,plan='community',netwo
  let signature;
  if(network==='devnet'&&provider.walletName==='Phantom'&&typeof provider.signAndSendTransaction!=='function'&&
     typeof navigator!=='undefined'&&/iPhone|iPad|iPod|Android/i.test(navigator.userAgent||''))
-   throw Error('Phantom mobile did not expose its sign-and-send capability. Update Phantom and reload IQ QUEST V5.14 before publishing. No wallet approval was requested.');
+   throw Error('Phantom mobile did not expose its sign-and-send capability. Update Phantom and reload IQ QUEST V5.15 before publishing. No wallet approval was requested.');
  if(network==='devnet'&&typeof provider.signAndSendTransaction==='function'){
    // Phantom mobile can reload the in-app page after signing. By letting the
    // wallet broadcast, then recording/recovering each SDK-built chunk onchain,
    // a page reset cannot silently discard a signed-but-unsent transaction.
-   const {publishResumableDevnet}=await import('./devnet-resumable.mjs');
+   const {publishResumableDevnet,DEVNET_STORAGE_ONLY_JOB_KEY}=await import('./devnet-resumable.mjs?v=515');
    onProgress('Using Phantom’s recoverable Devnet sign-and-send route. IQ Labs instructions are verified before wallet approval.');
    signature=await publishResumableDevnet({sdk,web3,BufferClass,connection,wallet,provider,payload,
+     ...(devnetStorageOnly?{jobKey:DEVNET_STORAGE_ONLY_JOB_KEY}:{}),
      preflight:async tx=>{inspect(tx);await preflight(tx);},onProgress});
  }else{
    signature=await sdk.writer.codeIn({connection,signer},payload,'iq-quest-15.json',0,'application/json',(percent)=>onProgress('IQ Labs upload: '+Math.round(Number(percent)||0)+'%'));
@@ -285,7 +303,14 @@ export async function publishQuestOnchain({draft,provider,plan='community',netwo
  }else await onSignature(signature); // Must persist BEFORE any slow readback.
  const read=await readQuestOnchain(signature,network);
  if(read.storedRaw!==payload)throw Error('The SDK readback does not match the uploaded bytes. Transaction: '+signature);
- if(network==='devnet'&&read.data.iqquest?.testPaymentSignature!==paymentTestSignature)throw Error('The saved quest is missing its verified Devnet test-payment reference. Transaction: '+signature);
+ if(network==='devnet'){
+  const meta=read.data.iqquest||{};
+  if(devnetStorageOnly){
+   if(meta.testMode!=='storage-only'||Object.hasOwn(meta,'testPaymentSignature'))
+    throw Error('The saved storage test was unexpectedly marked as a paid quest. Transaction: '+signature);
+  }else if(meta.testPaymentSignature!==paymentTestSignature||Object.hasOwn(meta,'testMode'))
+   throw Error('The saved quest is missing its verified Devnet test-payment reference. Transaction: '+signature);
+ }
  if(network==='mainnet-beta'&&(read.data.iqquest?.orderId!==orderId||read.data.iqquest?.paymentSignature!==paymentSignature))
   throw Error('The saved quest does not match the paid order. Transaction: '+signature);
  onProgress('Verified: all 15 questions and answers match IQ Labs '+network+' storage.');
@@ -294,4 +319,8 @@ export async function publishQuestOnchain({draft,provider,plan='community',netwo
 
 export function publishQuestDevnet(options){
  return publishQuestOnchain({...options,network:'devnet'});
+}
+export function publishQuestDevnetStorageTest(options){
+ if(options?.paymentTestSignature!=null)throw Error('Do not attach a payment receipt to a storage-only Devnet test.');
+ return publishQuestOnchain({...options,network:'devnet',devnetStorageOnly:true});
 }

@@ -1,10 +1,11 @@
-/* IQ QUEST V5.14 — resumable Devnet writes using official IQ Labs instruction builders.
+/* IQ QUEST V5.15 — resumable Devnet writes using official IQ Labs instruction builders.
  * Mobile Phantom broadcasts approved transactions itself. Nothing is signed
  * automatically after a reload; the user must return and explicitly Publish.
  */
 import {sha256Hex} from './payments/order-core.mjs';
 
 const JOB_KEY='iqquest_devnet_mobile_upload_v1';
+export const DEVNET_STORAGE_ONLY_JOB_KEY='iqquest_devnet_mobile_storage_only_v515';
 const SEND_CODE='ef8123d03ea86ec9';
 const INVENTORY_CODE='51b1057ad57d15ee';
 const ALPHABET='123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz';
@@ -40,16 +41,16 @@ export function decodeIqInstruction(ix,program){
   return p+1===b.length&&b[p]===0?{type:'final',onChainPath,metadata}:null;
  }catch(_e){return null;}
 }
-function saveJob(storage,job){
- try{storage.setItem(JOB_KEY,JSON.stringify(job));}
+function saveJob(storage,job,jobKey=JOB_KEY){
+ try{storage.setItem(jobKey,JSON.stringify(job));}
  catch(_e){throw Error('Browser storage is needed to resume Phantom Devnet uploads. No wallet request was started.');}
 }
-function getJob(storage){
+function getJob(storage,jobKey=JOB_KEY){
  let saved;
- try{saved=JSON.parse(storage.getItem(JOB_KEY)||'null');}catch(_e){throw Error('Cannot read the saved Devnet upload. No transaction was requested.');}
+ try{saved=JSON.parse(storage.getItem(jobKey)||'null');}catch(_e){throw Error('Cannot read the saved Devnet upload. No transaction was requested.');}
  return saved&&typeof saved==='object'?saved:null;
 }
-export function getSavedMobileJob(storage=globalThis.localStorage){return getJob(storage);}
+export function getSavedMobileJob(storage=globalThis.localStorage,jobKey=JOB_KEY){return getJob(storage,jobKey);}
 
 async function findLanded({connection,address,program,kind,chunk,beforeTx,metadata,limit=50}){
  const entries=await connection.getSignaturesForAddress(address,{limit},'confirmed');
@@ -79,7 +80,8 @@ async function waitForConfirmed(connection,signature){
  throw Error('Phantom submitted transaction '+signature+' but Devnet confirmation is pending. Wait, then return to Publish to resume. Do not pay again.');
 }
 
-export async function publishResumableDevnet({sdk,web3,BufferClass,connection,wallet,provider,payload,preflight,onProgress=()=>{},storage=globalThis.localStorage}){
+export async function publishResumableDevnet({sdk,web3,BufferClass,connection,wallet,provider,payload,preflight,onProgress=()=>{},storage=globalThis.localStorage,jobKey=JOB_KEY}){
+ if(![JOB_KEY,DEVNET_STORAGE_ONLY_JOB_KEY].includes(jobKey))throw Error('Unsupported IQ Labs Devnet recovery namespace. No wallet request was started.');
  if(typeof provider?.signAndSendTransaction!=='function')throw Error('This wallet cannot broadcast an approved Devnet transaction.');
  if(!/^[\x00-\x7f]+$/.test(payload))throw Error('The packed onchain data must be ASCII to preserve IQ Labs chunk boundaries.');
  const chunks=[];
@@ -93,10 +95,10 @@ export async function publishResumableDevnet({sdk,web3,BufferClass,connection,wa
  const receiver=new web3.PublicKey(sdk.constants.DEFAULT_WRITE_FEE_RECEIVER);
  const metadata=JSON.stringify({filetype:'application/json',method:0,filename:'iq-quest-15.json',total_chunks:chunks.length});
  const builder=sdk.contract.createInstructionBuilder(sdk.contract.IQ_IDL,program);
- let job=getJob(storage);
+ let job=getJob(storage,jobKey);
  if(job&&(job.payer!==payer||job.digest!==digest))
   throw Error('An older IQ Labs Devnet upload is saved for a different wallet or quest. Do not overwrite a potentially submitted upload. Ask for recovery help.');
- if(!job){job={version:1,payer,digest,index:0,tail:'Genesis',pending:null,finalSignature:null};saveJob(storage,job);}
+ if(!job){job={version:1,payer,digest,index:0,tail:'Genesis',pending:null,finalSignature:null};saveJob(storage,job,jobKey);}
  if(job.version!==1||!Number.isInteger(job.index)||job.index<0||job.index>chunks.length||typeof job.tail!=='string')
   throw Error('Saved Devnet upload state is invalid. Do not sign again until it has been checked.');
  if((job.index===0)!==(job.tail==='Genesis'))throw Error('Saved IQ Labs linked-list position is inconsistent. No wallet request was started.');
@@ -116,7 +118,7 @@ export async function publishResumableDevnet({sdk,web3,BufferClass,connection,wa
   if(found){
    if(type==='final')job.finalSignature=found;
    else{job.index=index+1;job.tail=found;}
-   job.pending=null;saveJob(storage,job);
+   job.pending=null;saveJob(storage,job,jobKey);
    onProgress('Recovered confirmed IQ Labs Devnet transaction '+found+'.');
   }else{
    // Wait through Solana blockhash expiry before permitting a second attempt.
@@ -124,7 +126,7 @@ export async function publishResumableDevnet({sdk,web3,BufferClass,connection,wa
    if(signature)throw Error('Wallet may have submitted '+signature+' but no matching Devnet record is readable yet. Wait and verify; no duplicate request was sent.');
    if(!Number.isFinite(at)||Date.now()-at<150000)
     throw Error('A Phantom request was interrupted. Devnet has no confirmed match yet. Wait about 3 minutes, then use Publish to safely resume.');
-   job.pending=null;saveJob(storage,job);
+   job.pending=null;saveJob(storage,job,jobKey);
   }
  }
  if(job.finalSignature)return job.finalSignature;
@@ -143,7 +145,7 @@ export async function publishResumableDevnet({sdk,web3,BufferClass,connection,wa
   tx.recentBlockhash=(await connection.getLatestBlockhash('confirmed')).blockhash;
   await preflight(tx);
   const record={type,index:job.index,tail:job.tail,at:Date.now(),signature:null};
-  job.pending=record;saveJob(storage,job);
+  job.pending=record;saveJob(storage,job,jobKey);
   onProgress('Phantom will SIGN AND SEND '+type+' on Devnet ('+(job.index+1)+'/'+(chunks.length+1)+'). Confirm only if you trust the IQ Labs instruction.');
   let result;
   try{result=await provider.signAndSendTransaction(tx);}
@@ -155,7 +157,7 @@ export async function publishResumableDevnet({sdk,web3,BufferClass,connection,wa
   const signature=typeof result==='string'?result:result?.signature;
   if(typeof signature!=='string'||!/^[1-9A-HJ-NP-Za-km-z]{80,100}$/.test(signature))
    throw Error('Phantom returned no valid Devnet signature. Wait and recover rather than approving again.');
-  job.pending.signature=signature;saveJob(storage,job);
+  job.pending.signature=signature;saveJob(storage,job,jobKey);
   await waitForConfirmed(connection,signature);
   const verified=await findLanded({connection,address:type==='final'?inventoryAccount:codeAccount,
    program,kind:type==='final'?'final':'chunk',chunk:chunks[job.index],beforeTx:job.tail,metadata});
@@ -163,7 +165,7 @@ export async function publishResumableDevnet({sdk,web3,BufferClass,connection,wa
   job.pending=null;
   if(type==='final')job.finalSignature=signature;
   else{job.index++;job.tail=signature;}
-  saveJob(storage,job);
+  saveJob(storage,job,jobKey);
   return signature;
  };
 
