@@ -1,12 +1,18 @@
 import {LEGAL_PROFILE} from './legal-config.mjs';
 
-const required = ['operatorName','operatorAddress','businessEmail','businessPhone'];
+const required = ['operatorName','operatorAddress','businessEmail'];
 const missing = required.filter(key => !String(LEGAL_PROFILE[key] ?? '').trim());
 const ready = missing.length === 0 && LEGAL_PROFILE.reviewedForLaunch === true;
+const optional = new Set(['businessPhone','legalForm','representative','commercialRegister','registerNumber','vatId','supervisoryAuthority']);
 
 for (const element of document.querySelectorAll('[data-legal-field]')) {
   const key = element.getAttribute('data-legal-field');
   const value = String(LEGAL_PROFILE[key] ?? '').trim();
+  if(!value&&optional.has(key)){
+    element.hidden=true;
+    if(element.previousElementSibling?.tagName==='DT')element.previousElementSibling.hidden=true;
+    continue;
+  }
   element.textContent = value || '[To be completed before launch]';
   if (!value) element.classList.add('placeholder');
 }

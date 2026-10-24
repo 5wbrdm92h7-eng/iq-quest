@@ -1,13 +1,13 @@
-// IQ QUEST V5.2 — owner-supplied public legal contact information.
-// These values are intentionally blank. Do not invent personal details.
-// Only enter details you are comfortable publishing on the public internet.
-// Every field must be checked against the operator's actual legal status.
+// IQ QUEST V5.6 — public operator details supplied directly by the owner.
+// These details will be publicly visible on the Imprint/Privacy pages after upload.
+// Operator reports no registered business; DO NOT invent an enterprise or VAT ID.
+// This is a free Devnet beta, not approval for paid commercial operation.
 export const LEGAL_PROFILE = Object.freeze({
-  operatorName: '',
-  operatorAddress: '',
+  operatorName: 'Christian Landwehr',
+  operatorAddress: 'Wagnerstrasse 3, 49733 Haren, Germany',
   legalForm: '',
   representative: '',
-  businessEmail: '',
+  businessEmail: 'christianlandwehr@ewetel.net',
   businessPhone: '',
   commercialRegister: '',
   registerNumber: '',
