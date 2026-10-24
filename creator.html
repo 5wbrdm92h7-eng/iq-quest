@@ -452,7 +452,7 @@ details.advanced-box[open]>summary{color:#adffb8;margin-bottom:13px}
               <div class="section-kicker">NEW · EXPERIMENTAL REAL ONCHAIN TEST</div>
               <h4 id="devnet-publish-heading">Publish 15 puzzles to IQ Labs Devnet</h4>
               <p><strong>Step 2 of the test:</strong> After the Devnet-only payment rehearsal above succeeds, the IQ Labs SDK can write your complete validated quest to Solana <strong>Devnet</strong>, recording the test receipt. You can opt in below to start the upload automatically after verification. Your selected wallet will still ask you to approve the necessary Devnet transactions. After exact onchain readback and test-payment verification, you get a shareable player link. Friends play free, without connecting a wallet.</p>
-              <p><strong>Not a paid Mainnet release.</strong> The 0.002 Devnet test SOL is not a real $3.99 platform payment. Devnet SOL has no monetary value. The IQ Labs SDK supports larger quests using parallel transactions; uploads over 8.5 KB may require several separate Phantom approvals and additional Devnet network / protocol fees. Review each wallet prompt.</p>
+              <p><strong>Not a paid Mainnet release.</strong> The 0.002 Devnet test SOL is not a real $3.99 platform payment. Devnet SOL has no monetary value. IQ QUEST now losslessly compresses the complete quest before uploading, aiming for fewer, smaller IQ Labs transactions. All 15 questions and answers are restored and verified on readback. Additional Devnet network / protocol fees and several Phantom approvals may still be needed. Review each wallet prompt.</p>
               <p>Selected plan is recorded as metadata only. A public community directory and real paid Mainnet checkout are not live yet.</p>
               <label class="publish-consent"><input type="checkbox" id="devnet-accept"><span>I will use <strong>Solana Devnet</strong> in my chosen wallet. I understand the questions, answers and hints are publicly readable onchain and may be permanent. I will review every wallet request.</span></label>
               <label class="publish-consent"><input type="checkbox" id="devnet-auto-publish"><span><strong>Automatically start publication after a verified Devnet test payment.</strong> I authorize IQ QUEST to begin the public upload without another page-button click. Every wallet signing request still needs my approval. This setting applies to this page session only.</span></label>
@@ -470,7 +470,7 @@ details.advanced-box[open]>summary{color:#adffb8;margin-bottom:13px}
         </aside>
       </section>
     </main>
-    <footer class="footer"><span><span class="green">IQ</span> QUEST · Creator Studio <strong>V5.7 BETA</strong> · Phantom Devnet test; Mainnet payments OFF</span><nav aria-label="Legal information" style="display:flex;gap:13px;flex-wrap:wrap"><a href="imprint.html" style="color:#b5fbc1;text-decoration:underline">Imprint</a><a href="privacy.html" style="color:#b5fbc1;text-decoration:underline">Privacy</a><a href="withdrawal.html" style="color:#b5fbc1;text-decoration:underline">Withdrawal info</a></nav><span class="footer-iqlabs"><span><b>IQ LABS SDK · COMING SOON</b> · Onchain storage &amp; more <span class="footer-soon">(integration in progress)</span></span><a href="https://x.com/IQLabsOfficial" target="_blank" rel="noopener noreferrer" aria-label="IQ Labs official X profile">X @IQLabsOfficial ↗</a></span></footer>
+    <footer class="footer"><span><span class="green">IQ</span> QUEST · Creator Studio <strong>V5.11 BETA</strong> · Phantom Devnet test; Mainnet payments OFF</span><nav aria-label="Legal information" style="display:flex;gap:13px;flex-wrap:wrap"><a href="imprint.html" style="color:#b5fbc1;text-decoration:underline">Imprint</a><a href="privacy.html" style="color:#b5fbc1;text-decoration:underline">Privacy</a><a href="withdrawal.html" style="color:#b5fbc1;text-decoration:underline">Withdrawal info</a></nav><span class="footer-iqlabs"><span><b>IQ LABS SDK · DEVNET TEST</b> · Onchain storage &amp; more <span class="footer-soon">(integration in progress)</span></span><a href="https://x.com/IQLabsOfficial" target="_blank" rel="noopener noreferrer" aria-label="IQ Labs official X profile">X @IQLabsOfficial ↗</a></span></footer>
   </div>
   <script>(function(){
 'use strict';
@@ -750,11 +750,9 @@ function updateFeeEstimate(){
  try{
  const d=safeDraft();
  const bytes=new TextEncoder().encode(JSON.stringify(d)).length;
- // Approximate tier, no on-chain fee quote. SDK metadata and chunk overhead may affect exact tier.
- const tier=bytes<850?0.001:bytes<=8500?0.003:0.005;
  $('byte-estimate').textContent='Draft payload: '+bytes.toLocaleString('en-US')+' UTF-8 bytes (metadata not included)';
- $('payload-headroom').textContent='Devnet test allowance: '+Math.max(0,11500-bytes).toLocaleString('en-US')+' bytes left before the 11,500-byte draft limit.'+(bytes>11500?' Shorten BEFORE making a Devnet test transfer.':bytes>=8500?' IQ Labs will use its larger parallel-upload method.':' Future real Mainnet publishing has a separate, lower 8 KB limit.');
- $('storage-estimate').textContent='Indicative IQ Labs Devnet storage tier: ~'+tier.toFixed(3)+' TEST SOL (not a payable quote).'+(bytes>=8500?' A larger upload can require many wallet approvals and extra test-network fees.':' Smaller uploads usually require fewer approvals.')+' Actual SDK metadata and network charges may differ. Mainnet payments remain OFF.';
+ $('payload-headroom').textContent='Original draft allowance: '+Math.max(0,11500-bytes).toLocaleString('en-US')+' bytes left before the 11,500-byte editor limit.'+(bytes>11500?' Shorten BEFORE a new Devnet test transfer.':' The upload is losslessly compressed and checked before Phantom signing.');
+ $('storage-estimate').textContent='Devnet upload goal: fewer than 10 IQ Labs data chunks, under 7.6 KB after lossless compression. Exact size is checked before signing; storage and network fees are not quoted here and can vary. Mainnet payments remain OFF.';
  }catch(e){console.warn('Could not estimate payload size',e)}
 }
 const IMPORT_BACKUP_KEY=DRAFT_KEY+'_before_ai_import';

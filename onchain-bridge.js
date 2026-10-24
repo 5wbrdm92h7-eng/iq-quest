@@ -1,4 +1,4 @@
-/* IQ QUEST V5.10 — official IQ Labs SDK: Devnet preflight, gated Mainnet publishing. */
+/* IQ QUEST V5.11 — lossless Devnet packing and safe IQ Labs preflight. */
 import {MAINNET_CLIENT_ENABLED} from './payments/client-bridge.mjs';
 import {sha256Hex,verifyOrderInputs} from './payments/order-core.mjs';
 const DEVNET_RPC='https://api.devnet.solana.com';
@@ -7,6 +7,51 @@ const MAINNET_RPC='https://api.mainnet-beta.solana.com';
 // That module is imported only inside the disabled Mainnet branch below.
 const IQ_PROGRAM='9KLLchQVJpGkw4jPuUmnvqESdR7mtNCYr3qS4iQLabs';
 export const isSolanaSignature=value=>typeof value==='string' && /^[1-9A-HJ-NP-Za-km-z]{80,100}$/.test(value);
+const PACKED_FORMAT='IQQUEST-GZIP-V1';
+const MAX_UNPACKED_BYTES=120000;
+// A browser-wallet IQ Labs write uses 850-byte chunks. Fewer than ten chunks
+// keeps us on the SDK's linked-list path, avoiding CreateSession on Devnet.
+const DEVNET_PACKED_LIMIT=7600;
+
+export async function packDevnetQuestPayload(raw){
+ if(typeof raw!=='string'||!raw)throw Error('Cannot pack an empty quest.');
+ const rawBytes=new TextEncoder().encode(raw);
+ if(rawBytes.length>MAX_UNPACKED_BYTES)throw Error('The quest is too large to pack.');
+ if(typeof CompressionStream!=='function')throw Error('This browser cannot compress a Devnet quest. Update Phantom before publishing.');
+ const compressed=new Uint8Array(await new Response(new Blob([rawBytes]).stream().pipeThrough(new CompressionStream('gzip'))).arrayBuffer());
+ const base64=btoa(Array.from(compressed,b=>String.fromCharCode(b)).join(''));
+ const packed=JSON.stringify({iqquestPacked:{format:PACKED_FORMAT,sha256:await sha256Hex(raw),data:base64}});
+ const size=new TextEncoder().encode(packed).length;
+ if(size>DEVNET_PACKED_LIMIT)throw Error('Lossless onchain packing still needs '+size+' bytes. Maximum for this Devnet publishing route is '+DEVNET_PACKED_LIMIT+' bytes. The original 15 questions were not changed or signed.');
+ return packed;
+}
+
+export async function unpackDevnetQuestPayload(stored){
+ if(typeof stored!=='string')throw Error('IQ Labs returned no readable quest data.');
+ let packed;
+ try{packed=JSON.parse(stored)?.iqquestPacked;}catch(e){return stored;}
+ if(!packed)return stored;
+ if(packed.format!==PACKED_FORMAT||typeof packed.data!=='string'||!/^[A-Za-z0-9+/]+={0,2}$/.test(packed.data)||packed.data.length>16000||!/^([a-f0-9]{64})$/.test(packed.sha256||''))
+  throw Error('Unknown or damaged compressed IQ QUEST inscription.');
+ if(typeof DecompressionStream!=='function')throw Error('This browser cannot read compressed onchain quests. Update your browser.');
+ const bytes=Uint8Array.from(atob(packed.data),c=>c.charCodeAt(0));
+ const reader=new Blob([bytes]).stream().pipeThrough(new DecompressionStream('gzip')).getReader();
+ const chunks=[];let length=0;
+ try{
+  while(true){
+   const {value,done}=await reader.read();
+   if(done)break;
+   length+=value.length;
+   if(length>MAX_UNPACKED_BYTES)throw Error('The decompressed quest exceeds the safety limit.');
+   chunks.push(value);
+  }
+ }catch(e){try{await reader.cancel();}catch(_e){}throw Error('Could not safely decompress the onchain quest: '+String(e?.message||e));}
+ const rawBytes=new Uint8Array(length);let offset=0;
+ for(const chunk of chunks){rawBytes.set(chunk,offset);offset+=chunk.length;}
+ const raw=new TextDecoder('utf-8',{fatal:true}).decode(rawBytes);
+ if(await sha256Hex(raw)!==packed.sha256)throw Error('The onchain quest failed its SHA-256 integrity check.');
+ return raw;
+}
 let sdkPromise=null;
 async function runtime(network='devnet'){
  if(!['devnet','mainnet-beta'].includes(network))throw Error('Unsupported Solana network.');
@@ -36,18 +81,20 @@ export async function readQuestOnchain(signature,network='devnet'){
  if(text instanceof Uint8Array)text=new TextDecoder().decode(text);
  if(typeof text!=='string'||!text.trim())throw Error('IQ Labs returned no readable quest data.');
  if(new TextEncoder().encode(text).length>120000)throw Error('The onchain payload is unexpectedly large.');
+ const storedRaw=text;
+ text=await unpackDevnetQuestPayload(storedRaw);
  let data;
  try{data=JSON.parse(text)}catch(e){throw Error('The saved onchain data is not valid JSON.');}
  if(data?.iqquest?.format!=='IQ-QUEST-ONCHAIN-V1')throw Error('This inscription is not a supported IQ QUEST adventure.');
  if(!Array.isArray(data.levels)||data.levels.length!==15)throw Error('The saved adventure does not have 15 levels.');
- return {data,raw:text,signature,network};
+ return {data,raw:text,storedRaw,signature,network};
 }
 
 function same(a,b){if(a.length!==b.length)return false;for(let i=0;i<a.length;i++)if(a[i]!==b[i])return false;return true;}
 export async function simulateFirstUploadOnDevnet({connection,web3,tx,onProgress=()=>{}}){
  const estimatedWireBytes=tx.serializeMessage().length+65;
  if(estimatedWireBytes>1232)throw Error('The IQ Labs transaction is too large for Solana ('+estimatedWireBytes+' bytes). No wallet approval was requested.');
- onProgress('Checking the first IQ Labs upload transaction on Devnet before wallet approval (free simulation)…');
+ onProgress('Checking the next IQ Labs upload transaction on Devnet before wallet approval (free simulation)…');
  let simulated;
  try{
    const unsigned=new web3.VersionedTransaction(tx.compileMessage());
@@ -60,7 +107,7 @@ export async function simulateFirstUploadOnDevnet({connection,web3,tx,onProgress
    const logs=(simulated.value.logs||[]).filter(line=>/Program log:|failed|error|insufficient|invoke/.test(line)).slice(-5).join(' | ').slice(0,750);
    throw Error('IQ Labs Devnet preflight rejected the upload: '+JSON.stringify(simulated.value.err)+(logs?' — '+logs:'')+'. No wallet approval was requested.');
  }
- onProgress('Devnet RPC simulated the first upload transaction successfully. Review the wallet request carefully.');
+ onProgress('Devnet RPC simulated this upload transaction successfully. Review the wallet request carefully.');
 }
 export async function publishQuestOnchain({draft,provider,plan='community',network='devnet',paymentTestSignature,paymentSignature,orderId,fingerprint,onSignature=()=>{},onProgress=()=>{}}){
  if(!['devnet','mainnet-beta'].includes(network))throw Error('Unsupported publishing network.');
@@ -81,12 +128,13 @@ export async function publishQuestOnchain({draft,provider,plan='community',netwo
    throw Error('The quest changed since payment. Restore the paid 15-question draft before uploading.');
   payload=mainnetPublicationPayload({canonical,payer:wallet.toBase58(),orderId,fingerprint,paymentSignature});
  }else{
-  payload=JSON.stringify({...draft,iqquest:{format:'IQ-QUEST-ONCHAIN-V1',network:'devnet',plan,publisher:wallet.toBase58(),testPaymentSignature:paymentTestSignature}});
+  const uncompressed=JSON.stringify({...draft,iqquest:{format:'IQ-QUEST-ONCHAIN-V1',network:'devnet',plan,publisher:wallet.toBase58(),testPaymentSignature:paymentTestSignature}});
+  payload=await packDevnetQuestPayload(uncompressed);
  }
  const byteSize=new TextEncoder().encode(payload).length;
- // IQ Labs codeIn supports larger Devnet payloads through parallel writes.
- // Keep a conservative 8 KB Mainnet gate until the paid flow has been tested.
- const uploadLimit=network==='devnet'?12000:8000;
+ // Devnet stays below the SDK's ten-chunk CreateSession threshold. Preserve
+ // the conservative Mainnet gate while its paid publishing path is disabled.
+ const uploadLimit=network==='devnet'?DEVNET_PACKED_LIMIT:8000;
  if(byteSize>uploadLimit)throw Error('The quest payload is '+byteSize+' bytes, above the '+uploadLimit+'-byte '+network+' limit. No upload was started.');
  const program=new web3.PublicKey(IQ_PROGRAM);
  const budget=web3.ComputeBudgetProgram.programId;
@@ -117,15 +165,10 @@ export async function publishQuestOnchain({draft,provider,plan='community',netwo
    tx.feePayer=wallet;
    return tx;
  };
- // Check the actual first upload instruction with Devnet RPC before Phantom
- // shows a signing dialog. A failed simulation must never be overridden by a
- // wallet's "confirm anyway" option. This is read-only and costs no SOL.
- let preflightPromise=null;
+ // Check each sequential Devnet chunk before Phantom sees it, including the
+ // final inventory transaction. No risky approval is requested on an RPC error.
  const preflight=async tx=>{
-   if(network!=='devnet')return;
-   if(preflightPromise)return preflightPromise;
-   preflightPromise=simulateFirstUploadOnDevnet({connection,web3,tx,onProgress});
-   return preflightPromise;
+   if(network==='devnet')await simulateFirstUploadOnDevnet({connection,web3,tx,onProgress});
  };
  const signer={
    publicKey:wallet,
@@ -157,7 +200,7 @@ export async function publishQuestOnchain({draft,provider,plan='community',netwo
      return signed;
    }
  };
- onProgress('Uploading '+byteSize+' bytes through the official IQ Labs SDK on Solana '+network+'.');
+ onProgress('Uploading '+byteSize+' losslessly packed bytes through the official IQ Labs SDK on Solana '+network+'.');
  const signature=await sdk.writer.codeIn({connection,signer},payload,'iq-quest-15.json',0,'application/json',(percent)=>onProgress('IQ Labs upload: '+Math.round(Number(percent)||0)+'%'));
  if(!isSolanaSignature(signature))throw Error('The SDK did not return a valid transaction signature. Review wallet history before retrying.');
  onProgress('Written on Devnet. Reading all 15 questions back for verification…');
@@ -166,7 +209,7 @@ export async function publishQuestOnchain({draft,provider,plan='community',netwo
   try{localStorage.setItem('iqquest_devnet_last_sig_v45',signature);}catch(e){}
  }else await onSignature(signature); // Must persist BEFORE any slow readback.
  const read=await readQuestOnchain(signature,network);
- if(read.raw!==payload)throw Error('The SDK readback does not match the submitted questions. Transaction: '+signature);
+ if(read.storedRaw!==payload)throw Error('The SDK readback does not match the uploaded bytes. Transaction: '+signature);
  if(network==='devnet'&&read.data.iqquest?.testPaymentSignature!==paymentTestSignature)throw Error('The saved quest is missing its verified Devnet test-payment reference. Transaction: '+signature);
  if(network==='mainnet-beta'&&(read.data.iqquest?.orderId!==orderId||read.data.iqquest?.paymentSignature!==paymentSignature))
   throw Error('The saved quest does not match the paid order. Transaction: '+signature);
