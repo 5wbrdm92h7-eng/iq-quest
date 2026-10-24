@@ -1,4 +1,4 @@
-/* IQ QUEST V5.12 — normalized Phantom wallet keys and IQ Labs PDA verification. */
+/* IQ QUEST V5.13 — Devnet-only correction of SDK SendCode account metas, with guarded simulation. */
 import {MAINNET_CLIENT_ENABLED} from './payments/client-bridge.mjs';
 import {sha256Hex,verifyOrderInputs} from './payments/order-core.mjs';
 const DEVNET_RPC='https://api.devnet.solana.com';
@@ -127,6 +127,38 @@ export async function verifyDevnetIqPdas({tx,program,expectedCodeAccount,expecte
    }
  }
 }
+// In the Phantom browser the bundled SDK has produced a SendCode instruction
+// using an uninitialized code_account, even though the canonical PDA already
+// exists. Rebind ONLY that exact account meta, ONLY on Devnet, after verifying
+// the payer, account layout, program ownership and the absence of the SDK's
+// incorrect account. The resulting message is always simulated before signing.
+export async function correctDevnetSendCodeAccount({tx,program,wallet,expectedCodeAccount,systemProgram,BufferClass,connection,checkedAccounts=new Set(),missingSdkAccounts=new Set(),onProgress=()=>{}}){
+ for(const ix of tx.instructions){
+   if(!ix.programId.equals(program))continue;
+   if(BufferClass.from(ix.data).subarray(0,8).toString('hex')!=='ef8123d03ea86ec9')continue;
+   const keys=ix.keys||[];
+   if(keys.length!==3||!keys[0].pubkey.equals(wallet)||!keys[0].isSigner||!keys[0].isWritable||
+      !keys[1].pubkey||keys[1].isSigner||!keys[1].isWritable||
+      !keys[2].pubkey.equals(systemProgram)||keys[2].isSigner||keys[2].isWritable)
+      throw Error('Unexpected IQ Labs SendCode account layout. No transaction was signed.');
+   const actual=keys[1].pubkey;
+   if(actual.equals(expectedCodeAccount))continue;
+   const incorrect=actual.toBase58();
+   if(!missingSdkAccounts.has(incorrect)){
+     let infos;
+     try{infos=await connection.getMultipleAccountsInfo([actual,expectedCodeAccount],'confirmed');}
+     catch(e){throw Error('Could not safely check SDK code accounts on Devnet: '+String(e?.message||e)+'. No transaction was signed.');}
+     const [actualInfo,expectedInfo]=infos||[];
+     if(actualInfo)throw Error('IQ Labs SDK selected another initialized code account '+incorrect+'. Upload stopped rather than changing it. No transaction was signed.');
+     if(!expectedInfo||!expectedInfo.owner?.equals(program)||expectedInfo.data?.length<8)
+       throw Error('The correct IQ Labs code_account '+expectedCodeAccount.toBase58()+' is missing or invalid on Devnet. No transaction was signed.');
+     missingSdkAccounts.add(incorrect);
+     checkedAccounts.add('code_account');
+   }
+   keys[1]={...keys[1],pubkey:expectedCodeAccount};
+   onProgress('Corrected the IQ Labs SDK Devnet code-account address. Simulating the corrected transaction before asking Phantom…');
+ }
+}
 export async function publishQuestOnchain({draft,provider,plan='community',network='devnet',paymentTestSignature,paymentSignature,orderId,fingerprint,onSignature=()=>{},onProgress=()=>{}}){
  if(!['devnet','mainnet-beta'].includes(network))throw Error('Unsupported publishing network.');
  if(network==='mainnet-beta'&&!MAINNET_CLIENT_ENABLED)throw Error('Real Mainnet IQ Labs publishing is disabled pending launch verification.');
@@ -162,6 +194,7 @@ export async function publishQuestOnchain({draft,provider,plan='community',netwo
  const expectedCodeAccount=web3.PublicKey.findProgramAddressSync([BufferClass.from('codemY}AGBJiqLabs'),wallet.toBuffer()],program)[0];
  const expectedUserState=web3.PublicKey.findProgramAddressSync([BufferClass.from('usermY}AGBJiqLabs'),program.toBuffer(),wallet.toBuffer()],program)[0];
  const checkedAccounts=new Set();
+ const missingSdkAccounts=new Set();
  let signaturePrompts=0;
  const inspect=tx=>{
    if(!tx||!Array.isArray(tx.instructions)||!tx.instructions.length)throw Error('SDK supplied no transaction instructions.');
@@ -193,6 +226,7 @@ export async function publishQuestOnchain({draft,provider,plan='community',netwo
  // final inventory transaction. No risky approval is requested on an RPC error.
  const preflight=async tx=>{
    if(network==='devnet'){
+     await correctDevnetSendCodeAccount({tx,program,wallet,expectedCodeAccount,systemProgram:web3.SystemProgram.programId,BufferClass,connection,checkedAccounts,missingSdkAccounts,onProgress});
      await verifyDevnetIqPdas({tx,program,expectedCodeAccount,expectedUserState,BufferClass,connection,checkedAccounts,wallet});
      await simulateFirstUploadOnDevnet({connection,web3,tx,onProgress});
    }
