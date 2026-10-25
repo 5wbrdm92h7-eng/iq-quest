@@ -377,6 +377,7 @@ details.advanced-box[open]>summary{color:#adffb8;margin-bottom:13px}
 /* V5.33 · Bright, readable creator journey and matching larger headers. */
 .wordmark{font-size:clamp(42px,4.25vw,55px)}
 .page-tagline{font-size:clamp(24px,3.25vw,31px);line-height:1.3;margin-top:15px}
+.page-tagline .tagline-subline{display:block;color:#ebd5ae;font-size:.86em;margin-top:2px}
 .simple-journey h2{font-size:33px;color:#ffe4a4;margin:7px 0 9px}
 .simple-journey .flow-tiles{gap:11px;margin-top:19px}
 .simple-journey .flow-tile{min-height:122px;padding:14px 13px;border:2px solid #6ee88a;background:linear-gradient(155deg,#1e5639,#113624);color:#effff1;font-size:15px;line-height:1.3;box-shadow:inset 0 0 14px #73ff8b16,0 0 18px #62ff7e25}
@@ -480,7 +481,7 @@ details.advanced-box[open]>summary{color:#adffb8;margin-bottom:13px}
 .creator-publish-safety ol{padding-left:21px;margin:8px 0 13px}
 .creator-publish-safety .safety-warning{border-left:3px solid #f3c982;padding:10px 12px;background:#3a2b1e;color:#ffe9b5}
 .creator-simple #devnet-publish-primary .iq-devnet-publisher{border-color:#7dece3;margin-top:15px;background:linear-gradient(160deg,#174443,#0a2224)}
-.creator-simple #devnet-publish-primary .iq-devnet-publisher>p:not(.creator-publish-short),.creator-simple #devnet-publish-primary #devnet-storage-only-box>p{display:none!important}
+.creator-simple #devnet-publish-primary .iq-devnet-publisher>p,.creator-simple #devnet-publish-primary #devnet-storage-only-box>p:not(.publish-wallet-tip){display:none!important}
 .creator-simple #devnet-publish-primary .iq-devnet-publisher h4{color:#bdfff5;font-size:20px}
 .creator-simple #devnet-publish-primary .publish-consent{padding:13px;border:1px solid #6ca49c;border-radius:10px;background:#173735;color:#f0fffd}
 .creator-simple #devnet-publish-primary #publish-storage-devnet{min-height:59px;font-size:15px;line-height:1.4;white-space:normal}
@@ -488,6 +489,15 @@ details.advanced-box[open]>summary{color:#adffb8;margin-bottom:13px}
 .creator-simple #devnet-publish-primary #verify-iq-devnet{min-height:49px}
 .creator-simple #devnet-publish-primary .iq-devnet-publisher .publish-consent{margin:11px 0}
 .creator-simple #wallet-choice-panel{font-size:14px}
+.creator-simple .creator-publish-safety{padding:15px}
+.creator-simple .creator-publish-safety h4{font-size:19px}
+.creator-simple .creator-publish-safety ol{margin:5px 0 12px}
+.creator-simple .creator-publish-safety li{margin-bottom:6px}
+.creator-publish-safety .publish-cost-line{padding:10px 12px;margin:8px 0;background:#123a39;border:1px solid #578d84;border-radius:10px}
+.creator-publish-safety details{margin-top:10px;border-top:1px solid #496b69;padding-top:10px}
+.creator-publish-safety details summary{cursor:pointer;font-size:14px;font-weight:800;color:#c6fbf4}
+.creator-publish-safety details p{font-size:13px!important;margin:10px 0 0}
+.creator-simple #devnet-publish-primary #devnet-storage-only-box{margin:7px 0 10px!important;padding:12px!important}
 @media(max-width:550px){.creator-start-buttons{grid-template-columns:1fr}.creator-simple .studio-panel,.creator-simple .publish-panel{padding:18px}.creator-simple .panel-topline{align-items:flex-start;flex-wrap:wrap;gap:8px}.creator-simple .status-dot{white-space:normal;font-size:11px}}
 </style></head>
 <body class="creator-simple" data-page="creator">
@@ -502,7 +512,7 @@ details.advanced-box[open]>summary{color:#adffb8;margin-bottom:13px}
       link.href=intent.toString();
     })();
     </script>
-    <h1 class="page-tagline">Your quest. Your community's challenge.</h1>
+    <h1 class="page-tagline">Create your own quest<span class="tagline-subline">Your community’s challenge</span></h1>
     <div class="quick-benefits" aria-label="Creator publication is planned at 0.03 SOL plus network and IQ Labs storage fees; playing is free"><span class="benefit-creator">✦ <strong>CREATORS · PUBLISH 0.03 SOL + FEES</strong> <small>(COMING SOON)</small></span><span class="benefit-play">✦ <strong>PLAY FOR FREE</strong></span><span class="benefit-battle">⚔ <strong>BATTLE WITH FRIENDS ON X</strong></span></div>
     <main>
       <section class="hero hero-creator" aria-labelledby="creator-heading"><div class="hero-scrim"></div><div class="hero-content"><div class="eyebrow"><span class="diamond-dot">✦</span> BUILT FOR DEVS · CREATORS · COMMUNITIES</div><h1 id="creator-heading">CREATE YOUR <span class="gold">MYSTERY,</span><span class="creator-hero-subtitle">ENTERTAIN YOUR COMMUNITY!</span></h1><p class="lead">Create 15 mysteries. Challenge your community to beat the clock and share their results on X.</p><div class="hero-buttons"><a class="btn btn-green" href="#studio">START CREATING <span aria-hidden="true">↗</span></a><a class="btn btn-glass" href="index.html">PLAY FREE</a></div><div class="hero-facts"><span>✧ AI-assisted content</span><span>◇ 3 difficulty levels</span><span>♢ Players free</span></div></div><div class="hero-corner">BUILD THE NEXT LEGEND</div></section>
@@ -641,17 +651,19 @@ details.advanced-box[open]>summary{color:#adffb8;margin-bottom:13px}
             <div class="section-kicker">STEP 3 · PUBLISH YOUR QUEST</div>
             <h3>Publish your quest on Solana</h3>
             <p>Your questions are ready? Publishing stores all 15 questions, hints and answers publicly onchain. Connect Phantom <strong>only now</strong>.</p>
-            <div class="creator-publish-simple-summary"><strong>DEVNET TEST ONLY · REAL PAYMENTS OFF.</strong> Approve several Phantom transactions, then receive a verified game link to copy or share on X. <strong>Players never pay.</strong> Future Mainnet creator price: <strong>0.03 SOL + network and IQ Labs storage fees</strong>.</div>
+            <div class="creator-publish-simple-summary"><strong>DEVNET TEST · NO PLATFORM PAYMENT.</strong> Your friends play for free. Future creator price: <strong>0.03 SOL + network and IQ Labs storage fees</strong> (Mainnet not live).</div>
             <section class="creator-publish-safety" aria-label="Devnet publication steps, fees and payment protection">
-              <h4>Before Phantom opens: here is what happens</h4>
+              <h4>Publish in 3 steps</h4>
               <ol>
-                <li><strong>Check your 15 questions</strong> and select public-onchain consent below.</li>
-                <li><strong>Approve about 6 Phantom transactions</strong> (5 data chunks + 1 registration in our example; larger quests may need up to 10).</li>
-                <li><strong>Wait for 15/15 onchain verification.</strong> Only then will your shareable game link appear.</li>
+                <li><strong>Check your 15 questions</strong> and agree to public onchain storage.</li>
+                <li><strong>Connect Phantom on Devnet</strong> and approve each storage transaction.</li>
+                <li><strong>Wait for 15/15 verified.</strong> Then copy your player link or share it on X.</li>
               </ol>
-              <p><strong>Previously observed Devnet example:</strong> 0.0030324 test SOL total (0.003 IQ Labs + 0.0000324 network fees). This is <strong>not a guaranteed estimate</strong>; Phantom shows the actual fees. No platform fee is charged in this Devnet storage test.</p>
-              <p class="safety-warning"><strong>Interrupted?</strong> Return here with the <strong>same wallet and unchanged quest</strong>, then use the recovery button below. The saved upload is checked onchain before any further signing. <strong>Never send a second platform payment to retry.</strong></p>
-              <p><strong>Future Mainnet protection (not live):</strong> a single 0.03 SOL escrow payment per wallet and exact quest, released after an operator verifies publication. If still pending after its deadline, a refund transaction can be requested. The contract is an undeployed draft and needs independent security review; it does not prove IQ Labs storage by itself. Network/IQ Labs transaction costs cannot automatically be refunded.</p>
+              <p class="publish-cost-line"><strong>Example:</strong> 6 Phantom approvals, about <strong>0.0030324 Devnet SOL</strong> total (IQ Labs registration + Solana transaction fees). Bigger quests may need up to 10 approvals. This is a previous test result, <strong>not a fixed quote</strong>. Review the amounts inside Phantom.</p>
+              <details><summary>Interrupted upload or future payment?</summary>
+                <p><strong>Interrupted?</strong> Return with the same wallet and unchanged quest. The app checks saved onchain transactions before asking for the next approval. If a transaction is uncertain, repeat signing is blocked. Check Phantom/Explorer; never make another platform payment just to resume.</p>
+                <p><strong>Future 0.03 SOL:</strong> We are preparing a payment instruction bundled with the final IQ Labs registration in one Solana transaction, with no separate advance payment. That design still needs testing and a reliable onchain readback/recovery flow. Network/IQ Labs fees can still be incurred even if publication is interrupted. Real Mainnet payments remain off.</p>
+              </details>
             </section>
             <div id="devnet-publish-primary" aria-label="Publish and recover your onchain Devnet quest"></div>
             <input type="radio" name="publish-plan" value="community" checked hidden aria-label="One publishing plan">
@@ -686,33 +698,10 @@ details.advanced-box[open]>summary{color:#adffb8;margin-bottom:13px}
               <div class="success-actions"><a class="btn btn-green" id="success-play" href="#" target="_blank" rel="noopener noreferrer" aria-disabled="true">▶ PLAY NOW</a><button type="button" id="success-copy" class="btn btn-outline" disabled>⧉ COPY PLAYABLE LINK</button><a class="btn btn-outline" id="success-share-x" href="#" target="_blank" rel="noopener noreferrer" aria-disabled="true">⚔ SHARE MY QUEST ON X</a><a class="btn btn-outline" href="#studio">BACK TO CREATOR</a></div>
             </div>
             <button type="button" id="preview-publish-success" class="text-button" style="margin:8px 0">SEE THE POST-PAYMENT SCREEN · PREVIEW ONLY</button>
-            <details class="advanced-box"><summary>Fees &amp; how publication will work</summary><p class="tiny-note">The planned platform price is a fixed 0.03 SOL, not a USD conversion. The creator also pays Solana network fees, IQ Labs protocol/storage fees and any escrow account rent. Those additional fees vary with the number and size of transactions and will need a live estimate before payment. The new Solana escrow program is still an undeployed Devnet draft; the old $3.99 server-based Mainnet checkout remains permanently disabled until replaced and security-reviewed. A trusted publication readback step is still required. Browser-local scores/timers are not onchain. Legal review remains pending.</p><span class="price-label">Planned creator platform fee</span><strong id="plan-breakdown">0.03 SOL + separate network/storage fees</strong></details>
+            <details class="advanced-box"><summary>Future paid publishing · details</summary><p class="tiny-note">Planned platform fee: exactly 0.03 SOL (30,000,000 lamports), plus separately paid Solana and IQ Labs fees. A payment bundled with the final IQ Labs registration would be atomic: either both instructions succeed or the platform fee transfer fails. However, earlier storage chunks still have costs and later readback/recovery must be checked independently. The existing old $3.99 server checkout remains disabled. The new bundled-payment design is preparation only and has not been tested with a wallet. Legal review remains pending; game times and scores are browser-side.</p><span class="price-label">Future creator price</span><strong id="plan-breakdown">0.03 SOL + separate network/storage fees</strong></details>
             <p class="tiny-note">Before any real paid launch, review our <a href="imprint.html" style="color:#aeffbd;text-decoration:underline">imprint</a>, <a href="privacy.html" style="color:#aeffbd;text-decoration:underline">privacy information</a> and <a href="withdrawal.html" style="color:#aeffbd;text-decoration:underline">withdrawal information</a>. These legal pages are still drafts and the Mainnet checkout remains disabled.</p>
             <p id="checkout-status" class="share-step-status" role="status" aria-live="polite">Checkout not live. Your 15-question adventure can be edited and tested without a wallet.</p>
-            <details class="advanced-box"><summary>Publication steps and estimated Devnet fees</summary>
-            <div class="creator-publish-guide" aria-label="How to publish your own quest in six steps">
-              <h4>👻 HOW TO PUBLISH YOUR OWN QUEST · DEVNET BETA</h4>
-              <ol>
-                <li><strong>Create or import</strong> 15 questions. Review every answer and hint.</li>
-                <li>Tap <strong>TEST YOUR QUEST FREE</strong>. Return to the creator when ready; no wallet needed.</li>
-                <li>Open the page in <strong>Phantom's browser</strong> and switch Phantom to <strong>Solana Devnet</strong> (test mode).</li>
-                <li>Tap <strong>TEST ONCHAIN STORAGE</strong> below, tick the public-data agreement and tap the storage button again. A separate 0.002 test-SOL platform payment is <strong>not</strong> required.</li>
-                <li><strong>Approve each Phantom request</strong> in order. For the saved example it took 5 data approvals + 1 final registration. Bigger drafts may need more. If Phantom returns to this page, use the same button to resume.</li>
-                <li>Wait for <strong>YOUR QUEST IS ONCHAIN!</strong> and 15/15 verified. Only then copy the player link or share it.</li>
-              </ol>
-              <p><strong>Just want to play?</strong> <a href="index.html#quest-entry-options" style="color:#aeffbd;text-decoration:underline">Choose one of the three published free games</a> — no creator steps or wallet confirmations are needed.</p>
-            </div>
-            <div class="fee-facts" role="note" aria-label="Observed Solana Devnet publishing cost; not a future price quote">
-              <strong>WHAT DID 6 PHANTOM CONFIRMATIONS COST IN OUR DEVNET EXAMPLE?</strong>
-              <div>5 data transfers + 1 final registration = <strong>6 separate confirmations</strong>, but <strong>not 6 separate platform charges</strong>.</div>
-              <div>Observed Solana transaction fees: <strong>6 × 0.0000054 = 0.0000324 Devnet SOL</strong>.</div>
-              <div>Observed IQ Labs registration fee on the final transaction: <strong>0.003 Devnet SOL once</strong>.</div>
-              <div><strong>Observed total: 0.0030324 Devnet SOL</strong> (test coins with no monetary value).</div>
-              <div style="margin-top:7px">This is a verified example, <strong>not a guaranteed quote</strong> for new uploads. Fees, account costs and the required number of transactions can change. Review each amount inside Phantom. The planned Mainnet platform fee is 0.03 SOL, with network/storage costs on top; <strong>Mainnet checkout is OFF.</strong></div>
-            </div>
-            </details>
             <button type="button" id="shortcut-storage-only" class="btn btn-green hidden">PUBLISH TEST QUEST ON DEVNET</button>
-            <p class="tiny-note">No platform test payment. Phantom requires several confirmations and Devnet network/IQ Labs test-SOL fees. You will see each request in your wallet.</p>
             <button type="button" id="start-sol-checkout" class="hidden" disabled>CHECK READINESS · NO PAYMENT</button>
             <details class="advanced-box" id="developer-tests"><summary>Devnet publishing · confirmations and recovery</summary>
             <p class="tiny-note"><strong>Phantom-only beta.</strong> On a phone, open this page in Phantom's built-in browser; in Phantom Settings → Developer Settings → Testnet Mode choose <strong>Solana Devnet</strong>. Use only free Devnet test SOL. Build and preview your quest without connecting any wallet; Phantom is requested only just before the test transfer or onchain upload.</p>
@@ -724,7 +713,7 @@ details.advanced-box[open]>summary{color:#adffb8;margin-bottom:13px}
               <h4 id="lab-heading">◈ PAYMENT SETUP · DEVNET CHECK</h4>
               <p>The public IQ QUEST payout wallet is now configured. The recipient below will be the planned destination for creator platform fees when secure Mainnet checkout is enabled.</p>
               <code id="lab-recipient" class="lab-address">BbMdFqpXfkJeKLvoT8W7QSFZmVeLV35gp6At2MbZF377</code>
-              <p class="lab-notice"><strong>IMPORTANT:</strong> Real 0.03 SOL Mainnet payments are OFF. This is an old, optional rehearsal using <strong>0.002 worthless Devnet test SOL</strong> plus network fees. The transfer alone does not buy or publish a quest. The NEW fixed-SOL escrow program is not deployed yet. Every signing request needs your approval.</p>
+              <p class="lab-notice"><strong>IMPORTANT:</strong> Real 0.03 SOL Mainnet payments are OFF. This is an old, optional rehearsal using <strong>0.002 worthless Devnet test SOL</strong> plus network fees. The transfer alone does not buy or publish a quest. Our planned final payment will be bundled with the IQ Labs registration; it is not active yet.</p>
               <div class="lab-actions"><button type="button" class="btn btn-outline" id="lab-quote">VIEW PLANNED SOL PLATFORM FEE · NO PAYMENT</button></div>
               <div id="lab-price" class="lab-status" role="status" aria-live="polite">Planned future platform price: 0.03 SOL plus separate network/storage fees. Mainnet payments are off.</div>
               <label class="lab-check"><input id="lab-consent" type="checkbox"><span>I understand this is a <strong>Devnet-only legacy test transfer</strong>, not the future 0.03 SOL platform fee. I will use a wallet supporting Devnet, review the recipient address, approve 0.002 test SOL only if correct, and understand a transfer alone does not publish my quest.</span></label>
@@ -740,7 +729,7 @@ details.advanced-box[open]>summary{color:#adffb8;margin-bottom:13px}
               </div>
               <div id="lab-status" class="lab-status" role="status" aria-live="polite">No Devnet payment test started. Nothing has been sent.</div>
               <div id="lab-result" class="lab-result hidden"><a id="lab-explorer" class="lab-explorer" target="_blank" rel="noopener noreferrer" href="#">View confirmed Devnet payment in Solana Explorer ↗</a></div>
-              <p><strong>What is still missing for actual sales:</strong> a deployed, audited fixed-SOL escrow program, independently enforced payment-to-IQ-Labs-publication verification, live Mainnet publication and the Community directory. Nobody should send real SOL before these checks pass.</p>
+              <p><strong>What is still missing for actual sales:</strong> testing the combined final payment and registration, independent onchain readback, safe recovery of interrupted wallet transactions, live Mainnet publication and legal approval. Nobody should send real SOL before these checks pass.</p>
             </section><button type="button" id="developer-start-sol-checkout" class="btn btn-gold" disabled>DEVELOPER CHECK · NO PAYMENT</button>
             <p class="share-step-status" id="developer-checkout-status" role="status" aria-live="polite">Future creator platform fee 0.03 SOL + fees. Mainnet checkout is off; developer-only tests below are not real payments.</p>
             <p class="tiny-note">This is only an unpaid readiness check, not a charge or publication. The planned public quest directory does not exist yet. Never approve SOL transfers based on this preview.</p>
@@ -757,13 +746,7 @@ details.advanced-box[open]>summary{color:#adffb8;margin-bottom:13px}
               <div id="devnet-storage-only-box" style="padding:14px;margin:12px 0 19px;border:2px solid #77e594;border-radius:12px;background:#102a1d">
                 <h4 style="margin:0 0 5px;color:#c2ffce">PUBLISH ON DEVNET · NO PLATFORM PAYMENT</h4>
                 <p>Start a new story-free 15-question upload using safe 800-byte transactions. Your earlier 1-chunk test remains on Devnet and in a separate recovery record; it cannot be reused because the quest contents changed. <strong>No second 0.002 test SOL platform transfer.</strong> Phantom still asks for Devnet storage and network/protocol test-SOL approvals. This is not a paid Mainnet publication.</p>
-                <div role="note" aria-label="Important: multiple wallet approvals required" style="padding:14px 13px;margin:13px 0 16px;border:2px solid #f4c66c;border-radius:12px;background:#382a15;color:#ffecc4;box-shadow:0 0 18px #e8a94824">
-                  <strong style="display:block;font-size:14px;line-height:1.4;letter-spacing:.02em;color:#ffe08c">⚠ CREATOR: MULTIPLE PHANTOM APPROVALS REQUIRED</strong>
-                  <p style="margin:9px 0 6px;color:#ffe8bd;font-size:13px;line-height:1.65"><strong>Why?</strong> All 15 puzzles are stored onchain. Solana limits the size of each transaction, so IQ QUEST writes several small data chunks one after another.</p>
-                  <p style="margin:6px 0;color:#fff0c9;font-size:13px;line-height:1.65"><strong>Expect approximately 6 separate transaction confirmations</strong> for the included example (5 data chunks + 1 final registration). Larger quests can require up to 10 confirmations. Phantom may return you to IQ QUEST between approvals; tap the same storage test button to safely resume.</p>
-                  <p style="margin:6px 0;color:#ffe8bd;font-size:12px;line-height:1.65"><strong>Verified Devnet example:</strong> 0.0000324 test SOL for all six Solana transaction fees together, plus a single 0.003 test SOL IQ Labs final registration charge = <strong>0.0030324 Devnet SOL total</strong>. These are previous test results, not a binding quote. Bigger/new uploads may cost differently.</p>
-                  <p style="margin:6px 0 0;color:#ffe8bd;font-size:12px;line-height:1.65"><strong>Each approval can incur a separate IQ Labs storage/protocol and Solana network fee.</strong> This test uses Devnet test SOL, not real money. Future Mainnet publication would cost real SOL in addition to the planned platform fee. <strong>Players do not connect wallets or sign these transactions.</strong></p>
-                </div>
+                <p class="tiny-note publish-wallet-tip" style="color:#c5ece8;font-size:13px">Please keep Phantom on <strong>Solana Devnet</strong>. Only approve requests that you understand.</p>
                 <button type="button" class="btn btn-green" id="publish-storage-devnet" disabled>✓ CONFIRM &amp; PUBLISH MY QUEST ON DEVNET</button>
               </div>
               <button type="button" class="btn btn-green" id="publish-iq-devnet" disabled>◈ PUBLISH TO IQ LABS DEVNET · TEST SOL ONLY</button>
@@ -1687,7 +1670,7 @@ function showVerified(receipt){
  window.dispatchEvent(new CustomEvent('iqquest:devnet-payment-verified',{detail:{signature:receipt.signature}}));
 }
 lookup('lab-quote').addEventListener('click',()=>{
- quoteStatus.textContent='PLANNED ONLY: 0.03 SOL platform fee (30,000,000 lamports) + separate IQ Labs network/storage and escrow account costs. The contract is NOT deployed, Mainnet payment is disabled, and nothing was sent.';
+ quoteStatus.textContent='PLANNED ONLY: 0.03 SOL platform fee (30,000,000 lamports) + separate IQ Labs network/storage charges. The final combined payment and publication are not activated; Mainnet payments are disabled and nothing was sent.';
 });
 for(const input of document.querySelectorAll('input[name="publish-plan"]'))input.addEventListener('change',()=>{
  quoteStatus.textContent='Plan changed. Request a fresh indicative quote if wanted; Mainnet payments remain disabled.';
