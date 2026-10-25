@@ -466,6 +466,12 @@ h1,h2,h3{font-family:Georgia,"Times New Roman",serif;letter-spacing:-.015em}h1{f
 .quest-path-card .battle-share-level:hover{border-color:#91c6f3;color:#fff}
 .battle-run-banner{margin:14px 0;padding:14px 17px;border:1px solid #a9d47c;border-radius:12px;background:#193526;color:#d8f9db;font-size:13px;line-height:1.55}
 .battle-run-banner strong{display:block;color:#f2d89c;letter-spacing:.06em;margin-bottom:3px}
+/* V5.29 · Clear return to game selection, including mid-quest on mobile. */
+.game-return-row{position:sticky;top:0;z-index:8;display:flex;justify-content:flex-start;margin:-2px 0 8px;padding:4px 1px 8px;background:linear-gradient(#11231e 84%,transparent)}
+.game-return-row .game-return-link{display:inline-flex;align-items:center;justify-content:center;min-height:39px;padding:8px 13px;border:1px solid #719f86;border-radius:10px;color:#d6f8df;background:#11291c;font-size:12px;font-weight:900;letter-spacing:.02em;text-decoration:none}
+.game-return-row .game-return-link:hover,.game-return-row .game-return-link:focus-visible{border-color:#5bf98a;color:#5bf98a;outline-offset:2px}
+.is-creator-preview .game-return-row{display:none}
+@media(max-width:740px){.game-return-row{margin:0 0 5px;padding:0 0 5px}.game-return-row .game-return-link{min-height:35px;padding:6px 10px;font-size:11px}}
 @media(max-width:740px){.quest-mode-chooser{display:grid;grid-template-columns:1fr 1fr;gap:7px}.quest-mode-chooser button{padding:9px 5px;font-size:10px}}
 </style>
 </head>
@@ -555,6 +561,7 @@ h1,h2,h3{font-family:Georgia,"Times New Roman",serif;letter-spacing:-.015em}h1{f
       <div id="battle-run-banner" class="battle-run-banner hidden" role="note"><strong>⚔ FRIEND BATTLE · 15 ONCHAIN PUZZLES</strong>Race the clock. After finishing, share your exact quest and target time on X. Your friend gets the same verified questions. Times and scores are browser-based, not verified onchain.</div>
       <section id="adventure" class="adventure-layout">
         <article class="panel game-panel">
+          <div class="game-return-row"><a id="game-return-link" class="game-return-link" href="index.html#quest-entry-options">← BACK TO GAMES</a></div>
           <span class="rune-corner rune-corner-tl" aria-hidden="true">◇</span>
           <span class="rune-corner rune-corner-tr" aria-hidden="true">✧</span>
           <span class="rune-corner rune-corner-bl" aria-hidden="true">✧</span>
@@ -718,6 +725,7 @@ const publishedQuestId=params.get('quest')||'';
 const battlePoolRequest=!preview&&params.has('pool');
 const battlePoolDifficulty=params.get('pool')||'';
 const battlePoolSeed=params.get('seed')||'';
+if(battlePoolRequest)$('game-return-link').href='index.html?view=battle#quest-entry-options';
 const onchainMode=!preview&&(!!onchainSignature||!!publishedQuestId||battlePoolRequest);
 const battleMode=battlePoolRequest||(onchainMode&&(params.get('battle')==='1'||params.has('target')));
 const onchainNetwork=params.get('network')==='mainnet-beta'?'mainnet-beta':'devnet';
