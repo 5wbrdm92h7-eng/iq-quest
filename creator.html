@@ -402,10 +402,33 @@ details.advanced-box[open]>summary{color:#adffb8;margin-bottom:13px}
  .creator-simple .top-links #share-creator-top-x{font-size:11px;padding:7px 10px}
 }
 @media(max-width:360px){.brand-cluster .wordmark{font-size:35px}.simple-journey .flow-tile{padding:10px 6px;font-size:12px}}
+/* V5.35 · My Quests: recover verified publications without connecting a wallet. */
+.creator-simple .top-links #nav-my-quests{display:inline-flex!important;align-items:center;justify-content:center;padding:10px 13px;border:1px solid #f1d38f;border-radius:10px;color:#ffe6a9;white-space:nowrap;font-size:12px}
+.creator-simple .top-links #nav-my-quests:hover{border-color:#fff1bd;color:#fff1bd}
+.my-quests-panel{margin-bottom:16px;border:1px solid #8fbe9b!important;background:linear-gradient(145deg,#163628,#10231f)!important;scroll-margin-top:12px}
+.my-quests-panel>summary{cursor:pointer;color:#e9f9d9;font-weight:900;font-size:17px;line-height:1.45}
+.my-quests-panel[open]>summary{margin-bottom:16px}
+.my-quests-panel .my-quests-intro{color:#c9e5d3;font-size:13px;line-height:1.6}
+.my-quests-panel h3{color:#e8d69c;font-size:16px;margin:22px 0 8px}
+.my-quests-panel label{display:block;font-weight:700;color:#d9eadc;font-size:12px;margin:11px 0 6px}
+.my-quests-panel input{width:100%;min-height:45px;padding:11px 12px;box-sizing:border-box;border:1px solid #608c73;border-radius:9px;background:#091911;color:#effff1;font-size:14px}
+.my-quests-panel input:focus-visible{outline:2px solid #a5eab6;outline-offset:2px}
+.my-quests-panel .my-quests-tools{display:flex;flex-wrap:wrap;gap:9px;align-items:center;margin:10px 0 15px}
+.my-quests-panel .my-quests-tools .btn{min-height:43px;white-space:normal;text-align:center}
+.my-quests-panel .my-quests-list{display:grid;gap:10px;margin:12px 0}
+.my-quest-card{padding:15px;background:#0c231b;border:1px solid #577b61;border-radius:11px}
+.my-quest-card h4{font-size:17px;color:#f4e4b6;margin:0 0 5px;overflow-wrap:anywhere}
+.my-quest-card p{font-size:11px;color:#c2ddc8;margin:0 0 10px;overflow-wrap:anywhere}
+.my-quest-actions{display:flex;flex-wrap:wrap;gap:8px}
+.my-quest-actions .btn{padding:10px 12px;font-size:11px;min-height:41px}
+#my-quests-count{display:inline-block;font-size:11px;font-weight:900;letter-spacing:.08em;color:#a5ffc0}
+#my-quests-status{min-height:1.5em;margin-top:12px;font-size:12px;color:#bdf0ce;line-height:1.55;overflow-wrap:anywhere}
+#my-quests-status.bad{color:#ffd19d}
+@media(max-width:740px){.creator-simple .top-links{flex-wrap:wrap}.creator-simple .top-links #nav-my-quests{font-size:11px;padding:7px 10px}.my-quest-actions .btn{flex:1 1 130px}.my-quests-panel>summary{font-size:15px}}
 </style></head>
 <body class="creator-simple" data-page="creator">
   <div class="site-shell">
-    <header class="topbar"><div class="brand-cluster"><a class="wordmark" href="index.html" aria-label="IQ Quest home"><span class="wordmark-iq">IQ</span><span class="wordmark-quest">QUEST</span></a><span class="onchain-promise" aria-label="Quest content is stored on Solana Devnet; full onchain gameplay is planned">QUESTS ONCHAIN · DEVNET<small>FULL ONCHAIN · PLANNED</small></span><a class="brand-official-x" href="https://x.com/IQLabsOfficial" target="_blank" rel="noopener noreferrer" aria-label="Open IQ Labs official profile on X">↗ IQ LABS ON X · @IQLabsOfficial</a></div><nav class="top-links" aria-label="Main navigation"><a class="nav-play" href="index.html#quest-entry-options">← PLAY FREE GAMES</a><a id="share-creator-top-x" href="https://x.com/intent/tweet" target="_blank" rel="noopener noreferrer" aria-label="Share IQ QUEST Creator on X">↗ SHARE ON X</a><a href="#studio">Creator Studio</a><a href="imprint.html">Imprint</a></nav></header>
+    <header class="topbar"><div class="brand-cluster"><a class="wordmark" href="index.html" aria-label="IQ Quest home"><span class="wordmark-iq">IQ</span><span class="wordmark-quest">QUEST</span></a><span class="onchain-promise" aria-label="Quest content is stored on Solana Devnet; full onchain gameplay is planned">QUESTS ONCHAIN · DEVNET<small>FULL ONCHAIN · PLANNED</small></span><a class="brand-official-x" href="https://x.com/IQLabsOfficial" target="_blank" rel="noopener noreferrer" aria-label="Open IQ Labs official profile on X">↗ IQ LABS ON X · @IQLabsOfficial</a></div><nav class="top-links" aria-label="Main navigation"><a class="nav-play" href="index.html#quest-entry-options">← PLAY FREE GAMES</a><a id="nav-my-quests" href="#my-quests">▣ MY QUESTS</a><a id="share-creator-top-x" href="https://x.com/intent/tweet" target="_blank" rel="noopener noreferrer" aria-label="Share IQ QUEST Creator on X">↗ SHARE ON X</a><a href="#studio">Creator Studio</a><a href="imprint.html">Imprint</a></nav></header>
     <script>
     (()=>{
       const link=document.getElementById('share-creator-top-x');
@@ -450,6 +473,24 @@ details.advanced-box[open]>summary{color:#adffb8;margin-bottom:13px}
             <div class="flow-tiles"><div class="flow-tile"><b>1</b>Create 15 puzzles</div><div class="flow-tile"><b>2</b>Test free</div><div class="flow-tile"><b>3</b>Publish onchain</div></div>
             <a class="btn btn-outline chatgpt-jump" href="#ai-builder">🤖 CREATE 15 QUESTIONS WITH CHATGPT ↓</a>
           </div>
+          <details class="panel studio-panel my-quests-panel" id="my-quests">
+            <summary>▣ MY QUESTS · OPEN &amp; SHARE YOUR PUBLISHED GAMES</summary>
+            <p class="my-quests-intro">Find your verified, published IQ QUEST games, play them again, copy the game link or share them on X. Saved links stay on this device. You can also find Devnet publications on a new phone using your <strong>public creator-wallet address</strong> — no wallet connection, payment or secret phrase needed.</p>
+            <span id="my-quests-count">0 SAVED QUESTS</span>
+            <div id="my-quests-list" class="my-quests-list" aria-live="polite"></div>
+            <div class="my-quests-tools"><button id="my-quests-recover-device" type="button" class="btn btn-outline">↻ FIND PAST QUESTS ON THIS DEVICE</button></div>
+            <h3>New phone? Search by creator wallet</h3>
+            <p class="my-quests-intro">Enter the <strong>public Solana address you used when publishing</strong>. The search reads Devnet records only. Never enter your 12/24-word recovery phrase or private key.</p>
+            <label for="my-quests-wallet">Public creator-wallet address</label>
+            <input type="text" id="my-quests-wallet" placeholder="Your PUBLIC Solana address" spellcheck="false" autocapitalize="none" autocomplete="off" />
+            <div class="my-quests-tools"><button id="my-quests-find-wallet" type="button" class="btn btn-green">⌕ SEARCH DEVNET</button><button id="my-quests-more" type="button" class="btn btn-outline hidden">LOAD MORE RESULTS</button></div>
+            <h3>Already have your game link?</h3>
+            <p class="my-quests-intro">Paste a published Devnet game link or final publication transaction signature to verify and save it here.</p>
+            <label for="my-quests-link">Published player link / Solana signature</label>
+            <input type="text" id="my-quests-link" placeholder="https://…/index.html?tx=…&amp;network=devnet" spellcheck="false" autocapitalize="none" autocomplete="off" />
+            <div class="my-quests-tools"><button id="my-quests-recover-link" type="button" class="btn btn-gold">✓ VERIFY &amp; ADD QUEST</button></div>
+            <p id="my-quests-status" role="status" aria-live="polite">Ready to look up published quests on Solana Devnet.</p>
+          </details>
           <details class="panel studio-panel templates-collapsible" aria-labelledby="prepared-quests-heading">
             <summary>OPTIONAL · START FROM A READY-MADE QUEST</summary>
             <div class="panel-topline"><span class="section-kicker">3 FREE · ONCHAIN · 15 PUZZLES EACH</span><span class="status-dot">ALL THREE VERIFIED ON DEVNET</span></div>
@@ -1207,6 +1248,10 @@ try{
    $('success-copy').disabled=false;
    $('success-copy').onclick=async()=>{try{await navigator.clipboard.writeText(url);$('success-copy').textContent='✓ LINK COPIED';}catch(e){prompt('Copy your playable link:',url);}};
    preview.classList.remove('hidden');
+   // The caller has already completed independent onchain readback. Give My Quests
+   // the verified publication link without prompting for a second wallet action.
+   if(network==='devnet'&&typeof CustomEvent==='function'&&typeof window.dispatchEvent==='function')
+     window.dispatchEvent(new CustomEvent('iqquest:quest-verified',{detail:{url,title,network}}));
    preview.scrollIntoView({behavior:'smooth',block:'start'});
  };
  refresh();
@@ -1534,5 +1579,6 @@ verifyButton.addEventListener('click',async()=>{
 });
 </script>
 <script type="module" src="./payments/checkout-ui.mjs"></script>
+<script type="module" src="./my-quests.mjs?v=535"></script>
 </body>
 </html>
