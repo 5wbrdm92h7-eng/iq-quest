@@ -337,8 +337,38 @@ details.advanced-box[open]>summary{color:#adffb8;margin-bottom:13px}
 .fee-facts strong{color:#ffe596}
 @media(max-width:1050px){.prepared-difficulty-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:620px){.quest-paths{padding:12px;margin:10px 0 13px}.quest-path-grid,.prepared-difficulty-grid{grid-template-columns:1fr;gap:9px}.quest-path-card{padding:12px}.quest-path-card h3{font-size:19px}.quest-path-card .btn{min-height:43px}.creator-publish-guide{padding:12px}}
+/* V5.21 · A short 3-step creator. Keep all old test logic behind optional details. */
+.creator-simple .hero-creator,
+.creator-simple .quick-benefits,
+.creator-simple .onchain-status,
+.creator-simple .quest-paths,
+.creator-simple .creator-benefits,
+.creator-simple .top-links a[href="#studio"]:not(.nav-create){display:none!important}
+.creator-simple #studio{margin-top:22px}
+.templates-collapsible{padding:14px!important;background:#14261e;border-color:#51785a!important}
+.templates-collapsible>summary{cursor:pointer;color:#d9f9df;font-size:14px;font-weight:900;line-height:1.5}
+.templates-collapsible[open]>summary{margin-bottom:15px}
+.creator-simple #social-payment-flow,
+.creator-simple #selected-plan-note,
+.creator-simple #preview-publish-success,
+.creator-simple #checkout-status,
+.creator-simple #publish-card .price-single,
+.creator-simple #publish-card>p.tiny-note,
+.creator-simple #developer-start-sol-checkout,
+.creator-simple #developer-checkout-status,
+.creator-simple .legacy-autopublish-label,
+.creator-simple #publish-iq-devnet,
+.creator-simple .iq-devnet-publisher>p{display:none!important}
+.creator-simple .iq-payment-lab{padding:0!important;border:0!important;background:transparent!important;margin:0!important}
+/* Keep the actual wallet chooser accessible; only legacy payment-test controls are hidden. */
+.creator-simple .iq-payment-lab>:not(#wallet-choice-panel){display:none!important}
+.creator-publish-simple-summary{padding:13px 15px;margin:12px 0;border:1px solid #5ba477;border-radius:11px;background:#132e21;color:#d6efdf;font-size:13px;line-height:1.65}
+.creator-publish-simple-summary strong{color:#c1ffd0}
+.creator-simple .publish-panel h3{font-size:23px}
+.creator-simple #shortcut-storage-only{min-height:49px;font-size:13px}
+.creator-simple .studio-main>.simple-journey{margin-bottom:14px}
 </style></head>
-<body data-page="creator">
+<body class="creator-simple" data-page="creator">
   <div class="site-shell">
     <header class="topbar"><div class="brand-cluster"><a class="wordmark" href="index.html" aria-label="IQ Quest home"><span class="wordmark-iq">IQ</span><span class="wordmark-quest">QUEST</span></a><span class="onchain-promise" aria-label="Quest content is stored on Solana Devnet; full onchain gameplay is planned">QUESTS ONCHAIN · DEVNET<small>FULL ONCHAIN · PLANNED</small></span><a class="brand-official-x" href="https://x.com/IQLabsOfficial" target="_blank" rel="noopener noreferrer" aria-label="Open IQ Labs official profile on X">↗ IQ LABS ON X · @IQLabsOfficial</a></div><nav class="top-links" aria-label="Main navigation"><a href="index.html">Play a Quest</a><a href="#studio">Creator Studio</a><a href="imprint.html">Imprint</a><a class="nav-create" href="#studio">BUILD YOUR QUEST <span aria-hidden="true">↗</span></a></nav></header>
     <div class="quick-benefits" aria-label="One creator publishing option: share on X, then 3 dollars and 99 cents once payment is live; playing is free"><span class="benefit-creator">✦ <strong>CREATORS · SHARE ON X &amp; PUBLISH $3.99</strong> <small>(COMING SOON)</small></span><span class="benefit-play">✦ <strong>PLAY FOR FREE</strong></span><span class="benefit-battle">⚔ <strong>BATTLE WITH FRIENDS ON X</strong></span></div>
@@ -370,11 +400,12 @@ details.advanced-box[open]>summary{color:#adffb8;margin-bottom:13px}
         <div class="studio-main">
           <div class="simple-journey" aria-label="Build your adventure in three steps">
             <div class="section-kicker">IQ QUEST · SIMPLE CREATOR</div>
-            <h2>Create · Test · Share</h2>
-            <p>Create and test without Phantom. To publish a <strong>new</strong> quest in this beta, you can use the optional Devnet storage test below. Your wallet is needed only when you publish, and each onchain transaction needs separate approval. Real $3.99 Mainnet checkout remains OFF.</p>
-            <div class="flow-tiles"><div class="flow-tile"><b>1</b>Describe</div><div class="flow-tile"><b>2</b>Create 15 puzzles</div><div class="flow-tile"><b>3</b>Test &amp; publish</div></div>
+            <h2>Create · Test · Publish</h2>
+            <p><strong>1. Create</strong> your 15 questions. <strong>2. Test</strong> them for free. <strong>3. Publish</strong> when ready. No wallet is needed until step 3. Paid Mainnet publishing is coming later; the current Devnet test uses test-SOL only.</p>
+            <div class="flow-tiles"><div class="flow-tile"><b>1</b>Create 15 puzzles</div><div class="flow-tile"><b>2</b>Test free</div><div class="flow-tile"><b>3</b>Publish onchain</div></div>
           </div>
-          <section class="panel studio-panel" aria-labelledby="prepared-quests-heading" style="border-color:#77bf8e">
+          <details class="panel studio-panel templates-collapsible" aria-labelledby="prepared-quests-heading">
+            <summary>OPTIONAL · START FROM A READY-MADE QUEST</summary>
             <div class="panel-topline"><span class="section-kicker">3 FREE · ONCHAIN · 15 PUZZLES EACH</span><span class="status-dot">ALL THREE VERIFIED ON DEVNET</span></div>
             <h2 id="prepared-quests-heading">Play Easy, Medium or Hard for free</h2>
             <p class="section-intro">All three versions have been stored and verified on <strong>IQ Labs Solana Devnet</strong>. Press the green button to play free. The gold buttons below only load an <strong>editable copy</strong> into your creator draft; publishing that copy would be a new onchain upload, so do not republish an unchanged game.</p>
@@ -403,9 +434,9 @@ details.advanced-box[open]>summary{color:#adffb8;margin-bottom:13px}
             </div>
             <p class="tiny-note">Loading a preset saves an Undo backup. <strong>All three quests already work: do not publish the same questions again just to play them.</strong> The original older Hard Treasure version also remains on Devnet, but it is not part of the featured free three-game selection. Only a newly customized quest needs another publication; editing or loading does not connect a wallet.</p>
             <p id="prepared-quest-status" class="small-status" role="status" aria-live="polite">Choose one to load its questions into the editor.</p>
-          </section>
+          </details>
           <div class="panel studio-panel">
-            <div class="panel-topline"><span class="section-kicker">01 · YOUR ADVENTURE</span><span class="status-dot">DRAFT · NO PAYMENT</span></div>
+            <div class="panel-topline"><span class="section-kicker">STEP 1 · CREATE YOUR QUEST</span><span class="status-dot">DRAFT · NO PAYMENT</span></div>
             <h2>Describe your mystery</h2><p class="section-intro">Name your adventure, describe its idea and choose Easy, Medium or Hard. You can edit everything after ChatGPT creates the puzzles.</p>
             <div class="form-group"><label for="quest-name">Adventure title</label><input id="quest-name" maxlength="100" value="The Lost Solana Treasure"></div>
             <div class="form-group"><label for="community-name">Creator / community name</label><input id="community-name" maxlength="70" placeholder="e.g. Solana Builders Club" value="Solana Adventurers"></div>
@@ -414,8 +445,8 @@ details.advanced-box[open]>summary{color:#adffb8;margin-bottom:13px}
             <div class="form-group"><span class="field-label">Questions per quest</span><div class="notice" style="display:block;position:static;padding:14px 16px;border-radius:10px;background:#152b23;color:#e5f4d5;border:1px solid #416c4d"><strong>15 MYSTERIES · FIXED</strong><br><span style="font-size:12px">Fifteen levels, one non-trivial puzzle each. Estimates depend on difficulty; hints add +1 minute. ChatGPT builds difficulty when you generate or revise, not by simply tapping a different setting.</span></div></div>
           </div>
           <div class="panel studio-panel ai-panel" id="ai-builder">
-            <div class="panel-topline"><span class="section-kicker">02 · CREATE 15 QUESTIONS</span><span class="ai-glow">CHATGPT ASSISTED</span></div>
-            <h2>ChatGPT — three simple steps</h2>
+            <div class="panel-topline"><span class="section-kicker">STEP 1 · GENERATE QUESTIONS</span><span class="ai-glow">CHATGPT ASSISTED</span></div>
+            <h2>Optional: Write questions with ChatGPT</h2>
             <p class="section-intro">No coding or JSON knowledge needed. Copy the task, send it to ChatGPT, and bring its answer back. We fill all 15 editor questions for you.</p>
             <div class="ai-simplified">
               <div class="ai-simple-step">
@@ -446,13 +477,14 @@ details.advanced-box[open]>summary{color:#adffb8;margin-bottom:13px}
             </div>
             <div class="prompt-fallback hidden" id="prompt-fallback"><label for="manual-ai-prompt">If your browser couldn't copy the task, select and copy this text manually:</label><textarea id="manual-ai-prompt" rows="6" readonly></textarea><button type="button" id="select-ai-prompt" class="btn btn-outline">SELECT TASK TEXT</button></div>
           </div>
-          <div class="panel studio-panel"><div class="panel-topline"><span class="section-kicker">03 · QUESTION EDITOR</span><span id="editor-count" class="status-dot">15 QUESTIONS</span></div><h2>Make every clue yours</h2><p class="section-intro">No story needed: all rules and clues must appear directly in each question. Check all 15 answers before publishing. Changing difficulty alone does not rewrite existing questions.</p><div class="editor-layout"><div class="level-selector" id="level-selector" aria-label="Choose a question"></div><div class="level-fields"><div class="form-group"><label for="level-title">Level title</label><input id="level-title" maxlength="100"></div><div class="form-group"><label for="level-question">Question · include every clue here</label><textarea id="level-question" rows="4" maxlength="600"></textarea></div><div class="form-group"><label for="level-hint">Hint <span class="muted">(costs player +1 minute)</span></label><textarea id="level-hint" rows="2" maxlength="400"></textarea></div><div class="form-group"><label for="level-answer">Accepted answer <span class="muted">(separate alternatives with |)</span></label><input id="level-answer" maxlength="180" spellcheck="false" placeholder="e.g. compass | a compass"></div><div class="tiny-note">Only title, question, hint and answer are saved onchain. Answers are public, not secret or prize-safe.</div></div></div></div>
+          <div class="panel studio-panel"><div class="panel-topline"><span class="section-kicker">STEP 1 · REVIEW QUESTIONS</span><span id="editor-count" class="status-dot">15 QUESTIONS</span></div><h2>Make every clue yours</h2><p class="section-intro">No story needed: all rules and clues must appear directly in each question. Check all 15 answers before publishing. Changing difficulty alone does not rewrite existing questions.</p><div class="editor-layout"><div class="level-selector" id="level-selector" aria-label="Choose a question"></div><div class="level-fields"><div class="form-group"><label for="level-title">Level title</label><input id="level-title" maxlength="100"></div><div class="form-group"><label for="level-question">Question · include every clue here</label><textarea id="level-question" rows="4" maxlength="600"></textarea></div><div class="form-group"><label for="level-hint">Hint <span class="muted">(costs player +1 minute)</span></label><textarea id="level-hint" rows="2" maxlength="400"></textarea></div><div class="form-group"><label for="level-answer">Accepted answer <span class="muted">(separate alternatives with |)</span></label><input id="level-answer" maxlength="180" spellcheck="false" placeholder="e.g. compass | a compass"></div><div class="tiny-note">Only title, question, hint and answer are saved onchain. Answers are public, not secret or prize-safe.</div></div></div></div>
         </div>
-        <aside class="studio-aside"><div class="panel preview-panel"><div class="section-kicker">LIVE QUEST PREVIEW</div><div class="preview-image" role="img" aria-label="Ancient temple ruins in jungle mist"></div><div class="preview-body"><div class="preview-brand">IQ QUEST</div><h3 id="preview-title">The Lost Solana Treasure</h3><p id="preview-theme">Ancient jungle temple adventure...</p><div class="preview-tags"><span id="preview-difficulty">MEDIUM</span><span id="preview-count">15 QUESTIONS</span><span id="preview-duration">9–18 MIN</span></div><div class="stack-buttons"><button type="button" id="preview-game" class="btn btn-green">▶ TEST YOUR QUEST FREE</button><span class="preview-help-text">You can return to this editor without losing your draft.</span><span class="draft-autosave-message">✓ Your draft saves automatically on this device.</span></div><div id="draft-status" class="small-status" role="status" aria-live="polite"></div></div></div>
+        <aside class="studio-aside"><div class="panel preview-panel"><div class="section-kicker">STEP 2 · TEST YOUR QUEST FREE</div><div class="preview-image" role="img" aria-label="Ancient temple ruins in jungle mist"></div><div class="preview-body"><div class="preview-brand">IQ QUEST</div><h3 id="preview-title">The Lost Solana Treasure</h3><p id="preview-theme">Ancient jungle temple adventure...</p><div class="preview-tags"><span id="preview-difficulty">MEDIUM</span><span id="preview-count">15 QUESTIONS</span><span id="preview-duration">9–18 MIN</span></div><div class="stack-buttons"><button type="button" id="preview-game" class="btn btn-green">▶ TEST YOUR QUEST FREE</button><span class="preview-help-text">You can return to this editor without losing your draft.</span><span class="draft-autosave-message">✓ Your draft saves automatically on this device.</span></div><div id="draft-status" class="small-status" role="status" aria-live="polite"></div></div></div>
           <div class="panel publish-panel" id="publish-card">
-            <div class="section-kicker">04 · SHARE &amp; PUBLISH</div>
-            <h3>One price. One link.</h3>
-            <p>Build and test free. When payment is live, sharing on X unlocks one-time publishing for <strong>$3.99</strong>. Your players never pay.</p>
+            <div class="section-kicker">STEP 3 · PUBLISH YOUR QUEST</div>
+            <h3>Publish when you're ready</h3>
+            <p>Creating and testing are free. New creator publications will have a fee when Mainnet payments go live. The current Devnet test uses test-SOL and several wallet approvals.</p>
+            <div class="creator-publish-simple-summary"><strong>Currently: Devnet beta only.</strong> Real $3.99 Mainnet payments are OFF. Review all 15 questions first. Connect Phantom only when you publish, accept that questions and answers become public onchain, and approve each transaction. After 15/15 verification, you get your game link. Share it with friends <strong>after</strong> publication.</div>
             <input type="radio" name="publish-plan" value="community" checked hidden aria-label="One publishing plan">
             <div class="price-single"><div><strong>SHARE ON X · PUBLISH</strong><p>One published adventure · 15 questions · shareable game link · free players.</p></div><strong class="price-main" id="plan-price">$3.99</strong></div>
             <p class="tiny-note" id="selected-plan-note">Single planned publishing option. The initial X post is a teaser; the actual game link is available only after a verified onchain upload.</p>
@@ -488,6 +520,7 @@ details.advanced-box[open]>summary{color:#adffb8;margin-bottom:13px}
             <details class="advanced-box"><summary>Fees &amp; how publication will work</summary><p class="tiny-note">The planned platform price is $3.99, settled in SOL using a five-minute server quote. Additional IQ Labs protocol/storage and Solana network fees apply and must be approved by the creator's wallet. A finalized payment enables a separate official IQ Labs SDK inscription of the exact paid 15-question draft. The backend must independently read it back before marking the order published. Browser-local scores/timers are not written onchain. Legal review of withdrawal, taxes and support is pending, so real Mainnet payment remains disabled.</p><span class="price-label">Planned creator fee</span><strong id="plan-breakdown">$3.99 USD equivalent in SOL</strong></details>
             <p class="tiny-note">Before any real paid launch, review our <a href="imprint.html" style="color:#aeffbd;text-decoration:underline">imprint</a>, <a href="privacy.html" style="color:#aeffbd;text-decoration:underline">privacy information</a> and <a href="withdrawal.html" style="color:#aeffbd;text-decoration:underline">withdrawal information</a>. These legal pages are still drafts and the Mainnet checkout remains disabled.</p>
             <p id="checkout-status" class="share-step-status" role="status" aria-live="polite">Checkout not live. Your 15-question adventure can be edited and tested without a wallet.</p>
+            <details class="advanced-box"><summary>Publication steps and estimated Devnet fees</summary>
             <div class="creator-publish-guide" aria-label="How to publish your own quest in six steps">
               <h4>👻 HOW TO PUBLISH YOUR OWN QUEST · DEVNET BETA</h4>
               <ol>
@@ -498,7 +531,7 @@ details.advanced-box[open]>summary{color:#adffb8;margin-bottom:13px}
                 <li><strong>Approve each Phantom request</strong> in order. For the saved example it took 5 data approvals + 1 final registration. Bigger drafts may need more. If Phantom returns to this page, use the same button to resume.</li>
                 <li>Wait for <strong>YOUR QUEST IS ONCHAIN!</strong> and 15/15 verified. Only then copy the player link or share it.</li>
               </ol>
-              <p><strong>Already published example?</strong> <a href="index.html?tx=42M6zsouCMcFqektRzp7D19vbc6mM3RYmjA2UHJzeSZmgFKXDftL6i9KbM1RK47NXyLLTvFKcMHpa7na8wHC46ms&amp;network=devnet" style="color:#aeffbd;text-decoration:underline">Play or share it here</a> — skip all six creator steps and all wallet confirmations.</p>
+              <p><strong>Just want to play?</strong> <a href="index.html#quest-entry-options" style="color:#aeffbd;text-decoration:underline">Choose one of the three published free games</a> — no creator steps or wallet confirmations are needed.</p>
             </div>
             <div class="fee-facts" role="note" aria-label="Observed Solana Devnet publishing cost; not a future price quote">
               <strong>WHAT DID 6 PHANTOM CONFIRMATIONS COST IN OUR DEVNET EXAMPLE?</strong>
@@ -508,10 +541,11 @@ details.advanced-box[open]>summary{color:#adffb8;margin-bottom:13px}
               <div><strong>Observed total: 0.0030324 Devnet SOL</strong> (test coins with no monetary value).</div>
               <div style="margin-top:7px">This is a verified example, <strong>not a guaranteed quote</strong> for new uploads. Fees, account costs and the required number of transactions can change. Review each amount inside Phantom. On Mainnet, real SOL plus the planned $3.99 platform fee would apply; <strong>Mainnet checkout is OFF.</strong></div>
             </div>
-            <button type="button" id="shortcut-storage-only" class="btn btn-green" style="width:100%;margin:12px 0">◈ TEST ONCHAIN STORAGE · NO PLATFORM PAYMENT</button>
+            </details>
+            <button type="button" id="shortcut-storage-only" class="btn btn-green" style="width:100%;margin:12px 0">3 · TEST ONCHAIN STORAGE · DEVNET ONLY</button>
             <p class="tiny-note">Devnet beta only: test the IQ Labs storage of all 15 questions without another platform test payment. Phantom still charges Devnet network / IQ Labs protocol test-SOL fees. Mainnet payments remain OFF.</p>
             <button type="button" id="start-sol-checkout" class="hidden" disabled>CHECK READINESS · NO PAYMENT</button>
-            <details class="advanced-box" id="developer-tests"><summary>Developer testing only · Wallet checkout / Devnet / IQ Labs</summary>
+            <details class="advanced-box" id="developer-tests"><summary>Devnet publishing · wallet confirmation and recovery</summary>
             <p class="tiny-note"><strong>Phantom-only beta.</strong> On a phone, open this page in Phantom's built-in browser; in Phantom Settings → Developer Settings → Testnet Mode choose <strong>Solana Devnet</strong>. Use only free Devnet test SOL. Build and preview your quest without connecting any wallet; Phantom is requested only just before the test transfer or onchain upload.</p>
             <div class="price-micro" id="byte-estimate">Quest size: calculating…</div>
             <div class="price-micro" id="storage-estimate">Estimated IQ Labs storage tier: calculating…</div>
@@ -549,7 +583,7 @@ details.advanced-box[open]>summary{color:#adffb8;margin-bottom:13px}
               <p><strong>Not a paid Mainnet release.</strong> The 0.002 Devnet test SOL is not a real $3.99 platform payment. Devnet SOL has no monetary value. IQ QUEST now losslessly compresses the complete quest before uploading, aiming for fewer, smaller IQ Labs transactions. All 15 questions and answers are restored and verified on readback. Additional Devnet network / protocol fees and several Phantom approvals may still be needed. Review each wallet prompt.</p>
               <p>Selected plan is recorded as metadata only. A public community directory and real paid Mainnet checkout are not live yet.</p>
               <label class="publish-consent"><input type="checkbox" id="devnet-accept"><span>I will use <strong>Solana Devnet</strong> in my chosen wallet. I understand the questions, answers and hints are publicly readable onchain and may be permanent. <strong>I understand the creator must approve several separate Phantom storage transactions, with possible fees on each one.</strong> I will review every wallet request.</span></label>
-              <label class="publish-consent"><input type="checkbox" id="devnet-auto-publish"><span><strong>Automatically start publication after a verified Devnet test payment.</strong> I authorize IQ QUEST to begin the public upload without another page-button click. Every wallet signing request still needs my approval. This setting applies to this page session only.</span></label>
+              <label class="publish-consent legacy-autopublish-label"><input type="checkbox" id="devnet-auto-publish"><span><strong>Automatically start publication after a verified Devnet test payment.</strong> I authorize IQ QUEST to begin the public upload without another page-button click. Every wallet signing request still needs my approval. This setting applies to this page session only.</span></label>
               <div id="devnet-storage-only-box" style="padding:14px;margin:12px 0 19px;border:2px solid #77e594;border-radius:12px;background:#102a1d">
                 <h4 style="margin:0 0 5px;color:#c2ffce">◈ STORAGE-ONLY DEVNET TEST · NO PLATFORM PAYMENT</h4>
                 <p>Start a new story-free 15-question upload using safe 800-byte transactions. Your earlier 1-chunk test remains on Devnet and in a separate recovery record; it cannot be reused because the quest contents changed. <strong>No second 0.002 test SOL platform transfer.</strong> Phantom still asks for Devnet storage and network/protocol test-SOL approvals. This is not a paid Mainnet publication.</p>
@@ -576,7 +610,7 @@ details.advanced-box[open]>summary{color:#adffb8;margin-bottom:13px}
         </aside>
       </section>
     </main>
-    <footer class="footer"><span><span class="green">IQ</span> QUEST · Creator Studio <strong>V5.16 BETA · NO STORY</strong> · Phantom Devnet test; Mainnet payments OFF</span><nav aria-label="Legal information" style="display:flex;gap:13px;flex-wrap:wrap"><a href="imprint.html" style="color:#b5fbc1;text-decoration:underline">Imprint</a><a href="privacy.html" style="color:#b5fbc1;text-decoration:underline">Privacy</a><a href="withdrawal.html" style="color:#b5fbc1;text-decoration:underline">Withdrawal info</a></nav><span class="footer-iqlabs"><span><b>IQ LABS SDK · DEVNET TEST</b> · Onchain storage &amp; more <span class="footer-soon">(integration in progress)</span></span><a href="https://x.com/IQLabsOfficial" target="_blank" rel="noopener noreferrer" aria-label="IQ Labs official X profile">X @IQLabsOfficial ↗</a></span></footer>
+    <footer class="footer"><span><span class="green">IQ</span> QUEST · Simple Creator · Devnet beta · Mainnet payments OFF</span><nav aria-label="Legal information" style="display:flex;gap:13px;flex-wrap:wrap"><a href="imprint.html" style="color:#b5fbc1;text-decoration:underline">Imprint</a><a href="privacy.html" style="color:#b5fbc1;text-decoration:underline">Privacy</a><a href="withdrawal.html" style="color:#b5fbc1;text-decoration:underline">Withdrawal info</a></nav><span class="footer-iqlabs"><span><b>IQ LABS · QUEST STORAGE ON DEVNET</b> · Full onchain platform planned</span><a href="https://x.com/IQLabsOfficial" target="_blank" rel="noopener noreferrer" aria-label="IQ Labs official X profile">X @IQLabsOfficial ↗</a></span></footer>
   </div>
   <div id="verified-onchain-modal" class="hidden" role="dialog" aria-modal="true" aria-labelledby="verified-onchain-title" style="position:fixed;inset:0;z-index:2000;background:#000d;display:flex;align-items:center;justify-content:center;padding:18px;overflow-y:auto">
     <div style="width:min(100%,540px);max-height:90vh;overflow-y:auto;border:2px solid #70f68c;border-radius:19px;background:linear-gradient(155deg,#173b28,#091c1a 75%);padding:25px 21px;box-shadow:0 22px 80px #000c,0 0 40px #38fc5840;color:#e6ffe8;text-align:center">

@@ -412,9 +412,45 @@ h1,h2,h3{font-family:Georgia,"Times New Roman",serif;letter-spacing:-.015em}h1{f
 .onchain-load-status.error{border-color:#c7857e;background:#301e1b;color:#ffe5dd}
 .is-onchain .hero .hero-buttons a[href="creator.html"]{display:inline-flex}
 .is-onchain .onchain-status{border-color:#8af7a3;background:#133b22}
+/* V5.21 · One clear route for players: choose one of three saved quests. */
+.is-home-chooser .quick-benefits,
+.is-home-chooser #demo-selector,
+.is-home-chooser .hero-player,
+.is-home-chooser .onchain-status,
+.is-home-chooser .mini-info,
+.is-home-chooser #onchain-load-status,
+.is-home-chooser #adventure,
+.is-home-chooser #how,
+.is-home-chooser .top-links a[href="#how"]{display:none!important}
+.is-home-chooser #quest-entry-options{margin-top:26px}
+.is-onchain .quick-benefits,
+.is-onchain .hero-player,
+.is-onchain .onchain-status,
+.is-onchain .mini-info,
+.is-onchain .story-panel,
+.is-onchain .battle-panel,
+.is-onchain #how,
+.is-onchain .top-links a[href="#how"],
+.is-creator-preview .hero-player,
+.is-creator-preview .onchain-status,
+.is-creator-preview .mini-info,
+.is-creator-preview .story-panel,
+.is-creator-preview .battle-panel,
+.is-creator-preview #how{display:none!important}
+.is-onchain #finish-area .battle-share-time-label,
+.is-onchain #finish-area .battle-share-time,
+.is-onchain #finish-area .battle-share-stats,
+.is-onchain #download-card,
+.is-onchain #copy-result{display:none!important}
+.is-onchain:not(.onchain-loaded) #adventure{display:none!important}
+.is-onchain.onchain-loaded #adventure,
+.is-creator-preview #adventure{margin-top:16px}
+#onchain-retry-home{display:inline-flex;margin:0 0 14px}
+#onchain-retry-home.hidden{display:none}
+.is-home-chooser .quest-path-note{margin-top:10px}
 </style>
 </head>
-<body data-page="player">
+<body class="is-home-chooser" data-page="player">
   <div class="site-shell">
     <header class="topbar">
       <div class="brand-cluster"><a class="wordmark" href="index.html" aria-label="IQ Quest home"><span class="wordmark-iq">IQ</span><span class="wordmark-quest">QUEST</span></a><span class="onchain-promise" aria-label="Quest questions and answers are published on Solana Devnet; full onchain gameplay is planned">QUESTS ONCHAIN · DEVNET<small>FULL ONCHAIN · PLANNED</small></span><a class="brand-official-x" href="https://x.com/IQLabsOfficial" target="_blank" rel="noopener noreferrer" aria-label="Open IQ Labs official profile on X">↗ IQ LABS ON X · @IQLabsOfficial</a></div>
@@ -456,7 +492,7 @@ h1,h2,h3{font-family:Georgia,"Times New Roman",serif;letter-spacing:-.015em}h1{f
           <div><h3>Want to publish your own quest?</h3><p>Build and test your own 15 puzzles for free. Publishing a new custom quest is planned as a paid creator feature; the paid Mainnet checkout is not live yet. Devnet test publishing currently requires Phantom approvals and test-SOL. The three ready-made games above remain free.</p></div>
           <a class="btn btn-gold" href="creator.html#studio">✦ BUILD MY OWN QUEST</a>
         </div>
-        <p class="quest-path-note">Devnet is a test network, not Solana Mainnet. Game timers and personal scores run in your browser. The difficulty selector below contains separate browser demos, not these three stored quests.</p>
+        <p class="quest-path-note">Devnet is a test network, not Solana Mainnet. Questions, hints and answers are onchain; timers and personal scores run in your browser. Choose a game above to start.</p>
       </section>
       <section class="demo-selector" id="demo-selector" aria-labelledby="difficulty-heading">
         <div class="demo-selector-heading"><div><div class="section-kicker free-battle-kicker">⚔ FREE TEMPLE BATTLES</div><h2 id="difficulty-heading">Challenge your friends. Beat their time.</h2><p>Play a quick 3-question Lightning Battle or the full 15-question quest. Pick a difficulty, race the clock and challenge friends on X. No wallet needed.</p></div><span class="demo-selector-stamp">2 MODES · 3 DIFFICULTIES · FREE TO PLAY</span></div>
@@ -493,6 +529,7 @@ h1,h2,h3{font-family:Georgia,"Times New Roman",serif;letter-spacing:-.015em}h1{f
       <div class="mini-info"><span>✦ <b>FREE PLAY</b> · NO WALLET</span><span>◷ HINT +1:00 · SKIP +1:00</span><span>⚔ SHARE YOUR TIME · CHALLENGE FRIENDS ON X</span></div>
 
       <section id="onchain-load-status" class="onchain-load-status hidden" role="status" aria-live="polite"></section>
+      <a id="onchain-retry-home" class="btn btn-outline hidden" href="index.html">← BACK TO THE THREE FREE GAMES</a>
       <section id="adventure" class="adventure-layout">
         <article class="panel game-panel">
           <span class="rune-corner rune-corner-tl" aria-hidden="true">◇</span>
@@ -576,7 +613,7 @@ h1,h2,h3{font-family:Georgia,"Times New Roman",serif;letter-spacing:-.015em}h1{f
       </section>
       <section id="how" class="how-grid"><div class="how-item"><span>01</span><h3>Choose your battle</h3><p>Play 15 connected mysteries or a 3-puzzle Lightning Battle with new codes.</p></div><div class="how-item"><span>02</span><h3>Choose your risk</h3><p>A hint adds one minute. You can then skip for one additional minute and see the answer.</p></div><div class="how-item"><span>03</span><h3>Challenge a friend</h3><p>Share a matching puzzle set and target time. First attempts and practice are marked.</p></div></section>
     </main>
-    <footer class="footer"><span><span class="green">IQ</span> QUEST · Battle Edition V5.3 · Free to play</span><nav aria-label="Legal information" style="display:flex;gap:13px;flex-wrap:wrap"><a href="imprint.html" style="color:#b5fbc1;text-decoration:underline">Imprint</a><a href="privacy.html" style="color:#b5fbc1;text-decoration:underline">Privacy</a><a href="withdrawal.html" style="color:#b5fbc1;text-decoration:underline">Withdrawal info</a></nav><span class="footer-iqlabs"><span><b>IQ LABS SDK · COMING SOON</b> · Onchain storage &amp; more <span class="footer-soon">(integration in progress)</span></span><a href="https://x.com/IQLabsOfficial" target="_blank" rel="noopener noreferrer" aria-label="IQ Labs official X profile">X @IQLabsOfficial ↗</a></span></footer>
+    <footer class="footer"><span><span class="green">IQ</span> QUEST · 3 free onchain games · Devnet beta</span><nav aria-label="Legal information" style="display:flex;gap:13px;flex-wrap:wrap"><a href="imprint.html" style="color:#b5fbc1;text-decoration:underline">Imprint</a><a href="privacy.html" style="color:#b5fbc1;text-decoration:underline">Privacy</a><a href="withdrawal.html" style="color:#b5fbc1;text-decoration:underline">Withdrawal info</a></nav><span class="footer-iqlabs"><span><b>IQ LABS · QUEST DATA ON DEVNET</b> · Full onchain gameplay planned</span><a href="https://x.com/IQLabsOfficial" target="_blank" rel="noopener noreferrer" aria-label="IQ Labs official X profile">X @IQLabsOfficial ↗</a></span></footer>
   </div>
   <script>(function(){
 'use strict';
@@ -657,6 +694,12 @@ const onchainSignature=params.get('tx')||'';
 const publishedQuestId=params.get('quest')||'';
 const onchainMode=!preview&&(!!onchainSignature||!!publishedQuestId);
 const onchainNetwork=params.get('network')==='mainnet-beta'?'mainnet-beta':'devnet';
+const isHomeChooser=!preview&&!onchainMode&&!params.has('difficulty')&&!params.has('mode')&&!params.has('target');
+document.body.classList.toggle('is-home-chooser',isHomeChooser);
+if(isHomeChooser){
+ const homePlay=document.querySelector('.top-links a[href="#adventure"]');
+ if(homePlay){homePlay.href='#quest-entry-options';homePlay.textContent='Free Games';}
+}
 let onchainReady=!onchainMode;
 const originalTargetParam=params.get('target');
 const validDifficulties=['Easy','Medium','Hard'];
@@ -971,12 +1014,14 @@ else{
    targetTime=Number.isInteger(Number(originalTargetParam))&&Number(originalTargetParam)>0&&Number(originalTargetParam)<=86399&&params.get('match')===puzzleFingerprint(quest)?Number(originalTargetParam):0;
    onchainReady=true;load();syncSelection();render();
    $('start-the-clue').disabled=false;
-   n.textContent=publishedQuestId?'✓ VERIFIED ONCHAIN · IQ Labs Mainnet · 15 puzzles · Registered quest '+publishedQuestId.slice(0,8)+'… · Players need no wallet.':'✓ VERIFIED ONCHAIN · IQ Labs '+onchainNetwork.toUpperCase()+' · 15 puzzles · Inscription '+onchainSignature.slice(0,12)+'…'+onchainSignature.slice(-8)+' · Players need no wallet.';
+   document.body.classList.add('onchain-loaded');
+   n.textContent=publishedQuestId?'✓ VERIFIED ONCHAIN · IQ Labs MAINNET · 15 questions · Free to play.':'✓ VERIFIED ONCHAIN · IQ Labs '+onchainNetwork.toUpperCase()+' · 15 questions · '+quest.difficulty.toUpperCase()+' · No wallet needed.';
    const status=document.querySelector('.onchain-status');if(status)status.textContent=publishedQuestId?'✓ IQ LABS MAINNET ONCHAIN QUEST VERIFIED · Questions and answers were read from Solana; battle times remain browser-unverified.':'✓ IQ LABS ONCHAIN QUEST VERIFIED · '+onchainNetwork.toUpperCase()+' · Quest and answers are publicly readable on Solana. Battle times remain browser-unverified.';
    if(run.startedAt&&!run.finishedAt)ensureStart();
  }catch(error){
    onchainReady=false;
    n.classList.add('error');n.textContent='COULD NOT LOAD THE PUBLISHED QUEST: '+String(error?.message||error)+' · Check the public game link. No demo questions are being substituted.';
+   $('onchain-retry-home').classList.remove('hidden');
    $('hero-quest-name').textContent='ONCHAIN QUEST UNAVAILABLE';
    $('start-the-clue').disabled=true;
  }})();
