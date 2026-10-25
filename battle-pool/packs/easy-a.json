@@ -1,0 +1,99 @@
+{
+  "v": 1,
+  "title": "IQ QUEST Battle Pool Easy A",
+  "creator": "IQ QUEST · Powered by IQ Labs",
+  "theme": "Fifteen independent easy battle puzzles, each with complete rules and no story dependencies. A fresh combination can challenge friends to beat your time.",
+  "difficulty": "Easy",
+  "levels": [
+    {
+      "title": "01 · The Moving Alphabet",
+      "q": "A lock uses a Caesar cipher: each plain letter is shifted 2 places FORWARD (Z wraps to A). It shows QTDKV. Move every letter BACK 2 places. What word is revealed?",
+      "h": "Work letter by letter and remember to wrap around the alphabet.",
+      "a": "ORBIT"
+    },
+    {
+      "title": "02 · The Mirror Word",
+      "q": "A mirror alphabet pairs A↔Z, B↔Y, C↔X and so on. Decode TLOW using this alphabet. Enter the original English word.",
+      "h": "The positions from opposite ends of the alphabet add to 27 if A is position 1.",
+      "a": "GOLD"
+    },
+    {
+      "title": "03 · The Growing Steps",
+      "q": "The steps are numbered 4, 7, 10, 13, 16, ?. Every difference is identical. What number is on the NEXT step?",
+      "h": "Compare two consecutive differences, then apply that same change again.",
+      "a": "19"
+    },
+    {
+      "title": "04 · The Letter Grid",
+      "q": "Five rows read ABCDE / FGHIJ / KLMNO / PQRST / UVWXY. Start at the center M (row 3, column 3). Move N → E → E → S one tile per arrow (N=up, S=down, E=right, W=left). Which LETTER is your final tile?",
+      "h": "Mark your position after every move on the 5×5 grid; move in the grid, not alphabet order.",
+      "a": "O"
+    },
+    {
+      "title": "05 · The Twelve-Hour Dial",
+      "q": "A 12-hour clock shows 9:00. Advance it 7 hours. The dial wraps after 12. Which hour (1–12) does it show?",
+      "h": "Move around a clock face rather than counting beyond 12.",
+      "a": "4"
+    },
+    {
+      "title": "06 · The Two Symbols",
+      "q": "Two symbols hide positive integers. SUN + SUN = 12, and SUN + MOON = 11. What integer is MOON?",
+      "h": "Find the repeated SUN value first, then substitute into the second equation.",
+      "a": "5"
+    },
+    {
+      "title": "07 · The Binary Plate",
+      "q": "The plate shows the binary number 101101. Every position is a power of 2 (from right: 1, 2, 4, 8, 16, 32). Convert the WHOLE binary number into decimal. What number is it?",
+      "h": "Add only the place values where the binary digit is 1.",
+      "a": "45"
+    },
+    {
+      "title": "08 · The Four Scouts",
+      "q": "Four scouts A, B, C and D stand in one line. D stands last; A stands immediately before B; and C is after B. Which scout is in SECOND place? Enter one letter.",
+      "h": "Build a four-position row and apply the strongest fixed-position clue first.",
+      "a": "B"
+    },
+    {
+      "title": "09 · The Arithmetic Machine",
+      "q": "A machine starts at 14. It MULTIPLIES by 3, then SUBTRACTS 5, then ADDS 6. What integer leaves the machine?",
+      "h": "Do the operations in the order stated, not by standard precedence across the sentence.",
+      "a": "43"
+    },
+    {
+      "title": "10 · Numbers into Letters",
+      "q": "A1Z26 represents A=1, B=2, ... Z=26. Decode 3-15-4-5 into four capital letters. Enter the word with no hyphens.",
+      "h": "Convert each number to exactly one letter, then read left to right.",
+      "a": "CODE"
+    },
+    {
+      "title": "11 · The Missing Tile",
+      "q": "Each row on a tablet must sum to 18. One row reads 6, 4, ?. Which integer replaces the question mark?",
+      "h": "Subtract the two visible tile values from the required row total.",
+      "a": "8"
+    },
+    {
+      "title": "12 · The Shortest Walk",
+      "q": "To reach the exit, a robot must make exactly 3 moves RIGHT and 2 moves UP, in any order. Every shortest path uses all these moves and no others. How many different shortest paths exist?",
+      "h": "Count how many ways the UP moves can occupy distinct positions among all moves.",
+      "a": "10"
+    },
+    {
+      "title": "13 · The Remainder Lock",
+      "q": "Find the SMALLEST whole number strictly greater than 20 that leaves remainder 3 when divided by 5. What is the number?",
+      "h": "Test numbers just above the bound by their remainder, not their quotient.",
+      "a": "23"
+    },
+    {
+      "title": "14 · The Supply Ratio",
+      "q": "A box contains red and blue crystals in ratio 2:3. There are 25 crystals total. How many are RED?",
+      "h": "First find the size of one ratio part using the total number of parts.",
+      "a": "10"
+    },
+    {
+      "title": "15 · The Morse Beacon",
+      "q": "A beacon flashes dots (.) and dashes (-). Decode the four Morse letters ... / - / .- / .-.. Slashes separate letters. Use this complete legend for the symbols in the message: A=.-, R=.-., S=..., T=-. Enter the four-letter word.",
+      "h": "Each dot-dash group maps to one letter from the provided legend; keep their original order.",
+      "a": "STAR"
+    }
+  ]
+}

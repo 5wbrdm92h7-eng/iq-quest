@@ -1,0 +1,99 @@
+{
+  "v": 1,
+  "title": "IQ QUEST Battle Pool Hard B",
+  "creator": "IQ QUEST · Powered by IQ Labs",
+  "theme": "Fifteen independent hard battle puzzles, each with complete rules and no story dependencies. A fresh combination can challenge friends to beat your time.",
+  "difficulty": "Hard",
+  "levels": [
+    {
+      "title": "01 · The Affine Vault",
+      "q": "For each original capital letter, write A=0 through Z=25 and encrypt its position x as y=(7x+3) mod 26. The vault shows EXSGDC. Reverse the formula for every letter and enter the original six-letter word.",
+      "h": "Undo the added constant, then multiply by the modular inverse of the multiplier. Always reduce positions modulo 26.",
+      "a": "PORTAL"
+    },
+    {
+      "title": "02 · The Twisted Mirror",
+      "q": "A six-letter word was encoded by (1) Caesar shift +5, (2) Atbash mirror A↔Z, (3) swap each neighboring pair of letters (positions 1↔2, 3↔4, 5↔6). The final text is QCDSBQ. Undo all three operations to find the original word.",
+      "h": "Undo the transformations in reverse order: pair swaps, mirror, then backward Caesar shift.",
+      "a": "SECRET"
+    },
+    {
+      "title": "03 · The Second Difference",
+      "q": "A quadratic sequence is 9, 20, 37, 60, 89, ?. The nth term follows an²+bn+c with integer constants and a constant SECOND difference. What is term 6?",
+      "h": "Find the first differences and then the second differences. A constant second difference confirms a quadratic rule.",
+      "a": "124"
+    },
+    {
+      "title": "04 · The Wrapped Mirror Grid",
+      "q": "Start at (row 3, column 2) on a 5×5 grid. First MIRROR the position left-to-right (column c becomes 6−c). Then move W → N → W → S → S with N/S changing row and E/W changing column. The grid WRAPS: moving beyond 1 goes to 5 and beyond 5 goes to 1. Final lock value = 7×ROW + 3×COLUMN. What number is it?",
+      "h": "Mirror the starting column before any movement. Apply wraparound immediately after each move.",
+      "a": "34"
+    },
+    {
+      "title": "05 · The Synchronized Gears",
+      "q": "Two gears begin at time t=0. The 5-position gear shows its marker when t mod 5 = 2; the 7-position gear shows its marker when t mod 7 = 4. Find the SMALLEST positive whole-number time t when BOTH markers appear together.",
+      "h": "List candidate times for one gear, then check their remainders on the second gear.",
+      "a": "32"
+    },
+    {
+      "title": "06 · The Linear Locks",
+      "q": "Integers A, B, C satisfy 2A+B+C=22, A+3B+2C=40, and 3A+2B+C=34. Solve the system, then enter A+2B+3C.",
+      "h": "Eliminate one variable by subtracting suitable multiples of equations; verify all three before forming the final sum.",
+      "a": "38"
+    },
+    {
+      "title": "07 · The XOR Broadcast",
+      "q": "Four capital ASCII letters were encrypted using decimal bitwise XOR with the key 37. The encrypted decimal bytes are 102, 106, 97, 96. For each value compute value XOR 37 again, convert that decimal ASCII code to a capital letter, and enter the four-letter result. (XORing twice with the same key restores the original.)",
+      "h": "Apply the same XOR key independently to each byte. XOR is bitwise, not ordinary addition.",
+      "a": "CODE"
+    },
+    {
+      "title": "08 · Two Truthful Statues",
+      "q": "Four statues guard boxes A, B, C and D. Their statements are: (1) The key is in A. (2) The key is in B. (3) The key is in D. (4) The key is in C or D. Exactly TWO statues tell the truth. Which box holds the key?",
+      "h": "Test each box in turn; exactly two of the four sentences must evaluate true.",
+      "a": "D"
+    },
+    {
+      "title": "09 · The Modular Processor",
+      "q": "Compute (9² × 5 + 23) mod 29. 'mod 29' means the remainder after division by 29. What remainder does the machine output?",
+      "h": "Calculate the square and multiplication first, then divide by the modulus and keep the remainder.",
+      "a": "22"
+    },
+    {
+      "title": "10 · The Reversed Vigenère",
+      "q": "A six-letter word was Vigenère-encrypted using repeating key MOON (A=0 to Z=25; encryption = plain + key mod 26). The ciphertext was then REVERSED. The displayed letters are HQEQSE. Undo both operations to recover the original word.",
+      "h": "Reverse the displayed text first; then repeat the key and subtract its letter positions.",
+      "a": "SECRET"
+    },
+    {
+      "title": "11 · The Matrix Gate",
+      "q": "Multiply matrices A and B in that order. A rows are [4,2] and [5,3]. B rows are [3,6] and [4,2]. The entry in row 1, column 2 of A×B is (A row 1) dot (B column 2). What is that number?",
+      "h": "For the requested cell, multiply each entry of A row 1 by the matching entry of B column 2, then add.",
+      "a": "28"
+    },
+    {
+      "title": "12 · The Checkpoint Path",
+      "q": "Count shortest paths from (0,0) to (6,4), moving only RIGHT or UP, that MUST visit (3,2) but must NOT visit (5,3). How many valid paths are possible?",
+      "h": "Count paths through the required checkpoint, then subtract the subset that also visits the forbidden point.",
+      "a": "40"
+    },
+    {
+      "title": "13 · The Triple Modulus Vault",
+      "q": "Find the SMALLEST integer greater than 80 that satisfies x mod 4 = 3, x mod 5 = 1, AND x mod 7 = 5. The notation 'mod' means remainder. What is x?",
+      "h": "Generate candidates satisfying the first two remainders, then check the third; do not simply add the target remainders.",
+      "a": "131"
+    },
+    {
+      "title": "14 · The Weighted Mixture",
+      "q": "A mixture has 70 units of two types. HIGH-grade units contribute 4 points each and LOW-grade units contribute 3 points each. The mixture has exactly 240 points in total. How many of the 70 units are HIGH-grade?",
+      "h": "If x units are high-grade, the others are total minus x. Make an equation using the total points and solve.",
+      "a": "30"
+    },
+    {
+      "title": "15 · The Four-Column Transposition",
+      "q": "An eight-letter word was written in two rows of four. Its columns were read top-to-bottom in order 3,1,4,2, producing AISSRPTH. Restore each TWO-letter column to its original position, then read the top row left-to-right followed by the bottom row. What eight-letter word returns?",
+      "h": "Split the ciphertext into four pairs. Place each pair in the stated column, then read across both recovered rows.",
+      "a": "STARSHIP"
+    }
+  ]
+}

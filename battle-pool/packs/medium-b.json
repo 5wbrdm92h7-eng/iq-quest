@@ -1,0 +1,99 @@
+{
+  "v": 1,
+  "title": "IQ QUEST Battle Pool Medium B",
+  "creator": "IQ QUEST · Powered by IQ Labs",
+  "theme": "Fifteen independent medium battle puzzles, each with complete rules and no story dependencies. A fresh combination can challenge friends to beat your time.",
+  "difficulty": "Medium",
+  "levels": [
+    {
+      "title": "01 · The Backwards Cipher",
+      "q": "First a word was shifted 7 letters FORWARD using the Caesar alphabet (Z wraps to A). Then the resulting string was REVERSED. The display now reads ZUVJHLI. Recover the original word.",
+      "h": "Undo the last operation first: reverse the displayed letters, then undo the forward shift.",
+      "a": "BEACONS"
+    },
+    {
+      "title": "02 · The Double Mirror",
+      "q": "An encoder first mirrors every letter using A↔Z, B↔Y, etc., then shifts each mirrored letter 4 places FORWARD (Z wraps to A). The final code is OJEESZ. Undo BOTH operations to recover the word.",
+      "h": "Reverse the Caesar shift before applying the mirror substitution.",
+      "a": "PUZZLE"
+    },
+    {
+      "title": "03 · The Alternating Engine",
+      "q": "The sequence is 3, 7, 14, 18, 36, 40, ?. It alternates between ADD 4 and MULTIPLY BY 2, starting with addition. Find the NEXT value.",
+      "h": "Write the two different rules over alternating arrows; do not apply one rule every time.",
+      "a": "80"
+    },
+    {
+      "title": "04 · The Coordinate Map",
+      "q": "A 5×5 grid has rows and columns numbered 1 to 5. Start at (row 2, column 2). Follow W → S → E → S → W (N=−1 row, S=+1 row, E=+1 column, W=−1 column). Enter the final TWO-DIGIT code ROW then COLUMN, without punctuation.",
+      "h": "Track row and column separately. Do not turn the grid or swap the coordinate order.",
+      "a": "41"
+    },
+    {
+      "title": "05 · The 24-Hour Relay",
+      "q": "A 24-hour station clock shows 17:25. SUBTRACT 11:50 hours and minutes, wrapping at midnight. Enter the final time as HH:MM.",
+      "h": "Convert everything to minutes, adjust, then convert back to a 24-hour time.",
+      "a": "05:35"
+    },
+    {
+      "title": "06 · The Three Seals",
+      "q": "Three positive numbers A, B and C satisfy A+B=11, B+C=13, and A+C=14. What is A+B+C?",
+      "h": "Adding all three equations counts each unknown exactly twice.",
+      "a": "19"
+    },
+    {
+      "title": "07 · The Hexadecimal Message",
+      "q": "The lock stores ASCII letters as hexadecimal bytes: 47 41 54 45. Decode each byte to a capital letter (for example hex 41 means A). What four-letter word is hidden?",
+      "h": "Convert each two-digit hex byte separately; keep the resulting letters in order.",
+      "a": "GATE"
+    },
+    {
+      "title": "08 · Exactly One True",
+      "q": "A key lies under LEFT, MIDDLE or RIGHT. Exactly ONE of the following statements is true: (1) The key is NOT under RIGHT. (2) The key is under LEFT. (3) The key is NOT under LEFT. Which position has the key?",
+      "h": "For each possible position, mark each statement true or false. Keep only the position producing exactly one true claim.",
+      "a": "RIGHT"
+    },
+    {
+      "title": "09 · The Ordered Operations",
+      "q": "Start with 9, multiply by 5, add 13, and finally divide by 2. What exact number results?",
+      "h": "Keep the running result after each of the four specified operations.",
+      "a": "29"
+    },
+    {
+      "title": "10 · The Repeating Key",
+      "q": "A Vigenère encoder uses A=0 through Z=25 and repeats the key KEY. It encrypts each plain letter p as (p + key letter) mod 26. The ciphertext is FESVX. SUBTRACT the repeating key to recover the original five-letter word.",
+      "h": "Repeat the key under the ciphertext first, then subtract letter positions with wraparound.",
+      "a": "VAULT"
+    },
+    {
+      "title": "11 · The Two-by-Two Seal",
+      "q": "The 2×2 matrix has first row [6, 3] and second row [5, 8]. Its determinant is (top-left × bottom-right) − (top-right × bottom-left). Calculate that determinant.",
+      "h": "Use the diagonal products and preserve the subtraction order.",
+      "a": "33"
+    },
+    {
+      "title": "12 · The Blocked Junction",
+      "q": "On a grid, travel from (0,0) to (5,3) using only RIGHT (+1 x) and UP (+1 y). You may NOT pass through (3,1). How many shortest paths are there?",
+      "h": "Count all unrestricted shortest paths, then subtract those that pass through the blocked junction.",
+      "a": "32"
+    },
+    {
+      "title": "13 · The Double Remainder",
+      "q": "Find the SMALLEST positive integer larger than 35 satisfying x mod 3 = 1 AND x mod 4 = 3. Enter the integer.",
+      "h": "List integers with one remainder, then test the second remainder on each candidate.",
+      "a": "43"
+    },
+    {
+      "title": "14 · The Two Machines",
+      "q": "Machine A makes 4 parts per minute and machine B makes 3 parts per minute. Both run together for 4 minutes, then A stops while B runs for 2 MORE minutes. How many parts were made in total?",
+      "h": "Separate the shared running time from B’s extra two minutes.",
+      "a": "34"
+    },
+    {
+      "title": "15 · The Two-Rail Cipher",
+      "q": "A six-letter word is written in a two-rail zigzag: letters at positions 1,3,5 go on the TOP rail; 2,4,6 on the BOTTOM. Then the TOP is followed by the BOTTOM, giving CPEIHR. Reverse this rail-fence cipher and recover the original word.",
+      "h": "Split the six letters into two groups of three, then interleave the two groups.",
+      "a": "CIPHER"
+    }
+  ]
+}
