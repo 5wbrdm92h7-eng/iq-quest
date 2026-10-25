@@ -1,0 +1,99 @@
+{
+  "v": 1,
+  "title": "The Neon Cipher Vault",
+  "creator": "IQ QUEST",
+  "theme": "Fifteen connected logic and code-breaking puzzles. Every rule needed to solve a puzzle is inside its question; retain earlier answers for later locks.",
+  "difficulty": "Hard",
+  "levels": [
+    {
+      "title": "01 · Access Header",
+      "q": "The ASCII decimal codes for capital letters are A=65, B=66, C=67 and so on through Z=90. Decode these four 8-bit binary numbers into decimal ASCII codes, then into capital letters: 01001110 01000101 01001111 01001110. Enter the resulting word.",
+      "h": "An ASCII capital letter is stored as one group of eight binary digits. The first group represents decimal 78.",
+      "a": "NEON"
+    },
+    {
+      "title": "02 · Shifted Sign",
+      "q": "A display writes each letter with a Caesar shift of +3: A becomes D, B becomes E and Z becomes C. Its inscription is JDWH. Reverse the shift to find the original four-letter word.",
+      "h": "Read the alphabet three places backward for each letter. Wrap around at A if needed.",
+      "a": "GATE"
+    },
+    {
+      "title": "03 · Numerical Footprint",
+      "q": "The vault displays 2, 6, 12, 20, 30, ?. The differences between consecutive terms grow by a fixed amount. What number replaces the question mark?",
+      "h": "Look at the gaps between terms before trying to extend the sequence.",
+      "a": "42"
+    },
+    {
+      "title": "04 · Alphabet Mirror",
+      "q": "Use the reverse-alphabet substitution A↔Z, B↔Y, C↔X, and so on. Decode the inscription XLWV. Enter the four-letter word.",
+      "h": "The first and last letters of the alphabet are partners. Every letter has exactly one mirrored partner.",
+      "a": "CODE"
+    },
+    {
+      "title": "05 · Nine-Key Route",
+      "q": "Use this 3×3 grid, with north toward the top: A B C / D E F / G H I. Start on E and move N, E, S, S, W, W, N, one cell at a time. Which letter do you finish on?",
+      "h": "Draw the grid. Keep your finger on the current cell after each move.",
+      "a": "D"
+    },
+    {
+      "title": "06 · Reversed Digits",
+      "q": "Find the two-digit number between 30 and 60 whose digits add to 9. When its digits are reversed, the new number is exactly 27 larger. Enter the original number.",
+      "h": "Reversing a two-digit number changes it by nine times the difference between its digits.",
+      "a": "36"
+    },
+    {
+      "title": "07 · Seven-Position Dial",
+      "q": "The dial has positions 0, 1, 2, 3, 4, 5, 6 in a loop. Start at the remainder when the answer to Level 03 is divided by 7. Then move 11 positions clockwise. Which position do you reach?",
+      "h": "Only remainders matter on this dial. Going seven positions returns you to where you started.",
+      "a": "4"
+    },
+    {
+      "title": "08 · Boolean Gateway",
+      "q": "Convert your decimal answer to Level 06 into binary. Use its LAST three binary digits as switches A, B, C, in that order. Evaluate (A AND NOT B) XOR C, where 1 is true, 0 is false, and XOR is true only when its inputs differ. Enter 0 or 1.",
+      "h": "Break the decimal number into powers of two. NOT flips a bit, AND needs both inputs to be 1, and XOR needs different inputs.",
+      "a": "1"
+    },
+    {
+      "title": "09 · Two-Rail Message",
+      "q": "A six-letter word was written by alternating letters from two rails, starting with rail 1. Rail 1 contains CYT. Rail 2 contains RPO. Rebuild the original six-letter word.",
+      "h": "Take one letter from the first rail, then one from the second, then return to the first.",
+      "a": "CRYPTO"
+    },
+    {
+      "title": "10 · Alphabet Checksum",
+      "q": "Take the four-letter answer to Level 02. Convert its letters using A=1, B=2, ... Z=26. Add all four values. What is the decimal checksum?",
+      "h": "Count alphabet positions for each letter separately; do not concatenate them.",
+      "a": "33"
+    },
+    {
+      "title": "11 · Hexadecimal Relay",
+      "q": "A hexadecimal digit uses 0–9 and A=10, B=11, C=12, D=13, E=14, F=15. Convert hexadecimal 2F to an ordinary decimal number.",
+      "h": "In base 16, the left digit counts groups of sixteen and the right digit counts units.",
+      "a": "47"
+    },
+    {
+      "title": "12 · Common-Multiple Lock",
+      "q": "Three devices repeat every 8, 9 and 12 beats. They activate together at beat 0. What is the earliest POSITIVE beat when all three activate together again?",
+      "h": "Find a positive multiple of 9 that is also divisible by both 8 and 12.",
+      "a": "72"
+    },
+    {
+      "title": "13 · Symbol Stream",
+      "q": "For this keypad, ○ means binary 0 and △ means binary 1. Read the six-symbol stream ○△○○△△ from left to right as a binary number. Convert it to decimal.",
+      "h": "Six binary places, from left to right, are worth 32, 16, 8, 4, 2 and 1.",
+      "a": "19"
+    },
+    {
+      "title": "14 · Keyed Letter Wheel",
+      "q": "Use the answer to Level 05 as an A=1 ... Z=26 key. A terminal displays WLMJX, encrypted by shifting each original letter FORWARD by that key value. Undo the shift and enter the five-letter original word.",
+      "h": "First convert the single-letter key into a number. Shift backward, not forward, to decode the terminal.",
+      "a": "SHIFT"
+    },
+    {
+      "title": "15 · Final Vault Key",
+      "q": "Build a code with exactly two hyphens in the form LETTERS-NUMBER-LETTER. Part 1: take the FIRST THREE letters of the answer to Level 04 and shift EACH forward by the numeric answer to Level 07 (A wraps after Z). Part 2: use the full number from Level 03. Part 3: use the LAST letter of the answer to Level 02. Enter the complete code.",
+      "h": "Use the alphabet shift on three separate letters; keep the number unchanged and include both hyphens.",
+      "a": "GSH-42-E"
+    }
+  ]
+}

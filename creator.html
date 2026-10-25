@@ -372,6 +372,27 @@ details.advanced-box[open]>summary{color:#adffb8;margin-bottom:13px}
             <p>Create and test without Phantom. To publish a <strong>new</strong> quest in this beta, you can use the optional Devnet storage test below. Your wallet is needed only when you publish, and each onchain transaction needs separate approval. Real $3.99 Mainnet checkout remains OFF.</p>
             <div class="flow-tiles"><div class="flow-tile"><b>1</b>Describe</div><div class="flow-tile"><b>2</b>Create 15 puzzles</div><div class="flow-tile"><b>3</b>Test &amp; publish</div></div>
           </div>
+          <section class="panel studio-panel" aria-labelledby="prepared-quests-heading" style="border-color:#77bf8e">
+            <div class="panel-topline"><span class="section-kicker">NEW · READY-MADE QUESTS</span><span class="status-dot">NOT ONCHAIN YET</span></div>
+            <h2 id="prepared-quests-heading">Two new adventures, 15 puzzles each</h2>
+            <p class="section-intro">You can load either full quest instantly. <strong>These two are not published yet.</strong> Review and preview all questions before you choose to pay the Devnet storage test fees. Each quest needs its own onchain upload.</p>
+            <div class="quest-path-grid">
+              <article class="quest-path-card create">
+                <span class="quest-path-tag">QUEST 02 · HARD · 15 PUZZLES</span>
+                <h3>The Neon Cipher Vault</h3>
+                <p>Binary, Caesar codes, logic gates, alphabet mirrors and a connected final lock. Around 6 Phantom approvals if published on Devnet.</p>
+                <button type="button" id="load-neon-vault" class="btn btn-gold">LOAD ALL 15 CIPHER PUZZLES</button>
+              </article>
+              <article class="quest-path-card create">
+                <span class="quest-path-tag">QUEST 03 · MEDIUM · 15 PUZZLES</span>
+                <h3>The Clockwork Observatory</h3>
+                <p>Star maps, gears, clock calculations, signals and a multi-clue dome combination. Around 6 Phantom approvals on Devnet.</p>
+                <button type="button" id="load-clockwork" class="btn btn-gold">LOAD ALL 15 OBSERVATORY PUZZLES</button>
+              </article>
+            </div>
+            <p class="tiny-note">Loading a quest saves an Undo backup of your current editor draft. After onchain verification, send the final Devnet transaction link so its public player button can be added alongside the existing quest. No wallet is connected when loading these drafts.</p>
+            <p id="prepared-quest-status" class="small-status" role="status" aria-live="polite">Choose one to load its questions into the editor.</p>
+          </section>
           <div class="panel studio-panel">
             <div class="panel-topline"><span class="section-kicker">01 · YOUR ADVENTURE</span><span class="status-dot">DRAFT · NO PAYMENT</span></div>
             <h2>Describe your mystery</h2><p class="section-intro">Name your adventure, describe its idea and choose Easy, Medium or Hard. You can edit everything after ChatGPT creates the puzzles.</p>
@@ -943,6 +964,30 @@ $('load-example').addEventListener('click',()=>{
  status('import-status','✓ 15 example puzzles loaded. Your previous draft has been saved for Undo.');
  document.getElementById('level-question').closest('.studio-panel').scrollIntoView({behavior:'smooth',block:'start'});
 });
+async function loadPreparedQuest(filename){
+ try{
+  const activeKey=localStorage.getItem('iqquest_devnet_active_storage_job_v517');
+  if(activeKey){
+   const job=JSON.parse(localStorage.getItem(activeKey)||'null');
+   if(job&&!job.finalSignature)throw Error('Finish your previous unfinished Devnet publication before loading another quest. Your earlier approvals remain recoverable.');
+  }
+  if(!confirm('Load all 15 new questions into the creator? We will save an Undo backup of your current draft first.'))return;
+  status('prepared-quest-status','Loading the complete 15-question adventure…');
+  const response=await fetch('./'+filename,{cache:'no-store'});
+  if(!response.ok)throw Error('Quest file could not be loaded (HTTP '+response.status+'). Make sure '+filename+' is uploaded beside creator.html on GitHub.');
+  const prepared=IQQuest.validate(await response.json());
+  const before=clone(safeDraft());
+  importUndo=before;
+  try{localStorage.setItem(IMPORT_BACKUP_KEY,JSON.stringify(before));}catch(e){console.warn('Prepared quest undo backup storage unavailable',e)}
+  loadData(prepared,false);
+  $('undo-ai-import').classList.remove('hidden');
+  status('prepared-quest-status','✓ '+prepared.title+' loaded. All '+prepared.levels.length+' questions are editable. Next: review, TEST YOUR QUEST FREE, then decide whether to publish on Devnet.');
+  status('import-status','✓ '+prepared.title+' imported. The earlier draft is saved for Undo. No wallet was connected.');
+  document.getElementById('level-question').closest('.studio-panel').scrollIntoView({behavior:'smooth',block:'start'});
+ }catch(error){status('prepared-quest-status',String(error?.message||error),true);}
+}
+$('load-neon-vault').addEventListener('click',()=>{void loadPreparedQuest('neon-cipher-vault.json');});
+$('load-clockwork').addEventListener('click',()=>{void loadPreparedQuest('clockwork-observatory.json');});
 // The editor auto-saves. Manual download/save controls are intentionally not shown.
 $('preview-game').addEventListener('click',previewGame);
 try{if(localStorage.getItem(IMPORT_BACKUP_KEY))$('undo-ai-import').classList.remove('hidden');}catch(e){}
@@ -1044,10 +1089,10 @@ try{
 })();
 </script><script type="module">
 // Explicit release query avoids a stale cached module in Phantom's in-app browser.
-import {publishQuestDevnet,publishQuestDevnetStorageTest,readQuestOnchain,isSolanaSignature} from './onchain-bridge.js?v=516';
+import {publishQuestDevnet,publishQuestDevnetStorageTest,readQuestOnchain,isSolanaSignature} from './onchain-bridge.js?v=517';
 import {verifyDevnetPayment,questFingerprint} from './checkout-bridge.js';
 import {requestCheckoutWallet} from './wallet-bridge.js?v=514';
-import {getSavedMobileJob,DEVNET_STORAGE_ONLY_JOB_KEY,DEVNET_STORY_FREE_JOB_KEY} from './devnet-resumable.mjs?v=516';
+import {getSavedMobileJob,DEVNET_STORAGE_ONLY_JOB_KEY,DEVNET_STORY_FREE_JOB_KEY} from './devnet-resumable.mjs?v=517';
 const $=id=>document.getElementById(id);
 const publish=$('publish-iq-devnet'),storageTest=$('publish-storage-devnet'),consent=$('devnet-accept'),auto=$('devnet-auto-publish'),verify=$('verify-iq-devnet');
 const progress=$('devnet-publish-status'),links=$('devnet-links');
@@ -1055,6 +1100,16 @@ const successModal=$('verified-onchain-modal');
 let busy=false,lastUrl='';
 const completionKey='iqquest_devnet_completed_v50';
 const storageCompletionKey='iqquest_devnet_storage_only_completed_v516_story_free';
+const storageCompletionPrefix='iqquest_devnet_storage_only_completed_v517_';
+// Preserve the already-published example when migrating from the old
+// single-completion field to per-quest completion records.
+try{
+ const legacy=JSON.parse(localStorage.getItem(storageCompletionKey)||'null');
+ if(legacy&&/^[a-f0-9]{64}$/.test(legacy.fingerprint||'')&&isSolanaSignature(legacy.signature)){
+  const migratedKey=storageCompletionPrefix+legacy.fingerprint;
+  if(!localStorage.getItem(migratedKey))localStorage.setItem(migratedKey,JSON.stringify(legacy));
+ }
+}catch(_e){}
 function setStatus(text){progress.textContent=String(text);}
 function closeVerifiedModal(){successModal.classList.add('hidden');}
 $('verified-onchain-close').addEventListener('click',closeVerifiedModal);
@@ -1128,7 +1183,14 @@ async function publishStorageOnly(){
   const plan=document.querySelector('input[name="publish-plan"]:checked')?.value||'community';
   const fingerprint=await questFingerprint(draft,plan);
   let previous=null;
-  try{previous=JSON.parse(localStorage.getItem(storageCompletionKey)||'null');}catch(_e){}
+  const completedKey=storageCompletionPrefix+fingerprint;
+  try{
+   previous=JSON.parse(localStorage.getItem(completedKey)||'null');
+   if(!previous){
+    const legacy=JSON.parse(localStorage.getItem(storageCompletionKey)||'null');
+    if(legacy?.fingerprint===fingerprint)previous=legacy;
+   }
+  }catch(_e){}
   if(previous?.fingerprint===fingerprint){
    if(!isSolanaSignature(previous.signature))throw Error('The saved storage test has no valid signature. Do not sign a duplicate transaction.');
    setStatus('Checking the earlier IQ Labs storage-only Devnet inscription before starting any new upload…');
@@ -1149,7 +1211,11 @@ async function publishStorageOnly(){
   if(await questFingerprint(await checkedDraft(),plan)!==fingerprint)
    throw Error('The 15 questions changed while connecting the wallet. No upload was started.');
   const result=await publishQuestDevnetStorageTest({draft,provider,plan,onProgress:setStatus});
-  try{localStorage.setItem(storageCompletionKey,JSON.stringify({signature:result.signature,fingerprint,payer}));}catch(_e){}
+  try{
+   const record=JSON.stringify({signature:result.signature,fingerprint,payer});
+   localStorage.setItem(completedKey,record);
+   localStorage.setItem(storageCompletionKey,record);
+  }catch(_e){}
   showPublished(result.signature,result.data.title||draft.title,true,true,
    'Original onchain data: '+new TextEncoder().encode(JSON.stringify(result.data)).length+' bytes · compressed: '+result.bytes+' bytes (protocol fees extra).');
  }catch(error){
@@ -1228,6 +1294,15 @@ verify.addEventListener('click',async()=>{
      await verifyDevnetPayment({signature:meta.testPaymentSignature,draft:result.data,plan:meta.plan,payer:meta.publisher,onProgress:setStatus});
      try{localStorage.setItem(completionKey,JSON.stringify({signature:sig,paymentSignature:meta.testPaymentSignature,fingerprint:await questFingerprint(result.data,meta.plan),payer:meta.publisher}));}catch(e){}
    }else if(meta.testMode!=='storage-only')throw Error('The saved quest has neither a verified test-payment reference nor the explicit storage-only test label.');
+   else{
+     const verifiedDraft={...result.data};delete verifiedDraft.iqquest;
+     const fingerprint=await questFingerprint(verifiedDraft,meta.plan);
+     try{
+       const record=JSON.stringify({signature:sig,fingerprint,payer:meta.publisher});
+       localStorage.setItem(storageCompletionPrefix+fingerprint,record);
+       localStorage.setItem(storageCompletionKey,record);
+     }catch(_e){}
+   }
    const title=result.data.title||'An IQ QUEST Adventure';
    showPublished(sig,title,true,meta.testMode==='storage-only',
     'Original onchain data: '+new TextEncoder().encode(result.raw).length+' bytes · compressed: '+new TextEncoder().encode(result.storedRaw).length+' bytes (protocol fees extra).');

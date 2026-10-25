@@ -8,6 +8,13 @@ const JOB_KEY='iqquest_devnet_mobile_upload_v1';
 export const DEVNET_STORAGE_ONLY_JOB_KEY='iqquest_devnet_mobile_storage_only_v515';
 // New inscription format: never overwrite a partially uploaded V5.15 story quest.
 export const DEVNET_STORY_FREE_JOB_KEY='iqquest_devnet_mobile_storage_only_v516_no_story';
+// V5.17: Every new compressed quest gets its own recovery record. Keeping a
+// completed first upload must never prevent the same creator publishing more.
+const MULTI_QUEST_JOB_PREFIX='iqquest_devnet_storage_v517_';
+export function devnetQuestJobKey(digest){
+ if(typeof digest!=='string'||!/^[a-f0-9]{64}$/.test(digest))throw Error('Invalid Devnet quest fingerprint.');
+ return MULTI_QUEST_JOB_PREFIX+digest;
+}
 const SEND_CODE='ef8123d03ea86ec9';
 const INVENTORY_CODE='51b1057ad57d15ee';
 const ALPHABET='123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz';
@@ -96,15 +103,17 @@ async function waitForConfirmed(connection,signature){
 }
 
 export async function publishResumableDevnet({sdk,web3,BufferClass,connection,wallet,provider,payload,preflight,onProgress=()=>{},storage=globalThis.localStorage,jobKey=JOB_KEY}){
- if(![JOB_KEY,DEVNET_STORAGE_ONLY_JOB_KEY,DEVNET_STORY_FREE_JOB_KEY].includes(jobKey))throw Error('Unsupported IQ Labs Devnet recovery namespace. No wallet request was started.');
+ const contentScoped=typeof jobKey==='string'&&jobKey.startsWith(MULTI_QUEST_JOB_PREFIX)&&/^[a-f0-9]{64}$/.test(jobKey.slice(MULTI_QUEST_JOB_PREFIX.length));
+ if(!contentScoped&&![JOB_KEY,DEVNET_STORAGE_ONLY_JOB_KEY,DEVNET_STORY_FREE_JOB_KEY].includes(jobKey))throw Error('Unsupported IQ Labs Devnet recovery namespace. No wallet request was started.');
  if(typeof provider?.signAndSendTransaction!=='function')throw Error('This wallet cannot broadcast an approved Devnet transaction.');
  if(!/^[\x00-\x7f]+$/.test(payload))throw Error('The packed onchain data must be ASCII to preserve IQ Labs chunk boundaries.');
  // V5.15 jobs retain the original 850-byte boundaries for safe legacy
  // recovery. New story-free jobs use 800 bytes and a separate local key.
- const chunks=jobKey===DEVNET_STORY_FREE_JOB_KEY?splitDevnetChunks(payload):
+ const chunks=(jobKey===DEVNET_STORY_FREE_JOB_KEY||contentScoped)?splitDevnetChunks(payload):
    Array.from({length:Math.ceil(payload.length/850)},(_,i)=>payload.slice(i*850,(i+1)*850));
  if(!chunks.length||chunks.length>=10)throw Error('Mobile Devnet upload must use 1–9 official IQ Labs chunks.');
  const digest=await sha256Hex(payload);
+ if(contentScoped&&jobKey!==devnetQuestJobKey(digest))throw Error('The Devnet recovery key does not match this quest. No wallet request was started.');
  const payer=wallet.toBase58();
  const program=new web3.PublicKey('9KLLchQVJpGkw4jPuUmnvqESdR7mtNCYr3qS4iQLabs');
  const codeAccount=web3.PublicKey.findProgramAddressSync([BufferClass.from('codemY}AGBJiqLabs'),wallet.toBuffer()],program)[0];

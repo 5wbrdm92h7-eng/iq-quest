@@ -1,0 +1,99 @@
+{
+  "v": 1,
+  "title": "The Clockwork Observatory",
+  "creator": "IQ QUEST",
+  "theme": "Fifteen self-contained astronomy-inspired logic puzzles, clocks, gears, maps and patterns. Earlier answers become keys for later instruments.",
+  "difficulty": "Medium",
+  "levels": [
+    {
+      "title": "01 · Star Coordinates",
+      "q": "A star map has columns A, B, C, D from left to right and rows 1, 2, 3, 4 from bottom to top. Start at B2. Move E, N, N, W, S, exactly one square per move. Enter the final coordinate as LETTER followed by DIGIT.",
+      "h": "East increases the column letter. North increases the row number. Track both independently.",
+      "a": "B3"
+    },
+    {
+      "title": "02 · Reversed Moon Label",
+      "q": "A telescope tag shows the four-letter word NOOM written in reverse order. Read the letters from RIGHT to LEFT. What ordinary English word does it spell?",
+      "h": "Keep all four letters; change only their order.",
+      "a": "MOON"
+    },
+    {
+      "title": "03 · Two Signal Bells",
+      "q": "One bell rings at t=0, 9, 18, 27 ... seconds. Another rings at t=0, 15, 30, 45 ... seconds. What is the earliest POSITIVE number of seconds when both ring at once?",
+      "h": "List a few multiples of both 9 and 15. Exclude the starting moment at zero.",
+      "a": "45"
+    },
+    {
+      "title": "04 · Clock Face Angle",
+      "q": "At exactly 3:00 on a standard 12-hour clock, the minute hand points to 12 and the hour hand to 3. What is the SMALLER angle between the hands, in degrees? Enter digits only.",
+      "h": "A full circle has 360 degrees and is divided into twelve equal hour intervals.",
+      "a": "90"
+    },
+    {
+      "title": "05 · Three-Station Orbit",
+      "q": "Three stations repeat clockwise as ALPHA → BETA → GAMMA → ALPHA. Start at ALPHA. Advance exactly eight stations, counting each move to the next station as one step. Which station do you land on?",
+      "h": "A set of three moves takes you around the loop and back to ALPHA.",
+      "a": "GAMMA"
+    },
+    {
+      "title": "06 · Lens Pair Selection",
+      "q": "Four lenses have strengths A=3, B=4, C=6, D=8. Choose EXACTLY TWO lenses whose strengths multiply to 24 and add to an ODD number. Enter their two letter labels in alphabetical order, without a separator.",
+      "h": "More than one pair multiplies to 24. Check the sum to eliminate the wrong pair.",
+      "a": "AD"
+    },
+    {
+      "title": "07 · Spectral Filter",
+      "q": "A filter has seven numbered bands: 1 through 7. Light passes through a band if its number is divisible by 2 OR by 3. How many DISTINCT bands allow light through?",
+      "h": "Write out the qualifying band numbers. A band divisible by both numbers counts only once.",
+      "a": "4"
+    },
+    {
+      "title": "08 · Encoded Star Position",
+      "q": "Take the coordinate from Level 01. Convert its column to a number (A=1, B=2, C=3, D=4). Convert that column number AND its row number separately to TWO-BIT binary (1=01, 2=10, 3=11; the earlier coordinate uses only these values). Concatenate column bits then row bits. Enter the four binary digits.",
+      "h": "The two parts are two bits each; do not insert a space or change their order.",
+      "a": "1011"
+    },
+    {
+      "title": "09 · Meshed Gears",
+      "q": "Gear A has 12 teeth and turns exactly 5 complete revolutions. It drives a meshed gear B with 20 teeth. Every passing tooth of A advances one tooth of B. How many COMPLETE revolutions does B make? Ignore direction.",
+      "h": "Count how many teeth pass through the mesh in five revolutions of gear A, then divide by the teeth on B.",
+      "a": "3"
+    },
+    {
+      "title": "10 · Morse from the Dome",
+      "q": "Use only this Morse key: ... = S, ..- = U, -. = N, --- = O. The receiver gives three letter groups separated by spaces: ... ..- -. Decode them as a three-letter word.",
+      "h": "Each space separates letters; there are exactly three groups to decode.",
+      "a": "SUN"
+    },
+    {
+      "title": "11 · Four-Night Phase Dial",
+      "q": "An imaginary moon display repeats this four-night cycle forever: night 1 NEW, night 2 WAXING, night 3 FULL, night 4 WANING, night 5 NEW again. Which phase does it show on night 14? Enter the phase word.",
+      "h": "Subtract groups of four nights until the night number is between 1 and 4.",
+      "a": "WAXING"
+    },
+    {
+      "title": "12 · Four-Digit Calibration",
+      "q": "A lock needs four DIFFERENT decimal digits in order. The second digit is 2. The first digit is twice the second. The third is the sum of the first and second. The fourth is one less than the third. What four-digit code opens it?",
+      "h": "Calculate digits from left to right. A code may start with any nonzero digit.",
+      "a": "4265"
+    },
+    {
+      "title": "13 · Spectral Letter Sum",
+      "q": "Use the three-letter answer to Level 10. Number the alphabet A=1, B=2, ... Z=26. Add the values of those three letters. What is the total?",
+      "h": "Find a numeric value for each letter and use addition, not concatenation.",
+      "a": "54"
+    },
+    {
+      "title": "14 · Azimuth Indicator",
+      "q": "The pointer begins at the number of degrees found in Level 04, measured clockwise from 0. Rotate it clockwise by five QUARTER turns. One quarter turn is 90 degrees. Reduce the final reading to 0–359 degrees. Enter the number only.",
+      "h": "Four quarter turns complete one revolution; any full revolutions can be discarded.",
+      "a": "180"
+    },
+    {
+      "title": "15 · The Dome Combination",
+      "q": "Enter the final access code as WORD-NUMBER-LETTER, with two hyphens. WORD: reverse the four-letter answer to Level 02. NUMBER: divide the answer to Level 03 by the answer to Level 09. LETTER: take the FIRST letter of the answer to Level 10. Keep all parts in that order.",
+      "h": "You need three earlier answers, and the numeric part requires division before joining the parts.",
+      "a": "NOOM-15-S"
+    }
+  ]
+}

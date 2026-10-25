@@ -290,10 +290,27 @@ export async function publishQuestOnchain({draft,provider,plan='community',netwo
    // Phantom mobile can reload the in-app page after signing. By letting the
    // wallet broadcast, then recording/recovering each SDK-built chunk onchain,
    // a page reset cannot silently discard a signed-but-unsent transaction.
-   const {publishResumableDevnet,DEVNET_STORAGE_ONLY_JOB_KEY,DEVNET_STORY_FREE_JOB_KEY}=await import('./devnet-resumable.mjs?v=516');
+   const {publishResumableDevnet,DEVNET_STORY_FREE_JOB_KEY,devnetQuestJobKey,getSavedMobileJob}=await import('./devnet-resumable.mjs?v=517');
+   let storageJobKey;
+   if(devnetStorageOnly){
+     // New quests need independent resumable jobs. Never overwrite the
+     // successfully published V5.16 example or an interrupted older upload.
+     const payloadDigest=await sha256Hex(payload);
+     storageJobKey=devnetQuestJobKey(payloadDigest);
+     const legacy=getSavedMobileJob(globalThis.localStorage,DEVNET_STORY_FREE_JOB_KEY);
+     if(legacy?.digest===payloadDigest&&legacy?.payer===wallet.toBase58())storageJobKey=DEVNET_STORY_FREE_JOB_KEY;
+     const activeKey='iqquest_devnet_active_storage_job_v517';
+     const previousKey=globalThis.localStorage.getItem(activeKey);
+     if(previousKey&&previousKey!==storageJobKey){
+       const previous=getSavedMobileJob(globalThis.localStorage,previousKey);
+       if(previous&&!previous.finalSignature)
+         throw Error('An earlier quest upload is still unfinished on this device. Return to that saved quest and resume its Phantom approvals before publishing a different quest. No new transaction was requested.');
+     }
+     globalThis.localStorage.setItem(activeKey,storageJobKey);
+   }
    onProgress('Using Phantom’s recoverable Devnet sign-and-send route. IQ Labs instructions are verified before wallet approval.');
    signature=await publishResumableDevnet({sdk,web3,BufferClass,connection,wallet,provider,payload,
-     ...(devnetStorageOnly?{jobKey:DEVNET_STORY_FREE_JOB_KEY}:{}),
+     ...(devnetStorageOnly?{jobKey:storageJobKey}:{}),
      preflight:async tx=>{inspect(tx);await preflight(tx);},onProgress});
  }else{
    signature=await sdk.writer.codeIn({connection,signer},payload,'iq-quest-15.json',0,'application/json',(percent)=>onProgress('IQ Labs upload: '+Math.round(Number(percent)||0)+'%'));
