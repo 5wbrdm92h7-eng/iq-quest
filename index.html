@@ -276,6 +276,12 @@ h1,h2,h3{font-family:Georgia,"Times New Roman",serif;letter-spacing:-.015em}h1{f
 .quest-path-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
 .quest-path-card{display:flex;flex-direction:column;gap:8px;padding:17px;border:1px solid #497357;border-radius:12px;background:#10271c}
 .quest-path-card.create{background:#16221f;border-color:#67705e}
+.quest-path-card.easy{border-color:#75d69b}
+.quest-path-card.medium{border-color:#e1c16f}
+.quest-path-card.hard{border-color:#e28a81}
+.quest-path-card.easy .quest-path-tag{color:#a9ffbd}
+.quest-path-card.medium .quest-path-tag{color:#ffe1a2}
+.quest-path-card.hard .quest-path-tag{color:#ffc0b8}
 .quest-path-card h3{font-size:21px;margin:0;color:#b8ffca}
 .quest-path-card p{font-size:12px;line-height:1.6;color:#d2e4d7;margin:0;flex:1}
 .quest-path-card .btn{width:100%;text-align:center;white-space:normal}
@@ -411,7 +417,7 @@ h1,h2,h3{font-family:Georgia,"Times New Roman",serif;letter-spacing:-.015em}h1{f
 <body data-page="player">
   <div class="site-shell">
     <header class="topbar">
-      <div class="brand-cluster"><a class="wordmark" href="index.html" aria-label="IQ Quest home"><span class="wordmark-iq">IQ</span><span class="wordmark-quest">QUEST</span></a><span class="onchain-promise" aria-label="100 percent onchain is planned, using IQ Labs SDK">100% ONCHAIN · PLANNED<small>IQ LABS SDK · NOT LIVE</small></span><a class="brand-official-x" href="https://x.com/IQLabsOfficial" target="_blank" rel="noopener noreferrer" aria-label="Open IQ Labs official profile on X">↗ IQ LABS ON X · @IQLabsOfficial</a></div>
+      <div class="brand-cluster"><a class="wordmark" href="index.html" aria-label="IQ Quest home"><span class="wordmark-iq">IQ</span><span class="wordmark-quest">QUEST</span></a><span class="onchain-promise" aria-label="Quest questions and answers are published on Solana Devnet; full onchain gameplay is planned">QUESTS ONCHAIN · DEVNET<small>FULL ONCHAIN · PLANNED</small></span><a class="brand-official-x" href="https://x.com/IQLabsOfficial" target="_blank" rel="noopener noreferrer" aria-label="Open IQ Labs official profile on X">↗ IQ LABS ON X · @IQLabsOfficial</a></div>
       <nav class="top-links" aria-label="Main navigation"><a class="nav-create preview-back-top hidden" id="preview-return-top" href="creator.html#studio">← BACK TO EDITOR</a>
         <a href="#adventure">Play</a>
         <a href="#how">How it works</a>
@@ -423,31 +429,31 @@ h1,h2,h3{font-family:Georgia,"Times New Roman",serif;letter-spacing:-.015em}h1{f
 
     <main>
       <section class="quest-paths" id="quest-entry-options" aria-labelledby="quest-entry-heading">
-        <div class="section-kicker">3 PUBLISHED QUESTS · 15 PUZZLES EACH</div>
-        <h2 id="quest-entry-heading">Choose your onchain quest</h2>
-        <p>All three puzzle sets have been published using <strong>IQ Labs on Solana Devnet</strong>. Their questions, hints and answers are stored onchain. <strong>Playing is free: no wallet, no confirmations and no new storage fee.</strong></p>
+        <div class="section-kicker">3 FREE ONCHAIN GAMES · 15 PUZZLES EACH</div>
+        <h2 id="quest-entry-heading">Choose your level: Easy, Medium or Hard</h2>
+        <p>Pick your difficulty below. All three 15-puzzle quests have been published using <strong>IQ Labs on Solana Devnet</strong>, including their questions, hints and answers. <strong>All three are free to play and share: no wallet, no confirmations, no storage fee.</strong></p>
         <div class="quest-path-grid">
-          <article class="quest-path-card">
-            <span class="quest-path-tag">QUEST 01 · HARD · DEVNET</span>
-            <h3>The Lost Solana Treasure</h3>
-            <p>Explore the original 15-puzzle adventure. Already stored on Solana Devnet; share the same challenge with friends. <strong>No wallet required.</strong></p>
-            <a class="btn btn-green" href="index.html?tx=42M6zsouCMcFqektRzp7D19vbc6mM3RYmjA2UHJzeSZmgFKXDftL6i9KbM1RK47NXyLLTvFKcMHpa7na8wHC46ms&amp;network=devnet">▶ PLAY SAVED ONCHAIN QUEST</a>
+          <article class="quest-path-card easy">
+            <span class="quest-path-tag">01 · EASY · BEGINNER · DEVNET</span>
+            <h3>The Lost Solana Treasure: Easy Edition</h3>
+            <p><strong>Level: EASY.</strong> Start with shorter codes, number patterns, a letter maze and beginner-friendly clues. 15 genuine puzzles, all stored onchain.</p>
+            <a class="btn btn-green" href="index.html?tx=2ixtJsqFm1KG5J7rcwjSVCLz6WqGxihGHNTkgd62uvyt5zX91zWnfgy1xitkb2npZumRqjn395UvLPFTENvwbwym&amp;network=devnet">▶ PLAY EASY QUEST · FREE</a>
           </article>
-          <article class="quest-path-card">
-            <span class="quest-path-tag">QUEST 02 · HARD · DEVNET</span>
-            <h3>The Neon Cipher Vault</h3>
-            <p>Crack binary clues, hidden codes and logic puzzles across 15 stages. <strong>Already published onchain.</strong> No Phantom or new upload needed to play.</p>
-            <a class="btn btn-green" href="index.html?tx=5TZS5svVvKLmAPnjrLeL9JbZtXMMriit8KpG8uSupvDAqGRDkjMV7jgtP6GZerzV4cZKJuusXApbfHA1ohRbgKAz&amp;network=devnet">▶ PLAY NEON CIPHER VAULT</a>
-          </article>
-          <article class="quest-path-card">
-            <span class="quest-path-tag">QUEST 03 · MEDIUM · DEVNET</span>
+          <article class="quest-path-card medium">
+            <span class="quest-path-tag">02 · MEDIUM · INTERMEDIATE · DEVNET</span>
             <h3>The Clockwork Observatory</h3>
-            <p>Decode star maps, gears, number patterns and secret signals in 15 puzzles. <strong>Already published onchain.</strong> Free to play and share.</p>
-            <a class="btn btn-green" href="index.html?tx=3B2DJjR28V5HZpV2Tv4HKuMET2imBaYQFf4LxufBRF2oKVScHe5iyJfexn3wopscKJntyhFAd2PTNwxZbY6BzcfU&amp;network=devnet">▶ PLAY CLOCKWORK OBSERVATORY</a>
+            <p><strong>Level: MEDIUM.</strong> Solve star maps, gears, clock calculations, number patterns and secret signals. 15 verified onchain puzzles.</p>
+            <a class="btn btn-green" href="index.html?tx=3B2DJjR28V5HZpV2Tv4HKuMET2imBaYQFf4LxufBRF2oKVScHe5iyJfexn3wopscKJntyhFAd2PTNwxZbY6BzcfU&amp;network=devnet">▶ PLAY MEDIUM QUEST · FREE</a>
+          </article>
+          <article class="quest-path-card hard">
+            <span class="quest-path-tag">03 · HARD · ADVANCED · DEVNET</span>
+            <h3>The Neon Cipher Vault</h3>
+            <p><strong>Level: HARD.</strong> Crack demanding binary clues, hidden ciphers and connected logic challenges in 15 onchain stages.</p>
+            <a class="btn btn-green" href="index.html?tx=5TZS5svVvKLmAPnjrLeL9JbZtXMMriit8KpG8uSupvDAqGRDkjMV7jgtP6GZerzV4cZKJuusXApbfHA1ohRbgKAz&amp;network=devnet">▶ PLAY HARD QUEST · FREE</a>
           </article>
         </div>
         <div class="quest-create-callout">
-          <div><h3>Want to create your own quest?</h3><p>Build and test 15 puzzles for free. Publishing new onchain content needs Phantom approvals and Devnet test-SOL; the three games above do not.</p></div>
+          <div><h3>Want to publish your own quest?</h3><p>Build and test your own 15 puzzles for free. Publishing a new custom quest is planned as a paid creator feature; the paid Mainnet checkout is not live yet. Devnet test publishing currently requires Phantom approvals and test-SOL. The three ready-made games above remain free.</p></div>
           <a class="btn btn-gold" href="creator.html#studio">✦ BUILD MY OWN QUEST</a>
         </div>
         <p class="quest-path-note">Devnet is a test network, not Solana Mainnet. Game timers and personal scores run in your browser. The difficulty selector below contains separate browser demos, not these three stored quests.</p>
