@@ -316,6 +316,25 @@ details.advanced-box[open]>summary{color:#adffb8;margin-bottom:13px}
  .creator-benefits p{display:none}
  .ai-next-step{padding:12px 10px}
 }
+/* V5.16.2: make reuse vs. creator publication impossible to confuse. */
+.quest-paths{margin:16px 0 20px;padding:18px;border:1px solid #466852;border-radius:15px;background:linear-gradient(145deg,#14291f,#0a1b19)}
+.quest-paths h2{margin:4px 0 6px;font-size:clamp(23px,3vw,31px);color:#f1d8a6}
+.quest-paths>p{margin:0 0 14px;color:#c3d9c9;font-size:13px;line-height:1.6}
+.quest-path-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.quest-path-card{display:flex;flex-direction:column;gap:8px;padding:17px;border:1px solid #497357;border-radius:12px;background:#10271c}
+.quest-path-card.create{background:#16221f;border-color:#67705e}
+.quest-path-card h3{font-size:21px;margin:0;color:#b8ffca}
+.quest-path-card p{font-size:12px;line-height:1.6;color:#d2e4d7;margin:0;flex:1}
+.quest-path-card .btn{width:100%;text-align:center;white-space:normal}
+.quest-path-tag{font-size:10px;font-weight:900;letter-spacing:.08em;color:#ffe1a2}
+.creator-publish-guide{padding:14px 15px;margin:14px 0;border:1px solid #66b579;border-radius:12px;background:#112d1b}
+.creator-publish-guide h4{font-size:16px;color:#c5ffd0;margin:0 0 7px}
+.creator-publish-guide ol{padding-left:19px;margin:6px 0;font-size:12px;color:#ddf0dc;line-height:1.75}
+.creator-publish-guide li{margin:3px 0}
+.creator-publish-guide p{margin:8px 0 0;color:#bbd5bc;font-size:12px;line-height:1.6}
+.fee-facts{padding:12px;margin:10px 0;border:1px solid #e0b35f;border-radius:10px;background:#352713;color:#ffe5b3;font-size:12px;line-height:1.65}
+.fee-facts strong{color:#ffe596}
+@media(max-width:620px){.quest-paths{padding:12px;margin:10px 0 13px}.quest-path-grid{grid-template-columns:1fr;gap:9px}.quest-path-card{padding:12px}.quest-path-card h3{font-size:19px}.quest-path-card .btn{min-height:43px}.creator-publish-guide{padding:12px}}
 </style></head>
 <body data-page="creator">
   <div class="site-shell">
@@ -324,6 +343,25 @@ details.advanced-box[open]>summary{color:#adffb8;margin-bottom:13px}
     <main>
       <section class="hero hero-creator" aria-labelledby="creator-heading"><div class="hero-scrim"></div><div class="hero-content"><div class="eyebrow"><span class="diamond-dot">✦</span> BUILT FOR DEVS · CREATORS · COMMUNITIES</div><h1 id="creator-heading">CREATE YOUR <span class="gold">MYSTERY,</span><span class="creator-hero-subtitle">ENTERTAIN YOUR COMMUNITY!</span></h1><p class="lead">Create 15 mysteries. Challenge your community to beat the clock and share their results on X.</p><div class="hero-buttons"><a class="btn btn-green" href="#studio">START CREATING <span aria-hidden="true">↗</span></a><a class="btn btn-glass" href="index.html">PLAY FREE</a></div><div class="hero-facts"><span>✧ AI-assisted content</span><span>◇ 3 difficulty levels</span><span>♢ Players free</span></div></div><div class="hero-corner">BUILD THE NEXT LEGEND</div></section>
       <div class="onchain-status" role="note" aria-label="Onchain development status"><span class="onchain-dot" aria-hidden="true"></span><strong>SOLANA-NATIVE ROADMAP</strong><span>The quest editor works locally. 100% fully onchain creation, storage and play are goals, not live features yet. Paid Mainnet publishing is not live. Devnet payment and IQ Labs publishing tests are available below.</span></div>
+      <section class="quest-paths" aria-labelledby="creator-choice-heading">
+        <div class="section-kicker">START HERE · TWO DIFFERENT CHOICES</div>
+        <h2 id="creator-choice-heading">Use the ready-made quest or publish your own?</h2>
+        <p>Do not publish the same example again just to play it. The original 15-question quest has already been stored and verified on <strong>IQ Labs Devnet</strong>.</p>
+        <div class="quest-path-grid">
+          <article class="quest-path-card">
+            <span class="quest-path-tag">OPTION A · ALREADY ONCHAIN</span>
+            <h3>Use the published example</h3>
+            <p>Play or share the existing 15 puzzles. <strong>0 wallet connections · 0 confirmations · 0 new storage charges.</strong> No need to open the creator.</p>
+            <a class="btn btn-green" href="index.html?tx=42M6zsouCMcFqektRzp7D19vbc6mM3RYmjA2UHJzeSZmgFKXDftL6i9KbM1RK47NXyLLTvFKcMHpa7na8wHC46ms&amp;network=devnet">▶ PLAY THE SAVED ONCHAIN QUEST</a>
+          </article>
+          <article class="quest-path-card create">
+            <span class="quest-path-tag">OPTION B · ORIGINAL CREATOR</span>
+            <h3>Build a new 15-puzzle quest</h3>
+            <p>Edit and test locally for free. To store <strong>your own new publication</strong> on Solana, you connect Phantom at the end and approve several separate transactions.</p>
+            <a class="btn btn-gold" href="#studio">✦ START THE CREATOR</a>
+          </article>
+        </div>
+      </section>
       
       <section class="creator-benefits" aria-label="Why create a quest"><article><span>✧</span><h3>Bring friends</h3><p>Invite your community.</p></article><article><span>◷</span><h3>Beat the clock</h3><p>Friendly time battles.</p></article><article><span>♢</span><h3>Share on X</h3><p>Bring in challengers.</p></article></section>
       <section id="studio" class="studio-layout">
@@ -331,7 +369,7 @@ details.advanced-box[open]>summary{color:#adffb8;margin-bottom:13px}
           <div class="simple-journey" aria-label="Build your adventure in three steps">
             <div class="section-kicker">IQ QUEST · SIMPLE CREATOR</div>
             <h2>Create · Test · Share</h2>
-            <p>Create and test free. When the onchain checkout is ready: share on X, pay $3.99 once and receive a real game link.</p>
+            <p>Create and test without Phantom. To publish a <strong>new</strong> quest in this beta, you can use the optional Devnet storage test below. Your wallet is needed only when you publish, and each onchain transaction needs separate approval. Real $3.99 Mainnet checkout remains OFF.</p>
             <div class="flow-tiles"><div class="flow-tile"><b>1</b>Describe</div><div class="flow-tile"><b>2</b>Create 15 puzzles</div><div class="flow-tile"><b>3</b>Test &amp; publish</div></div>
           </div>
           <div class="panel studio-panel">
@@ -367,6 +405,7 @@ details.advanced-box[open]>summary{color:#adffb8;margin-bottom:13px}
               </div>
               <details class="advanced-box"><summary>Examples &amp; extra import options</summary>
                 <button type="button" id="load-example" class="btn btn-outline">LOAD 15 EXAMPLE QUESTIONS</button>
+                <p class="tiny-note"><strong>Important:</strong> LOAD EXAMPLE puts editable questions into <em>your draft</em>; it does not give you a separate onchain publication. To play or share the <a href="index.html?tx=42M6zsouCMcFqektRzp7D19vbc6mM3RYmjA2UHJzeSZmgFKXDftL6i9KbM1RK47NXyLLTvFKcMHpa7na8wHC46ms&amp;network=devnet" style="color:#a6ffb7;text-decoration:underline">example already on Devnet</a>, no upload or wallet is required. Publishing a new copy under your wallet would require new approvals and fees.</p>
                 <div class="stack-buttons"><button type="button" id="paste-ai" class="btn btn-outline">PASTE FROM CLIPBOARD</button><button type="button" id="import-ai" class="btn btn-outline">FILL FROM TEXT BOX</button></div>
                 <div class="stack-buttons"><button type="button" id="check-ai-json" class="btn btn-outline">CHECK 15 QUESTIONS FIRST</button><button type="button" id="review-with-chatgpt" class="btn btn-outline">IMPROVE DIFFICULTY</button></div>
                 <label class="btn btn-outline import-file-label" for="upload-ai-json">↑ CHOOSE TEXT FILE<input id="upload-ai-json" type="file" accept=".json,.txt,application/json,text/plain" aria-label="Load ChatGPT text file"></label>
@@ -417,6 +456,26 @@ details.advanced-box[open]>summary{color:#adffb8;margin-bottom:13px}
             <details class="advanced-box"><summary>Fees &amp; how publication will work</summary><p class="tiny-note">The planned platform price is $3.99, settled in SOL using a five-minute server quote. Additional IQ Labs protocol/storage and Solana network fees apply and must be approved by the creator's wallet. A finalized payment enables a separate official IQ Labs SDK inscription of the exact paid 15-question draft. The backend must independently read it back before marking the order published. Browser-local scores/timers are not written onchain. Legal review of withdrawal, taxes and support is pending, so real Mainnet payment remains disabled.</p><span class="price-label">Planned creator fee</span><strong id="plan-breakdown">$3.99 USD equivalent in SOL</strong></details>
             <p class="tiny-note">Before any real paid launch, review our <a href="imprint.html" style="color:#aeffbd;text-decoration:underline">imprint</a>, <a href="privacy.html" style="color:#aeffbd;text-decoration:underline">privacy information</a> and <a href="withdrawal.html" style="color:#aeffbd;text-decoration:underline">withdrawal information</a>. These legal pages are still drafts and the Mainnet checkout remains disabled.</p>
             <p id="checkout-status" class="share-step-status" role="status" aria-live="polite">Checkout not live. Your 15-question adventure can be edited and tested without a wallet.</p>
+            <div class="creator-publish-guide" aria-label="How to publish your own quest in six steps">
+              <h4>👻 HOW TO PUBLISH YOUR OWN QUEST · DEVNET BETA</h4>
+              <ol>
+                <li><strong>Create or import</strong> 15 questions. Review every answer and hint.</li>
+                <li>Tap <strong>TEST YOUR QUEST FREE</strong>. Return to the creator when ready; no wallet needed.</li>
+                <li>Open the page in <strong>Phantom's browser</strong> and switch Phantom to <strong>Solana Devnet</strong> (test mode).</li>
+                <li>Tap <strong>TEST ONCHAIN STORAGE</strong> below, tick the public-data agreement and tap the storage button again. A separate 0.002 test-SOL platform payment is <strong>not</strong> required.</li>
+                <li><strong>Approve each Phantom request</strong> in order. For the saved example it took 5 data approvals + 1 final registration. Bigger drafts may need more. If Phantom returns to this page, use the same button to resume.</li>
+                <li>Wait for <strong>YOUR QUEST IS ONCHAIN!</strong> and 15/15 verified. Only then copy the player link or share it.</li>
+              </ol>
+              <p><strong>Already published example?</strong> <a href="index.html?tx=42M6zsouCMcFqektRzp7D19vbc6mM3RYmjA2UHJzeSZmgFKXDftL6i9KbM1RK47NXyLLTvFKcMHpa7na8wHC46ms&amp;network=devnet" style="color:#aeffbd;text-decoration:underline">Play or share it here</a> — skip all six creator steps and all wallet confirmations.</p>
+            </div>
+            <div class="fee-facts" role="note" aria-label="Observed Solana Devnet publishing cost; not a future price quote">
+              <strong>WHAT DID 6 PHANTOM CONFIRMATIONS COST IN OUR DEVNET EXAMPLE?</strong>
+              <div>5 data transfers + 1 final registration = <strong>6 separate confirmations</strong>, but <strong>not 6 separate platform charges</strong>.</div>
+              <div>Observed Solana transaction fees: <strong>6 × 0.0000054 = 0.0000324 Devnet SOL</strong>.</div>
+              <div>Observed IQ Labs registration fee on the final transaction: <strong>0.003 Devnet SOL once</strong>.</div>
+              <div><strong>Observed total: 0.0030324 Devnet SOL</strong> (test coins with no monetary value).</div>
+              <div style="margin-top:7px">This is a verified example, <strong>not a guaranteed quote</strong> for new uploads. Fees, account costs and the required number of transactions can change. Review each amount inside Phantom. On Mainnet, real SOL plus the planned $3.99 platform fee would apply; <strong>Mainnet checkout is OFF.</strong></div>
+            </div>
             <button type="button" id="shortcut-storage-only" class="btn btn-green" style="width:100%;margin:12px 0">◈ TEST ONCHAIN STORAGE · NO PLATFORM PAYMENT</button>
             <p class="tiny-note">Devnet beta only: test the IQ Labs storage of all 15 questions without another platform test payment. Phantom still charges Devnet network / IQ Labs protocol test-SOL fees. Mainnet payments remain OFF.</p>
             <button type="button" id="start-sol-checkout" class="hidden" disabled>CHECK READINESS · NO PAYMENT</button>
@@ -466,6 +525,7 @@ details.advanced-box[open]>summary{color:#adffb8;margin-bottom:13px}
                   <strong style="display:block;font-size:14px;line-height:1.4;letter-spacing:.02em;color:#ffe08c">⚠ CREATOR: MULTIPLE PHANTOM APPROVALS REQUIRED</strong>
                   <p style="margin:9px 0 6px;color:#ffe8bd;font-size:13px;line-height:1.65"><strong>Why?</strong> All 15 puzzles are stored onchain. Solana limits the size of each transaction, so IQ QUEST writes several small data chunks one after another.</p>
                   <p style="margin:6px 0;color:#fff0c9;font-size:13px;line-height:1.65"><strong>Expect approximately 6 separate transaction confirmations</strong> for the included example (5 data chunks + 1 final registration). Larger quests can require up to 10 confirmations. Phantom may return you to IQ QUEST between approvals; tap the same storage test button to safely resume.</p>
+                  <p style="margin:6px 0;color:#ffe8bd;font-size:12px;line-height:1.65"><strong>Verified Devnet example:</strong> 0.0000324 test SOL for all six Solana transaction fees together, plus a single 0.003 test SOL IQ Labs final registration charge = <strong>0.0030324 Devnet SOL total</strong>. These are previous test results, not a binding quote. Bigger/new uploads may cost differently.</p>
                   <p style="margin:6px 0 0;color:#ffe8bd;font-size:12px;line-height:1.65"><strong>Each approval can incur a separate IQ Labs storage/protocol and Solana network fee.</strong> This test uses Devnet test SOL, not real money. Future Mainnet publication would cost real SOL in addition to the planned platform fee. <strong>Players do not connect wallets or sign these transactions.</strong></p>
                 </div>
                 <button type="button" class="btn btn-green" id="publish-storage-devnet" disabled>◈ TEST ONCHAIN STORAGE · NO PAYMENT</button>

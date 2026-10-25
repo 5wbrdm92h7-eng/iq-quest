@@ -269,6 +269,20 @@ h1,h2,h3{font-family:Georgia,"Times New Roman",serif;letter-spacing:-.015em}h1{f
 .onchain-load-status.error{border-color:#c7857e;background:#301e1b;color:#ffe5dd}
 .is-onchain .hero .hero-buttons a[href="creator.html"]{display:inline-flex}
 .is-onchain .onchain-status{border-color:#8af7a3;background:#133b22}
+/* V5.16.2: choose an existing Devnet inscription or create a new quest. */
+.quest-paths{margin:17px 0 18px;padding:18px;border:1px solid #466852;border-radius:15px;background:linear-gradient(145deg,#14291f,#0a1b19)}
+.quest-paths h2{margin:4px 0 5px;font-size:clamp(23px,3vw,31px);color:#f1d8a6}
+.quest-paths>p{margin:0 0 14px;color:#c3d9c9;font-size:13px;line-height:1.5}
+.quest-path-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.quest-path-card{display:flex;flex-direction:column;gap:8px;padding:17px;border:1px solid #497357;border-radius:12px;background:#10271c}
+.quest-path-card.create{background:#16221f;border-color:#67705e}
+.quest-path-card h3{font-size:21px;margin:0;color:#b8ffca}
+.quest-path-card p{font-size:12px;line-height:1.6;color:#d2e4d7;margin:0;flex:1}
+.quest-path-card .btn{width:100%;text-align:center;white-space:normal}
+.quest-path-tag{font-size:10px;font-weight:900;letter-spacing:.08em;color:#ffe1a2}
+.quest-path-note{font-size:11px;color:#a5bfae;margin-top:12px;line-height:1.5}
+.is-onchain #quest-entry-options,.is-creator-preview #quest-entry-options{display:none}
+@media(max-width:620px){.quest-paths{padding:12px;margin:10px 0}.quest-path-grid{grid-template-columns:1fr;gap:9px}.quest-path-card{padding:12px}.quest-path-card h3{font-size:19px}.quest-path-card .btn{min-height:43px}}
 </style>
 
 <style>
@@ -403,6 +417,26 @@ h1,h2,h3{font-family:Georgia,"Times New Roman",serif;letter-spacing:-.015em}h1{f
       <div class="quick-benefits" aria-label="One creator publishing option: share on X, then 3 dollars and 99 cents once payment is live; playing is free"><span class="benefit-creator">✦ <strong>CREATORS · SHARE ON X &amp; PUBLISH $3.99</strong> <small>(COMING SOON)</small></span><span class="benefit-play">✦ <strong>PLAY FOR FREE</strong></span><span class="benefit-battle">⚔ <strong>BATTLE WITH FRIENDS ON X</strong></span></div>
 
     <main>
+      <section class="quest-paths" id="quest-entry-options" aria-labelledby="quest-entry-heading">
+        <div class="section-kicker">GET STARTED · CHOOSE ONE PATH</div>
+        <h2 id="quest-entry-heading">Play the saved quest or make your own?</h2>
+        <p>The published example already exists on <strong>Solana Devnet</strong>. Playing or sharing it does not store anything again.</p>
+        <div class="quest-path-grid">
+          <article class="quest-path-card">
+            <span class="quest-path-tag">OPTION A · READY TO PLAY</span>
+            <h3>Play the published 15-puzzle quest</h3>
+            <p>Already saved on IQ Labs Devnet and ready to load. <strong>No wallet. No Phantom confirmations. No new storage fee.</strong> Share the same link with friends.</p>
+            <a class="btn btn-green" href="index.html?tx=42M6zsouCMcFqektRzp7D19vbc6mM3RYmjA2UHJzeSZmgFKXDftL6i9KbM1RK47NXyLLTvFKcMHpa7na8wHC46ms&amp;network=devnet">▶ PLAY SAVED ONCHAIN QUEST</a>
+          </article>
+          <article class="quest-path-card create">
+            <span class="quest-path-tag">OPTION B · YOUR OWN PUZZLES</span>
+            <h3>Create a new quest</h3>
+            <p>Write and test your 15 questions free, without a wallet. <strong>Only publishing new onchain data</strong> requires Phantom confirmations and Devnet test-SOL fees.</p>
+            <a class="btn btn-gold" href="creator.html#studio">✦ BUILD MY OWN QUEST</a>
+          </article>
+        </div>
+        <p class="quest-path-note">The difficulty selector below contains additional browser demos. Those demos are separate from the already-published Devnet quest.</p>
+      </section>
       <section class="demo-selector" id="demo-selector" aria-labelledby="difficulty-heading">
         <div class="demo-selector-heading"><div><div class="section-kicker free-battle-kicker">⚔ FREE TEMPLE BATTLES</div><h2 id="difficulty-heading">Challenge your friends. Beat their time.</h2><p>Play a quick 3-question Lightning Battle or the full 15-question quest. Pick a difficulty, race the clock and challenge friends on X. No wallet needed.</p></div><span class="demo-selector-stamp">2 MODES · 3 DIFFICULTIES · FREE TO PLAY</span></div>
         <div class="battle-pitch" aria-label="Free friend battles"><div><strong>⚔ YOUR TIME vs. YOUR FRIEND’S TIME</strong><span>Finish a quest → share the challenge link → friends play the same puzzles.</span></div><a href="#how">HOW BATTLES WORK ↗</a></div><div class="selector-step">1 · CHOOSE GAME LENGTH</div>
