@@ -457,11 +457,12 @@ details.advanced-box[open]>summary{color:#adffb8;margin-bottom:13px}
                 <p>We prepare the request from your title, theme and difficulty. Tap below to copy it.</p>
                 <button type="button" id="ai-generate-one" class="btn btn-green">1 · COPY REQUEST FOR CHATGPT</button>
                 <div id="quick-ai-status" role="status" aria-live="polite"></div>
-                <div class="ai-next-step"><h3>2 · Open ChatGPT</h3><p>Tap the button. In ChatGPT, <strong>hold the message box → Paste → Send</strong>. When all 15 questions appear, copy the <strong>whole reply</strong>.</p>
-                <a id="open-chatgpt-step" href="https://chatgpt.com/" class="btn btn-outline ai-open-link">2 · OPEN CHATGPT · SAME TAB ↗</a><span class="ai-safety-note"><strong>How to return on iPhone:</strong> After copying ChatGPT's answer, tap your browser's <strong>← Back</strong> button to return to IQ QUEST. If the ChatGPT app opens instead, swipe up and switch back to your IQ QUEST browser. Your draft is saved on this device.</span></div><button type="button" id="copy-prompt" class="btn btn-outline hidden">COPY TASK AGAIN</button>
+                <div class="ai-next-step"><h3>2 · Open ChatGPT</h3><p>Tap the button. In ChatGPT, <strong>hold the message box → Paste → Send</strong>. When all 15 questions appear, <strong>copy the answer first</strong>. ChatGPT should put a clickable <strong>↩ RETURN TO IQ QUEST CREATOR</strong> link directly below its answer. Tap that link to come back.</p>
+                <a id="open-chatgpt-step" href="https://chatgpt.com/" class="btn btn-outline ai-open-link">2 · OPEN CHATGPT ↗</a><span class="ai-safety-note"><strong>On iPhone:</strong> Use the <strong>RETURN TO IQ QUEST</strong> link at the end of ChatGPT's answer. If it does not appear, switch back to your IQ QUEST browser or use the creator link you received from us. You can import all 15 questions even if the return link opens another browser.</span></div><button type="button" id="copy-prompt" class="btn btn-outline hidden">COPY TASK AGAIN</button>
               </div>
               <div class="ai-simple-step">
                 <h3>3 · Paste the answer &amp; fill all 15</h3>
+                <div id="chatgpt-return-banner" class="notice hidden" role="status"><strong>↩ WELCOME BACK TO IQ QUEST!</strong> Your ChatGPT answer is on the clipboard. Paste the complete JSON below, then fill your 15 questions. If you returned in another browser, the imported JSON will also restore your quest title, theme and difficulty.</div>
                 <p>Back in IQ QUEST, tap the button below to paste from your clipboard and fill all 15 questions. If your browser blocks clipboard access, <strong>hold inside the box → Paste</strong>, then tap again. Your existing questions will be backed up.</p>
                 <label class="field-label" for="chatgpt-json">ChatGPT answer (paste everything)</label>
                 <textarea id="chatgpt-json" rows="5" spellcheck="false" autocapitalize="off" autocomplete="off" placeholder="Tap and hold here → Paste your entire ChatGPT reply. We detect the questions automatically."></textarea>
@@ -864,6 +865,7 @@ window.IQQuestEditorGetDraft=validateDraft;
 async function downloadJson(){try{const clean=validateDraft();const json=JSON.stringify(clean,null,2);const blob=new Blob([json],{type:'application/json'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='iq-quest-'+clean.title.toLowerCase().replace(/[^a-z0-9]+/g,'-').slice(0,35)+'.json';document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);status('draft-status',`Downloaded ${new TextEncoder().encode(JSON.stringify(clean)).length} UTF-8 bytes of quest data (excluding IQ Labs metadata).`);}catch(err){status('draft-status',err.message,true)}}
 function copyPromptText(){
  const d=safeDraft();
+ const returnLink=new URL('creator.html?from=chatgpt#ai-builder',location.href).href;
  const rulebook={
    Easy:'15 approachable but genuine logic puzzles. Each requires one meaningful deduction (not recall, not simple arithmetic). Aim for a 5–9 minute completion by a practiced player. Give visible clues and short answers. At least 3 puzzle mechanisms across 15 levels.',
    Medium:'15 substantial logic/cipher puzzles with 1–2 reasoning steps each. Aim for 9–18 minutes for a practiced player. Use at least 4 different mechanisms and 2 connections between earlier and later levels. Never simple trivia.',
@@ -890,7 +892,7 @@ GLOBAL QUALITY GATE (REWRITE UNTIL ALL PASS):
 9. Create exactly fifteen levels with diverse challenges, but no storyline. Critically revise your first draft until all 15 pass the quality gate.
 10. Make the expected play time realistic for a practiced player. Avoid artificial waiting or impossible puzzles.
 
-RETURN ONLY ONE VALID JSON OBJECT, with NO Markdown fence or additional text. Exactly this shape:
+RETURN ONE VALID JSON OBJECT, with NO Markdown fence. Exactly this shape:
 {
 "v":1,
 "title":"${d.title.replace(/"/g,"'")}",
@@ -900,7 +902,11 @@ RETURN ONLY ONE VALID JSON OBJECT, with NO Markdown fence or additional text. Ex
 "levels":[{"title":"Level title","q":"Complete solvable puzzle containing ALL clues","h":"Useful hint without answer","a":"EXACT ANSWER"}]
 }
 
-The levels array MUST contain exactly 15 objects. If accepted answers have synonyms, put them into a single string separated by |, e.g. 'bronze | the bronze statue'. No extra JSON keys, especially no story. Valid JSON escaping only, no literal line breaks inside string values. Aim to keep the entire compact JSON below 6,500 UTF-8 bytes, without making the puzzles trivial. All clues MUST appear in q and all answer keys must be unambiguous. The creator will review before publication.`;
+The levels array MUST contain exactly 15 objects. If accepted answers have synonyms, put them into a single string separated by |, e.g. 'bronze | the bronze statue'. No extra JSON keys, especially no story. Valid JSON escaping only, no literal line breaks inside string values. Aim to keep the entire compact JSON below 6,500 UTF-8 bytes, without making the puzzles trivial. All clues MUST appear in q and all answer keys must be unambiguous. The creator will review before publication.
+
+IMPORTANT IPHONE RETURN STEP: Immediately AFTER the JSON object, on a separate line, output exactly this clickable Markdown link (not inside JSON):
+[↩ RETURN TO IQ QUEST CREATOR](${returnLink})
+Do not add any other explanation. The creator will copy the JSON answer and tap this link to return to the editor. The IQ QUEST import safely ignores this link if the entire reply is pasted.`;
 }
 function offerManualPrompt(prompt){$('manual-ai-prompt').value=prompt;$('prompt-fallback').classList.remove('hidden');$('manual-ai-prompt').focus();$('manual-ai-prompt').select();}
 async function copyPrompt(){const text=copyPromptText();try{if(!navigator.clipboard?.writeText)throw Error('Clipboard is unavailable');await navigator.clipboard.writeText(text);$('prompt-fallback').classList.add('hidden');status('import-status','✓ Copied! Tap 2 · OPEN CHATGPT below, paste and send. Copy all 15 answers, then return to step 3.');$('quick-ai-status').classList.remove('bad');$('quick-ai-status').textContent='✓ Request copied! Now tap 2 · OPEN CHATGPT below. In ChatGPT, Paste → Send, then copy the entire reply.';}catch(e){offerManualPrompt(text);status('import-status','Your browser blocked automatic copying. Select and copy the task shown below, then open ChatGPT.',true);$('quick-ai-status').classList.add('bad');$('quick-ai-status').textContent='Clipboard blocked. Copy the request from the opened text box below, then tap 2 · OPEN CHATGPT.';}}
@@ -921,10 +927,15 @@ function showAiReturnHelp(){
 }
 window.addEventListener('pageshow',showAiReturnHelp);
 document.addEventListener('visibilitychange',()=>{if(!document.hidden)showAiReturnHelp();});
+if(new URLSearchParams(location.search).get('from')==='chatgpt'){
+ $('chatgpt-return-banner').classList.remove('hidden');
+ status('import-status','✓ You returned from ChatGPT. Paste its full 15-question reply and press 3 · PASTE & FILL MY 15 QUESTIONS.');
+}
 async function improveWithChatGPT(){
  const d=safeDraft();
  const difficultyRule={Easy:'5–9 min, real one-step logic; never trivial',Medium:'9–18 min, 1–2 steps, 3 cross-level clues',Hard:'15–30 min, 2–4 steps, 4+ cross-level dependencies'}[d.difficulty];
- const prompt='Act as a senior escape-room editor and strict puzzle verifier. Audit and IMPROVE the following IQ QUEST JSON. The creator chose '+d.difficulty+' difficulty ('+difficultyRule+'). All 15 puzzles must fit this standard. For EVERY level, independently recompute the intended answer using only its question and earlier levels. Fix ambiguous or unsolvable riddles; replace simplistic trivia, obvious arithmetic and repeat mechanisms. Do NOT add any story or narration. All necessary rules and clues must appear in q. Ensure Level 15 combines at least two earlier solved clues. Hints help without revealing solutions and cost +60 seconds in play. Return ONLY the complete, valid, corrected JSON with exactly 15 levels and keys v,title,creator,theme,difficulty,levels (each level: title,q,h,a). Do not add extra keys or any explanation. Difficulty must remain '+d.difficulty+'.\n\nQUEST TO REVISE:\n'+JSON.stringify(d);
+ const returnLink=new URL('creator.html?from=chatgpt#ai-builder',location.href).href;
+ const prompt='Act as a senior escape-room editor and strict puzzle verifier. Audit and IMPROVE the following IQ QUEST JSON. The creator chose '+d.difficulty+' difficulty ('+difficultyRule+'). All 15 puzzles must fit this standard. For EVERY level, independently recompute the intended answer using only its question and earlier levels. Fix ambiguous or unsolvable riddles; replace simplistic trivia, obvious arithmetic and repeat mechanisms. Do NOT add any story or narration. All necessary rules and clues must appear in q. Ensure Level 15 combines at least two earlier solved clues. Hints help without revealing solutions and cost +60 seconds in play. Return the complete, valid, corrected JSON with exactly 15 levels and keys v,title,creator,theme,difficulty,levels (each level: title,q,h,a). Do not add extra JSON keys. Difficulty must remain '+d.difficulty+'.\n\nQUEST TO REVISE:\n'+JSON.stringify(d)+'\n\nAfter the JSON, put this clickable link on its own line so I can return to IQ QUEST on my iPhone: [↩ RETURN TO IQ QUEST CREATOR]('+returnLink+'). Do not add other explanation.';
  try {await navigator.clipboard.writeText(prompt);status('import-status','Difficulty review prompt copied! Open ChatGPT, paste it and import the improved JSON below.');}
  catch(e){offerManualPrompt(prompt);status('import-status','Select and copy the review prompt from the box below; the JSON import field is untouched.',true);}
 }
@@ -952,9 +963,11 @@ function importResponse(){
   const text=$('chatgpt-json').value;
   const existing=safeDraft();
   const parsed=IQQuest.readImport(text,existing);
-  // Keep the creator's current title, community, theme and selected difficulty.
-  // This button specifically replaces 15 occupied chapter fields, never the site branding.
-  const data={...parsed,title:existing.title,creator:existing.creator,theme:existing.theme,difficulty:existing.difficulty};
+  // A return link may open in a DIFFERENT iPhone browser with no saved draft.
+  // In that case the complete imported JSON must restore the quest metadata.
+  // Ordinary same-editor imports continue keeping the current editor settings.
+  const returnedFromChatGPT=new URLSearchParams(location.search).get('from')==='chatgpt';
+  const data=returnedFromChatGPT?parsed:{...parsed,title:existing.title,creator:existing.creator,theme:existing.theme,difficulty:existing.difficulty};
   // The user requested a one-tap import. The full previous draft is backed up for Undo before replacing anything.
   importUndo=clone(existing);
   try{localStorage.setItem(IMPORT_BACKUP_KEY,JSON.stringify(existing));}catch(e){console.warn('Import backup could not be persisted',e)}
