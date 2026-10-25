@@ -461,6 +461,9 @@ h1,h2,h3{font-family:Georgia,"Times New Roman",serif;letter-spacing:-.015em}h1{f
 .quest-mode-chooser button:focus-visible{outline:2px solid #f7d589;outline-offset:3px}
 .quest-mode-note{font-size:12px!important;color:#c7ddcb;margin:0 0 14px!important;line-height:1.55}
 .battle-chooser .quest-path-card{border-color:#a6c974}
+.battle-chooser #share-free-x{display:none!important}
+.quest-path-card .battle-share-level{border-color:#679dce;color:#e1efff;background:#132637}
+.quest-path-card .battle-share-level:hover{border-color:#91c6f3;color:#fff}
 .battle-run-banner{margin:14px 0;padding:14px 17px;border:1px solid #a9d47c;border-radius:12px;background:#193526;color:#d8f9db;font-size:13px;line-height:1.55}
 .battle-run-banner strong{display:block;color:#f2d89c;letter-spacing:.06em;margin-bottom:3px}
 @media(max-width:740px){.quest-mode-chooser{display:grid;grid-template-columns:1fr 1fr;gap:7px}.quest-mode-chooser button{padding:9px 5px;font-size:10px}}
@@ -754,6 +757,12 @@ if(isHomeChooser){
    const name=card.classList.contains('easy')?'Easy':card.classList.contains('medium')?'Medium':'Hard';
    const difficulty=name.toUpperCase();
    const title=card.querySelector('h3'),copy=card.querySelector('p'),tag=card.querySelector('.quest-path-tag');
+   let share=card.querySelector('.battle-share-level');
+   if(!share){
+    share=document.createElement('a');share.className='btn btn-outline battle-share-level hidden';
+    share.target='_blank';share.rel='noopener noreferrer';share.textContent='↗ SHARE THIS BATTLE ON X';
+    share.setAttribute('aria-label','Share '+name+' Battle on X');card.append(share);
+   }
    if(!card.dataset.soloHref){card.dataset.soloHref=link.href;card.dataset.soloTitle=title.textContent;card.dataset.soloCopy=copy.innerHTML;card.dataset.soloTag=tag.textContent;}
    if(useBattle){
     const random=new Uint8Array(12);crypto.getRandomValues(random);
@@ -764,7 +773,11 @@ if(isHomeChooser){
     title.textContent=name+' Battle · 30-question pool';
     copy.innerHTML='<strong>15 rotating onchain puzzles</strong> chosen from 30 verified '+name+' questions. Your friend gets the identical selection through your Battle link.';
     tag.textContent=difficulty+' · 30 ONCHAIN QUESTIONS · ROTATING 15';
-   }else{link.href=card.dataset.soloHref;title.textContent=card.dataset.soloTitle;copy.innerHTML=card.dataset.soloCopy;tag.textContent=card.dataset.soloTag;}
+    const intent=new URL('https://x.com/intent/tweet');
+    intent.searchParams.set('text',`⚔ IQ QUEST ${name} Battle! 15 changing puzzles from 30 verified onchain questions on Solana Devnet. Powered by IQ Labs. Can your friends solve them? Create your own onchain quest, too! Free to play. #IQQUEST #Solana`);
+    intent.searchParams.set('url',href.href);
+    share.href=intent.href;share.classList.remove('hidden');
+   }else{link.href=card.dataset.soloHref;title.textContent=card.dataset.soloTitle;copy.innerHTML=card.dataset.soloCopy;tag.textContent=card.dataset.soloTag;share.classList.add('hidden');}
    link.textContent=useBattle?`⚔ START ${difficulty} BATTLE`:`▶ PLAY ${difficulty} QUEST · FREE`;
   });
  }
@@ -1082,7 +1095,7 @@ else{
      const difficulty=battlePoolDifficulty[0].toUpperCase()+battlePoolDifficulty.slice(1);
      const signatures=VERIFIED_BATTLE_POOL[difficulty];
      const bridge=await import('./onchain-bridge.js?v=516');
-     const pool=await import('./battle-pool/selector.mjs?v=525');
+     const pool=await import('./battle-pool/packs/selector.mjs?v=525');
      const pair=[];
      for(let i=0;i<2;i++){
        n.textContent=`◈ Reading IQ Labs Devnet Battle pack ${i+1}/2 · ${difficulty} · ${i?'B':'A'}…`;
