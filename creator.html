@@ -402,7 +402,7 @@ details.advanced-box[open]>summary{color:#adffb8;margin-bottom:13px}
       <section id="studio" class="studio-layout">
         <div class="studio-main">
           <div class="simple-journey" aria-label="Build your adventure in three steps">
-            <div class="section-kicker">IQ QUEST · SIMPLE CREATOR</div>
+            <div class="section-kicker">IQ QUEST · SIMPLE CREATOR · POWERED BY IQ LABS</div>
             <h2>Create · Test · Publish</h2>
             <p><strong>1. Create</strong> your 15 questions. <strong>2. Test</strong> them for free. <strong>3. Publish</strong> when ready. No wallet is needed until step 3. Paid Mainnet publishing is coming later; the current Devnet test uses test-SOL only.</p>
             <div class="flow-tiles"><div class="flow-tile"><b>1</b>Create 15 puzzles</div><div class="flow-tile"><b>2</b>Test free</div><div class="flow-tile"><b>3</b>Publish onchain</div></div>
@@ -613,7 +613,7 @@ details.advanced-box[open]>summary{color:#adffb8;margin-bottom:13px}
         </aside>
       </section>
     </main>
-    <footer class="footer"><span><span class="green">IQ</span> QUEST · Simple Creator · Devnet beta · Mainnet payments OFF</span><nav aria-label="Legal information" style="display:flex;gap:13px;flex-wrap:wrap"><a href="imprint.html" style="color:#b5fbc1;text-decoration:underline">Imprint</a><a href="privacy.html" style="color:#b5fbc1;text-decoration:underline">Privacy</a><a href="withdrawal.html" style="color:#b5fbc1;text-decoration:underline">Withdrawal info</a></nav><span class="footer-iqlabs"><span><b>IQ LABS · QUEST STORAGE ON DEVNET</b> · Full onchain platform planned</span><a href="https://x.com/IQLabsOfficial" target="_blank" rel="noopener noreferrer" aria-label="IQ Labs official X profile">X @IQLabsOfficial ↗</a></span></footer>
+    <footer class="footer"><span><span class="green">IQ</span> QUEST · Simple Creator · Devnet beta · Mainnet payments OFF</span><nav aria-label="Legal information" style="display:flex;gap:13px;flex-wrap:wrap"><a href="imprint.html" style="color:#b5fbc1;text-decoration:underline">Imprint</a><a href="privacy.html" style="color:#b5fbc1;text-decoration:underline">Privacy</a><a href="withdrawal.html" style="color:#b5fbc1;text-decoration:underline">Withdrawal info</a></nav><span class="footer-iqlabs"><span><b>POWERED BY IQ LABS · QUEST STORAGE ON DEVNET</b> · Full onchain platform planned</span><a href="https://x.com/IQLabsOfficial" target="_blank" rel="noopener noreferrer" aria-label="IQ Labs official X profile">X @IQLabsOfficial ↗</a></span></footer>
   </div>
   <div id="verified-onchain-modal" class="hidden" role="dialog" aria-modal="true" aria-labelledby="verified-onchain-title" style="position:fixed;inset:0;z-index:2000;background:#000d;display:flex;align-items:center;justify-content:center;padding:18px;overflow-y:auto">
     <div style="width:min(100%,540px);max-height:90vh;overflow-y:auto;border:2px solid #70f68c;border-radius:19px;background:linear-gradient(155deg,#173b28,#091c1a 75%);padding:25px 21px;box-shadow:0 22px 80px #000c,0 0 40px #38fc5840;color:#e6ffe8;text-align:center">
@@ -1085,10 +1085,10 @@ try{
  }
  share.addEventListener('click',()=>{
    const title=currentTitle();
-   const teaser=`I'm building “${title}” on IQ QUEST! Play the free puzzles and get ready for our community challenge. #IQQUEST #Solana`;
+   const teaser=`I'm building “${title}” on IQ QUEST! Try 3 free onchain games and create your own 15-puzzle quest. Powered by IQ Labs. Custom onchain publishing is in Solana Devnet beta. #IQQUEST #Solana`;
    const intent=new URL('https://x.com/intent/tweet');
    intent.searchParams.set('text',teaser);
-   intent.searchParams.set('url','https://5wbrdm92h7-eng.github.io/iq-quest/');
+   intent.searchParams.set('url',new URL('index.html',location.href).href);
    share.href=intent.toString();
    currentShareTitle=title;
    try{localStorage.setItem(shareKey,JSON.stringify({title,openedAt:Date.now()}));}catch(e){}
@@ -1126,7 +1126,7 @@ try{
    const play=$('success-play'),x=$('success-share-x');
    play.href=url;play.removeAttribute('aria-disabled');
    const intent=new URL('https://x.com/intent/tweet');
-   intent.searchParams.set('text',`Play “${title}” on IQ QUEST! Beat my time in all 15 mysteries. ${network==='devnet'?'(Devnet test) ':''}#IQQUEST`);
+   intent.searchParams.set('text',`Play “${title}” on IQ QUEST! All 15 questions are verified onchain, powered by IQ Labs on ${network==='devnet'?'Solana Devnet (beta)':'Solana Mainnet'}. Create your own quest too! #IQQUEST #Solana`);
    intent.searchParams.set('url',url);
    x.href=intent.toString();x.removeAttribute('aria-disabled');
    $('success-copy').disabled=false;
@@ -1203,7 +1203,7 @@ function showPublished(sig,title,verified,storageOnly=false,stats=''){
  $('devnet-play-link').href=lastUrl;
  $('devnet-explorer').href='https://explorer.solana.com/tx/'+encodeURIComponent(sig)+'?cluster=devnet';
  const share=new URL('https://x.com/intent/tweet');
- share.searchParams.set('text','I published '+title+' on IQ QUEST using IQ Labs on Solana Devnet! Play all 15 puzzles free and try to beat my time. #IQQUEST #Solana');
+ share.searchParams.set('text','I published '+title+' onchain on IQ QUEST! 15 puzzles stored on Solana Devnet, powered by IQ Labs. Play free, beat my time, or create your own quest (Devnet beta)! #IQQUEST #Solana');
  share.searchParams.set('url',lastUrl);
  $('devnet-share-x').href=share.toString();
  links.classList.remove('hidden');

@@ -7,7 +7,7 @@
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="IQ QUEST">
   <meta property="og:title" content="IQ QUEST — Mystery Adventures">
-  <meta property="og:description" content="Explore 15 ancient mysteries, beat the clock and challenge your friends on X. Free for players.">
+  <meta property="og:description" content="Play three free onchain mystery games on Solana Devnet. Battle friends by time or create your own 15-puzzle quest. Powered by IQ Labs.">
   <meta property="og:url" content="https://5wbrdm92h7-eng.github.io/iq-quest/">
   <meta property="og:image" content="https://5wbrdm92h7-eng.github.io/iq-quest/social-cover.jpg">
   <meta property="og:image:width" content="1200">
@@ -15,7 +15,7 @@
   <meta property="og:image:alt" content="IQ QUEST mystery adventures title image over ancient jungle ruins">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="IQ QUEST — Mystery Adventures">
-  <meta name="twitter:description" content="15 connected mysteries. Beat the clock. Share your time and challenge friends.">
+  <meta name="twitter:description" content="3 free onchain games on Solana Devnet. Battle friends and create your own 15-puzzle quest. Powered by IQ Labs.">
   <meta name="twitter:image" content="https://5wbrdm92h7-eng.github.io/iq-quest/social-cover.jpg">
   <meta name="twitter:image:alt" content="IQ QUEST mystery adventures title image with jungle ruins">
   <meta name="theme-color" content="#07120f">
@@ -454,6 +454,16 @@ h1,h2,h3{font-family:Georgia,"Times New Roman",serif;letter-spacing:-.015em}h1{f
 .is-home-chooser .top-links #share-free-x:hover{border-color:#5bf98a;color:#5bf98a}
 .is-creator-preview .quick-benefits,.is-creator-preview .top-links a[href="#how"]{display:none!important}
 @media(max-width:740px){.is-home-chooser .top-links #share-free-x{font-size:11px;padding:7px 10px}}
+/* V5.23 · Battle uses the same verified 15-question onchain games, never the legacy Lightning set. */
+.quest-mode-chooser{display:flex;gap:9px;margin:16px 0 8px;flex-wrap:wrap}
+.quest-mode-chooser button{border:1px solid #547e5e;border-radius:11px;background:#10261b;color:#d8edda;padding:12px 17px;font-family:inherit;font-size:12px;font-weight:900;cursor:pointer;min-height:43px}
+.quest-mode-chooser button[aria-pressed="true"]{background:#246b39;color:#f0ffe7;border-color:#79f695;box-shadow:0 0 13px #43f96b24}
+.quest-mode-chooser button:focus-visible{outline:2px solid #f7d589;outline-offset:3px}
+.quest-mode-note{font-size:12px!important;color:#c7ddcb;margin:0 0 14px!important;line-height:1.55}
+.battle-chooser .quest-path-card{border-color:#a6c974}
+.battle-run-banner{margin:14px 0;padding:14px 17px;border:1px solid #a9d47c;border-radius:12px;background:#193526;color:#d8f9db;font-size:13px;line-height:1.55}
+.battle-run-banner strong{display:block;color:#f2d89c;letter-spacing:.06em;margin-bottom:3px}
+@media(max-width:740px){.quest-mode-chooser{display:grid;grid-template-columns:1fr 1fr;gap:7px}.quest-mode-chooser button{padding:9px 5px;font-size:10px}}
 </style>
 </head>
 <body class="is-home-chooser" data-page="player">
@@ -472,9 +482,11 @@ h1,h2,h3{font-family:Georgia,"Times New Roman",serif;letter-spacing:-.015em}h1{f
 
     <main>
       <section class="quest-paths" id="quest-entry-options" aria-labelledby="quest-entry-heading">
-        <div class="section-kicker">3 FREE ONCHAIN GAMES · 15 PUZZLES EACH</div>
+        <div class="section-kicker">3 FREE ONCHAIN GAMES · 15 PUZZLES EACH · POWERED BY IQ LABS</div>
         <h2 id="quest-entry-heading">Choose your level: Easy, Medium or Hard</h2>
         <p>Pick your difficulty below. All three 15-puzzle quests have been published using <strong>IQ Labs on Solana Devnet</strong>, including their questions, hints and answers. <strong>All three are free to play and share: no wallet, no confirmations, no storage fee.</strong></p>
+        <div class="quest-mode-chooser" role="group" aria-label="Choose free play or Battle Mode"><button id="choose-free-mode" type="button" aria-pressed="true">▶ FREE PLAY</button><button id="choose-battle-mode" type="button" aria-pressed="false">⚔ BATTLE MODE</button></div>
+        <p class="quest-mode-note" id="quest-mode-explanation" role="status" aria-live="polite">Pick Easy, Medium or Hard to start your free onchain quest.</p>
         <div class="quest-path-grid">
           <article class="quest-path-card easy">
             <span class="quest-path-tag">01 · EASY · BEGINNER · DEVNET</span>
@@ -537,6 +549,7 @@ h1,h2,h3{font-family:Georgia,"Times New Roman",serif;letter-spacing:-.015em}h1{f
 
       <section id="onchain-load-status" class="onchain-load-status hidden" role="status" aria-live="polite"></section>
       <a id="onchain-retry-home" class="btn btn-outline hidden" href="index.html">← BACK TO THE THREE FREE GAMES</a>
+      <div id="battle-run-banner" class="battle-run-banner hidden" role="note"><strong>⚔ FRIEND BATTLE · 15 ONCHAIN PUZZLES</strong>Race the clock. After finishing, share your exact quest and target time on X. Your friend gets the same verified questions. Times and scores are browser-based, not verified onchain.</div>
       <section id="adventure" class="adventure-layout">
         <article class="panel game-panel">
           <span class="rune-corner rune-corner-tl" aria-hidden="true">◇</span>
@@ -620,7 +633,7 @@ h1,h2,h3{font-family:Georgia,"Times New Roman",serif;letter-spacing:-.015em}h1{f
       </section>
       <section id="how" class="how-grid"><div class="how-item"><span>01</span><h3>Choose your battle</h3><p>Play 15 connected mysteries or a 3-puzzle Lightning Battle with new codes.</p></div><div class="how-item"><span>02</span><h3>Choose your risk</h3><p>A hint adds one minute. You can then skip for one additional minute and see the answer.</p></div><div class="how-item"><span>03</span><h3>Challenge a friend</h3><p>Share a matching puzzle set and target time. First attempts and practice are marked.</p></div></section>
     </main>
-    <footer class="footer"><span><span class="green">IQ</span> QUEST · 3 free onchain games · Devnet beta</span><nav aria-label="Legal information" style="display:flex;gap:13px;flex-wrap:wrap"><a href="imprint.html" style="color:#b5fbc1;text-decoration:underline">Imprint</a><a href="privacy.html" style="color:#b5fbc1;text-decoration:underline">Privacy</a><a href="withdrawal.html" style="color:#b5fbc1;text-decoration:underline">Withdrawal info</a></nav><span class="footer-iqlabs"><span><b>IQ LABS · QUEST DATA ON DEVNET</b> · Full onchain gameplay planned</span><a href="https://x.com/IQLabsOfficial" target="_blank" rel="noopener noreferrer" aria-label="IQ Labs official X profile">X @IQLabsOfficial ↗</a></span></footer>
+    <footer class="footer"><span><span class="green">IQ</span> QUEST · 3 free onchain games · Devnet beta</span><nav aria-label="Legal information" style="display:flex;gap:13px;flex-wrap:wrap"><a href="imprint.html" style="color:#b5fbc1;text-decoration:underline">Imprint</a><a href="privacy.html" style="color:#b5fbc1;text-decoration:underline">Privacy</a><a href="withdrawal.html" style="color:#b5fbc1;text-decoration:underline">Withdrawal info</a></nav><span class="footer-iqlabs"><span><b>POWERED BY IQ LABS · QUEST DATA ON DEVNET</b> · Full onchain gameplay planned</span><a href="https://x.com/IQLabsOfficial" target="_blank" rel="noopener noreferrer" aria-label="IQ Labs official X profile">X @IQLabsOfficial ↗</a></span></footer>
   </div>
   <script>(function(){
 'use strict';
@@ -700,19 +713,38 @@ const preview=params.get('preview')==='1';
 const onchainSignature=params.get('tx')||'';
 const publishedQuestId=params.get('quest')||'';
 const onchainMode=!preview&&(!!onchainSignature||!!publishedQuestId);
+const battleMode=onchainMode&&(params.get('battle')==='1'||params.has('target'));
 const onchainNetwork=params.get('network')==='mainnet-beta'?'mainnet-beta':'devnet';
 const isHomeChooser=!preview&&!onchainMode&&!params.has('difficulty')&&!params.has('mode')&&!params.has('target');
 document.body.classList.toggle('is-home-chooser',isHomeChooser);
 const freeGamesShare=$('share-free-x');
 if(freeGamesShare){
  const intent=new URL('https://x.com/intent/tweet');
- intent.searchParams.set('text','Try IQ QUEST: three free onchain mystery games. Choose Easy, Medium or Hard, with 15 puzzles each. No wallet needed to play!');
+ intent.searchParams.set('text','⚔ IQ QUEST: 3 FREE onchain games (Easy, Medium, Hard), 15 puzzles each! Battle friends by time. ✍️ Create your own onchain quest, too (Devnet beta). Powered by IQ Labs on Solana Devnet. No wallet to play! #IQQUEST #Solana');
  intent.searchParams.set('url',new URL('index.html',location.href).href);
  freeGamesShare.href=intent.href;
 }
 if(isHomeChooser){
  const homePlay=document.querySelector('.top-links a[href="#adventure"]');
  if(homePlay){homePlay.href='#quest-entry-options';homePlay.textContent='Free Games';}
+ const freeButton=$('choose-free-mode'),battleButton=$('choose-battle-mode'),description=$('quest-mode-explanation');
+ const chooserCards=[...document.querySelectorAll('#quest-entry-options .quest-path-card')];
+ function chooseMode(useBattle){
+  document.body.classList.toggle('battle-chooser',useBattle);
+  freeButton.setAttribute('aria-pressed',String(!useBattle));
+  battleButton.setAttribute('aria-pressed',String(useBattle));
+  description.textContent=useBattle?'Choose your level. Race through the SAME 15 verified onchain puzzles, then share your time on X to challenge friends. Timer and scores are local and unverified.':'Pick Easy, Medium or Hard to start your free onchain quest.';
+  chooserCards.forEach(card=>{
+   const link=card.querySelector('a.btn');
+   const href=new URL(link.href);
+   if(useBattle)href.searchParams.set('battle','1');else href.searchParams.delete('battle');
+   link.href=href.href;
+   const difficulty=card.classList.contains('easy')?'EASY':card.classList.contains('medium')?'MEDIUM':'HARD';
+   link.textContent=useBattle?`⚔ START ${difficulty} BATTLE`:`▶ PLAY ${difficulty} QUEST · FREE`;
+  });
+ }
+ freeButton.addEventListener('click',()=>chooseMode(false));
+ battleButton.addEventListener('click',()=>chooseMode(true));
 }
 let onchainReady=!onchainMode;
 const originalTargetParam=params.get('target');
@@ -872,7 +904,7 @@ function updateAttemptChip(){
  const chip=$('attempt-chip');chip.classList.remove('practice','preview');
  const label=preview?'CREATOR PREVIEW':run.attemptType==='first'?'★ FIRST ATTEMPT':run.attemptType==='practice'?'↻ REPLAY / PRACTICE':hasAttempt()?'↻ PRACTICE AVAILABLE':'★ FIRST ATTEMPT AVAILABLE';
  chip.textContent=label;chip.classList.toggle('practice',label.includes('PRACTICE'));chip.classList.toggle('preview',preview);
- $('mode-description').textContent=preview?'UNPUBLISHED DRAFT':playMode==='lightning'?'LIGHTNING · 3 PUZZLES · SAME QUESTIONS FOR FRIENDS':'FULL QUEST · 15 CHAMBERS';
+ $('mode-description').textContent=preview?'UNPUBLISHED DRAFT':battleMode?'⚔ FRIEND BATTLE · 15 ONCHAIN PUZZLES':playMode==='lightning'?'LIGHTNING · 3 PUZZLES · SAME QUESTIONS FOR FRIENDS':'FULL QUEST · 15 CHAMBERS';
  $('challenge-target').classList.toggle('hidden',!targetTime||preview);
  if(targetTime)$('challenge-target-time').textContent=time(targetTime);
 }
@@ -977,11 +1009,18 @@ function challengeURL(){
  const url=new URL(location.origin+location.pathname);
  if(publishedQuestId)url.searchParams.set('quest',publishedQuestId);
  else if(onchainMode){url.searchParams.set('tx',onchainSignature);url.searchParams.set('network',onchainNetwork);}else url.searchParams.set('difficulty',chosenDifficulty);
+ if(onchainMode)url.searchParams.set('battle','1');
  if(!onchainMode&&playMode==='lightning'){url.searchParams.set('mode','lightning');url.searchParams.set('seed',String(puzzleSeed));}
  url.searchParams.set('target',String(totalSeconds()));url.searchParams.set('match',puzzleFingerprint(quest));return url.toString();
 }
-function shareText(){return `⚔️ IQ QUEST: Can you beat ${time(totalSeconds())}?\n${playMode==='lightning'?'⚡ Lightning Battle: same 3 puzzles':'✦ Full Quest: same 15 mysteries'} · ${quest.difficulty} · ${run.attemptType==='first'?'First Attempt':'Practice'}\n${quest.levels.length-run.skips.length}/${quest.levels.length} solved · ${run.hints.length} hints · ${run.skips.length} skips (penalties included)\nPlay the same quest: #IQQUEST #Solana`;}
-function shareX(){if(preview)return;qaEvent('share_x_clicked');const url=new URL('https://twitter.com/intent/tweet');url.searchParams.set('text',shareText());url.searchParams.set('url',challengeURL());window.open(url.toString(),'_blank','noopener,noreferrer');}
+function shareText(){
+ if(onchainMode){
+  const network=publishedQuestId||onchainNetwork==='mainnet-beta'?'Solana Mainnet':'Solana Devnet';
+  return `⚔ IQ QUEST: Beat my ${time(totalSeconds())} on 15 ${quest.difficulty} mysteries!\n⛓ Questions onchain, powered by IQ Labs (${network}).\n⏱ Times are browser-only. Battle friends or create your own onchain quest (Devnet beta)! #IQQUEST #Solana`;
+ }
+ return `⚔️ IQ QUEST: Can you beat ${time(totalSeconds())}?\n${playMode==='lightning'?'⚡ Lightning Battle: same 3 puzzles':'✦ Full Quest: same 15 mysteries'} · ${quest.difficulty} · ${run.attemptType==='first'?'First Attempt':'Practice'}\n${quest.levels.length-run.skips.length}/${quest.levels.length} solved · ${run.hints.length} hints · ${run.skips.length} skips (penalties included)\nPlay the same quest: #IQQUEST #Solana`;
+}
+function shareX(){if(preview)return;qaEvent('share_x_clicked');const url=new URL('https://x.com/intent/tweet');url.searchParams.set('text',shareText());url.searchParams.set('url',challengeURL());window.open(url.toString(),'_blank','noopener,noreferrer');}
 async function copyChallenge(){if(preview)return;qaEvent('friend_link_copied');try{await navigator.clipboard.writeText(challengeURL());$('copy-challenge').textContent='✓ CHALLENGE LINK COPIED';setTimeout(()=>$('copy-challenge').textContent='⤴ COPY FRIEND CHALLENGE LINK',1800);}catch(e){prompt('Copy the friend challenge link:',challengeURL());}}
 async function copyResult(){try{await navigator.clipboard.writeText(shareText()+'\n'+(preview?location.href:challengeURL()));$('copy-result').textContent='COPIED!';setTimeout(()=>$('copy-result').textContent='COPY RESULT',1800);}catch(e){prompt('Copy your result:',shareText()+'\n'+challengeURL());}}
 function wrap(ctx,text,maxWidth,x,y,lineHeight,maxLines=2){const words=String(text).split(/\s+/);let line='',n=0;for(const word of words){const test=line?line+' '+word:word;if(ctx.measureText(test).width>maxWidth&&line){ctx.fillText(line,x,y+n*lineHeight);n++;line=word;if(n>=maxLines-1)break;}else line=test;}if(line)ctx.fillText(line,x,y+n*lineHeight);}
@@ -1027,6 +1066,7 @@ else{
    chosenDifficulty=quest.difficulty;playMode='full';puzzleSeed=0;
    targetTime=Number.isInteger(Number(originalTargetParam))&&Number(originalTargetParam)>0&&Number(originalTargetParam)<=86399&&params.get('match')===puzzleFingerprint(quest)?Number(originalTargetParam):0;
    onchainReady=true;load();syncSelection();render();
+   if(battleMode)$('battle-run-banner').classList.remove('hidden');
    $('start-the-clue').disabled=false;
    document.body.classList.add('onchain-loaded');
    n.textContent=publishedQuestId?'✓ VERIFIED ONCHAIN · IQ Labs MAINNET · 15 questions · Free to play.':'✓ VERIFIED ONCHAIN · IQ Labs '+onchainNetwork.toUpperCase()+' · 15 questions · '+quest.difficulty.toUpperCase()+' · No wallet needed.';
