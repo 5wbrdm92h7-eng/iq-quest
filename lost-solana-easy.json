@@ -1,0 +1,99 @@
+{
+  "v": 1,
+  "title": "The Lost Solana Treasure: Easy Edition",
+  "creator": "IQ QUEST",
+  "theme": "Fifteen short, fair beginner-friendly treasure puzzles. Every question contains the rules needed to solve it; save discoveries for the final lock.",
+  "difficulty": "Easy",
+  "levels": [
+    {
+      "title": "01 · The First Message",
+      "q": "The treasure map hides a word by shifting every letter ONE step FORWARD in the alphabet (A becomes B, B becomes C, and Z becomes A). The hidden message is USFBTVSF. Move each letter one step BACK to read the original word. Enter the word in capital letters.",
+      "h": "Work backwards, one letter at a time. The first U becomes T; use the same rule for the other letters.",
+      "a": "TREASURE"
+    },
+    {
+      "title": "02 · The Compass Tiles",
+      "q": "A compass gives these digits: N=4, E=1, S=7, W=9. A route is written E-S-N, but the lock says READ THE ROUTE BACKWARDS. Reverse the three directions, then replace each direction with its digit. Enter the three-digit code.",
+      "h": "Reverse the order of the directions first. Only then look up each digit in the compass key.",
+      "a": "471"
+    },
+    {
+      "title": "03 · The Missing Steps",
+      "q": "A staircase has numbers 2, 5, 8, 11, ?, ?. The difference between consecutive numbers stays the same. Find the NEXT TWO numbers and write them next to each other with no spaces, making a four-digit door code.",
+      "h": "Look at how much each number increases. Keep adding that amount two more times.",
+      "a": "1417"
+    },
+    {
+      "title": "04 · The Letter Maze",
+      "q": "A small map has three rows: A B C / D E F / G H I. Start on the CENTRE tile E. Move ONE tile NORTH, then ONE tile EAST, then ONE tile SOUTH. Which letter do you finish on? Enter that single capital letter.",
+      "h": "Trace the journey on the three rows rather than moving through the alphabet. North moves up one row.",
+      "a": "F"
+    },
+    {
+      "title": "05 · The Sun and Moon",
+      "q": "Three pictures stand for fixed positive whole numbers. SUN + SUN = 12. SUN + MOON = 11. MOON + STAR = 9. Find the value of MOON and STAR, then MULTIPLY them. Enter the resulting number.",
+      "h": "Find SUN using the first equation. Then work through the second and third equations in order.",
+      "a": "20"
+    },
+    {
+      "title": "06 · The Mirror Alphabet",
+      "q": "A mirror code swaps letters with their opposites in the alphabet: A↔Z, B↔Y, C↔X and so on. Decode the four-letter message TLOW using this same mirror rule. What valuable treasure word appears? Enter it in capital letters.",
+      "h": "Count matching positions from the front and back of the alphabet. For example, A matches Z and B matches Y.",
+      "a": "GOLD"
+    },
+    {
+      "title": "07 · The Map Number",
+      "q": "Letters have positions in the alphabet: A=1, B=2, C=3, through Z=26. A note says to ADD the positions of all three letters in MAP. What total do you get? Enter only the number.",
+      "h": "Find the position of M, then A, then P. The lock needs their sum, not the three values joined together.",
+      "a": "30"
+    },
+    {
+      "title": "08 · The Binary Lanterns",
+      "q": "A four-bit binary number uses place values 8, 4, 2, 1 from left to right. A 1 means count that value and a 0 means ignore it. Decode these THREE binary groups separately: 0101 0010 0111. Put the three decimal digits together without spaces.",
+      "h": "Read each group on its own. Add only the place values marked 1, then join the three results.",
+      "a": "527"
+    },
+    {
+      "title": "09 · The Three Treasure Chests",
+      "q": "Three chests, RED (R), BLUE (B) and GREEN (G), must stand in a row from LEFT to RIGHT. Each position holds exactly one chest. GREEN is NOT first and NOT last. RED stands somewhere BEFORE BLUE. Write the colour initials in the only possible left-to-right order.",
+      "h": "Work out which position GREEN must occupy. Then use the rule about RED and BLUE.",
+      "a": "RGB"
+    },
+    {
+      "title": "10 · The Dot-Dash Letterbox",
+      "q": "A letterbox uses this tiny Morse-code key: .- = A, .-. = R, -.- = K, ... = S, --- = O, -.. = D. The three signs on its lock are written in quotes: \".- / .-. / -.-\". Translate each sign using the key and join the letters to make a three-letter word.",
+      "h": "The slash separates whole Morse letters. Match each full dot-dash group with the code table above.",
+      "a": "ARK"
+    },
+    {
+      "title": "11 · The Door Command",
+      "q": "A door has a four-letter command that was encrypted by moving every letter ONE step FORWARD in the alphabet. The encrypted text is PQFO. Undo the shift by moving each letter ONE step BACK. Enter the original English command in capital letters.",
+      "h": "Move backwards on the alphabet, one letter at a time. Start by changing P to O.",
+      "a": "OPEN"
+    },
+    {
+      "title": "12 · The Spinning Number Lock",
+      "q": "A number lock displays the digits 1 3 5 7 in that order. Turning its wheel TWO positions to the RIGHT moves the last two digits to the front, keeping their order. What four-digit code does the lock display after that turn?",
+      "h": "Split the original digits into the first pair and the last pair. Bring the last pair to the front.",
+      "a": "5713"
+    },
+    {
+      "title": "13 · The Watchmaker's Note",
+      "q": "A clock above the exit shows 09:40 in the morning. The note says the gate opens exactly 35 MINUTES LATER. What time will it be on a 24-hour clock? Enter four digits HHMM without the colon.",
+      "h": "After 20 minutes it is 10:00. Add the remaining minutes to find the gate-opening time.",
+      "a": "1015"
+    },
+    {
+      "title": "14 · The Twin Crystals",
+      "q": "Two positive whole-number crystal values are X and Y. Their SUM is 14 and their DIFFERENCE is X−Y=4. Find X and Y. Enter their single-digit values in order, X first and then Y, with no space.",
+      "h": "Try two numbers that add to 14 and check how far apart they are. The larger value is X.",
+      "a": "95"
+    },
+    {
+      "title": "15 · The Treasure's Final Lock",
+      "q": "The last gate combines three discoveries from earlier puzzles. Enter the treasure WORD from puzzle 06, then the door COMMAND from puzzle 11, then the two-digit crystal CODE from puzzle 14. Join the three answers with hyphens in exactly that order, with no spaces. What is the final key?",
+      "h": "Check your earlier answers from puzzles 06, 11 and 14. You need a word, a word and a two-digit number, in that order.",
+      "a": "GOLD-OPEN-95"
+    }
+  ]
+}

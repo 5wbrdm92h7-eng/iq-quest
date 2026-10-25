@@ -321,6 +321,7 @@ details.advanced-box[open]>summary{color:#adffb8;margin-bottom:13px}
 .quest-paths h2{margin:4px 0 6px;font-size:clamp(23px,3vw,31px);color:#f1d8a6}
 .quest-paths>p{margin:0 0 14px;color:#c3d9c9;font-size:13px;line-height:1.6}
 .quest-path-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.prepared-difficulty-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
 .quest-path-card{display:flex;flex-direction:column;gap:8px;padding:17px;border:1px solid #497357;border-radius:12px;background:#10271c}
 .quest-path-card.create{background:#16221f;border-color:#67705e}
 .quest-path-card h3{font-size:21px;margin:0;color:#b8ffca}
@@ -334,7 +335,8 @@ details.advanced-box[open]>summary{color:#adffb8;margin-bottom:13px}
 .creator-publish-guide p{margin:8px 0 0;color:#bbd5bc;font-size:12px;line-height:1.6}
 .fee-facts{padding:12px;margin:10px 0;border:1px solid #e0b35f;border-radius:10px;background:#352713;color:#ffe5b3;font-size:12px;line-height:1.65}
 .fee-facts strong{color:#ffe596}
-@media(max-width:620px){.quest-paths{padding:12px;margin:10px 0 13px}.quest-path-grid{grid-template-columns:1fr;gap:9px}.quest-path-card{padding:12px}.quest-path-card h3{font-size:19px}.quest-path-card .btn{min-height:43px}.creator-publish-guide{padding:12px}}
+@media(max-width:1050px){.prepared-difficulty-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:620px){.quest-paths{padding:12px;margin:10px 0 13px}.quest-path-grid,.prepared-difficulty-grid{grid-template-columns:1fr;gap:9px}.quest-path-card{padding:12px}.quest-path-card h3{font-size:19px}.quest-path-card .btn{min-height:43px}.creator-publish-guide{padding:12px}}
 </style></head>
 <body data-page="creator">
   <div class="site-shell">
@@ -373,24 +375,32 @@ details.advanced-box[open]>summary{color:#adffb8;margin-bottom:13px}
             <div class="flow-tiles"><div class="flow-tile"><b>1</b>Describe</div><div class="flow-tile"><b>2</b>Create 15 puzzles</div><div class="flow-tile"><b>3</b>Test &amp; publish</div></div>
           </div>
           <section class="panel studio-panel" aria-labelledby="prepared-quests-heading" style="border-color:#77bf8e">
-            <div class="panel-topline"><span class="section-kicker">NEW · READY-MADE QUESTS</span><span class="status-dot">NOT ONCHAIN YET</span></div>
-            <h2 id="prepared-quests-heading">Two new adventures, 15 puzzles each</h2>
-            <p class="section-intro">You can load either full quest instantly. <strong>These two are not published yet.</strong> Review and preview all questions before you choose to pay the Devnet storage test fees. Each quest needs its own onchain upload.</p>
-            <div class="quest-path-grid">
-              <article class="quest-path-card create">
-                <span class="quest-path-tag">QUEST 02 · HARD · 15 PUZZLES</span>
-                <h3>The Neon Cipher Vault</h3>
-                <p>Binary, Caesar codes, logic gates, alphabet mirrors and a connected final lock. Around 6 Phantom approvals if published on Devnet.</p>
-                <button type="button" id="load-neon-vault" class="btn btn-gold">LOAD ALL 15 CIPHER PUZZLES</button>
+            <div class="panel-topline"><span class="section-kicker">READY-MADE 15-PUZZLE QUESTS</span><span class="status-dot">EASY UPDATE · NOT ONCHAIN YET</span></div>
+            <h2 id="prepared-quests-heading">Easy, Medium, Hard · Three free games</h2>
+            <p class="section-intro">The original Treasure, Observatory and Neon quests are already playable for free on <strong>Solana Devnet</strong>. To give players three distinct difficulty levels, we prepared a <strong>new, genuinely easier Treasure edition</strong>. Only that Easy edition still needs one onchain publication; the existing Medium and Hard games must <strong>not</strong> be uploaded again.</p>
+            <div class="quest-path-grid prepared-difficulty-grid">
+              <article class="quest-path-card create" style="border-color:#b3df8e">
+                <span class="quest-path-tag">QUEST 01 · EASY · 15 NEW PUZZLES</span>
+                <h3>The Lost Solana Treasure: Easy Edition</h3>
+                <p>Beginner-friendly ciphers, number patterns, a simple map and a fair final code. <strong>This revision is not stored onchain yet.</strong> Preview it free, then publish it once on Devnet (typically multiple Phantom approvals).</p>
+                <button type="button" id="load-easy-treasure" class="btn btn-gold">LOAD ALL 15 EASY PUZZLES</button>
               </article>
               <article class="quest-path-card create">
-                <span class="quest-path-tag">QUEST 03 · MEDIUM · 15 PUZZLES</span>
+                <span class="quest-path-tag">QUEST 02 · MEDIUM · ALREADY ONCHAIN</span>
                 <h3>The Clockwork Observatory</h3>
-                <p>Star maps, gears, clock calculations, signals and a multi-clue dome combination. Around 6 Phantom approvals on Devnet.</p>
-                <button type="button" id="load-clockwork" class="btn btn-gold">LOAD ALL 15 OBSERVATORY PUZZLES</button>
+                <p>Star maps, gears, clock calculations and signals. <strong>Already published:</strong> players use the free link below. Load these questions only if you want to create a modified version.</p>
+                <a href="index.html?tx=3B2DJjR28V5HZpV2Tv4HKuMET2imBaYQFf4LxufBRF2oKVScHe5iyJfexn3wopscKJntyhFAd2PTNwxZbY6BzcfU&amp;network=devnet" class="btn btn-green">▶ PLAY PUBLISHED MEDIUM QUEST</a>
+                <button type="button" id="load-clockwork" class="btn btn-gold">EDIT OBSERVATORY COPY</button>
+              </article>
+              <article class="quest-path-card create">
+                <span class="quest-path-tag">QUEST 03 · HARD · ALREADY ONCHAIN</span>
+                <h3>The Neon Cipher Vault</h3>
+                <p>Binary, Caesar codes, logic gates and a connected final lock. <strong>Already published:</strong> players need no wallet or new storage. Loading a copy is optional.</p>
+                <a href="index.html?tx=5TZS5svVvKLmAPnjrLeL9JbZtXMMriit8KpG8uSupvDAqGRDkjMV7jgtP6GZerzV4cZKJuusXApbfHA1ohRbgKAz&amp;network=devnet" class="btn btn-green">▶ PLAY PUBLISHED HARD QUEST</a>
+                <button type="button" id="load-neon-vault" class="btn btn-gold">EDIT CIPHER COPY</button>
               </article>
             </div>
-            <p class="tiny-note">Loading a quest saves an Undo backup of your current editor draft. After onchain verification, send the final Devnet transaction link so its public player button can be added alongside the existing quest. No wallet is connected when loading these drafts.</p>
+            <p class="tiny-note">Loading any preset saves an Undo backup. <strong>Do not republish the original, Medium or Hard game unchanged:</strong> their links already work. For the new Easy edition, review all questions, use TEST YOUR QUEST FREE and then publish on Devnet. After 15/15 onchain verification, send the final transaction link so we can replace the original Hard Treasure card with Easy on the homepage. No wallet is connected merely by loading a draft.</p>
             <p id="prepared-quest-status" class="small-status" role="status" aria-live="polite">Choose one to load its questions into the editor.</p>
           </section>
           <div class="panel studio-panel">
@@ -986,6 +996,7 @@ async function loadPreparedQuest(filename){
   document.getElementById('level-question').closest('.studio-panel').scrollIntoView({behavior:'smooth',block:'start'});
  }catch(error){status('prepared-quest-status',String(error?.message||error),true);}
 }
+$('load-easy-treasure').addEventListener('click',()=>{void loadPreparedQuest('lost-solana-easy.json');});
 $('load-neon-vault').addEventListener('click',()=>{void loadPreparedQuest('neon-cipher-vault.json');});
 $('load-clockwork').addEventListener('click',()=>{void loadPreparedQuest('clockwork-observatory.json');});
 // The editor auto-saves. Manual download/save controls are intentionally not shown.
