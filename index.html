@@ -7,7 +7,7 @@
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="IQ QUEST">
   <meta property="og:title" content="IQ QUEST — Mystery Adventures">
-  <meta property="og:description" content="Play three free onchain mystery games on Solana Devnet. Battle friends by time or create your own 15-puzzle quest. Powered by IQ Labs.">
+  <meta property="og:description" content="Play three free onchain mystery games or challenge friends in FREE X BATTLES. Create your own 15-puzzle quest. Powered by IQ Labs on Solana Devnet.">
   <meta property="og:url" content="https://5wbrdm92h7-eng.github.io/iq-quest/">
   <meta property="og:image" content="https://5wbrdm92h7-eng.github.io/iq-quest/social-cover.jpg">
   <meta property="og:image:width" content="1200">
@@ -15,7 +15,7 @@
   <meta property="og:image:alt" content="IQ QUEST mystery adventures title image over ancient jungle ruins">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="IQ QUEST — Mystery Adventures">
-  <meta name="twitter:description" content="3 free onchain games on Solana Devnet. Battle friends and create your own 15-puzzle quest. Powered by IQ Labs.">
+  <meta name="twitter:description" content="3 free onchain games plus FREE X BATTLES to share with friends. Create your own onchain quest. Powered by IQ Labs on Solana Devnet.">
   <meta name="twitter:image" content="https://5wbrdm92h7-eng.github.io/iq-quest/social-cover.jpg">
   <meta name="twitter:image:alt" content="IQ QUEST mystery adventures title image with jungle ruins">
   <meta name="theme-color" content="#07120f">
@@ -488,7 +488,7 @@ h1,h2,h3{font-family:Georgia,"Times New Roman",serif;letter-spacing:-.015em}h1{f
         <div class="section-kicker">3 FREE ONCHAIN GAMES · 15 PUZZLES EACH · POWERED BY IQ LABS</div>
         <h2 id="quest-entry-heading">Choose your level: Easy, Medium or Hard</h2>
         <p>Pick your difficulty below. All three 15-puzzle quests have been published using <strong>IQ Labs on Solana Devnet</strong>, including their questions, hints and answers. <strong>All three are free to play and share: no wallet, no confirmations, no storage fee.</strong></p>
-        <div class="quest-mode-chooser" role="group" aria-label="Choose free play or Battle Mode"><button id="choose-free-mode" type="button" aria-pressed="true">▶ FREE PLAY</button><button id="choose-battle-mode" type="button" aria-pressed="false">⚔ BATTLE MODE</button></div>
+        <div class="quest-mode-chooser" role="group" aria-label="Choose free play or free X Battles"><button id="choose-free-mode" type="button" aria-pressed="true">▶ FREE PLAY</button><button id="choose-battle-mode" type="button" aria-pressed="false">⚔ FREE X BATTLES</button></div>
         <p class="quest-mode-note" id="quest-mode-explanation" role="status" aria-live="polite">Pick Easy, Medium or Hard to start your free onchain quest.</p>
         <div class="quest-path-grid">
           <article class="quest-path-card easy">
@@ -517,7 +517,7 @@ h1,h2,h3{font-family:Georgia,"Times New Roman",serif;letter-spacing:-.015em}h1{f
         <p class="quest-path-note">Devnet is a test network, not Solana Mainnet. Questions, hints and answers are onchain; timers and personal scores run in your browser. Choose a game above to start.</p>
       </section>
       <section class="demo-selector" id="demo-selector" aria-labelledby="difficulty-heading">
-        <div class="demo-selector-heading"><div><div class="section-kicker free-battle-kicker">⚔ FREE TEMPLE BATTLES</div><h2 id="difficulty-heading">Challenge your friends. Beat their time.</h2><p>Play a quick 3-question Lightning Battle or the full 15-question quest. Pick a difficulty, race the clock and challenge friends on X. No wallet needed.</p></div><span class="demo-selector-stamp">2 MODES · 3 DIFFICULTIES · FREE TO PLAY</span></div>
+        <div class="demo-selector-heading"><div><div class="section-kicker free-battle-kicker">⚔ FREE X BATTLES</div><h2 id="difficulty-heading">Challenge your friends. Beat their time.</h2><p>Play a quick 3-question Lightning Battle or the full 15-question quest. Pick a difficulty, race the clock and challenge friends on X. No wallet needed.</p></div><span class="demo-selector-stamp">2 MODES · 3 DIFFICULTIES · FREE TO PLAY</span></div>
         <div class="battle-pitch" aria-label="Free friend battles"><div><strong>⚔ YOUR TIME vs. YOUR FRIEND’S TIME</strong><span>Finish a quest → share the challenge link → friends play the same puzzles.</span></div><a href="#how">HOW BATTLES WORK ↗</a></div><div class="selector-step">1 · CHOOSE GAME LENGTH</div>
         <div class="battle-mode-switch" role="group" aria-label="Choose game mode">
           <button type="button" class="mode-option" data-mode="full" aria-pressed="true"><span>✦ FULL QUEST</span><strong>15 QUESTIONS</strong><small>15 puzzles, no story required</small></button>
@@ -748,9 +748,9 @@ if(isHomeChooser){
   document.body.classList.toggle('battle-chooser',useBattle);
   freeButton.setAttribute('aria-pressed',String(!useBattle));
   battleButton.setAttribute('aria-pressed',String(useBattle));
-  heading.textContent=useBattle?'Choose your Battle difficulty':'Choose your level: Easy, Medium or Hard';
+  heading.textContent=useBattle?'FREE X BATTLES · Choose your level':'Choose your level: Easy, Medium or Hard';
   intro.innerHTML=useBattle?'<strong>90 puzzles · 6 verified onchain packs.</strong> Pick Easy, Medium or Hard. Every Battle draws 15 independent questions from two 15-question Devnet packs. Share your link so friends face the <strong>same 15 puzzles</strong>. No wallet needed; browser times and scores are unverified.':originalIntro;
-  kicker.textContent=useBattle?'90 BATTLE QUESTIONS · 6 ONCHAIN PACKS · POWERED BY IQ LABS':originalKicker;
+  kicker.textContent=useBattle?'FREE X BATTLES · 90 ONCHAIN QUESTIONS · POWERED BY IQ LABS':originalKicker;
   description.textContent=useBattle?'Each new Battle mixes 15 questions from 30 verified onchain puzzles. Your shared link keeps the selection identical for friends.':'Pick Easy, Medium or Hard to start your free onchain quest.';
   chooserCards.forEach(card=>{
    const link=card.querySelector('a.btn');
@@ -760,7 +760,7 @@ if(isHomeChooser){
    let share=card.querySelector('.battle-share-level');
    if(!share){
     share=document.createElement('a');share.className='btn btn-outline battle-share-level hidden';
-    share.target='_blank';share.rel='noopener noreferrer';share.textContent='↗ SHARE THIS BATTLE ON X';
+    share.target='_blank';share.rel='noopener noreferrer';share.textContent='↗ SHARE X BATTLE';
     share.setAttribute('aria-label','Share '+name+' Battle on X');card.append(share);
    }
    if(!card.dataset.soloHref){card.dataset.soloHref=link.href;card.dataset.soloTitle=title.textContent;card.dataset.soloCopy=copy.innerHTML;card.dataset.soloTag=tag.textContent;}
@@ -770,11 +770,11 @@ if(isHomeChooser){
     const href=new URL('index.html',location.href);
     href.searchParams.set('pool',name.toLowerCase());href.searchParams.set('seed',seed);href.searchParams.set('battle','1');href.searchParams.set('network','devnet');
     link.href=href.href;
-    title.textContent=name+' Battle · 30-question pool';
+    title.textContent=name+' X Battle · 30-question pool';
     copy.innerHTML='<strong>15 rotating onchain puzzles</strong> chosen from 30 verified '+name+' questions. Your friend gets the identical selection through your Battle link.';
     tag.textContent=difficulty+' · 30 ONCHAIN QUESTIONS · ROTATING 15';
     const intent=new URL('https://x.com/intent/tweet');
-    intent.searchParams.set('text',`⚔ IQ QUEST ${name} Battle! 15 changing puzzles from 30 verified onchain questions on Solana Devnet. Powered by IQ Labs. Can your friends solve them? Create your own onchain quest, too! Free to play. #IQQUEST #Solana`);
+    intent.searchParams.set('text',`⚔ FREE X BATTLE: IQ QUEST ${name}! 15 changing puzzles from 30 verified onchain questions on Solana Devnet. Powered by IQ Labs. Can your friends solve them? Create your own onchain quest, too! #IQQUEST #Solana`);
     intent.searchParams.set('url',href.href);
     share.href=intent.href;share.classList.remove('hidden');
    }else{link.href=card.dataset.soloHref;title.textContent=card.dataset.soloTitle;copy.innerHTML=card.dataset.soloCopy;tag.textContent=card.dataset.soloTag;share.classList.add('hidden');}
