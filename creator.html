@@ -374,7 +374,7 @@ details.advanced-box[open]>summary{color:#adffb8;margin-bottom:13px}
 <body class="creator-simple" data-page="creator">
   <div class="site-shell">
     <header class="topbar"><div class="brand-cluster"><a class="wordmark" href="index.html" aria-label="IQ Quest home"><span class="wordmark-iq">IQ</span><span class="wordmark-quest">QUEST</span></a><span class="onchain-promise" aria-label="Quest content is stored on Solana Devnet; full onchain gameplay is planned">QUESTS ONCHAIN · DEVNET<small>FULL ONCHAIN · PLANNED</small></span><a class="brand-official-x" href="https://x.com/IQLabsOfficial" target="_blank" rel="noopener noreferrer" aria-label="Open IQ Labs official profile on X">↗ IQ LABS ON X · @IQLabsOfficial</a></div><nav class="top-links" aria-label="Main navigation"><a class="nav-play" href="index.html#quest-entry-options">← PLAY FREE GAMES</a><a href="#studio">Creator Studio</a><a href="imprint.html">Imprint</a></nav></header>
-    <div class="quick-benefits" aria-label="One creator publishing option: share on X, then 3 dollars and 99 cents once payment is live; playing is free"><span class="benefit-creator">✦ <strong>CREATORS · SHARE ON X &amp; PUBLISH $3.99</strong> <small>(COMING SOON)</small></span><span class="benefit-play">✦ <strong>PLAY FOR FREE</strong></span><span class="benefit-battle">⚔ <strong>BATTLE WITH FRIENDS ON X</strong></span></div>
+    <div class="quick-benefits" aria-label="Creator publication is planned at 0.03 SOL plus network and IQ Labs storage fees; playing is free"><span class="benefit-creator">✦ <strong>CREATORS · PUBLISH 0.03 SOL + FEES</strong> <small>(COMING SOON)</small></span><span class="benefit-play">✦ <strong>PLAY FOR FREE</strong></span><span class="benefit-battle">⚔ <strong>BATTLE WITH FRIENDS ON X</strong></span></div>
     <main>
       <section class="hero hero-creator" aria-labelledby="creator-heading"><div class="hero-scrim"></div><div class="hero-content"><div class="eyebrow"><span class="diamond-dot">✦</span> BUILT FOR DEVS · CREATORS · COMMUNITIES</div><h1 id="creator-heading">CREATE YOUR <span class="gold">MYSTERY,</span><span class="creator-hero-subtitle">ENTERTAIN YOUR COMMUNITY!</span></h1><p class="lead">Create 15 mysteries. Challenge your community to beat the clock and share their results on X.</p><div class="hero-buttons"><a class="btn btn-green" href="#studio">START CREATING <span aria-hidden="true">↗</span></a><a class="btn btn-glass" href="index.html">PLAY FREE</a></div><div class="hero-facts"><span>✧ AI-assisted content</span><span>◇ 3 difficulty levels</span><span>♢ Players free</span></div></div><div class="hero-corner">BUILD THE NEXT LEGEND</div></section>
       <div class="onchain-status" role="note" aria-label="Onchain development status"><span class="onchain-dot" aria-hidden="true"></span><strong>SOLANA-NATIVE ROADMAP</strong><span>The quest editor works locally. 100% fully onchain creation, storage and play are goals, not live features yet. Paid Mainnet publishing is not live. Devnet payment and IQ Labs publishing tests are available below.</span></div>
@@ -457,15 +457,15 @@ details.advanced-box[open]>summary{color:#adffb8;margin-bottom:13px}
                 <p>We prepare the request from your title, theme and difficulty. Tap below to copy it.</p>
                 <button type="button" id="ai-generate-one" class="btn btn-green">1 · COPY REQUEST FOR CHATGPT</button>
                 <div id="quick-ai-status" role="status" aria-live="polite"></div>
-                <div class="ai-next-step"><h3>2 · Open ChatGPT</h3><p>Tap the button. In ChatGPT, <strong>hold the message box → Paste → Send</strong>. When all 15 questions appear, copy the <strong>whole reply</strong>. Then come back to this page.</p>
-                <a id="open-chatgpt-step" href="https://chatgpt.com/" target="_blank" rel="noopener noreferrer" class="btn btn-outline ai-open-link">2 · OPEN CHATGPT ↗</a><span class="ai-safety-note">Tip: Leave this IQ QUEST tab open so your adventure stays here.</span></div><button type="button" id="copy-prompt" class="btn btn-outline hidden">COPY TASK AGAIN</button>
+                <div class="ai-next-step"><h3>2 · Open ChatGPT</h3><p>Tap the button. In ChatGPT, <strong>hold the message box → Paste → Send</strong>. When all 15 questions appear, copy the <strong>whole reply</strong>.</p>
+                <a id="open-chatgpt-step" href="https://chatgpt.com/" class="btn btn-outline ai-open-link">2 · OPEN CHATGPT · SAME TAB ↗</a><span class="ai-safety-note"><strong>How to return on iPhone:</strong> After copying ChatGPT's answer, tap your browser's <strong>← Back</strong> button to return to IQ QUEST. If the ChatGPT app opens instead, swipe up and switch back to your IQ QUEST browser. Your draft is saved on this device.</span></div><button type="button" id="copy-prompt" class="btn btn-outline hidden">COPY TASK AGAIN</button>
               </div>
               <div class="ai-simple-step">
                 <h3>3 · Paste the answer &amp; fill all 15</h3>
-                <p>Back on this page, <strong>press and hold in the box → Paste</strong>. Then tap the green-gold button. Your existing questions will be backed up.</p>
+                <p>Back in IQ QUEST, tap the button below to paste from your clipboard and fill all 15 questions. If your browser blocks clipboard access, <strong>hold inside the box → Paste</strong>, then tap again. Your existing questions will be backed up.</p>
                 <label class="field-label" for="chatgpt-json">ChatGPT answer (paste everything)</label>
                 <textarea id="chatgpt-json" rows="5" spellcheck="false" autocapitalize="off" autocomplete="off" placeholder="Tap and hold here → Paste your entire ChatGPT reply. We detect the questions automatically."></textarea>
-                <button type="button" id="ai-import-one" class="btn btn-gold" style="margin-top:10px">3 · FILL MY 15 QUESTIONS</button>
+                <button type="button" id="ai-import-one" class="btn btn-gold" style="margin-top:10px">3 · PASTE &amp; FILL MY 15 QUESTIONS</button>
                 <div id="import-status" class="small-status" role="status" aria-live="polite"></div>
                 <button type="button" id="undo-ai-import" class="btn btn-outline hidden">↶ UNDO LAST IMPORT</button>
               </div>
@@ -487,16 +487,16 @@ details.advanced-box[open]>summary{color:#adffb8;margin-bottom:13px}
             <div class="section-kicker">STEP 3 · PUBLISH YOUR QUEST</div>
             <h3>Publish when you're ready</h3>
             <p>Creating and testing are free. New creator publications will have a fee when Mainnet payments go live. The current Devnet test uses test-SOL and several wallet approvals.</p>
-            <div class="creator-publish-simple-summary"><strong>Currently: Devnet beta only.</strong> Real $3.99 Mainnet payments are OFF. Review all 15 questions first. Connect Phantom only when you publish, accept that questions and answers become public onchain, and approve each transaction. After 15/15 verification, you get your game link. Share it with friends <strong>after</strong> publication.</div>
+            <div class="creator-publish-simple-summary"><strong>Currently: Devnet beta only.</strong> Planned creator price: <strong>0.03 SOL platform fee + Solana and IQ Labs storage/network fees</strong>, all paid by the creator. Players are free. <strong>Real payments are OFF.</strong> Review all 15 questions first. Connect Phantom only when you publish, accept that questions and answers become public onchain, and approve each transaction. After 15/15 verification, you get your game link. Share it with friends <strong>after</strong> publication.</div>
             <input type="radio" name="publish-plan" value="community" checked hidden aria-label="One publishing plan">
-            <div class="price-single"><div><strong>SHARE ON X · PUBLISH</strong><p>One published adventure · 15 questions · shareable game link · free players.</p></div><strong class="price-main" id="plan-price">$3.99</strong></div>
+            <div class="price-single"><div><strong>SHARE ON X · PUBLISH</strong><p>One adventure · 15 questions · players free · additional storage/network fees.</p></div><strong class="price-main" id="plan-price">0.03 SOL</strong></div>
             <p class="tiny-note" id="selected-plan-note">Single planned publishing option. The initial X post is a teaser; the actual game link is available only after a verified onchain upload.</p>
             <div class="share-payment-sequence" id="social-payment-flow">
               <div class="flow-step"><span class="flow-number">1</span><div><strong>Share on X first</strong><small>X opens with your adventure title and the IQ QUEST link. It can display the IQ QUEST cover image as a preview.</small></div></div>
               <figure class="x-cover-preview" aria-label="IQ QUEST cover for X link preview"><img src="social-cover.jpg" alt="IQ QUEST cover over ancient jungle ruins" width="1200" height="630" loading="lazy"><figcaption>IQ QUEST cover preview · X controls whether the link image appears.</figcaption></figure>
               <a class="btn btn-green" id="share-creator-draft" href="https://x.com/intent/tweet" target="_blank" rel="noopener noreferrer">↗ SHARE ON X · STEP 1</a>
               <p class="share-step-status" id="share-step-status" role="status" aria-live="polite">Open X to continue. Clicking does not prove a post was published.</p>
-              <div class="share-next-step" id="payment-next-step"><h4>2 · Try publishing on Solana Devnet</h4><p id="payment-step-message">Real $3.99 Mainnet payments are not available yet. You can test the complete flow with Phantom and worthless Devnet SOL.</p><button id="beta-payment-shortcut" type="button" class="btn btn-gold">👻 TEST PAYMENT WITH PHANTOM · DEVNET ONLY</button><p class="tiny-note">This button opens the Devnet test settings. You will need 15 valid questions, must check the test-consent box, and must separately approve every wallet transaction. <strong>No real SOL payment.</strong></p><button id="simple-publish" type="button" class="btn btn-green publish-simple-button" disabled aria-disabled="true">REAL $3.99 PAYMENT · NOT LIVE YET</button><p class="tiny-note">Mainnet payments are OFF. Nobody will be charged. Real onchain publication will require a verified SOL payment and a separate wallet-approved IQ Labs upload with additional storage/network fees.</p>
+              <div class="share-next-step" id="payment-next-step"><h4>2 · Try publishing on Solana Devnet</h4><p id="payment-step-message">Real 0.03 SOL platform payments are not available yet. You can test with Phantom and worthless Devnet SOL.</p><button id="beta-payment-shortcut" type="button" class="btn btn-gold">👻 TEST PAYMENT WITH PHANTOM · DEVNET ONLY</button><p class="tiny-note">This button opens the legacy Devnet test settings. You will need 15 valid questions, must check the test-consent box, and must separately approve every wallet transaction. <strong>No real SOL payment.</strong></p><button id="simple-publish" type="button" class="btn btn-green publish-simple-button" disabled aria-disabled="true">REAL 0.03 SOL PAYMENT · NOT LIVE YET</button><p class="tiny-note">Mainnet payments are OFF. Nobody will be charged. Future total creator cost = 0.03 SOL platform fee + IQ Labs storage/protocol charges + Solana network fees and any account rent. Final costs must be shown before wallet approval.</p>
               <div id="mainnet-quote-panel" class="hidden" aria-live="polite" style="padding:14px;border:1px solid #4b9162;border-radius:11px;background:#12291d;margin:14px 0">
                 <p id="mainnet-invoice" style="white-space:pre-line;overflow-wrap:anywhere;color:#e6f3df;font-size:13px;line-height:1.7"></p>
                 <label class="publish-consent" style="display:flex;gap:9px;align-items:flex-start;font-size:12px;line-height:1.5"><input id="mainnet-order-consent" type="checkbox" style="margin-top:4px"><span>I checked the amount, Mainnet network and recipient. Payment alone does not publish. After payment, I must approve separate IQ Labs storage transactions in my wallet and pay their additional fees; the 15 questions, answers and hints become publicly readable on Solana. I have read the <a href="withdrawal.html" target="_blank" rel="noopener" style="text-decoration:underline">withdrawal information</a> and <a href="privacy.html" target="_blank" rel="noopener" style="text-decoration:underline">privacy information</a>.</span></label>
@@ -520,7 +520,7 @@ details.advanced-box[open]>summary{color:#adffb8;margin-bottom:13px}
               <div class="success-actions"><a class="btn btn-green" id="success-play" href="#" target="_blank" rel="noopener noreferrer" aria-disabled="true">▶ PLAY NOW</a><button type="button" id="success-copy" class="btn btn-outline" disabled>⧉ COPY PLAYABLE LINK</button><a class="btn btn-outline" id="success-share-x" href="#" target="_blank" rel="noopener noreferrer" aria-disabled="true">⚔ SHARE MY X BATTLE</a><a class="btn btn-outline" href="#studio">BACK TO CREATOR</a></div>
             </div>
             <button type="button" id="preview-publish-success" class="text-button" style="margin:8px 0">SEE THE POST-PAYMENT SCREEN · PREVIEW ONLY</button>
-            <details class="advanced-box"><summary>Fees &amp; how publication will work</summary><p class="tiny-note">The planned platform price is $3.99, settled in SOL using a five-minute server quote. Additional IQ Labs protocol/storage and Solana network fees apply and must be approved by the creator's wallet. A finalized payment enables a separate official IQ Labs SDK inscription of the exact paid 15-question draft. The backend must independently read it back before marking the order published. Browser-local scores/timers are not written onchain. Legal review of withdrawal, taxes and support is pending, so real Mainnet payment remains disabled.</p><span class="price-label">Planned creator fee</span><strong id="plan-breakdown">$3.99 USD equivalent in SOL</strong></details>
+            <details class="advanced-box"><summary>Fees &amp; how publication will work</summary><p class="tiny-note">The planned platform price is a fixed 0.03 SOL, not a USD conversion. The creator also pays Solana network fees, IQ Labs protocol/storage fees and any escrow account rent. Those additional fees vary with the number and size of transactions and will need a live estimate before payment. The new Solana escrow program is still an undeployed Devnet draft; the old $3.99 server-based Mainnet checkout remains permanently disabled until replaced and security-reviewed. A trusted publication readback step is still required. Browser-local scores/timers are not onchain. Legal review remains pending.</p><span class="price-label">Planned creator platform fee</span><strong id="plan-breakdown">0.03 SOL + separate network/storage fees</strong></details>
             <p class="tiny-note">Before any real paid launch, review our <a href="imprint.html" style="color:#aeffbd;text-decoration:underline">imprint</a>, <a href="privacy.html" style="color:#aeffbd;text-decoration:underline">privacy information</a> and <a href="withdrawal.html" style="color:#aeffbd;text-decoration:underline">withdrawal information</a>. These legal pages are still drafts and the Mainnet checkout remains disabled.</p>
             <p id="checkout-status" class="share-step-status" role="status" aria-live="polite">Checkout not live. Your 15-question adventure can be edited and tested without a wallet.</p>
             <details class="advanced-box"><summary>Publication steps and estimated Devnet fees</summary>
@@ -542,7 +542,7 @@ details.advanced-box[open]>summary{color:#adffb8;margin-bottom:13px}
               <div>Observed Solana transaction fees: <strong>6 × 0.0000054 = 0.0000324 Devnet SOL</strong>.</div>
               <div>Observed IQ Labs registration fee on the final transaction: <strong>0.003 Devnet SOL once</strong>.</div>
               <div><strong>Observed total: 0.0030324 Devnet SOL</strong> (test coins with no monetary value).</div>
-              <div style="margin-top:7px">This is a verified example, <strong>not a guaranteed quote</strong> for new uploads. Fees, account costs and the required number of transactions can change. Review each amount inside Phantom. On Mainnet, real SOL plus the planned $3.99 platform fee would apply; <strong>Mainnet checkout is OFF.</strong></div>
+              <div style="margin-top:7px">This is a verified example, <strong>not a guaranteed quote</strong> for new uploads. Fees, account costs and the required number of transactions can change. Review each amount inside Phantom. The planned Mainnet platform fee is 0.03 SOL, with network/storage costs on top; <strong>Mainnet checkout is OFF.</strong></div>
             </div>
             </details>
             <button type="button" id="shortcut-storage-only" class="btn btn-green" style="width:100%;margin:12px 0">3 · TEST ONCHAIN STORAGE · DEVNET ONLY</button>
@@ -558,10 +558,10 @@ details.advanced-box[open]>summary{color:#adffb8;margin-bottom:13px}
               <h4 id="lab-heading">◈ PAYMENT SETUP · DEVNET CHECK</h4>
               <p>The public IQ QUEST payout wallet is now configured. The recipient below will be the planned destination for creator platform fees when secure Mainnet checkout is enabled.</p>
               <code id="lab-recipient" class="lab-address">BbMdFqpXfkJeKLvoT8W7QSFZmVeLV35gp6At2MbZF377</code>
-              <p class="lab-notice"><strong>IMPORTANT:</strong> Real $3.99 Mainnet payments are OFF. This is only an optional rehearsal using <strong>0.002 worthless Devnet test SOL</strong> plus network fees. The transfer alone does not buy or publish a quest. With separate auto-publish consent, a verified transfer can start the upload. Your selected wallet must still approve every signing request.</p>
-              <div class="lab-actions"><button type="button" class="btn btn-outline" id="lab-quote">VIEW INDICATIVE SOL PRICE · NO PAYMENT</button></div>
-              <div id="lab-price" class="lab-status" role="status" aria-live="polite">Only the $3.99 Share on X plan is available. SOL conversion is informational only; Mainnet payments are off.</div>
-              <label class="lab-check"><input id="lab-consent" type="checkbox"><span>I understand this is a <strong>Devnet-only test transfer</strong>, not the $3.99 Mainnet fee. I will use a wallet supporting Devnet, review the recipient address, approve 0.002 test SOL only if correct, and understand a transfer alone does not publish my quest.</span></label>
+              <p class="lab-notice"><strong>IMPORTANT:</strong> Real 0.03 SOL Mainnet payments are OFF. This is an old, optional rehearsal using <strong>0.002 worthless Devnet test SOL</strong> plus network fees. The transfer alone does not buy or publish a quest. The NEW fixed-SOL escrow program is not deployed yet. Every signing request needs your approval.</p>
+              <div class="lab-actions"><button type="button" class="btn btn-outline" id="lab-quote">VIEW PLANNED SOL PLATFORM FEE · NO PAYMENT</button></div>
+              <div id="lab-price" class="lab-status" role="status" aria-live="polite">Planned future platform price: 0.03 SOL plus separate network/storage fees. Mainnet payments are off.</div>
+              <label class="lab-check"><input id="lab-consent" type="checkbox"><span>I understand this is a <strong>Devnet-only legacy test transfer</strong>, not the future 0.03 SOL platform fee. I will use a wallet supporting Devnet, review the recipient address, approve 0.002 test SOL only if correct, and understand a transfer alone does not publish my quest.</span></label>
               <div class="lab-actions"><button type="button" id="lab-send" class="btn btn-gold" disabled>TEST PAYMENT ON DEVNET · 0.002 TEST SOL</button><button type="button" id="lab-verify" class="btn btn-outline">VERIFY LAST DEVNET TEST PAYMENT</button></div>
               <div id="wallet-choice-panel" class="wallet-checkout hidden" role="region" aria-labelledby="wallet-choice-heading">
                 <h4 id="wallet-choice-heading">Connect Phantom just before the test transfer</h4>
@@ -574,16 +574,16 @@ details.advanced-box[open]>summary{color:#adffb8;margin-bottom:13px}
               </div>
               <div id="lab-status" class="lab-status" role="status" aria-live="polite">No Devnet payment test started. Nothing has been sent.</div>
               <div id="lab-result" class="lab-result hidden"><a id="lab-explorer" class="lab-explorer" target="_blank" rel="noopener noreferrer" href="#">View confirmed Devnet payment in Solana Explorer ↗</a></div>
-              <p><strong>What is still missing for actual sales:</strong> a trustworthy USD→SOL checkout quote, independently enforced payment-to-quest validation, live IQ Labs Mainnet publication and the Community directory. Nobody should send real SOL before these checks pass.</p>
+              <p><strong>What is still missing for actual sales:</strong> a deployed, audited fixed-SOL escrow program, independently enforced payment-to-IQ-Labs-publication verification, live Mainnet publication and the Community directory. Nobody should send real SOL before these checks pass.</p>
             </section><button type="button" id="developer-start-sol-checkout" class="btn btn-gold" disabled>DEVELOPER CHECK · NO PAYMENT</button>
-            <p class="share-step-status" id="developer-checkout-status" role="status" aria-live="polite">Share on X · Publish $3.99 selected. Mainnet checkout is off; developer-only tests below are not real payments.</p>
+            <p class="share-step-status" id="developer-checkout-status" role="status" aria-live="polite">Future creator platform fee 0.03 SOL + fees. Mainnet checkout is off; developer-only tests below are not real payments.</p>
             <p class="tiny-note">This is only an unpaid readiness check, not a charge or publication. The planned public quest directory does not exist yet. Never approve SOL transfers based on this preview.</p>
             <section class="iq-devnet-publisher" aria-labelledby="devnet-publish-heading">
               <div class="section-kicker">NEW · EXPERIMENTAL REAL ONCHAIN TEST</div>
               <h4 id="devnet-publish-heading">Publish 15 puzzles to IQ Labs Devnet</h4>
               <p><strong>V5.16 · story-free Devnet test:</strong> All 15 questions now contain their own clues without separate story text. Solana transactions use smaller, 800-byte chunks. The earlier V5.15 partial upload stays saved separately; this new story-free quest requires a fresh Devnet storage upload, but <strong>NO second 0.002 Test SOL platform payment</strong>. Phantom still asks you to approve IQ Labs Devnet storage and network/protocol test-SOL fees.</p>
               <p><strong>Step 2 of the test:</strong> After the Devnet-only payment rehearsal above succeeds, the IQ Labs SDK can write your complete validated quest to Solana <strong>Devnet</strong>, recording the test receipt. You can opt in below to start the upload automatically after verification. Your selected wallet will still ask you to approve the necessary Devnet transactions. After exact onchain readback and test-payment verification, you get a shareable player link. Friends play free, without connecting a wallet.</p>
-              <p><strong>Not a paid Mainnet release.</strong> The 0.002 Devnet test SOL is not a real $3.99 platform payment. Devnet SOL has no monetary value. IQ QUEST now losslessly compresses the complete quest before uploading, aiming for fewer, smaller IQ Labs transactions. All 15 questions and answers are restored and verified on readback. Additional Devnet network / protocol fees and several Phantom approvals may still be needed. Review each wallet prompt.</p>
+              <p><strong>Not a paid Mainnet release.</strong> The 0.002 Devnet test SOL is not the future 0.03 SOL platform payment. Devnet SOL has no monetary value. IQ QUEST now losslessly compresses the complete quest before uploading, aiming for fewer, smaller IQ Labs transactions. All 15 questions and answers are restored and verified on readback. Additional Devnet network / protocol fees and several Phantom approvals may still be needed. Review each wallet prompt.</p>
               <p>Selected plan is recorded as metadata only. A public community directory and real paid Mainnet checkout are not live yet.</p>
               <label class="publish-consent"><input type="checkbox" id="devnet-accept"><span>I will use <strong>Solana Devnet</strong> in my chosen wallet. I understand the questions, answers and hints are publicly readable onchain and may be permanent. <strong>I understand the creator must approve several separate Phantom storage transactions, with possible fees on each one.</strong> I will review every wallet request.</span></label>
               <label class="publish-consent legacy-autopublish-label"><input type="checkbox" id="devnet-auto-publish"><span><strong>Automatically start publication after a verified Devnet test payment.</strong> I authorize IQ QUEST to begin the public upload without another page-button click. Every wallet signing request still needs my approval. This setting applies to this page session only.</span></label>
@@ -904,6 +904,23 @@ The levels array MUST contain exactly 15 objects. If accepted answers have synon
 }
 function offerManualPrompt(prompt){$('manual-ai-prompt').value=prompt;$('prompt-fallback').classList.remove('hidden');$('manual-ai-prompt').focus();$('manual-ai-prompt').select();}
 async function copyPrompt(){const text=copyPromptText();try{if(!navigator.clipboard?.writeText)throw Error('Clipboard is unavailable');await navigator.clipboard.writeText(text);$('prompt-fallback').classList.add('hidden');status('import-status','✓ Copied! Tap 2 · OPEN CHATGPT below, paste and send. Copy all 15 answers, then return to step 3.');$('quick-ai-status').classList.remove('bad');$('quick-ai-status').textContent='✓ Request copied! Now tap 2 · OPEN CHATGPT below. In ChatGPT, Paste → Send, then copy the entire reply.';}catch(e){offerManualPrompt(text);status('import-status','Your browser blocked automatic copying. Select and copy the task shown below, then open ChatGPT.',true);$('quick-ai-status').classList.add('bad');$('quick-ai-status').textContent='Clipboard blocked. Copy the request from the opened text box below, then tap 2 · OPEN CHATGPT.';}}
+// Mobile ChatGPT handoff: use the SAME browser tab so Back returns to the
+// saved creator draft. Native ChatGPT app handoff uses the iPhone app switcher.
+const AI_RETURN_KEY='iqquest_chatgpt_return_v1';
+$('open-chatgpt-step').addEventListener('click',()=>{
+ saveSilent();
+ try{sessionStorage.setItem(AI_RETURN_KEY,'1');}catch(_e){}
+ try{history.replaceState(history.state,'',new URL('#ai-builder',location.href));}catch(_e){}
+});
+function showAiReturnHelp(){
+ let returning=false;
+ try{returning=sessionStorage.getItem(AI_RETURN_KEY)==='1';if(returning)sessionStorage.removeItem(AI_RETURN_KEY);}catch(_e){}
+ if(!returning)return;
+ status('import-status','✓ Welcome back to IQ QUEST! Copy all 15 answers in ChatGPT, then tap 3 · PASTE & FILL MY 15 QUESTIONS. If clipboard access is blocked, hold inside the answer box and choose Paste.');
+ $('chatgpt-json').scrollIntoView({behavior:'auto',block:'center'});
+}
+window.addEventListener('pageshow',showAiReturnHelp);
+document.addEventListener('visibilitychange',()=>{if(!document.hidden)showAiReturnHelp();});
 async function improveWithChatGPT(){
  const d=safeDraft();
  const difficultyRule={Easy:'5–9 min, real one-step logic; never trivial',Medium:'9–18 min, 1–2 steps, 3 cross-level clues',Hard:'15–30 min, 2–4 steps, 4+ cross-level dependencies'}[d.difficulty];
@@ -1080,8 +1097,8 @@ try{
  function refresh(){
    const ok=shared();
    payment.classList.toggle('completed',ok);
-   paymentMessage.textContent=ok ? '✓ X teaser opened. You can now try the Phantom Devnet test below. Real $3.99 payments remain unavailable.' : 'Phantom Devnet testing is available below without paying real SOL. X sharing is optional for the test.';
-   if(ok)status.textContent='✓ X share window opened. Posting was not verified. The $3.99 Mainnet payment is not available yet.';
+   paymentMessage.textContent=ok ? '✓ X teaser opened. You can now try the Phantom Devnet test below. Planned 0.03 SOL real payments remain unavailable.' : 'Phantom Devnet testing is available below without paying real SOL. X sharing is optional for the test.';
+   if(ok)status.textContent='✓ X share window opened. Posting was not verified. The 0.03 SOL Mainnet platform payment is not available yet.';
  }
  share.addEventListener('click',()=>{
    const title=currentTitle();
@@ -1395,20 +1412,15 @@ function showPending(signature){
  resultBox.classList.remove('hidden');
 }
 function showVerified(receipt){
- setStatus('✓ REAL DEVNET BLOCKCHAIN RECEIPT VERIFIED.\n0.002 test SOL received by the configured wallet. The memo matches these 15 questions and the selected plan.\nThis is NOT a real $3.99 payment and DOES NOT publish your quest.');
+ setStatus('✓ REAL DEVNET BLOCKCHAIN RECEIPT VERIFIED.\n0.002 test SOL received by the configured wallet. The memo matches these 15 questions and the selected plan.\nThis is NOT a real 0.03 SOL platform payment and DOES NOT publish your quest.');
  lookup('lab-explorer').href='https://explorer.solana.com/tx/'+encodeURIComponent(receipt.signature)+'?cluster=devnet';
  lookup('lab-explorer').textContent='View confirmed Devnet payment in Solana Explorer ↗';
  resultBox.classList.remove('hidden');
  // The publishing panel independently checks the saved receipt again before any upload.
  window.dispatchEvent(new CustomEvent('iqquest:devnet-payment-verified',{detail:{signature:receipt.signature}}));
 }
-lookup('lab-quote').addEventListener('click',async()=>{
- const plan=selectedPlan(),usd=3.99;
- quoteStatus.textContent='Checking public SOL/USD market price (illustrative only)…';
- try{
-  const quote=await indicativeMainnetQuote(usd);
-  quoteStatus.textContent=`$${usd} ≈ ${quote.sol.toFixed(6)} SOL at $${quote.usdPerSol.toFixed(2)}/SOL (${new Date(quote.retrievedAt).toLocaleTimeString()}). ESTIMATE ONLY · never a payable invoice · storage/network costs extra · Mainnet payment disabled.`;
- }catch(e){quoteStatus.textContent='Indicative quote unavailable: '+String(e?.message||e)+'. No SOL transaction was requested.';}
+lookup('lab-quote').addEventListener('click',()=>{
+ quoteStatus.textContent='PLANNED ONLY: 0.03 SOL platform fee (30,000,000 lamports) + separate IQ Labs network/storage and escrow account costs. The contract is NOT deployed, Mainnet payment is disabled, and nothing was sent.';
 });
 for(const input of document.querySelectorAll('input[name="publish-plan"]'))input.addEventListener('change',()=>{
  quoteStatus.textContent='Plan changed. Request a fresh indicative quote if wanted; Mainnet payments remain disabled.';
