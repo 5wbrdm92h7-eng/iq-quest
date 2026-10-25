@@ -813,7 +813,9 @@ function puzzleFingerprint(data){
 }
 function puzzleKey(){return (onchainMode?'onchain':playMode==='lightning'?'lightning':'full')+'_'+quest.difficulty+'_'+puzzleFingerprint(quest);}
 function setId(){return preview?'preview_'+encodeURIComponent(quest.title).slice(0,65):publishedQuestId?'published_'+publishedQuestId:onchainMode?'onchain_'+onchainSignature:playMode+'_'+chosenDifficulty+(playMode==='lightning'?'_'+puzzleSeed:'');}
-function runKey(){return 'iqquest_run_v40_'+setId();}
+// Solo and Battle Mode keep separate in-progress runs: opening a battle must
+// never revive an old solo timer. The First Attempt remains per puzzle set.
+function runKey(){return 'iqquest_run_v40_'+setId()+(battleMode?'_battle':'');}
 function attemptKey(){return 'iqquest_first_v40_'+puzzleKey();}
 function bestKey(){return 'iqquest_best_v40_'+puzzleKey();}
 // Keep legacy runs: upgrading must not give somebody a fresh First Attempt.
