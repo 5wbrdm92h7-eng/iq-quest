@@ -561,7 +561,7 @@ details.advanced-box[open]>summary{color:#adffb8;margin-bottom:13px}
               <h3 id="publish-success-title">Your adventure is ready to share</h3>
               <p id="publish-success-detail">After a verified payment and independent IQ Labs Mainnet readback, your real onchain game link will appear here.</p>
               <div class="success-url" id="publish-success-url">No public link exists yet.</div>
-              <div class="success-actions"><a class="btn btn-green" id="success-play" href="#" target="_blank" rel="noopener noreferrer" aria-disabled="true">▶ PLAY NOW</a><button type="button" id="success-copy" class="btn btn-outline" disabled>⧉ COPY PLAYABLE LINK</button><a class="btn btn-outline" id="success-share-x" href="#" target="_blank" rel="noopener noreferrer" aria-disabled="true">⚔ SHARE MY X BATTLE</a><a class="btn btn-outline" href="#studio">BACK TO CREATOR</a></div>
+              <div class="success-actions"><a class="btn btn-green" id="success-play" href="#" target="_blank" rel="noopener noreferrer" aria-disabled="true">▶ PLAY NOW</a><button type="button" id="success-copy" class="btn btn-outline" disabled>⧉ COPY PLAYABLE LINK</button><a class="btn btn-outline" id="success-share-x" href="#" target="_blank" rel="noopener noreferrer" aria-disabled="true">⚔ SHARE MY QUEST ON X</a><a class="btn btn-outline" href="#studio">BACK TO CREATOR</a></div>
             </div>
             <button type="button" id="preview-publish-success" class="text-button" style="margin:8px 0">SEE THE POST-PAYMENT SCREEN · PREVIEW ONLY</button>
             <details class="advanced-box"><summary>Fees &amp; how publication will work</summary><p class="tiny-note">The planned platform price is a fixed 0.03 SOL, not a USD conversion. The creator also pays Solana network fees, IQ Labs protocol/storage fees and any escrow account rent. Those additional fees vary with the number and size of transactions and will need a live estimate before payment. The new Solana escrow program is still an undeployed Devnet draft; the old $3.99 server-based Mainnet checkout remains permanently disabled until replaced and security-reviewed. A trusted publication readback step is still required. Browser-local scores/timers are not onchain. Legal review remains pending.</p><span class="price-label">Planned creator platform fee</span><strong id="plan-breakdown">0.03 SOL + separate network/storage fees</strong></details>
@@ -649,7 +649,7 @@ details.advanced-box[open]>summary{color:#adffb8;margin-bottom:13px}
               <div class="publish-links hidden" id="devnet-links">
                 <a id="devnet-play-link" target="_blank" rel="noopener noreferrer" href="#">OPEN YOUR PUBLISHED QUEST ↗</a>
                 <button type="button" class="btn btn-outline" id="copy-devnet-link">COPY PLAYER LINK</button>
-                <a id="devnet-share-x" class="btn btn-green" target="_blank" rel="noopener noreferrer" href="https://x.com/intent/tweet">⚔ SHARE MY X BATTLE ↗</a>
+                <a id="devnet-share-x" class="btn btn-green" target="_blank" rel="noopener noreferrer" href="https://x.com/intent/tweet">⚔ SHARE MY QUEST ON X ↗</a>
                 <a id="devnet-explorer" target="_blank" rel="noopener noreferrer" href="#">VERIFY TRANSACTION IN SOLANA EXPLORER ↗</a>
               </div>
             </section></details></div>
@@ -668,6 +668,7 @@ details.advanced-box[open]>summary{color:#adffb8;margin-bottom:13px}
       <div style="margin:10px 0 20px;padding:11px;border:1px solid #54ac6b;border-radius:10px;background:#143322;color:#baffc5;font-size:13px;font-weight:850">✓ 15 / 15 PUZZLES VERIFIED ONCHAIN</div>
       <a id="verified-onchain-play" class="btn btn-green" style="display:flex;width:100%;font-size:13px;margin:10px 0" target="_blank" rel="noopener noreferrer">▶ OPEN MY PUBLISHED QUEST ↗</a>
       <button type="button" id="verified-onchain-copy" class="btn btn-outline" style="width:100%;font-size:13px;margin:7px 0">COPY PLAYER LINK</button>
+      <a id="verified-onchain-share-x" class="btn btn-gold" style="display:flex;width:100%;font-size:13px;margin:10px 0" target="_blank" rel="noopener noreferrer">⚔ SHARE MY QUEST ON X ↗</a>
       <a id="verified-onchain-explorer" style="display:block;color:#a9ffba;text-decoration:underline;margin:13px 0;font-size:12px" target="_blank" rel="noopener noreferrer">Verify transaction in Solana Explorer ↗</a>
       <p style="font-size:11px;color:#cddfc8;line-height:1.5;margin:13px 0">This confirms the Devnet storage test only. Real Mainnet sales are not enabled. Players do not need a wallet.</p>
       <button type="button" id="verified-onchain-close" class="btn btn-glass" style="width:100%;margin:7px 0 0">CLOSE · BACK TO CREATOR</button>
@@ -1200,7 +1201,7 @@ try{
    play.href=url;play.removeAttribute('aria-disabled');
    const battleUrl=new URL(url);battleUrl.searchParams.set('battle','1');
    const intent=new URL('https://x.com/intent/tweet');
-   intent.searchParams.set('text',`⚔ FREE X BATTLE: Can you beat my time in “${title}” on IQ QUEST? All 15 questions are verified onchain, powered by IQ Labs on ${network==='devnet'?'Solana Devnet (beta)':'Solana Mainnet'}. Create your own battle quest too! #IQQUEST #Solana`);
+   intent.searchParams.set('text',`🧠 I created “${title}” on IQ QUEST! Can you solve all 15 puzzles? ⚔ Challenge your friends and community! Quest data verified on ${network==='devnet'?'Solana Devnet (beta)':'Solana Mainnet'}, powered by IQ Labs. Create your own onchain quest too! #IQQUEST #Solana`);
    intent.searchParams.set('url',battleUrl.href);
    x.href=intent.toString();x.removeAttribute('aria-disabled');
    $('success-copy').disabled=false;
@@ -1248,6 +1249,7 @@ function openVerifiedModal(title,sig){
  // onchain readback. A mere Phantom approval is never treated as success.
  $('verified-onchain-description').textContent='“'+title+'” is published! All 15 questions, hints and answers were independently read back from IQ Labs on Solana Devnet and verified. Your player link is ready.';
  $('verified-onchain-play').href=lastUrl;
+ $('verified-onchain-share-x').href=$('devnet-share-x').href;
  $('verified-onchain-explorer').href='https://explorer.solana.com/tx/'+encodeURIComponent(sig)+'?cluster=devnet';
  $('verified-onchain-copy').textContent='COPY PLAYER LINK';
  successModal.classList.remove('hidden');
@@ -1271,6 +1273,7 @@ try{
   setStatus('An earlier Phantom Devnet upload may be unfinished ('+job.index+' confirmed chunks saved). First VERIFY LAST DEVNET TEST PAYMENT above. After checking the Devnet consent box, Publish will safely CHECK THE CHAIN AND RESUME; do not make a second test payment.');
 }catch(_e){}
 function showPublished(sig,title,verified,storageOnly=false,stats=''){
+ if(!verified){links.classList.add('hidden');setStatus('Onchain verification is still pending. Your X share link will appear only after all 15 puzzles are verified.');return;}
  const u=new URL('index.html',location.href);
  u.searchParams.set('tx',sig);u.searchParams.set('network','devnet');
  lastUrl=u.toString();
@@ -1278,7 +1281,7 @@ function showPublished(sig,title,verified,storageOnly=false,stats=''){
  $('devnet-explorer').href='https://explorer.solana.com/tx/'+encodeURIComponent(sig)+'?cluster=devnet';
  const battleUrl=new URL(lastUrl);battleUrl.searchParams.set('battle','1');
  const share=new URL('https://x.com/intent/tweet');
- share.searchParams.set('text','I published '+title+' onchain on IQ QUEST! 15 puzzles stored on Solana Devnet, powered by IQ Labs. ⚔ FREE X BATTLE: can you beat my time? Create your own quest too (Devnet beta)! #IQQUEST #Solana');
+ share.searchParams.set('text','🧠 I created “'+title+'” on IQ QUEST! Can you solve all 15 puzzles? ⚔ Challenge your friends and community! Quest data verified on Solana Devnet (beta), powered by IQ Labs. Create your own onchain quest too! #IQQUEST #Solana');
  share.searchParams.set('url',battleUrl.href);
  $('devnet-share-x').href=share.toString();
  links.classList.remove('hidden');
