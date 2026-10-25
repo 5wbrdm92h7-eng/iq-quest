@@ -1,4 +1,4 @@
-/* IQ QUEST V5.15 — recoverable Phantom Devnet storage-only test, with paid publishing unchanged. */
+/* IQ QUEST V5.16 — story-free 800-byte Phantom storage test; Mainnet stays disabled. */
 import {MAINNET_CLIENT_ENABLED} from './payments/client-bridge.mjs';
 import {sha256Hex,verifyOrderInputs} from './payments/order-core.mjs';
 const DEVNET_RPC='https://api.devnet.solana.com';
@@ -9,9 +9,9 @@ const IQ_PROGRAM='9KLLchQVJpGkw4jPuUmnvqESdR7mtNCYr3qS4iQLabs';
 export const isSolanaSignature=value=>typeof value==='string' && /^[1-9A-HJ-NP-Za-km-z]{80,100}$/.test(value);
 const PACKED_FORMAT='IQQUEST-GZIP-V1';
 const MAX_UNPACKED_BYTES=120000;
-// A browser-wallet IQ Labs write uses 850-byte chunks. Fewer than ten chunks
-// keeps us on the SDK's linked-list path, avoiding CreateSession on Devnet.
-const DEVNET_PACKED_LIMIT=7600;
+// Nine 800-byte SendCode chunks max. A previous transaction signature increases
+// every subsequent wire transaction; larger chunks exceeded Solana's 1232 bytes.
+const DEVNET_PACKED_LIMIT=7200;
 
 export async function packDevnetQuestPayload(raw){
  if(typeof raw!=='string'||!raw)throw Error('Cannot pack an empty quest.');
@@ -66,7 +66,10 @@ export function buildDevnetQuestEnvelope({draft,plan,publisher,paymentTestSignat
   if(!isSolanaSignature(paymentTestSignature))throw Error('A verified Devnet test-payment signature is required for the payment-gated test.');
   metadata.testPaymentSignature=paymentTestSignature;
  }
- return {...draft,iqquest:metadata};
+ // Only game-critical puzzle fields go onchain. A story from older drafts is
+ // deliberately excluded; the creator/player must show all clues inside q.
+ const levels=draft.levels.map(l=>({title:l.title,q:l.q,h:l.h,a:l.a}));
+ return {...draft,levels,iqquest:metadata};
 }
 let sdkPromise=null;
 async function runtime(network='devnet'){
@@ -282,15 +285,15 @@ export async function publishQuestOnchain({draft,provider,plan='community',netwo
  let signature;
  if(network==='devnet'&&provider.walletName==='Phantom'&&typeof provider.signAndSendTransaction!=='function'&&
     typeof navigator!=='undefined'&&/iPhone|iPad|iPod|Android/i.test(navigator.userAgent||''))
-   throw Error('Phantom mobile did not expose its sign-and-send capability. Update Phantom and reload IQ QUEST V5.15 before publishing. No wallet approval was requested.');
+   throw Error('Phantom mobile did not expose its sign-and-send capability. Update Phantom and reload IQ QUEST V5.16 before publishing. No wallet approval was requested.');
  if(network==='devnet'&&typeof provider.signAndSendTransaction==='function'){
    // Phantom mobile can reload the in-app page after signing. By letting the
    // wallet broadcast, then recording/recovering each SDK-built chunk onchain,
    // a page reset cannot silently discard a signed-but-unsent transaction.
-   const {publishResumableDevnet,DEVNET_STORAGE_ONLY_JOB_KEY}=await import('./devnet-resumable.mjs?v=515');
+   const {publishResumableDevnet,DEVNET_STORAGE_ONLY_JOB_KEY,DEVNET_STORY_FREE_JOB_KEY}=await import('./devnet-resumable.mjs?v=516');
    onProgress('Using Phantom’s recoverable Devnet sign-and-send route. IQ Labs instructions are verified before wallet approval.');
    signature=await publishResumableDevnet({sdk,web3,BufferClass,connection,wallet,provider,payload,
-     ...(devnetStorageOnly?{jobKey:DEVNET_STORAGE_ONLY_JOB_KEY}:{}),
+     ...(devnetStorageOnly?{jobKey:DEVNET_STORY_FREE_JOB_KEY}:{}),
      preflight:async tx=>{inspect(tx);await preflight(tx);},onProgress});
  }else{
    signature=await sdk.writer.codeIn({connection,signer},payload,'iq-quest-15.json',0,'application/json',(percent)=>onProgress('IQ Labs upload: '+Math.round(Number(percent)||0)+'%'));

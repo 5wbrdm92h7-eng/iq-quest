@@ -1,4 +1,4 @@
-/* IQ QUEST V5.15 — resumable Devnet writes using official IQ Labs instruction builders.
+/* IQ QUEST V5.16 — story-free, size-safe, resumable Devnet writes using official IQ Labs instruction builders.
  * Mobile Phantom broadcasts approved transactions itself. Nothing is signed
  * automatically after a reload; the user must return and explicitly Publish.
  */
@@ -6,6 +6,8 @@ import {sha256Hex} from './payments/order-core.mjs';
 
 const JOB_KEY='iqquest_devnet_mobile_upload_v1';
 export const DEVNET_STORAGE_ONLY_JOB_KEY='iqquest_devnet_mobile_storage_only_v515';
+// New inscription format: never overwrite a partially uploaded V5.15 story quest.
+export const DEVNET_STORY_FREE_JOB_KEY='iqquest_devnet_mobile_storage_only_v516_no_story';
 const SEND_CODE='ef8123d03ea86ec9';
 const INVENTORY_CODE='51b1057ad57d15ee';
 const ALPHABET='123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz';
@@ -52,6 +54,19 @@ function getJob(storage,jobKey=JOB_KEY){
 }
 export function getSavedMobileJob(storage=globalThis.localStorage,jobKey=JOB_KEY){return getJob(storage,jobKey);}
 
+// Every SendCode transaction after the first contains an 88-character previous
+// Solana signature. 850 data bytes with that signature made a 1,245-byte
+// transaction on Phantom (Solana max 1,232). 800 leaves a safety margin.
+export const DEVNET_CHUNK_BYTES=800;
+export function splitDevnetChunks(payload){
+ if(typeof payload!=='string'||!/^[\x00-\x7f]+$/.test(payload))
+  throw Error('IQ Labs chunk input must be ASCII.');
+ const chunks=[];
+ for(let i=0;i<payload.length;i+=DEVNET_CHUNK_BYTES)chunks.push(payload.slice(i,i+DEVNET_CHUNK_BYTES));
+ if(!chunks.length||chunks.length>=10)throw Error('Devnet upload must fit in 1–9 safe 800-byte IQ Labs chunks. Shorten the quest before signing.');
+ return chunks;
+}
+
 async function findLanded({connection,address,program,kind,chunk,beforeTx,metadata,limit=50}){
  const entries=await connection.getSignaturesForAddress(address,{limit},'confirmed');
  for(const entry of entries){
@@ -81,11 +96,13 @@ async function waitForConfirmed(connection,signature){
 }
 
 export async function publishResumableDevnet({sdk,web3,BufferClass,connection,wallet,provider,payload,preflight,onProgress=()=>{},storage=globalThis.localStorage,jobKey=JOB_KEY}){
- if(![JOB_KEY,DEVNET_STORAGE_ONLY_JOB_KEY].includes(jobKey))throw Error('Unsupported IQ Labs Devnet recovery namespace. No wallet request was started.');
+ if(![JOB_KEY,DEVNET_STORAGE_ONLY_JOB_KEY,DEVNET_STORY_FREE_JOB_KEY].includes(jobKey))throw Error('Unsupported IQ Labs Devnet recovery namespace. No wallet request was started.');
  if(typeof provider?.signAndSendTransaction!=='function')throw Error('This wallet cannot broadcast an approved Devnet transaction.');
  if(!/^[\x00-\x7f]+$/.test(payload))throw Error('The packed onchain data must be ASCII to preserve IQ Labs chunk boundaries.');
- const chunks=[];
- for(let i=0;i<payload.length;i+=850)chunks.push(payload.slice(i,i+850));
+ // V5.15 jobs retain the original 850-byte boundaries for safe legacy
+ // recovery. New story-free jobs use 800 bytes and a separate local key.
+ const chunks=jobKey===DEVNET_STORY_FREE_JOB_KEY?splitDevnetChunks(payload):
+   Array.from({length:Math.ceil(payload.length/850)},(_,i)=>payload.slice(i*850,(i+1)*850));
  if(!chunks.length||chunks.length>=10)throw Error('Mobile Devnet upload must use 1–9 official IQ Labs chunks.');
  const digest=await sha256Hex(payload);
  const payer=wallet.toBase58();

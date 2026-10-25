@@ -375,7 +375,7 @@ details.advanced-box[open]>summary{color:#adffb8;margin-bottom:13px}
             </div>
             <div class="prompt-fallback hidden" id="prompt-fallback"><label for="manual-ai-prompt">If your browser couldn't copy the task, select and copy this text manually:</label><textarea id="manual-ai-prompt" rows="6" readonly></textarea><button type="button" id="select-ai-prompt" class="btn btn-outline">SELECT TASK TEXT</button></div>
           </div>
-          <div class="panel studio-panel"><div class="panel-topline"><span class="section-kicker">03 · QUESTION EDITOR</span><span id="editor-count" class="status-dot">15 QUESTIONS</span></div><h2>Make every clue yours</h2><p class="section-intro">ChatGPT can draft and revise all fifteen puzzles, but please play-test the exact answers. Changing difficulty alone does not rewrite existing questions.</p><div class="editor-layout"><div class="level-selector" id="level-selector" aria-label="Choose a question"></div><div class="level-fields"><div class="form-group"><label for="level-title">Chapter title</label><input id="level-title" maxlength="100"></div><div class="form-group"><label for="level-story">Story / atmosphere</label><textarea id="level-story" rows="3" maxlength="500"></textarea></div><div class="form-group"><label for="level-question">Question</label><textarea id="level-question" rows="3" maxlength="600"></textarea></div><div class="form-group"><label for="level-hint">Hint <span class="muted">(costs player +1 minute)</span></label><textarea id="level-hint" rows="2" maxlength="400"></textarea></div><div class="form-group"><label for="level-answer">Accepted answer <span class="muted">(separate alternatives with |)</span></label><input id="level-answer" maxlength="180" spellcheck="false" placeholder="e.g. compass | a compass"></div><div class="tiny-note">Answers are stored as plaintext in this draft. They are not secret or prize-safe.</div></div></div></div>
+          <div class="panel studio-panel"><div class="panel-topline"><span class="section-kicker">03 · QUESTION EDITOR</span><span id="editor-count" class="status-dot">15 QUESTIONS</span></div><h2>Make every clue yours</h2><p class="section-intro">No story needed: all rules and clues must appear directly in each question. Check all 15 answers before publishing. Changing difficulty alone does not rewrite existing questions.</p><div class="editor-layout"><div class="level-selector" id="level-selector" aria-label="Choose a question"></div><div class="level-fields"><div class="form-group"><label for="level-title">Level title</label><input id="level-title" maxlength="100"></div><div class="form-group"><label for="level-question">Question · include every clue here</label><textarea id="level-question" rows="4" maxlength="600"></textarea></div><div class="form-group"><label for="level-hint">Hint <span class="muted">(costs player +1 minute)</span></label><textarea id="level-hint" rows="2" maxlength="400"></textarea></div><div class="form-group"><label for="level-answer">Accepted answer <span class="muted">(separate alternatives with |)</span></label><input id="level-answer" maxlength="180" spellcheck="false" placeholder="e.g. compass | a compass"></div><div class="tiny-note">Only title, question, hint and answer are saved onchain. Answers are public, not secret or prize-safe.</div></div></div></div>
         </div>
         <aside class="studio-aside"><div class="panel preview-panel"><div class="section-kicker">LIVE QUEST PREVIEW</div><div class="preview-image" role="img" aria-label="Ancient temple ruins in jungle mist"></div><div class="preview-body"><div class="preview-brand">IQ QUEST</div><h3 id="preview-title">The Lost Solana Treasure</h3><p id="preview-theme">Ancient jungle temple adventure...</p><div class="preview-tags"><span id="preview-difficulty">MEDIUM</span><span id="preview-count">15 QUESTIONS</span><span id="preview-duration">9–18 MIN</span></div><div class="stack-buttons"><button type="button" id="preview-game" class="btn btn-green">▶ TEST YOUR QUEST FREE</button><span class="preview-help-text">You can return to this editor without losing your draft.</span><span class="draft-autosave-message">✓ Your draft saves automatically on this device.</span></div><div id="draft-status" class="small-status" role="status" aria-live="polite"></div></div></div>
           <div class="panel publish-panel" id="publish-card">
@@ -453,7 +453,7 @@ details.advanced-box[open]>summary{color:#adffb8;margin-bottom:13px}
             <section class="iq-devnet-publisher" aria-labelledby="devnet-publish-heading">
               <div class="section-kicker">NEW · EXPERIMENTAL REAL ONCHAIN TEST</div>
               <h4 id="devnet-publish-heading">Publish 15 puzzles to IQ Labs Devnet</h4>
-              <p><strong>NEW V5.15 · direct storage test:</strong> If you changed your draft after paying, use <strong>TEST ONCHAIN STORAGE · NO PAYMENT</strong> below. It saves the current 15 questions on Devnet without a second platform transfer. You still approve actual IQ Labs Devnet storage transactions and their test-SOL fees in Phantom. This is not a paid release.</p>
+              <p><strong>V5.16 · story-free Devnet test:</strong> All 15 questions now contain their own clues without separate story text. Solana transactions use smaller, 800-byte chunks. The earlier V5.15 partial upload stays saved separately; this new story-free quest requires a fresh Devnet storage upload, but <strong>NO second 0.002 Test SOL platform payment</strong>. Phantom still asks you to approve IQ Labs Devnet storage and network/protocol test-SOL fees.</p>
               <p><strong>Step 2 of the test:</strong> After the Devnet-only payment rehearsal above succeeds, the IQ Labs SDK can write your complete validated quest to Solana <strong>Devnet</strong>, recording the test receipt. You can opt in below to start the upload automatically after verification. Your selected wallet will still ask you to approve the necessary Devnet transactions. After exact onchain readback and test-payment verification, you get a shareable player link. Friends play free, without connecting a wallet.</p>
               <p><strong>Not a paid Mainnet release.</strong> The 0.002 Devnet test SOL is not a real $3.99 platform payment. Devnet SOL has no monetary value. IQ QUEST now losslessly compresses the complete quest before uploading, aiming for fewer, smaller IQ Labs transactions. All 15 questions and answers are restored and verified on readback. Additional Devnet network / protocol fees and several Phantom approvals may still be needed. Review each wallet prompt.</p>
               <p>Selected plan is recorded as metadata only. A public community directory and real paid Mainnet checkout are not live yet.</p>
@@ -461,7 +461,7 @@ details.advanced-box[open]>summary{color:#adffb8;margin-bottom:13px}
               <label class="publish-consent"><input type="checkbox" id="devnet-auto-publish"><span><strong>Automatically start publication after a verified Devnet test payment.</strong> I authorize IQ QUEST to begin the public upload without another page-button click. Every wallet signing request still needs my approval. This setting applies to this page session only.</span></label>
               <div id="devnet-storage-only-box" style="padding:14px;margin:12px 0 19px;border:2px solid #77e594;border-radius:12px;background:#102a1d">
                 <h4 style="margin:0 0 5px;color:#c2ffce">◈ STORAGE-ONLY DEVNET TEST · NO PLATFORM PAYMENT</h4>
-                <p>Use this to test the real IQ Labs onchain upload without sending another 0.002 test SOL transfer. Phantom will still request approval for Devnet storage transactions and their network/protocol test-SOL costs. This is <strong>not a paid publication</strong> and cannot unlock Mainnet sales. Your old test payment is neither reused nor claimed for these questions.</p>
+                <p>Start a new story-free 15-question upload using safe 800-byte transactions. Your earlier 1-chunk test remains on Devnet and in a separate recovery record; it cannot be reused because the quest contents changed. <strong>No second 0.002 test SOL platform transfer.</strong> Phantom still asks for Devnet storage and network/protocol test-SOL approvals. This is not a paid Mainnet publication.</p>
                 <button type="button" class="btn btn-green" id="publish-storage-devnet" disabled>◈ TEST ONCHAIN STORAGE · NO PAYMENT</button>
               </div>
               <button type="button" class="btn btn-green" id="publish-iq-devnet" disabled>◈ PUBLISH TO IQ LABS DEVNET · TEST SOL ONLY</button>
@@ -478,19 +478,19 @@ details.advanced-box[open]>summary{color:#adffb8;margin-bottom:13px}
         </aside>
       </section>
     </main>
-    <footer class="footer"><span><span class="green">IQ</span> QUEST · Creator Studio <strong>V5.15 BETA</strong> · Phantom Devnet test; Mainnet payments OFF</span><nav aria-label="Legal information" style="display:flex;gap:13px;flex-wrap:wrap"><a href="imprint.html" style="color:#b5fbc1;text-decoration:underline">Imprint</a><a href="privacy.html" style="color:#b5fbc1;text-decoration:underline">Privacy</a><a href="withdrawal.html" style="color:#b5fbc1;text-decoration:underline">Withdrawal info</a></nav><span class="footer-iqlabs"><span><b>IQ LABS SDK · DEVNET TEST</b> · Onchain storage &amp; more <span class="footer-soon">(integration in progress)</span></span><a href="https://x.com/IQLabsOfficial" target="_blank" rel="noopener noreferrer" aria-label="IQ Labs official X profile">X @IQLabsOfficial ↗</a></span></footer>
+    <footer class="footer"><span><span class="green">IQ</span> QUEST · Creator Studio <strong>V5.16 BETA · NO STORY</strong> · Phantom Devnet test; Mainnet payments OFF</span><nav aria-label="Legal information" style="display:flex;gap:13px;flex-wrap:wrap"><a href="imprint.html" style="color:#b5fbc1;text-decoration:underline">Imprint</a><a href="privacy.html" style="color:#b5fbc1;text-decoration:underline">Privacy</a><a href="withdrawal.html" style="color:#b5fbc1;text-decoration:underline">Withdrawal info</a></nav><span class="footer-iqlabs"><span><b>IQ LABS SDK · DEVNET TEST</b> · Onchain storage &amp; more <span class="footer-soon">(integration in progress)</span></span><a href="https://x.com/IQLabsOfficial" target="_blank" rel="noopener noreferrer" aria-label="IQ Labs official X profile">X @IQLabsOfficial ↗</a></span></footer>
   </div>
   <script>(function(){
 'use strict';
 const q=[
-{"title":"The Moon Seal","story":"The entrance slab is covered in moss. Beneath four glowing letters, a scribe has carved: \"I shifted every letter three places FORWARD.\"","q":"The slab reads PRRQ. Reverse the scribe’s shift to discover the four-letter key word. What is it?","h":"Shift P→M, R→O, R→O, Q→N. The key is something seen at night.","a":"MOON"},
+{"title":"The Moon Seal","q":"A scribe shifted each letter THREE places forward. The slab reads PRRQ. Reverse the shift to discover the four-letter key word. What is it?","h":"Shift P→M, R→O, R→O, Q→N. The key is something seen at night.","a":"MOON"},
 {"title":"The Mirror Compass","story":"Inside the gate, the navigator left a compass key and a mirrored route on a bronze plate.","q":"The wind tiles read N=7, E=2, S=5, W=9. The mirror displays S-W-N-E. Read that route BACKWARDS, then change the directions to digits. Enter the four-digit code.","h":"Read the sequence as E-N-W-S. Convert each letter using the numbers on the tiles.","a":"2795"},
 {"title":"The Five-Row Cipher","story":"A library wall displays five rows of letters. A brass plaque says, \"The first digit is the row, the second the column.\"","q":"Rows 1–5 are: ABCDE / FGHIJ / KLMNO / PQRST / UVWXY. Decode 35-41-15-34. What four-letter command is written?","h":"35 is row 3, column 5: O. Then find 41, 15, and 34.","a":"OPEN"},
 {"title":"The Stargazer’s Cipher","story":"A fallen astronomer recorded a strange message, EHOE. Nearby is an instruction: \"Use the first seal as your repeating key.\"","q":"Decode EHOE with the Vigenère method: A=0 through Z=25. SUBTRACT the positions of the four-letter key from Chamber 1, wrapping around the alphabet. What sky word appears?","h":"The key is MOON. E(4)−M(12) wraps to S(18). Decode the other three letters the same way.","a":"STAR"},
-{"title":"The Four Guardians","story":"Four stone figures stand on moveable plinths. Each figure carries one letter: G, A, T or E.","q":"Arrange the four letters from left to right: E stands LAST; A is immediately to the RIGHT of G; and G stands LEFT of T. Which four-letter word appears?","h":"Put E fourth. The pair G-A must be together, and T must come after G.","a":"GATE"},
+{"title":"The Four Guardians","q":"Arrange G, A, T and E from left to right: E stands LAST; A is immediately to the RIGHT of G; and G stands LEFT of T. Which four-letter word appears?","h":"Put E fourth. The pair G-A must be together, and T must come after G.","a":"GATE"},
 {"title":"The Lantern Sequence","story":"Four lamps illuminate a stone number machine. A fifth lamp is dark.","q":"The machine shows INPUT→OUTPUT: 2→5, 3→10, 4→17, 5→?. Find the rule and enter the missing OUTPUT.","h":"Square each input, then add 1. For example 4² + 1 = 17.","a":"26"},
 {"title":"The Binary Crypt","story":"Within a chamber of metal plates, four groups of eight glowing bits pulse like distant stars.","q":"Decode these 8-bit binary ASCII values into capital letters: 01000100 01010101 01010011 01001011. What four-letter word do they spell?","h":"Each group is an ASCII character. 01000100 is decimal 68, which is D.","a":"DUSK"},
-{"title":"The Three Pedestals","story":"Three pedestals stand in the hall. Exactly ONE of their inscriptions tells the truth. Only one pedestal hides the key.","q":"LEFT says: \"The key is not under LEFT.\" MIDDLE says: \"The key is under RIGHT.\" RIGHT says: \"The key is not under RIGHT.\" Which pedestal has the key: LEFT, MIDDLE or RIGHT?","h":"Test each possible location and count the true sentences. Only one location makes exactly one statement true.","a":"LEFT"},
+{"title":"The Three Pedestals","q":"Exactly ONE of three statements is true. LEFT says: \"The key is not under LEFT.\" MIDDLE says: \"The key is under RIGHT.\" RIGHT says: \"The key is not under RIGHT.\" Which pedestal has the key: LEFT, MIDDLE or RIGHT?","h":"Test each possible location and count the true sentences. Only one location makes exactly one statement true.","a":"LEFT"},
 {"title":"The Lost Fragments","story":"A torn map has four empty slots. The nearby inscription refers to discoveries you have already made.","q":"Build the crossing word: take the 1st letter of Chamber 1’s key, the 1st letter of Chamber 3’s command, the 3rd letter of Chamber 4’s sky word, and the 3rd letter of Chamber 5’s guardian word. What do they spell?","h":"Use your Discovery Journal: MOON[1], OPEN[1], STAR[3], GATE[3].","a":"MOAT"},
 {"title":"The Inverted Inscription","story":"A cracked mirror reveals four glyphs that are the exact opposites of their letters in the alphabet.","q":"Use the Atbash alphabet (A↔Z, B↔Y, C↔X, and so on). Decode GZOV. Enter the four-letter English word.","h":"Atbash pairs the first and last letters of the alphabet. Work out the opposing letter for each glyph.","a":"TALE"},
 {"title":"The Five Flames","story":"Five crystal flames flicker above the altar. Each flame reveals a hex byte of an old message.","q":"Decode the hexadecimal ASCII sequence 4C 49 47 48 54. What five-letter word appears? The letters form something the dark crypt needs.","h":"Hex 4C equals decimal 76, which represents L in ASCII. Convert each two-digit byte.","a":"LIGHT"},
@@ -509,13 +509,21 @@ function validate(raw){
   const levels=rawLevels.map((x,i)=>{
     if(!x||typeof x!=='object')throw Error('Question '+(i+1)+' is not an object.');
     const title=String(x.title||x.name||'Mystery '+(i+1)).trim().slice(0,100);
-    const story=String(x.story||x.intro||'').trim().slice(0,500);
-    const question=String(x.q||x.question||'').trim().slice(0,600);
+    let question=String(x.q||x.question||'').trim();
+    // Legacy demo migration: three puzzles previously hid essential rules in
+    // the story box. Retain only those rules inside the playable question.
+    if(x.story&&title==='The Moon Seal'&&question.startsWith('The slab reads PRRQ.'))
+      question='A scribe shifted each letter THREE places forward. '+question;
+    if(x.story&&title==='The Four Guardians'&&question.startsWith('Arrange the four letters'))
+      question=question.replace('the four letters','G, A, T and E');
+    if(x.story&&title==='The Three Pedestals'&&question.startsWith('LEFT says:'))
+      question='Exactly ONE of the following three statements is true. '+question;
+    question=question.slice(0,600);
     const hint=String(x.h||x.hint||'').trim().slice(0,400);
     const arr=Array.isArray(x.a||x.answer)?(x.a||x.answer):[x.a||x.answer||''];
     const answer=arr.map(a=>String(a).trim()).filter(Boolean).join(' | ').slice(0,180);
     if(!title||!question||!hint||!answer)throw Error('Question '+(i+1)+' needs title, question, hint and answer.');
-    return {title,story,q:question,h:hint,a:answer};
+    return {title,q:question,h:hint,a:answer};
   });
   const difficulty=['Easy','Medium','Hard'].includes(data.difficulty)?data.difficulty:'Medium';
   const title=String(data.title||data.questName||'Untitled Mystery').trim().slice(0,100);
@@ -688,7 +696,7 @@ let current=0;
 let count=15;
 let lastSave=0;
 let autosaveTimer=0;
-function defaultLevel(i){return {title:'Mystery '+String(i+1).padStart(2,'0'),story:'A forgotten chamber opens in the ancient ruins.',q:'What is the secret answer?',h:'Replace this hint with a helpful clue.',a:'answer'};}
+function defaultLevel(i){return {title:'Mystery '+String(i+1).padStart(2,'0'),q:'What is the secret answer?',h:'Replace this hint with a helpful clue.',a:'answer'};}
 function clone(x){return JSON.parse(JSON.stringify(x));}
 function status(id,msg,bad=false){const el=$(id);el.textContent=msg;el.className='small-status'+(bad?' bad':'');}
 function safeDraft(){return {v:1,title:$('quest-name').value.trim()||'Untitled Mystery',creator:$('community-name').value.trim()||'Community',theme:$('quest-theme').value.trim()||'A mysterious adventure awaits.',difficulty:quest.difficulty,levels:quest.levels.map(x=>({...x}))};}
@@ -697,8 +705,8 @@ function queueSave(){clearTimeout(autosaveTimer);autosaveTimer=setTimeout(saveSi
 function updateBasics(){quest.title=$('quest-name').value;quest.creator=$('community-name').value;quest.theme=$('quest-theme').value;refreshPreview();queueSave();}
 function difficultySelect(diff){quest.difficulty=diff;document.querySelectorAll('[data-difficulty]').forEach(b=>{const active=b.dataset.difficulty===diff;b.classList.toggle('selected',active);b.setAttribute('aria-pressed',String(active));});refreshPreview();queueSave();}
 function renderSelector(){const root=$('level-selector');root.replaceChildren();quest.levels.forEach((l,i)=>{const b=document.createElement('button');b.type='button';b.textContent=`${String(i+1).padStart(2,'0')} · ${l.title||'Untitled'}`;b.className=i===current?'active':'';b.setAttribute('aria-current',i===current?'true':'false');b.addEventListener('click',()=>{current=i;renderSelector();renderFields();});root.append(b);});}
-function renderFields(){const l=quest.levels[current];for(const [id,key] of [['level-title','title'],['level-story','story'],['level-question','q'],['level-hint','h'],['level-answer','a']]){$(id).value=l[key]||'';}}
-function updateLevel(){const level=quest.levels[current];for(const [id,key] of [['level-title','title'],['level-story','story'],['level-question','q'],['level-hint','h'],['level-answer','a']]){level[key]=$(id).value;}renderSelector();refreshPreview();queueSave();}
+function renderFields(){const l=quest.levels[current];for(const [id,key] of [['level-title','title'],['level-question','q'],['level-hint','h'],['level-answer','a']]){$(id).value=l[key]||'';}}
+function updateLevel(){const level=quest.levels[current];for(const [id,key] of [['level-title','title'],['level-question','q'],['level-hint','h'],['level-answer','a']]){level[key]=$(id).value;}renderSelector();refreshPreview();queueSave();}
 function refreshPreview(){const draft=safeDraft();$('preview-title').textContent=draft.title;$('preview-theme').textContent=draft.theme;$('preview-difficulty').textContent=draft.difficulty.toUpperCase();$('preview-count').textContent=draft.levels.length+' QUESTIONS';$('preview-duration').textContent=times[draft.difficulty]||times.Medium;updateFeeEstimate();}
 function loadData(data,announce=true){quest=clone(IQQuest.validate(data));$('quest-name').value=quest.title;$('community-name').value=quest.creator;$('quest-theme').value=quest.theme;current=0;count=15;difficultySelect(quest.difficulty);$('editor-count').textContent='15 QUESTIONS';renderSelector();renderFields();refreshPreview();saveSilent();if(announce)status('import-status',`${count} questions loaded. Review answers and hints before sharing.`);}
 function validateDraft(){return IQQuest.validate(safeDraft());}
@@ -727,10 +735,10 @@ GLOBAL QUALITY GATE (REWRITE UNTIL ALL PASS):
 3. For each puzzle, privately solve it FROM SCRATCH using only displayed clues and earlier unlocked levels. Check that exactly ONE intended answer exists (or add accepted alternatives). Fix contradictory/ambiguous questions by changing the clues. Don't show the private audit.
 4. Never ask 2+2, obvious alphabet completions, the name of a blockchain, generic trivia, or vague riddle answers such as 'what has keys but no locks'. Never require web searches, insider crypto knowledge, a wallet, or code execution.
 5. Level 15 MUST use at least two previously discovered answers to solve a meaningful final lock. All dependencies must refer to earlier levels only.
-6. Story, question, hint and answer must be ENGLISH. Each hint nudges the approach WITHOUT giving away the answer; in the game it adds a 60-second penalty.
-7. Keep each story 1–2 sentences and every puzzle readable on a mobile phone. Difficulty comes from clever deductions, not excessively long text.
+6. Title, question, hint and answer must be ENGLISH. Each hint nudges the approach WITHOUT giving away the answer; in the game it adds a 60-second penalty.
+7. NO STORY, INTRO, NARRATIVE OR ATMOSPHERE FIELD. Put every rule and clue needed to solve the puzzle directly inside q. Keep puzzles readable on a phone.
 8. Avoid duplicate answers unless genuinely required by an explicit mechanic. Avoid questions answerable by simply reading the title or seeing an obvious pattern.
-9. Create exactly fifteen levels with diverse challenges and an atmospheric ruin/temple narrative. Critically revise your first draft until all 15 pass the quality gate.
+9. Create exactly fifteen levels with diverse challenges, but no storyline. Critically revise your first draft until all 15 pass the quality gate.
 10. Make the expected play time realistic for a practiced player. Avoid artificial waiting or impossible puzzles.
 
 RETURN ONLY ONE VALID JSON OBJECT, with NO Markdown fence or additional text. Exactly this shape:
@@ -740,17 +748,17 @@ RETURN ONLY ONE VALID JSON OBJECT, with NO Markdown fence or additional text. Ex
 "creator":"${d.creator.replace(/"/g,"'")}",
 "theme":"${d.theme.replace(/"/g,"'").replace(/\n/g,' ')}",
 "difficulty":"${d.difficulty}",
-"levels":[{"title":"Chapter title","story":"Atmospheric scene","q":"Complete solvable puzzle with all information","h":"Useful hint without answer","a":"EXACT ANSWER"}]
+"levels":[{"title":"Level title","q":"Complete solvable puzzle containing ALL clues","h":"Useful hint without answer","a":"EXACT ANSWER"}]
 }
 
-The levels array MUST contain exactly 15 objects. If accepted answers have synonyms, put them into a single string separated by |, e.g. 'bronze | the bronze statue'. No extra JSON keys. Valid JSON escaping only, no literal line breaks inside string values. Aim to keep the entire compact JSON below 7,500 UTF-8 bytes, without making the puzzles trivial. Every story should be concise and all answer keys should be unambiguous. The creator will review before publication.`;
+The levels array MUST contain exactly 15 objects. If accepted answers have synonyms, put them into a single string separated by |, e.g. 'bronze | the bronze statue'. No extra JSON keys, especially no story. Valid JSON escaping only, no literal line breaks inside string values. Aim to keep the entire compact JSON below 6,500 UTF-8 bytes, without making the puzzles trivial. All clues MUST appear in q and all answer keys must be unambiguous. The creator will review before publication.`;
 }
 function offerManualPrompt(prompt){$('manual-ai-prompt').value=prompt;$('prompt-fallback').classList.remove('hidden');$('manual-ai-prompt').focus();$('manual-ai-prompt').select();}
 async function copyPrompt(){const text=copyPromptText();try{if(!navigator.clipboard?.writeText)throw Error('Clipboard is unavailable');await navigator.clipboard.writeText(text);$('prompt-fallback').classList.add('hidden');status('import-status','✓ Copied! Tap 2 · OPEN CHATGPT below, paste and send. Copy all 15 answers, then return to step 3.');$('quick-ai-status').classList.remove('bad');$('quick-ai-status').textContent='✓ Request copied! Now tap 2 · OPEN CHATGPT below. In ChatGPT, Paste → Send, then copy the entire reply.';}catch(e){offerManualPrompt(text);status('import-status','Your browser blocked automatic copying. Select and copy the task shown below, then open ChatGPT.',true);$('quick-ai-status').classList.add('bad');$('quick-ai-status').textContent='Clipboard blocked. Copy the request from the opened text box below, then tap 2 · OPEN CHATGPT.';}}
 async function improveWithChatGPT(){
  const d=safeDraft();
  const difficultyRule={Easy:'5–9 min, real one-step logic; never trivial',Medium:'9–18 min, 1–2 steps, 3 cross-level clues',Hard:'15–30 min, 2–4 steps, 4+ cross-level dependencies'}[d.difficulty];
- const prompt='Act as a senior escape-room editor and strict puzzle verifier. Audit and IMPROVE the following IQ QUEST JSON. The creator chose '+d.difficulty+' difficulty ('+difficultyRule+'). All 15 puzzles must fit this standard. For EVERY chapter, independently recompute the intended answer using only its text and prior chapters. Fix ambiguous or unsolvable riddles; replace simplistic trivia, obvious arithmetic and repeat mechanisms. Preserve the overarching mystery story but improve progression, logic and fairness. Ensure Chapter 15 combines at least two earlier solved clues. Hints help without revealing solutions and cost +60 seconds in play. Return ONLY the complete, valid, corrected JSON with exactly 15 levels and keys v,title,creator,theme,difficulty,levels (each level: title,story,q,h,a). Do not add extra keys or any explanation. Difficulty must remain '+d.difficulty+'.\n\nQUEST TO REVISE:\n'+JSON.stringify(d);
+ const prompt='Act as a senior escape-room editor and strict puzzle verifier. Audit and IMPROVE the following IQ QUEST JSON. The creator chose '+d.difficulty+' difficulty ('+difficultyRule+'). All 15 puzzles must fit this standard. For EVERY level, independently recompute the intended answer using only its question and earlier levels. Fix ambiguous or unsolvable riddles; replace simplistic trivia, obvious arithmetic and repeat mechanisms. Do NOT add any story or narration. All necessary rules and clues must appear in q. Ensure Level 15 combines at least two earlier solved clues. Hints help without revealing solutions and cost +60 seconds in play. Return ONLY the complete, valid, corrected JSON with exactly 15 levels and keys v,title,creator,theme,difficulty,levels (each level: title,q,h,a). Do not add extra keys or any explanation. Difficulty must remain '+d.difficulty+'.\n\nQUEST TO REVISE:\n'+JSON.stringify(d);
  try {await navigator.clipboard.writeText(prompt);status('import-status','Difficulty review prompt copied! Open ChatGPT, paste it and import the improved JSON below.');}
  catch(e){offerManualPrompt(prompt);status('import-status','Select and copy the review prompt from the box below; the JSON import field is untouched.',true);}
 }
@@ -760,7 +768,7 @@ function updateFeeEstimate(){
  const bytes=new TextEncoder().encode(JSON.stringify(d)).length;
  $('byte-estimate').textContent='Draft payload: '+bytes.toLocaleString('en-US')+' UTF-8 bytes (metadata not included)';
  $('payload-headroom').textContent='Original draft allowance: '+Math.max(0,11500-bytes).toLocaleString('en-US')+' bytes left before the 11,500-byte editor limit.'+(bytes>11500?' Shorten BEFORE a new Devnet test transfer.':' The upload is losslessly compressed and checked before Phantom signing.');
- $('storage-estimate').textContent='Devnet upload goal: fewer than 10 IQ Labs data chunks, under 7.6 KB after lossless compression. Exact size is checked before signing; storage and network fees are not quoted here and can vary. Mainnet payments remain OFF.';
+ $('storage-estimate').textContent='Story-free Devnet upload: up to 9 IQ Labs chunks of 800 bytes (max 7.2 KB packed). Every transaction is checked before signing; additional Devnet storage and network fees may apply. Mainnet payments OFF.';
  }catch(e){console.warn('Could not estimate payload size',e)}
 }
 const IMPORT_BACKUP_KEY=DRAFT_KEY+'_before_ai_import';
@@ -818,7 +826,7 @@ function undoAiImport(){
 function previewGame(){try{const clean=validateDraft();saveSilent();localStorage.setItem(PREVIEW_KEY,JSON.stringify(clean));localStorage.removeItem('iqquest_run_v40_preview_'+encodeURIComponent(clean.title).slice(0,65));localStorage.removeItem('iqquest_run_v39_preview_'+encodeURIComponent(clean.title).slice(0,65));status('draft-status','Opening local quest preview…');location.href='index.html?preview=1&from=creator';}catch(e){status('draft-status',e.message,true)}}
 function manualSave(){try{validateDraft();saveSilent();status('draft-status','Draft saved on this device. Export the JSON for a portable backup.');}catch(e){status('draft-status',e.message,true)}}
 for(const id of ['quest-name','community-name','quest-theme'])$(id).addEventListener('input',updateBasics);
-for(const id of ['level-title','level-story','level-question','level-hint','level-answer'])$(id).addEventListener('input',updateLevel);
+for(const id of ['level-title','level-question','level-hint','level-answer'])$(id).addEventListener('input',updateLevel);
 for(const b of document.querySelectorAll('[data-difficulty]'))b.addEventListener('click',()=>difficultySelect(b.dataset.difficulty));
 
 $('use-theme-example').addEventListener('click',()=>{
@@ -862,6 +870,11 @@ try{
  const saved=localStorage.getItem(DRAFT_KEY)||localStorage.getItem('iqquest_v31_creator_draft');
  if(saved){
    const legacy=JSON.parse(saved);
+   const hadStory=Array.isArray(legacy.levels)&&legacy.levels.some(l=>typeof l.story==='string'&&l.story.trim());
+   if(hadStory){
+     const backupKey=DRAFT_KEY+'_v515_before_story_free';
+     if(!localStorage.getItem(backupKey))localStorage.setItem(backupKey,saved);
+   }
    if(Array.isArray(legacy.levels)&&legacy.levels.length!==15){
      localStorage.setItem(DRAFT_KEY+'_backup_before_15_questions',saved);
      const rebuilt=structuredClone(legacy);
@@ -870,6 +883,7 @@ try{
      loadData(rebuilt,false);
      status('draft-status','Your previous draft was backed up locally before adapting it to the new fixed 15-question format. Please review and export your draft.');
    } else loadData(legacy,false);
+   if(hadStory)status('draft-status','✓ Story removed; your older draft was backed up locally. IMPORTANT: Review all 15 questions to ensure every needed clue appears in the QUESTION before publishing.');
  } else loadData(IQQuest.DEMO,false);
 }catch(e){console.warn('Draft could not be restored',e);loadData(IQQuest.DEMO,false);status('draft-status','Previous draft could not be loaded: '+e.message,true)}
 })();
@@ -950,16 +964,16 @@ try{
 })();
 </script><script type="module">
 // Explicit release query avoids a stale cached module in Phantom's in-app browser.
-import {publishQuestDevnet,publishQuestDevnetStorageTest,readQuestOnchain,isSolanaSignature} from './onchain-bridge.js?v=515';
+import {publishQuestDevnet,publishQuestDevnetStorageTest,readQuestOnchain,isSolanaSignature} from './onchain-bridge.js?v=516';
 import {verifyDevnetPayment,questFingerprint} from './checkout-bridge.js';
 import {requestCheckoutWallet} from './wallet-bridge.js?v=514';
-import {getSavedMobileJob,DEVNET_STORAGE_ONLY_JOB_KEY} from './devnet-resumable.mjs?v=515';
+import {getSavedMobileJob,DEVNET_STORAGE_ONLY_JOB_KEY,DEVNET_STORY_FREE_JOB_KEY} from './devnet-resumable.mjs?v=516';
 const $=id=>document.getElementById(id);
 const publish=$('publish-iq-devnet'),storageTest=$('publish-storage-devnet'),consent=$('devnet-accept'),auto=$('devnet-auto-publish'),verify=$('verify-iq-devnet');
 const progress=$('devnet-publish-status'),links=$('devnet-links');
 let busy=false,lastUrl='';
 const completionKey='iqquest_devnet_completed_v50';
-const storageCompletionKey='iqquest_devnet_storage_only_completed_v515';
+const storageCompletionKey='iqquest_devnet_storage_only_completed_v516_story_free';
 function setStatus(text){progress.textContent=String(text);}
 function enable(){publish.disabled=busy||!consent.checked;storageTest.disabled=busy||!consent.checked;verify.disabled=busy;}
 consent.addEventListener('change',enable);enable();
@@ -968,10 +982,13 @@ $('shortcut-storage-only').addEventListener('click',()=>{
  consent.scrollIntoView({behavior:'smooth',block:'center'});
 });
 try{
- const storageJob=getSavedMobileJob(localStorage,DEVNET_STORAGE_ONLY_JOB_KEY);
+ const storageJob=getSavedMobileJob(localStorage,DEVNET_STORY_FREE_JOB_KEY);
+ const oldStoryJob=getSavedMobileJob(localStorage,DEVNET_STORAGE_ONLY_JOB_KEY);
  const job=getSavedMobileJob();
  if(storageJob&&!storageJob.finalSignature)
-  setStatus('An earlier storage-only IQ Labs Devnet upload may be unfinished ('+storageJob.index+' confirmed chunks saved). Check the Devnet consent box, then tap TEST ONCHAIN STORAGE to check the chain and safely resume. No platform payment needed.');
+  setStatus('Your STORY-FREE IQ Labs Devnet upload may be unfinished ('+storageJob.index+' confirmed chunks saved). Check the consent box, then tap TEST ONCHAIN STORAGE to safely resume. No platform payment needed.');
+ else if(oldStoryJob&&!oldStoryJob.finalSignature)
+  setStatus('Previous V5.15 quest: '+oldStoryJob.index+' story-based chunk(s) were already stored on Devnet and the old recovery record is preserved. Since you chose NO STORY, this V5.16 test starts a new onchain chain with 800-byte chunks. No second 0.002 test SOL platform payment; separate Devnet storage/network fees still apply. Please check your 15 questions, consent and tap TEST ONCHAIN STORAGE when ready.');
  else if(job&&!job.finalSignature)
   setStatus('An earlier Phantom Devnet upload may be unfinished ('+job.index+' confirmed chunks saved). First VERIFY LAST DEVNET TEST PAYMENT above. After checking the Devnet consent box, Publish will safely CHECK THE CHAIN AND RESUME; do not make a second test payment.');
 }catch(_e){}

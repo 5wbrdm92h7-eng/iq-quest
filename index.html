@@ -407,7 +407,7 @@ h1,h2,h3{font-family:Georgia,"Times New Roman",serif;letter-spacing:-.015em}h1{f
         <div class="demo-selector-heading"><div><div class="section-kicker free-battle-kicker">⚔ FREE TEMPLE BATTLES</div><h2 id="difficulty-heading">Challenge your friends. Beat their time.</h2><p>Play a quick 3-question Lightning Battle or the full 15-question quest. Pick a difficulty, race the clock and challenge friends on X. No wallet needed.</p></div><span class="demo-selector-stamp">2 MODES · 3 DIFFICULTIES · FREE TO PLAY</span></div>
         <div class="battle-pitch" aria-label="Free friend battles"><div><strong>⚔ YOUR TIME vs. YOUR FRIEND’S TIME</strong><span>Finish a quest → share the challenge link → friends play the same puzzles.</span></div><a href="#how">HOW BATTLES WORK ↗</a></div><div class="selector-step">1 · CHOOSE GAME LENGTH</div>
         <div class="battle-mode-switch" role="group" aria-label="Choose game mode">
-          <button type="button" class="mode-option" data-mode="full" aria-pressed="true"><span>✦ FULL QUEST</span><strong>15 QUESTIONS</strong><small>Discover the full temple story</small></button>
+          <button type="button" class="mode-option" data-mode="full" aria-pressed="true"><span>✦ FULL QUEST</span><strong>15 QUESTIONS</strong><small>15 puzzles, no story required</small></button>
           <button type="button" class="mode-option" data-mode="lightning" aria-pressed="false"><span>⚡ LIGHTNING BATTLE</span><strong>3 QUESTIONS</strong><small>Fresh codes · challenge friends</small></button>
         </div>
         <div class="selector-step">2 · CHOOSE DIFFICULTY</div>
@@ -471,7 +471,7 @@ h1,h2,h3{font-family:Georgia,"Times New Roman",serif;letter-spacing:-.015em}h1{f
           <div id="question-area" class="question-area hidden">
             <div class="question-subtitle"><span id="question-number">MYSTERY 01</span><span class="micro-rune" aria-hidden="true">◇ ✧ ◇</span></div>
             <h3 id="question-heading">The Hidden Door</h3>
-            <p id="question-story" class="narration"></p>
+            <p id="question-story" class="narration hidden" aria-hidden="true"></p>
             <div class="question-box"><p id="question-text"></p></div>
             <form id="answer-form" autocomplete="off">
               <label class="field-label" for="answer-input">YOUR ANSWER</label>
@@ -513,7 +513,7 @@ h1,h2,h3{font-family:Georgia,"Times New Roman",serif;letter-spacing:-.015em}h1{f
         </article>
 
         <aside class="side-rail">
-          <section class="panel story-panel"><div class="section-kicker">A WORLD LOST TO TIME</div><div class="scene-image" role="img" aria-label="Ancient ruins, a glowing stone doorway and jungle mist"></div><h3>Where the ruins whisper</h3><p>Each answer uncovers a deeper chamber. Follow the clues to the ancient vault.</p></section>
+          <section class="panel story-panel"><div class="section-kicker">PURE PUZZLE CHALLENGE</div><div class="scene-image" role="img" aria-label="Ancient ruins, a glowing stone doorway and jungle mist"></div><h3>15 levels. Zero filler.</h3><p>Every clue is inside its question. Solve, use hints when needed, and beat your friends' times.</p></section>
           <details class="panel chapter-panel" id="journey-panel"><summary><span><span class="section-kicker">YOUR JOURNEY</span><strong id="chapter-panel-status">0 / 15 chambers cleared</strong></span><span class="fold-chevron" aria-hidden="true">⌄</span></summary><ol id="chapter-list" class="chapter-list"></ol></details>
           <details class="panel chapter-panel" id="journal-panel"><summary><span><span class="section-kicker">CLUE JOURNAL</span><strong id="journal-panel-status">Sealed discoveries</strong></span><span class="fold-chevron" aria-hidden="true">⌄</span></summary><p class="muted" style="font-size:12px;line-height:1.6">Your unlocked words and codes are collected here. No extra hint penalty.</p><ol id="clue-journal" class="clue-journal"></ol></details>
           <section class="panel battle-panel"><div class="section-kicker">COMMUNITY BATTLES</div><h3>Who breaks the curse fastest?</h3><p>Send friends the same mysteries, compare target times and improve your personal best. First runs are marked separately from practice. No wallet required.</p><span class="highlight-chip">PLAY FREE · NO ON-CHAIN ACTIONS</span></section>
@@ -546,6 +546,27 @@ const EASY_DEMO={"v":1,"title":"The Whispering Ruins","creator":"IQ QUEST","them
 const MEDIUM_DEMO={"v":1,"title":"The Rune Keeper’s Path","creator":"IQ QUEST","theme":"Decode the rune keeper’s messages across fifteen chambers. Record early discoveries: several later seals depend on them.","difficulty":"Medium","levels":[{"title":"The Flame Cipher","story":"A bronze dial reads: \"To hide our secret, move each letter THREE places forward.\"","q":"The dial shows IODPH. Undo the forward Caesar shift to reveal the five-letter source of light.","h":"I→F and O→L. Move all five symbols back three.","a":"FLAME"},{"title":"The Numbered River","story":"Five carved numbers follow the rule A=1, B=2, ... Z=26.","q":"Decode 18-9-22-5-18. Which natural feature lies beyond the ruins?","h":"18 is R and 9 is I.","a":"RIVER"},{"title":"The Crossed Letters","story":"A stone table shows two rows of letters: TOP = R N; BOTTOM = U E.","q":"Read this 2×2 table DOWN the first column, then DOWN the second column. What four-letter word is formed?","h":"First column gives R then U. Second gives N then E.","a":"RUNE"},{"title":"The Square Pedestals","story":"Four platforms are numbered by square numbers.","q":"The labels are 4, 9, 16, 25, ?. What is the next number?","h":"They are 2², 3², 4², 5².","a":"36"},{"title":"The Mirror Touch","story":"The mirror has been turned around, so every word reads backward.","q":"The slab reads H-C-U-O-T. Reverse the complete sequence. Which five-letter command do you uncover?","h":"The first two letters are T and O.","a":"TOUCH"},{"title":"The Binary Arch","story":"A machine speaks in eight-bit ASCII symbols. A nearby legend says one group equals one capital letter.","q":"Decode 01000111 01000001 01010100 01000101. What four-letter word opens the arch?","h":"01000111 is G; 01000001 is A.","a":"GATE"},{"title":"The Three Stone Guardians","story":"Three guardians stand over LEFT, MIDDLE and RIGHT boxes. Only ONE inscription is true.","q":"LEFT says \"The key is NOT in LEFT.\" MIDDLE says \"The key is in LEFT.\" RIGHT says \"The key is NOT in RIGHT.\" Exactly one sentence is true. Which box contains the key? Answer LEFT, MIDDLE or RIGHT.","h":"Try each possible box and count true statements. RIGHT gives exactly one truth.","a":"RIGHT"},{"title":"The Atbash Gem","story":"In the hidden alcove, the alphabet runs in reverse: A↔Z, B↔Y, C↔X and so on.","q":"Decode T-V-N with the Atbash substitution. What three-letter treasure word emerges?","h":"T maps to G and V maps to E.","a":"GEM"},{"title":"The Borrowed Letters","story":"Four earlier answers are etched around the altar.","q":"Build a word from these letters, in order: the 1st of Chamber 1, 2nd of Chamber 2, 1st of Chamber 3 and 2nd of Chamber 8. What four-letter word appears?","h":"FLAME→F; RIVER→I; RUNE→R; GEM→E.","a":"FIRE"},{"title":"The Hexadecimal Door","story":"An ancient computer terminal displays four hexadecimal ASCII bytes.","q":"Convert hex 44 4F 4F 52 to capital ASCII letters. What object is named?","h":"44 in hex represents D. Both 4F bytes are O.","a":"DOOR"},{"title":"The Doubling Differences","story":"Each staircase gap is twice the one before it.","q":"The wall shows 6, 10, 18, 34, ?. What number comes next?","h":"The gaps are +4, +8, +16, then +32.","a":"66"},{"title":"The Thirteen-Step Message","story":"An inscription announces ROT13: every letter is shifted 13 places around the alphabet.","q":"Decode SVAQ with ROT13. What four-letter instruction appears?","h":"S→F, V→I, A→N.","a":"FIND"},{"title":"The Double Mirror","story":"A mirrored compass shows a word whose letters were FIRST reversed and THEN shifted one letter forward.","q":"The visible word is U-T-B-F. Undo the +1 shift, then reverse the four letters. Which compass direction is revealed?","h":"First shift back to T-S-A-E, then reverse the order.","a":"EAST"},{"title":"The Difference Dial","story":"Two previous number seals now power the altar.","q":"Take the number you found in Chamber 11, subtract the number from Chamber 4 and enter the result.","h":"The numbers are 66 and 36.","a":"30"},{"title":"The Keeper’s Master Seal","story":"The final wall connects four earlier discoveries to the exit.","q":"Build the final seal, separated by hyphens with no spaces: Chamber 1's answer, Chamber 9's answer, Chamber 13's answer, then Chamber 14's number.","h":"Combine the flame word, the four-letter fire word, the compass direction and the difference dial.","a":"FLAME-FIRE-EAST-30"}]};
 const DEMO={v:1,title:'The Lost Solana Treasure',creator:'IQ QUEST',theme:'Decode fifteen connected mysteries hidden in ancient jungle ruins. Keep the clues from each chamber for the final vault.',difficulty:'Hard',levels:q};
 function normalizeAnswer(value){return String(value||'').trim().normalize('NFKC').toLocaleLowerCase('en-US').replace(/\s+/g,' ')}
+function completeLegacyClues(x,question){
+ if(!x.story)return question;
+ // Older bundled demos placed a few vital puzzle rules inside story text.
+ // Move just those facts into the question; no narrative field is displayed
+ // or serialized onchain in the story-free format.
+ const rules={
+  'The Moon Seal':'A scribe shifted each letter THREE places forward.',
+  'The Four Guardians':'The four letters are G, A, T and E.',
+  'The Three Pedestals':'Exactly ONE of the three statements is true.',
+  'The Compass Corridor':'Use the direction values N=4, E=1, S=7, W=2.',
+  'The Lantern Alphabet':'Use A=1, B=2, ... Z=26.',
+  'The Sliding Alphabet':'Use A=1, B=2, ... Z=26.',
+  'The Flame Cipher':'Every letter was moved THREE places forward.',
+  'The Numbered River':'Use A=1, B=2, ... Z=26.',
+  'The Crossed Letters':'The two-row table is TOP: R N; BOTTOM: U E.',
+  'The Binary Arch':'Each eight-bit binary group is one capital ASCII letter.',
+  'The Doubling Differences':'The difference between consecutive numbers doubles each time.'
+ };
+ const prefix=rules[x.title];
+ return prefix&&!question.includes(prefix)?prefix+' '+question:question;
+}
 function validate(raw){
   const data=typeof raw==='string'?JSON.parse(raw):raw;
   if(!data||typeof data!=='object'||Array.isArray(data))throw Error('The quest must be one JSON object.');
@@ -554,13 +575,12 @@ function validate(raw){
   const levels=rawLevels.map((x,i)=>{
     if(!x||typeof x!=='object')throw Error('Question '+(i+1)+' is not an object.');
     const title=String(x.title||x.name||'Mystery '+(i+1)).trim().slice(0,100);
-    const story=String(x.story||x.intro||'').trim().slice(0,500);
-    const question=String(x.q||x.question||'').trim().slice(0,600);
+    const question=completeLegacyClues(x,String(x.q||x.question||'').trim()).slice(0,600);
     const hint=String(x.h||x.hint||'').trim().slice(0,400);
     const arr=Array.isArray(x.a||x.answer)?(x.a||x.answer):[x.a||x.answer||''];
     const answer=arr.map(a=>String(a).trim()).filter(Boolean).join(' | ').slice(0,180);
     if(!title||!question||!hint||!answer)throw Error('Question '+(i+1)+' needs title, question, hint and answer.');
-    return {title,story,q:question,h:hint,a:answer};
+    return {title,q:question,h:hint,a:answer};
   });
   const difficulty=['Easy','Medium','Hard'].includes(data.difficulty)?data.difficulty:'Medium';
   const title=String(data.title||data.questName||'Untitled Mystery').trim().slice(0,100);
@@ -770,7 +790,7 @@ function render(){
  if(run.finishedAt){showFinish();renderChapters();updateClocks();return;}
  if(!run.startedAt){renderChapters();updateClocks();return;}
  const level=quest.levels[run.step];$('question-number').textContent=`MYSTERY ${String(run.step+1).padStart(2,'0')}`;
- $('question-heading').textContent=level.title;$('question-story').textContent=level.story||'An ancient clue awaits.';$('question-text').textContent=level.q;
+ $('question-heading').textContent=level.title;$('question-text').textContent=level.q;
  $('answer-input').value='';$('answer-input').disabled=false;$('answer-input').required=true;
  $('check-answer').disabled=false;$('check-answer').textContent=run.step+1>=quest.levels.length?'COMPLETE THE QUEST →':'UNLOCK NEXT CLUE →';
  $('answer-message').className='feedback hidden';$('show-hint').disabled=false;
@@ -870,7 +890,7 @@ if(!onchainMode){load();syncSelection();render();}
 else{
  document.body.classList.add('is-onchain');
  const n=$('onchain-load-status');n.classList.remove('hidden');
- n.textContent=publishedQuestId?'◈ Loading the publicly published IQ QUEST adventure… No wallet needed to play.':'◈ Verifying 15 questions from IQ Labs on Solana '+onchainNetwork+'… No wallet needed to play.';
+ n.textContent=publishedQuestId?'◈ Resolving the published IQ Labs Mainnet signature… No wallet needed to play.':'◈ Verifying 15 questions from IQ Labs on Solana '+onchainNetwork+'… No wallet needed to play.';
  $('demo-selector').classList.add('hidden');
  $('start-the-clue').disabled=true;
  syncSelection();
@@ -879,14 +899,16 @@ else{
    if(publishedQuestId){
      if(!/^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(publishedQuestId))throw Error('Invalid published quest ID.');
      const {API_BASE}=await import('./payments/site-config.mjs');
-     if(!API_BASE||!/^https:\/\//.test(API_BASE))throw Error('The public quest catalogue is not deployed yet.');
+     if(!API_BASE||!/^https:\/\//.test(API_BASE))throw Error('The onchain signature registry is not deployed yet.');
      const result=await fetch(new URL('/api/quests/'+encodeURIComponent(publishedQuestId),API_BASE),{cache:'no-store'});
      if(!result.ok)throw Error('This published quest is not available. Check the link or try again later.');
      const body=await result.json();
-     if(!body.published||body.id!==publishedQuestId||!body.quest)throw Error('Quest catalogue returned an invalid record.');
-     quest=IQQuest.validate(body.quest);
+     if(!body.published||body.id!==publishedQuestId||body.network!=='mainnet-beta'||!body.signature)throw Error('Quest registry returned an invalid record.');
+     const mod=await import('./onchain-bridge.js?v=516');
+     const fetched=await mod.readQuestOnchain(body.signature,'mainnet-beta');
+     quest=IQQuest.validate(fetched.data);
    }else{
-     const mod=await import('./onchain-bridge.js');
+     const mod=await import('./onchain-bridge.js?v=516');
      const fetched=await mod.readQuestOnchain(onchainSignature,onchainNetwork);
      quest=IQQuest.validate(fetched.data);
    }
@@ -894,8 +916,8 @@ else{
    targetTime=Number.isInteger(Number(originalTargetParam))&&Number(originalTargetParam)>0&&Number(originalTargetParam)<=86399&&params.get('match')===puzzleFingerprint(quest)?Number(originalTargetParam):0;
    onchainReady=true;load();syncSelection();render();
    $('start-the-clue').disabled=false;
-   n.textContent=publishedQuestId?'✓ PUBLIC IQ QUEST · 15 puzzles · Published record '+publishedQuestId.slice(0,8)+'… · Players need no wallet. NOT ONCHAIN.':'✓ VERIFIED ONCHAIN · IQ Labs '+onchainNetwork.toUpperCase()+' · 15 puzzles · Inscription '+onchainSignature.slice(0,12)+'…'+onchainSignature.slice(-8)+' · Players need no wallet.';
-   const status=document.querySelector('.onchain-status');if(status)status.textContent=publishedQuestId?'✓ PUBLISHED IQ QUEST · Content is publicly readable from the IQ QUEST database (not onchain). Battle times are browser-unverified.':'✓ IQ LABS ONCHAIN QUEST VERIFIED · '+onchainNetwork.toUpperCase()+' · Quest and answers are publicly readable on Solana. Battle times remain browser-unverified.';
+   n.textContent=publishedQuestId?'✓ VERIFIED ONCHAIN · IQ Labs Mainnet · 15 puzzles · Registered quest '+publishedQuestId.slice(0,8)+'… · Players need no wallet.':'✓ VERIFIED ONCHAIN · IQ Labs '+onchainNetwork.toUpperCase()+' · 15 puzzles · Inscription '+onchainSignature.slice(0,12)+'…'+onchainSignature.slice(-8)+' · Players need no wallet.';
+   const status=document.querySelector('.onchain-status');if(status)status.textContent=publishedQuestId?'✓ IQ LABS MAINNET ONCHAIN QUEST VERIFIED · Questions and answers were read from Solana; battle times remain browser-unverified.':'✓ IQ LABS ONCHAIN QUEST VERIFIED · '+onchainNetwork.toUpperCase()+' · Quest and answers are publicly readable on Solana. Battle times remain browser-unverified.';
    if(run.startedAt&&!run.finishedAt)ensureStart();
  }catch(error){
    onchainReady=false;
