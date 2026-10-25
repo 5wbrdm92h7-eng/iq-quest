@@ -74,7 +74,7 @@ export function splitDevnetChunks(payload){
  return chunks;
 }
 
-async function findLanded({connection,address,program,kind,chunk,beforeTx,metadata,limit=50}){
+async function findLanded({connection,address,program,kind,chunk,beforeTx,metadata,limit=100}){
  const entries=await connection.getSignaturesForAddress(address,{limit},'confirmed');
  for(const entry of entries){
   if(entry.err||!entry.signature)continue;
@@ -147,12 +147,14 @@ export async function publishResumableDevnet({sdk,web3,BufferClass,connection,wa
    job.pending=null;saveJob(storage,job,jobKey);
    onProgress('Recovered confirmed IQ Labs Devnet transaction '+found+'.');
   }else{
-   // Wait through Solana blockhash expiry before permitting a second attempt.
-   // A returned signature with unknown status is never treated as a failure.
+   // Fail closed: a lost Phantom return value is not proof that the approved
+   // transaction failed. An RPC lookup limited to recent signatures cannot
+   // prove the absence of an older confirmed instruction. Never silently
+   // clear this pending record and ask the user to sign/pay for it again.
    if(signature)throw Error('Wallet may have submitted '+signature+' but no matching Devnet record is readable yet. Wait and verify; no duplicate request was sent.');
    if(!Number.isFinite(at)||Date.now()-at<150000)
     throw Error('A Phantom request was interrupted. Devnet has no confirmed match yet. Wait about 3 minutes, then use Publish to safely resume.');
-   job.pending=null;saveJob(storage,job,jobKey);
+   throw Error('The interrupted Phantom transaction is still uncertain. Automatic repeat signing is blocked to avoid duplicate IQ Labs fees. Check Phantom history / Solana Explorer and request recovery help if it does not appear. No second payment was requested.');
   }
  }
  if(job.finalSignature)return job.finalSignature;

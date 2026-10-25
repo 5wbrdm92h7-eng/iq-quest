@@ -456,6 +456,39 @@ details.advanced-box[open]>summary{color:#adffb8;margin-bottom:13px}
 .creator-simple #developer-tests #devnet-storage-only-box{margin:8px 0 13px!important}
 .creator-simple #developer-tests #publish-storage-devnet{min-height:50px}
 @media(max-width:740px){.creator-simple .studio-layout{width:100%}.creator-review>summary{font-size:14px}.creator-stage-title{font-size:24px}.creator-simple .simple-journey .flow-tile{font-size:12px}}
+/* V5.37 · Each numbered stage has the same color as its journey tile. */
+.creator-simple #create-quest,.creator-simple #ai-builder,.creator-simple #question-review{border:2px solid #56f86e8c;background:linear-gradient(140deg,#173e2b,#0b1c1a 70%)}
+.creator-simple #preview-step{border:2px solid #ecc67f;background:linear-gradient(145deg,#3b301d,#171d19 77%)}
+.creator-simple #publish-card{border:2px solid #83e9de;background:linear-gradient(145deg,#123c41,#0b1d22 73%)}
+.creator-simple #create-quest .section-kicker,.creator-simple #ai-builder .section-kicker,.creator-simple #question-review .section-kicker{color:#c0ffca;background:#214e32;border:1px solid #56f86e}
+.creator-simple #preview-step .section-kicker{color:#ffe6ac;background:#534021;border:1px solid #e8c17d}
+.creator-simple #publish-card>.section-kicker{color:#bcfff7;background:#1b4e53;border:1px solid #85e2d6}
+.creator-simple #create-quest .section-kicker,.creator-simple #ai-builder .section-kicker,.creator-simple #question-review .section-kicker,.creator-simple #preview-step .section-kicker,.creator-simple #publish-card>.section-kicker{display:inline-block;padding:10px 13px;border-radius:11px;font-size:clamp(13px,3.7vw,17px);font-weight:950;letter-spacing:.045em;line-height:1.4}
+.creator-simple .studio-panel .section-intro,.creator-simple .creator-stage-note,.creator-simple .creator-publish-short,.creator-simple .ai-next-step p,.creator-simple .ai-safety-note,.creator-simple #devnet-publish-primary .publish-consent{font-size:clamp(14px,3.65vw,16px)!important;line-height:1.62}
+.creator-simple .form-group label,.creator-simple .field-label,.creator-simple .creator-minor-options summary{font-size:13px}
+.creator-simple .tiny-note,.creator-simple .price-micro,.creator-simple .draft-autosave-message{font-size:13px;line-height:1.65}
+.creator-start-choice{padding:13px;margin:13px 0 18px;border:1px solid #5b9c6d;border-radius:13px;background:#112b22}
+.creator-start-choice h3{font-size:20px;color:#d8f9dc;margin:0 0 9px}
+.creator-start-buttons{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.creator-start-buttons .btn{white-space:normal;text-align:center;min-height:52px;font-size:13px}
+.creator-start-choice p{margin:10px 0 0;color:#c8e2ce;font-size:14px;line-height:1.55}
+#creator-resume-draft{border-color:#e8c17d;color:#ffdf99}
+.creator-step-choice-status{color:#bff8cb!important}
+.creator-publish-safety{padding:16px;margin:15px 0 8px;border:1px solid #75d7d1;border-radius:13px;background:#112e33}
+.creator-publish-safety h4{color:#bffff7;font-size:19px;margin:0 0 8px}
+.creator-publish-safety p,.creator-publish-safety li{font-size:14px;line-height:1.65;color:#e0f3ef}
+.creator-publish-safety ol{padding-left:21px;margin:8px 0 13px}
+.creator-publish-safety .safety-warning{border-left:3px solid #f3c982;padding:10px 12px;background:#3a2b1e;color:#ffe9b5}
+.creator-simple #devnet-publish-primary .iq-devnet-publisher{border-color:#7dece3;margin-top:15px;background:linear-gradient(160deg,#174443,#0a2224)}
+.creator-simple #devnet-publish-primary .iq-devnet-publisher>p:not(.creator-publish-short),.creator-simple #devnet-publish-primary #devnet-storage-only-box>p{display:none!important}
+.creator-simple #devnet-publish-primary .iq-devnet-publisher h4{color:#bdfff5;font-size:20px}
+.creator-simple #devnet-publish-primary .publish-consent{padding:13px;border:1px solid #6ca49c;border-radius:10px;background:#173735;color:#f0fffd}
+.creator-simple #devnet-publish-primary #publish-storage-devnet{min-height:59px;font-size:15px;line-height:1.4;white-space:normal}
+.creator-simple #devnet-publish-primary #devnet-publish-status{padding:12px;border:1px solid #548c8a;border-radius:10px;font-size:14px;background:#082123;min-height:48px}
+.creator-simple #devnet-publish-primary #verify-iq-devnet{min-height:49px}
+.creator-simple #devnet-publish-primary .iq-devnet-publisher .publish-consent{margin:11px 0}
+.creator-simple #wallet-choice-panel{font-size:14px}
+@media(max-width:550px){.creator-start-buttons{grid-template-columns:1fr}.creator-simple .studio-panel,.creator-simple .publish-panel{padding:18px}.creator-simple .panel-topline{align-items:flex-start;flex-wrap:wrap;gap:8px}.creator-simple .status-dot{white-space:normal;font-size:11px}}
 </style></head>
 <body class="creator-simple" data-page="creator">
   <div class="site-shell">
@@ -555,10 +588,16 @@ details.advanced-box[open]>summary{color:#adffb8;margin-bottom:13px}
           <div class="panel studio-panel" id="create-quest">
             <div class="panel-topline"><span class="section-kicker">STEP 1 · CREATE YOUR QUEST</span><span class="status-dot">DRAFT · NO PAYMENT</span></div>
             <h2>What is your quest about?</h2><p class="section-intro">Just choose a title, a topic and the difficulty. ChatGPT helps you create 15 new puzzles below.</p>
+            <div class="creator-start-choice" role="group" aria-label="Start a new quest or continue your saved draft">
+              <h3>Where would you like to start?</h3>
+              <div class="creator-start-buttons"><button type="button" id="reset-quest-draft" class="btn btn-green">＋ CREATE NEW QUEST</button><button type="button" id="creator-resume-draft" class="btn btn-outline">↻ CONTINUE MY DRAFT</button></div>
+              <p id="creator-draft-choice-status" class="creator-step-choice-status" role="status" aria-live="polite">Checking for your saved draft…</p>
+              <p>Starting fresh makes a backup first. Your draft stays on this device unless you export it.</p>
+            </div>
             <div class="form-group"><label for="quest-name">Quest title</label><input id="quest-name" maxlength="100" placeholder="e.g. Mission to Mars" value=""></div>
             <div class="form-group"><label for="quest-theme">Topic</label><textarea id="quest-theme" rows="2" maxlength="500" placeholder="e.g. Space, football, dinosaurs or ancient Egypt"></textarea><p class="tiny-note">A single word like <strong>Space</strong> is enough. Your quest can have any topic.</p></div>
             <div class="form-group"><span class="field-label">Difficulty</span><div class="choice-grid" id="difficulty-options" role="group" aria-label="Quest difficulty"><button type="button" data-difficulty="Easy"><strong>✧ EASY</strong><small>5–9 min · real puzzles</small></button><button type="button" data-difficulty="Medium" class="selected"><strong>◇ MEDIUM</strong><small>9–18 min · two-step logic</small></button><button type="button" data-difficulty="Hard"><strong>✦ HARD</strong><small>15–30 min · linked ciphers</small></button></div></div>
-            <details class="creator-minor-options"><summary>Optional · creator name &amp; fresh draft</summary><div class="form-group"><label for="community-name">Creator / community name</label><input id="community-name" maxlength="70" placeholder="e.g. Solana Builders Club" value=""></div><button type="button" id="reset-quest-draft" class="btn btn-outline" style="margin-top:10px;width:100%">↻ START A FRESH QUEST</button><p class="tiny-note">Your previous draft is backed up before starting over.</p></details>
+            <details class="creator-minor-options"><summary>Optional · creator / community name</summary><div class="form-group"><label for="community-name">Creator / community name</label><input id="community-name" maxlength="70" placeholder="e.g. Solana Builders Club" value=""></div></details>
             <a href="#ai-builder" class="btn btn-green creator-continue">NEXT · CREATE 15 QUESTIONS WITH CHATGPT ↓</a>
           </div>
           <div class="panel studio-panel ai-panel" id="ai-builder">
@@ -603,6 +642,18 @@ details.advanced-box[open]>summary{color:#adffb8;margin-bottom:13px}
             <h3>Publish your quest on Solana</h3>
             <p>Your questions are ready? Publishing stores all 15 questions, hints and answers publicly onchain. Connect Phantom <strong>only now</strong>.</p>
             <div class="creator-publish-simple-summary"><strong>DEVNET TEST ONLY · REAL PAYMENTS OFF.</strong> Approve several Phantom transactions, then receive a verified game link to copy or share on X. <strong>Players never pay.</strong> Future Mainnet creator price: <strong>0.03 SOL + network and IQ Labs storage fees</strong>.</div>
+            <section class="creator-publish-safety" aria-label="Devnet publication steps, fees and payment protection">
+              <h4>Before Phantom opens: here is what happens</h4>
+              <ol>
+                <li><strong>Check your 15 questions</strong> and select public-onchain consent below.</li>
+                <li><strong>Approve about 6 Phantom transactions</strong> (5 data chunks + 1 registration in our example; larger quests may need up to 10).</li>
+                <li><strong>Wait for 15/15 onchain verification.</strong> Only then will your shareable game link appear.</li>
+              </ol>
+              <p><strong>Previously observed Devnet example:</strong> 0.0030324 test SOL total (0.003 IQ Labs + 0.0000324 network fees). This is <strong>not a guaranteed estimate</strong>; Phantom shows the actual fees. No platform fee is charged in this Devnet storage test.</p>
+              <p class="safety-warning"><strong>Interrupted?</strong> Return here with the <strong>same wallet and unchanged quest</strong>, then use the recovery button below. The saved upload is checked onchain before any further signing. <strong>Never send a second platform payment to retry.</strong></p>
+              <p><strong>Future Mainnet protection (not live):</strong> a single 0.03 SOL escrow payment per wallet and exact quest, released after an operator verifies publication. If still pending after its deadline, a refund transaction can be requested. The contract is an undeployed draft and needs independent security review; it does not prove IQ Labs storage by itself. Network/IQ Labs transaction costs cannot automatically be refunded.</p>
+            </section>
+            <div id="devnet-publish-primary" aria-label="Publish and recover your onchain Devnet quest"></div>
             <input type="radio" name="publish-plan" value="community" checked hidden aria-label="One publishing plan">
             <div class="price-single"><div><strong>SHARE ON X · PUBLISH</strong><p>One adventure · 15 questions · players free · additional storage/network fees.</p></div><strong class="price-main" id="plan-price">0.03 SOL</strong></div>
             <p class="tiny-note" id="selected-plan-note">Single planned publishing option. The initial X post is a teaser; the actual game link is available only after a verified onchain upload.</p>
@@ -660,7 +711,7 @@ details.advanced-box[open]>summary{color:#adffb8;margin-bottom:13px}
               <div style="margin-top:7px">This is a verified example, <strong>not a guaranteed quote</strong> for new uploads. Fees, account costs and the required number of transactions can change. Review each amount inside Phantom. The planned Mainnet platform fee is 0.03 SOL, with network/storage costs on top; <strong>Mainnet checkout is OFF.</strong></div>
             </div>
             </details>
-            <button type="button" id="shortcut-storage-only" class="btn btn-green" style="width:100%;margin:12px 0">3 · PUBLISH TEST QUEST ON DEVNET →</button>
+            <button type="button" id="shortcut-storage-only" class="btn btn-green hidden">PUBLISH TEST QUEST ON DEVNET</button>
             <p class="tiny-note">No platform test payment. Phantom requires several confirmations and Devnet network/IQ Labs test-SOL fees. You will see each request in your wallet.</p>
             <button type="button" id="start-sol-checkout" class="hidden" disabled>CHECK READINESS · NO PAYMENT</button>
             <details class="advanced-box" id="developer-tests"><summary>Devnet publishing · confirmations and recovery</summary>
@@ -717,7 +768,7 @@ details.advanced-box[open]>summary{color:#adffb8;margin-bottom:13px}
               </div>
               <button type="button" class="btn btn-green" id="publish-iq-devnet" disabled>◈ PUBLISH TO IQ LABS DEVNET · TEST SOL ONLY</button>
               <button type="button" class="btn btn-outline" id="verify-iq-devnet">↻ VERIFY LAST DEVNET PUBLICATION</button>
-              <div id="devnet-publish-status" class="publish-progress" role="status" aria-live="polite">For the storage-only Devnet test, check the public-data consent box and tap TEST ONCHAIN STORAGE above. The separate payment-gated Publish button still requires a matching Devnet payment.</div>
+              <div id="devnet-publish-status" class="publish-progress" role="status" aria-live="polite">Ready for Devnet. Check the public-data consent box, then tap CONFIRM &amp; PUBLISH MY QUEST ON DEVNET. No platform payment is required for this test.</div>
               <div class="publish-links hidden" id="devnet-links">
                 <a id="devnet-play-link" target="_blank" rel="noopener noreferrer" href="#">OPEN YOUR PUBLISHED QUEST ↗</a>
                 <button type="button" class="btn btn-outline" id="copy-devnet-link">COPY PLAYER LINK</button>
@@ -746,6 +797,19 @@ details.advanced-box[open]>summary{color:#adffb8;margin-bottom:13px}
       <button type="button" id="verified-onchain-close" class="btn btn-glass" style="width:100%;margin:7px 0 0">CLOSE · BACK TO CREATOR</button>
     </div>
   </div>
+  <script>
+  // Keep the existing verified Devnet publication code and all DOM IDs, while
+  // moving the actual storage controls in front of the legacy test settings.
+  // This happens before any module reads the elements or attaches listeners.
+  (()=>{
+    'use strict';
+    const main=document.getElementById('devnet-publish-primary');
+    const publisher=document.querySelector('#developer-tests .iq-devnet-publisher');
+    const wallet=document.getElementById('wallet-choice-panel');
+    if(!main||!publisher||!wallet)throw Error('Devnet publication controls could not be prepared.');
+    main.append(publisher,wallet);
+  })();
+  </script>
   <script>(function(){
 'use strict';
 const q=[
@@ -1222,7 +1286,17 @@ $('reset-quest-draft').addEventListener('click',()=>{
  loadFreshDraft();$('undo-ai-import').classList.remove('hidden');
  status('import-status','✓ Started a fresh 15-question draft. Your previous questions can be restored with UNDO LAST IMPORT.');
  status('draft-status','✓ New empty draft ready. Start with a title and topic in Step 1.');
+ $('creator-draft-choice-status').textContent='✓ Fresh quest opened. Your former draft was backed up for Undo.';
  document.getElementById('create-quest').scrollIntoView({behavior:'smooth',block:'start'});
+});
+$('creator-resume-draft').addEventListener('click',()=>{
+ const draft=safeDraft();
+ const hasWork=Boolean(draft.title?.trim()||draft.theme?.trim()||draft.levels?.some(level=>level.q?.trim()));
+ $('creator-draft-choice-status').textContent=hasWork
+  ?'✓ Your saved draft is open below. Continue where you left off.'
+  :'No previous questions found on this device. Add a title and topic to begin.';
+ $('quest-name').focus({preventScroll:true});
+ $('quest-name').scrollIntoView({behavior:'smooth',block:'center'});
 });
 // The editor auto-saves. Manual download/save controls are intentionally not shown.
 $('preview-game').addEventListener('click',previewGame);
@@ -1251,6 +1325,13 @@ try{
  try{const raw=localStorage.getItem(DRAFT_KEY)||localStorage.getItem('iqquest_v31_creator_draft');if(raw)localStorage.setItem(DRAFT_KEY+'_failed_restore_backup_v536',raw);}catch(_e){}
  loadFreshDraft();status('draft-status','Previous draft could not be loaded. If it contains unfinished work, ask for recovery help before publishing: '+e.message,true);
 }
+try{
+ const draft=safeDraft();
+ const hasWork=Boolean(draft.title?.trim()||draft.theme?.trim()||draft.levels?.some(level=>level.q?.trim()));
+ $('creator-draft-choice-status').textContent=hasWork
+  ?'✓ Previous draft found and loaded on this device. Choose Continue My Draft or start a new quest.'
+  :'No earlier quest found. Create New Quest or enter your idea below.';
+}catch(_e){$('creator-draft-choice-status').textContent='You can create a new quest or continue editing below.';}
 })();
 </script>
 <script>
@@ -1334,10 +1415,10 @@ try{
 })();
 </script><script type="module">
 // Explicit release query avoids a stale cached module in Phantom's in-app browser.
-import {publishQuestDevnet,publishQuestDevnetStorageTest,readQuestOnchain,isSolanaSignature} from './onchain-bridge.js?v=517';
+import {publishQuestDevnet,publishQuestDevnetStorageTest,readQuestOnchain,isSolanaSignature} from './onchain-bridge.js?v=537';
 import {verifyDevnetPayment,questFingerprint} from './checkout-bridge.js';
 import {requestCheckoutWallet} from './wallet-bridge.js?v=514';
-import {getSavedMobileJob,DEVNET_STORAGE_ONLY_JOB_KEY,DEVNET_STORY_FREE_JOB_KEY} from './devnet-resumable.mjs?v=517';
+import {getSavedMobileJob,DEVNET_STORAGE_ONLY_JOB_KEY,DEVNET_STORY_FREE_JOB_KEY} from './devnet-resumable.mjs?v=537';
 const $=id=>document.getElementById(id);
 const publish=$('publish-iq-devnet'),storageTest=$('publish-storage-devnet'),consent=$('devnet-accept'),auto=$('devnet-auto-publish'),verify=$('verify-iq-devnet');
 const progress=$('devnet-publish-status'),links=$('devnet-links');
@@ -1383,10 +1464,16 @@ $('shortcut-storage-only').addEventListener('click',()=>{
  consent.scrollIntoView({behavior:'smooth',block:'center'});
 });
 try{
+ const activeKey=localStorage.getItem('iqquest_devnet_active_storage_job_v517');
+ const activeJob=activeKey?getSavedMobileJob(localStorage,activeKey):null;
  const storageJob=getSavedMobileJob(localStorage,DEVNET_STORY_FREE_JOB_KEY);
  const oldStoryJob=getSavedMobileJob(localStorage,DEVNET_STORAGE_ONLY_JOB_KEY);
  const job=getSavedMobileJob();
- if(storageJob&&!storageJob.finalSignature)
+ if(activeJob&&!activeJob.finalSignature)
+  setStatus('UNFINISHED DEVNET UPLOAD FOUND: '+activeJob.index+' chunks were recorded as confirmed. Keep the same quest and wallet, check consent, then tap CONFIRM & PUBLISH MY QUEST ON DEVNET to verify and resume. Never start a second platform payment.');
+ else if(activeJob?.finalSignature)
+  setStatus('A final IQ Labs Devnet transaction was saved on this device. If the success screen did not appear, keep the same quest and tap CONFIRM & PUBLISH MY QUEST ON DEVNET. The existing transaction will be independently read back before anything else is signed.');
+ else if(storageJob&&!storageJob.finalSignature)
   setStatus('Your STORY-FREE IQ Labs Devnet upload may be unfinished ('+storageJob.index+' confirmed chunks saved). Check the consent box, then tap TEST ONCHAIN STORAGE to safely resume. No platform payment needed.');
  else if(oldStoryJob&&!oldStoryJob.finalSignature)
   setStatus('Previous V5.15 quest: '+oldStoryJob.index+' story-based chunk(s) were already stored on Devnet and the old recovery record is preserved. Since you chose NO STORY, this V5.16 test starts a new onchain chain with 800-byte chunks. No second 0.002 test SOL platform payment; separate Devnet storage/network fees still apply. Please check your 15 questions, consent and tap TEST ONCHAIN STORAGE when ready.');
@@ -1452,7 +1539,7 @@ async function publishStorageOnly(){
     'Original onchain data: '+new TextEncoder().encode(existing.raw).length+' bytes · compressed: '+new TextEncoder().encode(existing.storedRaw).length+' bytes (protocol fees extra).');
    return;
   }
-  setStatus('Storage-only DEVNET test. No 0.002 SOL platform payment will be requested. Choose Phantom to approve the real IQ Labs storage transactions. Devnet network/protocol fees may apply.');
+  setStatus('Storage-only DEVNET test. No platform payment will be requested. The next step connects Phantom; then you individually approve IQ Labs storage transactions. Devnet network/protocol fees may apply.');
   const provider=await requestCheckoutWallet({purpose:'publication',onProgress:setStatus});
   const payer=provider.publicKey?.toBase58?.();
   if(!payer)throw Error('A Phantom wallet is required to sign the Devnet storage transactions.');
@@ -1468,7 +1555,7 @@ async function publishStorageOnly(){
    'Original onchain data: '+new TextEncoder().encode(JSON.stringify(result.data)).length+' bytes · compressed: '+result.bytes+' bytes (protocol fees extra).');
  }catch(error){
   setStatus('Storage-only Devnet upload was NOT verified: '+String(error?.message||error)+
-   '\nIf Phantom approved anything or returned to this page, do not pay again. Wait for confirmation, then tap TEST ONCHAIN STORAGE to check and resume safely.');
+   '\nIf Phantom approved anything or returned to this page, do not pay again. Wait for confirmation, then tap CONFIRM & PUBLISH MY QUEST ON DEVNET to check and resume safely.');
  }finally{busy=false;enable();}
 }
 async function publishAfterVerifiedPayment(autoStarted=false){

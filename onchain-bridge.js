@@ -290,7 +290,7 @@ export async function publishQuestOnchain({draft,provider,plan='community',netwo
    // Phantom mobile can reload the in-app page after signing. By letting the
    // wallet broadcast, then recording/recovering each SDK-built chunk onchain,
    // a page reset cannot silently discard a signed-but-unsent transaction.
-   const {publishResumableDevnet,DEVNET_STORY_FREE_JOB_KEY,devnetQuestJobKey,getSavedMobileJob}=await import('./devnet-resumable.mjs?v=517');
+   const {publishResumableDevnet,DEVNET_STORY_FREE_JOB_KEY,devnetQuestJobKey,getSavedMobileJob}=await import('./devnet-resumable.mjs?v=537');
    let storageJobKey;
    if(devnetStorageOnly){
      // New quests need independent resumable jobs. Never overwrite the
