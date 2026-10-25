@@ -448,6 +448,12 @@ h1,h2,h3{font-family:Georgia,"Times New Roman",serif;letter-spacing:-.015em}h1{f
 #onchain-retry-home{display:inline-flex;margin:0 0 14px}
 #onchain-retry-home.hidden{display:none}
 .is-home-chooser .quest-path-note{margin-top:10px}
+/* V5.22 · One prominent share action on the three-game chooser only. */
+.top-links #share-free-x{display:none}
+.is-home-chooser .top-links #share-free-x{display:inline-flex!important;align-items:center;justify-content:center;border:1px solid #719f86;border-radius:10px;padding:10px 13px;color:#d2f8dc;white-space:nowrap}
+.is-home-chooser .top-links #share-free-x:hover{border-color:#5bf98a;color:#5bf98a}
+.is-creator-preview .quick-benefits,.is-creator-preview .top-links a[href="#how"]{display:none!important}
+@media(max-width:740px){.is-home-chooser .top-links #share-free-x{font-size:11px;padding:7px 10px}}
 </style>
 </head>
 <body class="is-home-chooser" data-page="player">
@@ -458,6 +464,7 @@ h1,h2,h3{font-family:Georgia,"Times New Roman",serif;letter-spacing:-.015em}h1{f
         <a href="#adventure">Play</a>
         <a href="#how">How it works</a>
         <a href="imprint.html">Imprint</a>
+        <a id="share-free-x" href="https://x.com/intent/tweet" target="_blank" rel="noopener noreferrer" aria-label="Share all three free IQ QUEST games on X">↗ SHARE ON X</a>
         <a class="nav-create" href="creator.html">Create a Quest <span aria-hidden="true">↗</span></a>
       </nav>
     </header>
@@ -489,7 +496,7 @@ h1,h2,h3{font-family:Georgia,"Times New Roman",serif;letter-spacing:-.015em}h1{f
           </article>
         </div>
         <div class="quest-create-callout">
-          <div><h3>Want to publish your own quest?</h3><p>Build and test your own 15 puzzles for free. Publishing a new custom quest is planned as a paid creator feature; the paid Mainnet checkout is not live yet. Devnet test publishing currently requires Phantom approvals and test-SOL. The three ready-made games above remain free.</p></div>
+          <div><h3>Create a game for your people</h3><p>Your friends, birthday or community. Choose your own theme, clues and difficulty, then share your 15-puzzle game. Creating and testing are free. Paid custom publishing is planned for Mainnet; today's Devnet beta uses test-SOL.</p></div>
           <a class="btn btn-gold" href="creator.html#studio">✦ BUILD MY OWN QUEST</a>
         </div>
         <p class="quest-path-note">Devnet is a test network, not Solana Mainnet. Questions, hints and answers are onchain; timers and personal scores run in your browser. Choose a game above to start.</p>
@@ -696,6 +703,13 @@ const onchainMode=!preview&&(!!onchainSignature||!!publishedQuestId);
 const onchainNetwork=params.get('network')==='mainnet-beta'?'mainnet-beta':'devnet';
 const isHomeChooser=!preview&&!onchainMode&&!params.has('difficulty')&&!params.has('mode')&&!params.has('target');
 document.body.classList.toggle('is-home-chooser',isHomeChooser);
+const freeGamesShare=$('share-free-x');
+if(freeGamesShare){
+ const intent=new URL('https://x.com/intent/tweet');
+ intent.searchParams.set('text','Try IQ QUEST: three free onchain mystery games. Choose Easy, Medium or Hard, with 15 puzzles each. No wallet needed to play!');
+ intent.searchParams.set('url',new URL('index.html',location.href).href);
+ freeGamesShare.href=intent.href;
+}
 if(isHomeChooser){
  const homePlay=document.querySelector('.top-links a[href="#adventure"]');
  if(homePlay){homePlay.href='#quest-entry-options';homePlay.textContent='Free Games';}
