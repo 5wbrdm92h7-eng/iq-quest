@@ -19,7 +19,7 @@
   <meta name="twitter:image" content="https://5wbrdm92h7-eng.github.io/iq-quest/social-cover.jpg">
   <meta name="twitter:image:alt" content="IQ QUEST mystery adventures title image with jungle ruins">
   <meta name="theme-color" content="#07120f">
-  <meta name="description" content="Turn your community into challengers. Draft mystery quests with ChatGPT, edit them and preview your experience.">
+  <meta name="description" content="Create a 15-question IQ QUEST challenge with ChatGPT, test it for free, and publish to Solana Devnet when ready.">
   <title>IQ QUEST — Creator Studio</title>
   <style>:root{--bg:#080e14;--panel:#101b22;--panel2:#101d24;--stroke:#294043;--white:#eff7ee;--muted:#9cb5ab;--green:#56f86e;--gold:#e8c17d;--cyan:#85e2d6;--red:#ffabb1;--radius:17px;--shadow:0 18px 65px rgba(0,0,0,.4)}
 *,*::before,*::after{box-sizing:border-box}
@@ -425,6 +425,37 @@ details.advanced-box[open]>summary{color:#adffb8;margin-bottom:13px}
 #my-quests-status{min-height:1.5em;margin-top:12px;font-size:12px;color:#bdf0ce;line-height:1.55;overflow-wrap:anywhere}
 #my-quests-status.bad{color:#ffd19d}
 @media(max-width:740px){.creator-simple .top-links{flex-wrap:wrap}.creator-simple .top-links #nav-my-quests{font-size:11px;padding:7px 10px}.my-quest-actions .btn{flex:1 1 130px}.my-quests-panel>summary{font-size:15px}}
+/* V5.36 · Three clear creator steps, preserving existing wallet / Devnet logic. */
+.creator-simple .studio-layout{grid-template-columns:minmax(0,1fr);width:min(100%,900px);margin-inline:auto;gap:16px}
+.creator-simple .studio-aside{grid-template-columns:minmax(0,1fr);gap:16px}
+.creator-simple .studio-main{gap:15px}
+.creator-simple .studio-aside>.publish-panel:last-child{display:none}
+.creator-simple .simple-journey{margin-bottom:0}
+.simple-journey .flow-tile{display:block;text-decoration:none;scroll-margin-top:10px}
+.simple-journey .flow-tile:hover,.simple-journey .flow-tile:focus-visible{filter:brightness(1.15);outline:2px solid #d7ffc7;outline-offset:2px}
+#create-quest,#ai-builder,#question-review,#preview-step,#publish-card{scroll-margin-top:14px}
+.creator-minor-options{padding:10px 12px;margin:15px 0;background:#10231d;border:1px solid #476e53;border-radius:10px}
+.creator-minor-options summary{font-weight:800;color:#bfdcc7;font-size:12px;cursor:pointer}
+.creator-minor-options .form-group{margin:12px 0 0}
+.creator-continue{display:flex;width:100%;margin-top:17px;white-space:normal;text-align:center}
+.creator-review>summary{cursor:pointer;color:#e9f6d7;font-size:16px;line-height:1.5;font-weight:900}
+.creator-review[open]>summary{padding-bottom:13px;margin-bottom:15px;border-bottom:1px solid #3d6952}
+.creator-review .level-selector button{min-height:42px}
+.creator-simple .preview-image{display:none}
+.creator-stage-title{font-size:28px;color:#f1dba6;margin:7px 0 4px}
+.creator-stage-note{color:#c2ddc8;font-size:13px;line-height:1.55;margin:0}
+.creator-simple #preview-step .preview-body{padding-top:8px}
+.creator-simple #preview-step .preview-brand{display:none}
+.creator-simple #preview-step .stack-buttons{margin-top:12px}
+.creator-simple #preview-step .btn{min-height:51px}
+.creator-simple #publish-card>p.tiny-note{font-size:11px}
+.creator-simple #developer-tests .iq-devnet-publisher>p:not(.creator-publish-short){display:none}
+.creator-simple #developer-tests #devnet-storage-only-box>p{display:none}
+.creator-publish-short{font-size:13px!important;color:#e3f4e3!important;border:1px solid #527e5f;padding:11px;border-radius:9px;background:#173322}
+.creator-simple #developer-tests .iq-devnet-publisher .publish-consent{margin:13px 0}
+.creator-simple #developer-tests #devnet-storage-only-box{margin:8px 0 13px!important}
+.creator-simple #developer-tests #publish-storage-devnet{min-height:50px}
+@media(max-width:740px){.creator-simple .studio-layout{width:100%}.creator-review>summary{font-size:14px}.creator-stage-title{font-size:24px}.creator-simple .simple-journey .flow-tile{font-size:12px}}
 </style></head>
 <body class="creator-simple" data-page="creator">
   <div class="site-shell">
@@ -468,10 +499,9 @@ details.advanced-box[open]>summary{color:#adffb8;margin-bottom:13px}
         <div class="studio-main">
           <div class="simple-journey" aria-label="Build your adventure in three steps">
             <div class="section-kicker">CREATE AN ONCHAIN QUEST · POWERED BY IQ LABS</div>
-            <h2>Create · Test · Publish</h2>
-            <p><strong>1. Create</strong> your 15 questions. <strong>2. Test</strong> them for free. <strong>3. Publish</strong> when ready. No wallet is needed until step 3. Paid Mainnet publishing is coming later; the current Devnet test uses test-SOL only.</p>
-            <div class="flow-tiles"><div class="flow-tile"><b>1</b>Create 15 puzzles</div><div class="flow-tile"><b>2</b>Test free</div><div class="flow-tile"><b>3</b>Publish onchain</div></div>
-            <a class="btn btn-outline chatgpt-jump" href="#ai-builder">🤖 CREATE 15 QUESTIONS WITH CHATGPT ↓</a>
+            <h2>3 simple steps to your own quest</h2>
+            <p>Give ChatGPT your topic, check the 15 puzzles, test for free, then publish. <strong>No wallet is needed until publishing.</strong> Only Devnet testing is available for now.</p>
+            <div class="flow-tiles"><a class="flow-tile" href="#create-quest"><b>1</b>Create 15 puzzles</a><a class="flow-tile" href="#preview-step"><b>2</b>Test for free</a><a class="flow-tile" href="#publish-card"><b>3</b>Publish onchain</a></div>
           </div>
           <details class="panel studio-panel my-quests-panel" id="my-quests">
             <summary>▣ MY QUESTS · OPEN &amp; SHARE YOUR PUBLISHED GAMES</summary>
@@ -522,35 +552,35 @@ details.advanced-box[open]>summary{color:#adffb8;margin-bottom:13px}
             <p class="tiny-note">Loading a preset saves an Undo backup. <strong>All three quests already work: do not publish the same questions again just to play them.</strong> The original older Hard Treasure version also remains on Devnet, but it is not part of the featured free three-game selection. Only a newly customized quest needs another publication; editing or loading does not connect a wallet.</p>
             <p id="prepared-quest-status" class="small-status" role="status" aria-live="polite">Choose one to load its questions into the editor.</p>
           </details>
-          <div class="panel studio-panel">
+          <div class="panel studio-panel" id="create-quest">
             <div class="panel-topline"><span class="section-kicker">STEP 1 · CREATE YOUR QUEST</span><span class="status-dot">DRAFT · NO PAYMENT</span></div>
-            <h2>Describe your mystery</h2><p class="section-intro">Challenge your friends and community with 15 puzzles of your own. Name your adventure, choose a topic and select Easy, Medium or Hard. You can edit everything after ChatGPT creates the puzzles.</p>
-            <div class="form-group"><label for="quest-name">Adventure title</label><input id="quest-name" maxlength="100" value="The Lost Solana Treasure"></div>
-            <div class="form-group"><label for="community-name">Creator / community name</label><input id="community-name" maxlength="70" placeholder="e.g. Solana Builders Club" value="Solana Adventurers"></div>
-            <div class="form-group"><label for="quest-theme">Your topic or idea</label><textarea id="quest-theme" rows="3" maxlength="500" placeholder="e.g. Space, football, dinosaurs or ancient Egypt">An ancient jungle temple filled with forgotten runes, mysterious doors and the lost Solana treasure.</textarea><p class="tiny-note">Even one word such as <strong>Space</strong> or <strong>Weltraum</strong> is enough. Replace the temple example and change the title above if you like. ChatGPT creates <strong>15 new puzzles with hints and answers</strong> based on your topic. Nothing is limited to our example questions.</p></div>
+            <h2>What is your quest about?</h2><p class="section-intro">Just choose a title, a topic and the difficulty. ChatGPT helps you create 15 new puzzles below.</p>
+            <div class="form-group"><label for="quest-name">Quest title</label><input id="quest-name" maxlength="100" placeholder="e.g. Mission to Mars" value=""></div>
+            <div class="form-group"><label for="quest-theme">Topic</label><textarea id="quest-theme" rows="2" maxlength="500" placeholder="e.g. Space, football, dinosaurs or ancient Egypt"></textarea><p class="tiny-note">A single word like <strong>Space</strong> is enough. Your quest can have any topic.</p></div>
             <div class="form-group"><span class="field-label">Difficulty</span><div class="choice-grid" id="difficulty-options" role="group" aria-label="Quest difficulty"><button type="button" data-difficulty="Easy"><strong>✧ EASY</strong><small>5–9 min · real puzzles</small></button><button type="button" data-difficulty="Medium" class="selected"><strong>◇ MEDIUM</strong><small>9–18 min · two-step logic</small></button><button type="button" data-difficulty="Hard"><strong>✦ HARD</strong><small>15–30 min · linked ciphers</small></button></div></div>
-            <div class="form-group"><span class="field-label">Questions per quest</span><div class="notice" style="display:block;position:static;padding:14px 16px;border-radius:10px;background:#152b23;color:#e5f4d5;border:1px solid #416c4d"><strong>15 MYSTERIES · FIXED</strong><br><span style="font-size:12px">Fifteen levels, one non-trivial puzzle each. Estimates depend on difficulty; hints add +1 minute. ChatGPT builds difficulty when you generate or revise, not by simply tapping a different setting.</span></div></div>
+            <details class="creator-minor-options"><summary>Optional · creator name &amp; fresh draft</summary><div class="form-group"><label for="community-name">Creator / community name</label><input id="community-name" maxlength="70" placeholder="e.g. Solana Builders Club" value=""></div><button type="button" id="reset-quest-draft" class="btn btn-outline" style="margin-top:10px;width:100%">↻ START A FRESH QUEST</button><p class="tiny-note">Your previous draft is backed up before starting over.</p></details>
+            <a href="#ai-builder" class="btn btn-green creator-continue">NEXT · CREATE 15 QUESTIONS WITH CHATGPT ↓</a>
           </div>
           <div class="panel studio-panel ai-panel" id="ai-builder">
-            <div class="panel-topline"><span class="section-kicker">STEP 1 · GENERATE QUESTIONS</span><span class="ai-glow">CHATGPT ASSISTED</span></div>
-            <h2>Optional: Write questions with ChatGPT</h2>
-            <p class="section-intro">No coding or JSON knowledge needed. Copy the task, send it to ChatGPT, and bring its answer back. We fill all 15 editor questions for you.</p>
+            <div class="panel-topline"><span class="section-kicker">STEP 1 · CREATE 15 QUESTIONS</span><span class="ai-glow">WITH CHATGPT</span></div>
+            <h2>Create your 15 puzzles</h2>
+            <p class="section-intro">No technical knowledge needed. Copy the prepared request, let ChatGPT write the puzzles, then paste the answer here. <strong>Creating costs nothing.</strong></p>
             <div class="ai-simplified">
               <div class="ai-simple-step">
-                <h3>1 · Copy your ready-made request</h3>
-                <p>We prepare the request from your title, theme and difficulty. Tap below to copy it.</p>
-                <button type="button" id="ai-generate-one" class="btn btn-green">1 · COPY REQUEST FOR CHATGPT</button>
+                <h3>1 · Copy your quest idea</h3>
+                <p>Your topic and difficulty are included automatically.</p>
+                <button type="button" id="ai-generate-one" class="btn btn-green">1 · COPY CHATGPT REQUEST</button>
                 <div id="quick-ai-status" role="status" aria-live="polite"></div>
-                <div class="ai-next-step"><h3>2 · Open ChatGPT</h3><p>Tap the button. In ChatGPT, <strong>hold the message box → Paste → Send</strong>. When all 15 questions appear, <strong>copy the answer first</strong>. ChatGPT should put a clickable <strong>↩ RETURN TO IQ QUEST CREATOR</strong> link directly below its answer. Tap that link to come back.</p>
-                <a id="open-chatgpt-step" href="https://chatgpt.com/" class="btn btn-outline ai-open-link">2 · OPEN CHATGPT ↗</a><span class="ai-safety-note"><strong>On iPhone:</strong> Use the <strong>RETURN TO IQ QUEST</strong> link at the end of ChatGPT's answer. If it does not appear, switch back to your IQ QUEST browser or use the creator link you received from us. You can import all 15 questions even if the return link opens another browser.</span></div><button type="button" id="copy-prompt" class="btn btn-outline hidden">COPY TASK AGAIN</button>
+                <div class="ai-next-step"><h3>2 · Let ChatGPT write the puzzles</h3><p>Open ChatGPT, tap <strong>Paste → Send</strong>. Wait for 15 questions, then <strong>copy the full answer</strong> and return to IQ QUEST.</p>
+                <a id="open-chatgpt-step" href="https://chatgpt.com/" class="btn btn-outline ai-open-link">2 · OPEN CHATGPT ↗</a><span class="ai-safety-note"><strong>On your phone:</strong> Tap the <strong>RETURN TO IQ QUEST</strong> link if ChatGPT includes it, or switch back to this browser tab. Your draft is saved on this device.</span></div><button type="button" id="copy-prompt" class="btn btn-outline hidden">COPY TASK AGAIN</button>
               </div>
               <div class="ai-simple-step">
-                <h3>3 · Paste the answer &amp; fill all 15</h3>
+                <h3>3 · Bring your 15 puzzles back</h3>
                 <div id="chatgpt-return-banner" class="notice hidden" role="status"><strong>↩ WELCOME BACK TO IQ QUEST!</strong> Your ChatGPT answer is on the clipboard. Paste the complete JSON below, then fill your 15 questions. If you returned in another browser, the imported JSON will also restore your quest title, theme and difficulty.</div>
-                <p>Back in IQ QUEST, tap the button below to paste from your clipboard and fill all 15 questions. If your browser blocks clipboard access, <strong>hold inside the box → Paste</strong>, then tap again. Your existing questions will be backed up.</p>
-                <label class="field-label" for="chatgpt-json">ChatGPT answer (paste everything)</label>
+                <p>Paste the whole ChatGPT answer below, then tap <strong>USE MY 15 QUESTIONS</strong>. Your previous draft is backed up first.</p>
+                <label class="field-label" for="chatgpt-json">ChatGPT answer</label>
                 <textarea id="chatgpt-json" rows="5" spellcheck="false" autocapitalize="off" autocomplete="off" placeholder="Tap and hold here → Paste your entire ChatGPT reply. We detect the questions automatically."></textarea>
-                <button type="button" id="ai-import-one" class="btn btn-gold" style="margin-top:10px">3 · PASTE &amp; FILL MY 15 QUESTIONS</button>
+                <button type="button" id="ai-import-one" class="btn btn-gold" style="margin-top:10px">3 · USE MY 15 QUESTIONS</button>
                 <div id="import-status" class="small-status" role="status" aria-live="polite"></div>
                 <button type="button" id="undo-ai-import" class="btn btn-outline hidden">↶ UNDO LAST IMPORT</button>
               </div>
@@ -565,14 +595,14 @@ details.advanced-box[open]>summary{color:#adffb8;margin-bottom:13px}
             </div>
             <div class="prompt-fallback hidden" id="prompt-fallback"><label for="manual-ai-prompt">If your browser couldn't copy the task, select and copy this text manually:</label><textarea id="manual-ai-prompt" rows="6" readonly></textarea><button type="button" id="select-ai-prompt" class="btn btn-outline">SELECT TASK TEXT</button></div>
           </div>
-          <div class="panel studio-panel"><div class="panel-topline"><span class="section-kicker">STEP 1 · REVIEW QUESTIONS</span><span id="editor-count" class="status-dot">15 QUESTIONS</span></div><h2>Make every clue yours</h2><p class="section-intro">No story needed: all rules and clues must appear directly in each question. Check all 15 answers before publishing. Changing difficulty alone does not rewrite existing questions.</p><div class="editor-layout"><div class="level-selector" id="level-selector" aria-label="Choose a question"></div><div class="level-fields"><div class="form-group"><label for="level-title">Level title</label><input id="level-title" maxlength="100"></div><div class="form-group"><label for="level-question">Question · include every clue here</label><textarea id="level-question" rows="4" maxlength="600"></textarea></div><div class="form-group"><label for="level-hint">Hint <span class="muted">(costs player +1 minute)</span></label><textarea id="level-hint" rows="2" maxlength="400"></textarea></div><div class="form-group"><label for="level-answer">Accepted answer <span class="muted">(separate alternatives with |)</span></label><input id="level-answer" maxlength="180" spellcheck="false" placeholder="e.g. compass | a compass"></div><div class="tiny-note">Only title, question, hint and answer are saved onchain. Answers are public, not secret or prize-safe.</div></div></div></div>
+          <details class="panel studio-panel creator-review" id="question-review"><summary>✓ REVIEW OR EDIT MY 15 QUESTIONS</summary><div class="panel-topline"><span class="section-kicker">STEP 1 · CHECK YOUR PUZZLES</span><span id="editor-count" class="status-dot">15 QUESTIONS</span></div><h2>Review questions &amp; answers</h2><p class="section-intro">Open each of the 15 questions and check the answer and hint. If you change the difficulty, ask ChatGPT to create new puzzles for that level.</p><div class="editor-layout"><div class="level-selector" id="level-selector" aria-label="Choose a question"></div><div class="level-fields"><div class="form-group"><label for="level-title">Question title</label><input id="level-title" maxlength="100"></div><div class="form-group"><label for="level-question">Question · include every clue here</label><textarea id="level-question" rows="4" maxlength="600"></textarea></div><div class="form-group"><label for="level-hint">Hint <span class="muted">(adds +1 minute for the player)</span></label><textarea id="level-hint" rows="2" maxlength="400"></textarea></div><div class="form-group"><label for="level-answer">Answer <span class="muted">(separate alternatives with |)</span></label><input id="level-answer" maxlength="180" spellcheck="false" placeholder="e.g. compass | a compass"></div><div class="tiny-note">Questions, hints and answers are public when published onchain. Never use secret or prize-safe answers.</div></div></div></details>
         </div>
-        <aside class="studio-aside"><div class="panel preview-panel"><div class="section-kicker">STEP 2 · TEST YOUR QUEST FREE</div><div class="preview-image" role="img" aria-label="Ancient temple ruins in jungle mist"></div><div class="preview-body"><div class="preview-brand">IQ QUEST</div><h3 id="preview-title">The Lost Solana Treasure</h3><p id="preview-theme">Ancient jungle temple adventure...</p><div class="preview-tags"><span id="preview-difficulty">MEDIUM</span><span id="preview-count">15 QUESTIONS</span><span id="preview-duration">9–18 MIN</span></div><div class="stack-buttons"><button type="button" id="preview-game" class="btn btn-green">▶ TEST YOUR QUEST FREE</button><span class="preview-help-text">You can return to this editor without losing your draft.</span><span class="draft-autosave-message">✓ Your draft saves automatically on this device.</span></div><div id="draft-status" class="small-status" role="status" aria-live="polite"></div></div></div>
+        <aside class="studio-aside"><div class="panel preview-panel" id="preview-step"><div class="section-kicker">STEP 2 · TEST FOR FREE</div><h3 class="creator-stage-title">Try your own quest</h3><p class="creator-stage-note">Check your answers by playing the 15 questions yourself. You can always come back and edit.</p><div class="preview-image" role="img" aria-label="Ancient temple ruins in jungle mist"></div><div class="preview-body"><div class="preview-brand">IQ QUEST</div><h3 id="preview-title">Your new quest</h3><p id="preview-theme">Your topic will appear here.</p><div class="preview-tags"><span id="preview-difficulty">MEDIUM</span><span id="preview-count">15 QUESTIONS</span><span id="preview-duration">9–18 MIN</span></div><div class="stack-buttons"><button type="button" id="preview-game" class="btn btn-green">▶ TEST MY 15 QUESTIONS</button><span class="preview-help-text">No wallet or payment needed. Return here to make changes.</span><span class="draft-autosave-message">✓ Draft saved on this device.</span></div><div id="draft-status" class="small-status" role="status" aria-live="polite"></div></div></div>
           <div class="panel publish-panel" id="publish-card">
             <div class="section-kicker">STEP 3 · PUBLISH YOUR QUEST</div>
-            <h3>Publish when you're ready</h3>
-            <p>Creating and testing are free. New creator publications will have a fee when Mainnet payments go live. The current Devnet test uses test-SOL and several wallet approvals.</p>
-            <div class="creator-publish-simple-summary"><strong>Currently: Devnet beta only.</strong> Planned creator price: <strong>0.03 SOL platform fee + Solana and IQ Labs storage/network fees</strong>, all paid by the creator. Players are free. <strong>Real payments are OFF.</strong> Review all 15 questions first. Connect Phantom only when you publish, accept that questions and answers become public onchain, and approve each transaction. After 15/15 verification, you get your game link. Share it with friends <strong>after</strong> publication.</div>
+            <h3>Publish your quest on Solana</h3>
+            <p>Your questions are ready? Publishing stores all 15 questions, hints and answers publicly onchain. Connect Phantom <strong>only now</strong>.</p>
+            <div class="creator-publish-simple-summary"><strong>DEVNET TEST ONLY · REAL PAYMENTS OFF.</strong> Approve several Phantom transactions, then receive a verified game link to copy or share on X. <strong>Players never pay.</strong> Future Mainnet creator price: <strong>0.03 SOL + network and IQ Labs storage fees</strong>.</div>
             <input type="radio" name="publish-plan" value="community" checked hidden aria-label="One publishing plan">
             <div class="price-single"><div><strong>SHARE ON X · PUBLISH</strong><p>One adventure · 15 questions · players free · additional storage/network fees.</p></div><strong class="price-main" id="plan-price">0.03 SOL</strong></div>
             <p class="tiny-note" id="selected-plan-note">Single planned publishing option. The initial X post is a teaser; the actual game link is available only after a verified onchain upload.</p>
@@ -630,10 +660,10 @@ details.advanced-box[open]>summary{color:#adffb8;margin-bottom:13px}
               <div style="margin-top:7px">This is a verified example, <strong>not a guaranteed quote</strong> for new uploads. Fees, account costs and the required number of transactions can change. Review each amount inside Phantom. The planned Mainnet platform fee is 0.03 SOL, with network/storage costs on top; <strong>Mainnet checkout is OFF.</strong></div>
             </div>
             </details>
-            <button type="button" id="shortcut-storage-only" class="btn btn-green" style="width:100%;margin:12px 0">3 · TEST ONCHAIN STORAGE · DEVNET ONLY</button>
-            <p class="tiny-note">Devnet beta only: test the IQ Labs storage of all 15 questions without another platform test payment. Phantom still charges Devnet network / IQ Labs protocol test-SOL fees. Mainnet payments remain OFF.</p>
+            <button type="button" id="shortcut-storage-only" class="btn btn-green" style="width:100%;margin:12px 0">3 · PUBLISH TEST QUEST ON DEVNET →</button>
+            <p class="tiny-note">No platform test payment. Phantom requires several confirmations and Devnet network/IQ Labs test-SOL fees. You will see each request in your wallet.</p>
             <button type="button" id="start-sol-checkout" class="hidden" disabled>CHECK READINESS · NO PAYMENT</button>
-            <details class="advanced-box" id="developer-tests"><summary>Devnet publishing · wallet confirmation and recovery</summary>
+            <details class="advanced-box" id="developer-tests"><summary>Devnet publishing · confirmations and recovery</summary>
             <p class="tiny-note"><strong>Phantom-only beta.</strong> On a phone, open this page in Phantom's built-in browser; in Phantom Settings → Developer Settings → Testnet Mode choose <strong>Solana Devnet</strong>. Use only free Devnet test SOL. Build and preview your quest without connecting any wallet; Phantom is requested only just before the test transfer or onchain upload.</p>
             <div class="price-micro" id="byte-estimate">Quest size: calculating…</div>
             <div class="price-micro" id="storage-estimate">Estimated IQ Labs storage tier: calculating…</div>
@@ -666,6 +696,7 @@ details.advanced-box[open]>summary{color:#adffb8;margin-bottom:13px}
             <section class="iq-devnet-publisher" aria-labelledby="devnet-publish-heading">
               <div class="section-kicker">NEW · EXPERIMENTAL REAL ONCHAIN TEST</div>
               <h4 id="devnet-publish-heading">Publish 15 puzzles to IQ Labs Devnet</h4>
+              <p class="creator-publish-short">1. Confirm that Phantom is on <strong>Solana Devnet</strong>. 2. Agree to public storage below. 3. Tap the green button. <strong>Approve each wallet request</strong> until your success message appears.</p>
               <p><strong>V5.16 · story-free Devnet test:</strong> All 15 questions now contain their own clues without separate story text. Solana transactions use smaller, 800-byte chunks. The earlier V5.15 partial upload stays saved separately; this new story-free quest requires a fresh Devnet storage upload, but <strong>NO second 0.002 Test SOL platform payment</strong>. Phantom still asks you to approve IQ Labs Devnet storage and network/protocol test-SOL fees.</p>
               <p><strong>Step 2 of the test:</strong> After the Devnet-only payment rehearsal above succeeds, the IQ Labs SDK can write your complete validated quest to Solana <strong>Devnet</strong>, recording the test receipt. You can opt in below to start the upload automatically after verification. Your selected wallet will still ask you to approve the necessary Devnet transactions. After exact onchain readback and test-payment verification, you get a shareable player link. Friends play free, without connecting a wallet.</p>
               <p><strong>Not a paid Mainnet release.</strong> The 0.002 Devnet test SOL is not the future 0.03 SOL platform payment. Devnet SOL has no monetary value. IQ QUEST now losslessly compresses the complete quest before uploading, aiming for fewer, smaller IQ Labs transactions. All 15 questions and answers are restored and verified on readback. Additional Devnet network / protocol fees and several Phantom approvals may still be needed. Review each wallet prompt.</p>
@@ -673,7 +704,7 @@ details.advanced-box[open]>summary{color:#adffb8;margin-bottom:13px}
               <label class="publish-consent"><input type="checkbox" id="devnet-accept"><span>I will use <strong>Solana Devnet</strong> in my chosen wallet. I understand the questions, answers and hints are publicly readable onchain and may be permanent. <strong>I understand the creator must approve several separate Phantom storage transactions, with possible fees on each one.</strong> I will review every wallet request.</span></label>
               <label class="publish-consent legacy-autopublish-label"><input type="checkbox" id="devnet-auto-publish"><span><strong>Automatically start publication after a verified Devnet test payment.</strong> I authorize IQ QUEST to begin the public upload without another page-button click. Every wallet signing request still needs my approval. This setting applies to this page session only.</span></label>
               <div id="devnet-storage-only-box" style="padding:14px;margin:12px 0 19px;border:2px solid #77e594;border-radius:12px;background:#102a1d">
-                <h4 style="margin:0 0 5px;color:#c2ffce">◈ STORAGE-ONLY DEVNET TEST · NO PLATFORM PAYMENT</h4>
+                <h4 style="margin:0 0 5px;color:#c2ffce">PUBLISH ON DEVNET · NO PLATFORM PAYMENT</h4>
                 <p>Start a new story-free 15-question upload using safe 800-byte transactions. Your earlier 1-chunk test remains on Devnet and in a separate recovery record; it cannot be reused because the quest contents changed. <strong>No second 0.002 test SOL platform transfer.</strong> Phantom still asks for Devnet storage and network/protocol test-SOL approvals. This is not a paid Mainnet publication.</p>
                 <div role="note" aria-label="Important: multiple wallet approvals required" style="padding:14px 13px;margin:13px 0 16px;border:2px solid #f4c66c;border-radius:12px;background:#382a15;color:#ffecc4;box-shadow:0 0 18px #e8a94824">
                   <strong style="display:block;font-size:14px;line-height:1.4;letter-spacing:.02em;color:#ffe08c">⚠ CREATOR: MULTIPLE PHANTOM APPROVALS REQUIRED</strong>
@@ -682,7 +713,7 @@ details.advanced-box[open]>summary{color:#adffb8;margin-bottom:13px}
                   <p style="margin:6px 0;color:#ffe8bd;font-size:12px;line-height:1.65"><strong>Verified Devnet example:</strong> 0.0000324 test SOL for all six Solana transaction fees together, plus a single 0.003 test SOL IQ Labs final registration charge = <strong>0.0030324 Devnet SOL total</strong>. These are previous test results, not a binding quote. Bigger/new uploads may cost differently.</p>
                   <p style="margin:6px 0 0;color:#ffe8bd;font-size:12px;line-height:1.65"><strong>Each approval can incur a separate IQ Labs storage/protocol and Solana network fee.</strong> This test uses Devnet test SOL, not real money. Future Mainnet publication would cost real SOL in addition to the planned platform fee. <strong>Players do not connect wallets or sign these transactions.</strong></p>
                 </div>
-                <button type="button" class="btn btn-green" id="publish-storage-devnet" disabled>◈ TEST ONCHAIN STORAGE · NO PAYMENT</button>
+                <button type="button" class="btn btn-green" id="publish-storage-devnet" disabled>✓ CONFIRM &amp; PUBLISH MY QUEST ON DEVNET</button>
               </div>
               <button type="button" class="btn btn-green" id="publish-iq-devnet" disabled>◈ PUBLISH TO IQ LABS DEVNET · TEST SOL ONLY</button>
               <button type="button" class="btn btn-outline" id="verify-iq-devnet">↻ VERIFY LAST DEVNET PUBLICATION</button>
@@ -931,24 +962,47 @@ let current=0;
 let count=15;
 let lastSave=0;
 let autosaveTimer=0;
+let promptPrepared=false;
 function defaultLevel(i){return {title:'Mystery '+String(i+1).padStart(2,'0'),q:'What is the secret answer?',h:'Replace this hint with a helpful clue.',a:'answer'};}
+function blankLevel(i){return {title:'Mystery '+String(i+1).padStart(2,'0'),q:'',h:'',a:''};}
 function clone(x){return JSON.parse(JSON.stringify(x));}
 function status(id,msg,bad=false){const el=$(id);el.textContent=msg;el.className='small-status'+(bad?' bad':'');}
-function safeDraft(){return {v:1,title:$('quest-name').value.trim()||'Untitled Mystery',creator:$('community-name').value.trim()||'Community',theme:$('quest-theme').value.trim()||'A mysterious adventure awaits.',difficulty:quest.difficulty,levels:quest.levels.map(x=>({...x}))};}
+function safeDraft(){return {v:1,title:$('quest-name').value.trim(),creator:$('community-name').value.trim()||'Community',theme:$('quest-theme').value.trim(),difficulty:quest.difficulty,levels:quest.levels.map(x=>({...x}))};}
 function saveSilent(){try{localStorage.setItem(DRAFT_KEY,JSON.stringify(safeDraft()));}catch(e){console.warn('Could not autosave',e)}}
 function queueSave(){clearTimeout(autosaveTimer);autosaveTimer=setTimeout(saveSilent,300);}
-function updateBasics(){quest.title=$('quest-name').value;quest.creator=$('community-name').value;quest.theme=$('quest-theme').value;refreshPreview();queueSave();}
-function difficultySelect(diff){quest.difficulty=diff;document.querySelectorAll('[data-difficulty]').forEach(b=>{const active=b.dataset.difficulty===diff;b.classList.toggle('selected',active);b.setAttribute('aria-pressed',String(active));});refreshPreview();queueSave();}
+function updateBasics(){promptPrepared=false;quest.title=$('quest-name').value;quest.creator=$('community-name').value;quest.theme=$('quest-theme').value;refreshPreview();queueSave();}
+function difficultySelect(diff){promptPrepared=false;quest.difficulty=diff;document.querySelectorAll('[data-difficulty]').forEach(b=>{const active=b.dataset.difficulty===diff;b.classList.toggle('selected',active);b.setAttribute('aria-pressed',String(active));});refreshPreview();queueSave();}
 function renderSelector(){const root=$('level-selector');root.replaceChildren();quest.levels.forEach((l,i)=>{const b=document.createElement('button');b.type='button';b.textContent=`${String(i+1).padStart(2,'0')} · ${l.title||'Untitled'}`;b.className=i===current?'active':'';b.setAttribute('aria-current',i===current?'true':'false');b.addEventListener('click',()=>{current=i;renderSelector();renderFields();});root.append(b);});}
 function renderFields(){const l=quest.levels[current];for(const [id,key] of [['level-title','title'],['level-question','q'],['level-hint','h'],['level-answer','a']]){$(id).value=l[key]||'';}}
 function updateLevel(){const level=quest.levels[current];for(const [id,key] of [['level-title','title'],['level-question','q'],['level-hint','h'],['level-answer','a']]){level[key]=$(id).value;}renderSelector();refreshPreview();queueSave();}
-function refreshPreview(){const draft=safeDraft();$('preview-title').textContent=draft.title;$('preview-theme').textContent=draft.theme;$('preview-difficulty').textContent=draft.difficulty.toUpperCase();$('preview-count').textContent=draft.levels.length+' QUESTIONS';$('preview-duration').textContent=times[draft.difficulty]||times.Medium;updateFeeEstimate();}
+function refreshPreview(){const draft=safeDraft();$('preview-title').textContent=draft.title||'Your new quest';$('preview-theme').textContent=draft.theme||'Choose a topic to start';$('preview-difficulty').textContent=draft.difficulty.toUpperCase();$('preview-count').textContent=draft.levels.length+' QUESTIONS';$('preview-duration').textContent=times[draft.difficulty]||times.Medium;updateFeeEstimate();}
 function loadData(data,announce=true){quest=clone(IQQuest.validate(data));$('quest-name').value=quest.title;$('community-name').value=quest.creator;$('quest-theme').value=quest.theme;current=0;count=15;difficultySelect(quest.difficulty);$('editor-count').textContent='15 QUESTIONS';renderSelector();renderFields();refreshPreview();saveSilent();if(announce)status('import-status',`${count} questions loaded. Review answers and hints before sharing.`);}
+function loadIncompleteDraft(data){
+ if(!data||!Array.isArray(data.levels)||data.levels.length!==15)throw Error('Draft must contain 15 question slots.');
+ quest={v:1,title:String(data.title||'').slice(0,100),creator:String(data.creator||'').slice(0,70),theme:String(data.theme||'').slice(0,500),
+  difficulty:['Easy','Medium','Hard'].includes(data.difficulty)?data.difficulty:'Medium',
+  levels:data.levels.map((l,i)=>({title:String(l?.title||'Mystery '+String(i+1).padStart(2,'0')).slice(0,100),q:String(l?.q||'').slice(0,600),h:String(l?.h||'').slice(0,400),a:String(l?.a||'').slice(0,180)}))};
+ $('quest-name').value=quest.title;$('community-name').value=quest.creator;$('quest-theme').value=quest.theme;
+ current=0;count=15;difficultySelect(quest.difficulty);
+ const ready=quest.levels.filter(l=>l.title.trim()&&l.q.trim()&&l.h.trim()&&l.a.trim()).length;
+ $('editor-count').textContent=ready+' / 15 QUESTIONS READY';
+ renderSelector();renderFields();refreshPreview();saveSilent();
+}
+function loadFreshDraft(){
+ loadIncompleteDraft({title:'',creator:'',theme:'',difficulty:'Medium',levels:Array.from({length:15},(_,i)=>blankLevel(i))});
+ document.getElementById('question-review').open=false;
+}
+function restoreDraft(data){
+ try{loadData(data,false);}catch(e){loadIncompleteDraft(data);}
+}
 function validateDraft(){return IQQuest.validate(safeDraft());}
 // Validation-only bridge for the separate publishing readiness panel.
 window.IQQuestEditorGetDraft=validateDraft;
 async function downloadJson(){try{const clean=validateDraft();const json=JSON.stringify(clean,null,2);const blob=new Blob([json],{type:'application/json'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='iq-quest-'+clean.title.toLowerCase().replace(/[^a-z0-9]+/g,'-').slice(0,35)+'.json';document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);status('draft-status',`Downloaded ${new TextEncoder().encode(JSON.stringify(clean)).length} UTF-8 bytes of quest data (excluding IQ Labs metadata).`);}catch(err){status('draft-status',err.message,true)}}
 function copyPromptText(){
+ if(!$('quest-name').value.trim()||!$('quest-theme').value.trim()){
+  throw Error('First enter a quest title and a topic in Step 1, for example “Mission to Mars” and “Space”.');
+ }
  const d=safeDraft();
  const returnLink=new URL('creator.html?from=chatgpt#ai-builder',location.href).href;
  const rulebook={
@@ -994,11 +1048,16 @@ IMPORTANT IPHONE RETURN STEP: Immediately AFTER the JSON object, on a separate l
 Do not add any other explanation. The creator will copy the JSON answer and tap this link to return to the editor. The IQ QUEST import safely ignores this link if the entire reply is pasted.`;
 }
 function offerManualPrompt(prompt){$('manual-ai-prompt').value=prompt;$('prompt-fallback').classList.remove('hidden');$('manual-ai-prompt').focus();$('manual-ai-prompt').select();}
-async function copyPrompt(){const text=copyPromptText();try{if(!navigator.clipboard?.writeText)throw Error('Clipboard is unavailable');await navigator.clipboard.writeText(text);$('prompt-fallback').classList.add('hidden');status('import-status','✓ Copied! Tap 2 · OPEN CHATGPT below, paste and send. Copy all 15 answers, then return to step 3.');$('quick-ai-status').classList.remove('bad');$('quick-ai-status').textContent='✓ Request copied! Now tap 2 · OPEN CHATGPT below. In ChatGPT, Paste → Send, then copy the entire reply.';}catch(e){offerManualPrompt(text);status('import-status','Your browser blocked automatic copying. Select and copy the task shown below, then open ChatGPT.',true);$('quick-ai-status').classList.add('bad');$('quick-ai-status').textContent='Clipboard blocked. Copy the request from the opened text box below, then tap 2 · OPEN CHATGPT.';}}
+async function copyPrompt(){
+ let text;
+ try{text=copyPromptText();}catch(e){status('import-status',e.message,true);$('quick-ai-status').textContent=e.message;$('quick-ai-status').classList.add('bad');document.getElementById('create-quest').scrollIntoView({behavior:'smooth',block:'start'});return;}
+ try{if(!navigator.clipboard?.writeText)throw Error('Clipboard is unavailable');await navigator.clipboard.writeText(text);promptPrepared=true;$('prompt-fallback').classList.add('hidden');status('import-status','✓ Copied! Open ChatGPT, paste and send, then copy all 15 questions back here.');$('quick-ai-status').classList.remove('bad');$('quick-ai-status').textContent='✓ Copied! Now tap 2 · OPEN CHATGPT.';}catch(e){promptPrepared=true;offerManualPrompt(text);status('import-status','Your browser blocked automatic copying. Select and copy the task shown below, then open ChatGPT.',true);$('quick-ai-status').classList.add('bad');$('quick-ai-status').textContent='Clipboard blocked. Copy the request from the opened text box below, then tap 2 · OPEN CHATGPT.';}
+}
 // Mobile ChatGPT handoff: use the SAME browser tab so Back returns to the
 // saved creator draft. Native ChatGPT app handoff uses the iPhone app switcher.
 const AI_RETURN_KEY='iqquest_chatgpt_return_v1';
-$('open-chatgpt-step').addEventListener('click',()=>{
+$('open-chatgpt-step').addEventListener('click',event=>{
+ if(!promptPrepared){event.preventDefault();status('import-status','First tap 1 · COPY CHATGPT REQUEST above. This prepares your exact topic, title and difficulty.',true);$('ai-generate-one').focus();return;}
  saveSilent();
  try{sessionStorage.setItem(AI_RETURN_KEY,'1');}catch(_e){}
  try{history.replaceState(history.state,'',new URL('#ai-builder',location.href));}catch(_e){}
@@ -1007,14 +1066,14 @@ function showAiReturnHelp(){
  let returning=false;
  try{returning=sessionStorage.getItem(AI_RETURN_KEY)==='1';if(returning)sessionStorage.removeItem(AI_RETURN_KEY);}catch(_e){}
  if(!returning)return;
- status('import-status','✓ Welcome back to IQ QUEST! Copy all 15 answers in ChatGPT, then tap 3 · PASTE & FILL MY 15 QUESTIONS. If clipboard access is blocked, hold inside the answer box and choose Paste.');
+ status('import-status','✓ Welcome back to IQ QUEST! Copy the complete 15-question answer from ChatGPT, then tap 3 · USE MY 15 QUESTIONS. If automatic paste is blocked, hold inside the answer box and choose Paste.');
  $('chatgpt-json').scrollIntoView({behavior:'auto',block:'center'});
 }
 window.addEventListener('pageshow',showAiReturnHelp);
 document.addEventListener('visibilitychange',()=>{if(!document.hidden)showAiReturnHelp();});
 if(new URLSearchParams(location.search).get('from')==='chatgpt'){
  $('chatgpt-return-banner').classList.remove('hidden');
- status('import-status','✓ You returned from ChatGPT. Paste its full 15-question reply and press 3 · PASTE & FILL MY 15 QUESTIONS.');
+ status('import-status','✓ You returned from ChatGPT. Paste its full 15-question reply and press 3 · USE MY 15 QUESTIONS.');
 }
 async function improveWithChatGPT(){
  const d=safeDraft();
@@ -1038,7 +1097,7 @@ function checkAiResponse(){
  try{
   const parsed=IQQuest.readImport($('chatgpt-json').value,safeDraft());
   const notice=IQQuest.importNotice?' '+IQQuest.importNotice:'';
-  status('import-status','✓ VALID: '+parsed.levels.length+' questions found, from “'+parsed.levels[0].title+'” to “'+parsed.levels[14].title+'”.'+notice+' Existing editor questions have NOT been changed. You can now tap FILL MY 15 QUESTIONS.');
+  status('import-status','✓ VALID: '+parsed.levels.length+' questions found, from “'+parsed.levels[0].title+'” to “'+parsed.levels[14].title+'”.'+notice+' Existing editor questions have NOT been changed. You can now tap USE MY 15 QUESTIONS.');
  }catch(e){status('import-status','NOT READY · '+String(e?.message||e)+' Your existing editor questions have NOT been changed.',true);}
 }
 
@@ -1052,11 +1111,12 @@ function importResponse(){
   // In that case the complete imported JSON must restore the quest metadata.
   // Ordinary same-editor imports continue keeping the current editor settings.
   const returnedFromChatGPT=new URLSearchParams(location.search).get('from')==='chatgpt';
-  const data=returnedFromChatGPT?parsed:{...parsed,title:existing.title,creator:existing.creator,theme:existing.theme,difficulty:existing.difficulty};
+  const data=returnedFromChatGPT?parsed:{...parsed,title:$('quest-name').value.trim()||parsed.title,creator:$('community-name').value.trim()||parsed.creator,theme:$('quest-theme').value.trim()||parsed.theme,difficulty:existing.difficulty};
   // The user requested a one-tap import. The full previous draft is backed up for Undo before replacing anything.
   importUndo=clone(existing);
   try{localStorage.setItem(IMPORT_BACKUP_KEY,JSON.stringify(existing));}catch(e){console.warn('Import backup could not be persisted',e)}
   loadData(data,false);
+  document.getElementById('question-review').open=true;
   $('chatgpt-json').value='';
   $('undo-ai-import').classList.remove('hidden');
   $('editor-count').textContent='✓ 15 AI QUESTIONS IMPORTED';
@@ -1069,19 +1129,20 @@ async function pasteAi(){try{
  const text=await navigator.clipboard.readText();
  if(!text.trim())throw Error('The clipboard is empty');
  $('chatgpt-json').value=text;
- status('import-status','✓ Response pasted. Now tap FILL MY 15 QUESTIONS.');
+ status('import-status','✓ Response pasted. Now tap USE MY 15 QUESTIONS.');
 }catch(e){status('import-status','Automatic paste blocked by your browser. Tap and hold inside the JSON field, then choose Paste, or load a JSON file. '+String(e?.message||''),true);$('chatgpt-json').focus();}}
 async function importFile(event){
  const file=event.target.files?.[0];if(!file)return;
  try{if(file.size>400000)throw Error('File is too large. Choose a JSON text file under 400 KB.');
  $('chatgpt-json').value=await file.text();
- status('import-status','✓ Loaded '+file.name+'. Now tap FILL MY 15 QUESTIONS.');
+ status('import-status','✓ Loaded '+file.name+'. Now tap USE MY 15 QUESTIONS.');
  }catch(e){status('import-status','Could not load the JSON file: '+String(e?.message||e),true);}finally{event.target.value='';}
 }
 function undoAiImport(){
  try{const backup=importUndo||JSON.parse(localStorage.getItem(IMPORT_BACKUP_KEY)||'null');
  if(!backup)throw Error('No import backup is available');
- loadData(backup,false);importUndo=null;
+ restoreDraft(backup);importUndo=null;
+ document.getElementById('question-review').open=true;
  $('undo-ai-import').classList.add('hidden');
  status('import-status','✓ Your original 15 questions have been restored.');
  }catch(e){status('import-status','Restore failed: '+String(e?.message||e),true);}
@@ -1123,6 +1184,7 @@ $('load-example').addEventListener('click',()=>{
  importUndo=clone(previous);
  try{localStorage.setItem(IMPORT_BACKUP_KEY,JSON.stringify(previous));}catch(e){console.warn('Example backup unavailable',e)}
  loadData(IQQuest.DEMO,false);
+ document.getElementById('question-review').open=true;
  $('undo-ai-import').classList.remove('hidden');
  status('import-status','✓ 15 example puzzles loaded. Your previous draft has been saved for Undo.');
  document.getElementById('level-question').closest('.studio-panel').scrollIntoView({behavior:'smooth',block:'start'});
@@ -1143,6 +1205,7 @@ async function loadPreparedQuest(filename,statusId='prepared-quest-status'){
   importUndo=before;
   try{localStorage.setItem(IMPORT_BACKUP_KEY,JSON.stringify(before));}catch(e){console.warn('Prepared quest undo backup storage unavailable',e)}
   loadData(prepared,false);
+  document.getElementById('question-review').open=true;
   $('undo-ai-import').classList.remove('hidden');
   status(statusId,'✓ '+prepared.title+' loaded. All '+prepared.levels.length+' questions are editable. Next: review, TEST YOUR QUEST FREE, then decide whether to publish on Devnet.');
   status('import-status','✓ '+prepared.title+' imported. The earlier draft is saved for Undo. No wallet was connected.');
@@ -1152,6 +1215,15 @@ async function loadPreparedQuest(filename,statusId='prepared-quest-status'){
 $('load-easy-treasure').addEventListener('click',()=>{void loadPreparedQuest('lost-solana-easy.json');});
 $('load-neon-vault').addEventListener('click',()=>{void loadPreparedQuest('neon-cipher-vault.json');});
 $('load-clockwork').addEventListener('click',()=>{void loadPreparedQuest('clockwork-observatory.json');});
+$('reset-quest-draft').addEventListener('click',()=>{
+ if(!confirm('Start a new empty quest? Your current questions will be backed up first.'))return;
+ const previous=clone(safeDraft());importUndo=previous;
+ try{localStorage.setItem(IMPORT_BACKUP_KEY,JSON.stringify(previous));}catch(e){status('draft-status','Cannot safely start a new quest: this browser blocked the backup. Your existing questions have NOT been erased.',true);return;}
+ loadFreshDraft();$('undo-ai-import').classList.remove('hidden');
+ status('import-status','✓ Started a fresh 15-question draft. Your previous questions can be restored with UNDO LAST IMPORT.');
+ status('draft-status','✓ New empty draft ready. Start with a title and topic in Step 1.');
+ document.getElementById('create-quest').scrollIntoView({behavior:'smooth',block:'start'});
+});
 // The editor auto-saves. Manual download/save controls are intentionally not shown.
 $('preview-game').addEventListener('click',previewGame);
 try{if(localStorage.getItem(IMPORT_BACKUP_KEY))$('undo-ai-import').classList.remove('hidden');}catch(e){}
@@ -1171,10 +1243,14 @@ try{
      while(rebuilt.levels.length<15)rebuilt.levels.push(defaultLevel(rebuilt.levels.length));
      loadData(rebuilt,false);
      status('draft-status','Your previous draft was backed up locally before adapting it to the new fixed 15-question format. Please review and export your draft.');
-   } else loadData(legacy,false);
+   } else restoreDraft(legacy);
    if(hadStory)status('draft-status','✓ Story removed; your older draft was backed up locally. IMPORTANT: Review all 15 questions to ensure every needed clue appears in the QUESTION before publishing.');
- } else loadData(IQQuest.DEMO,false);
-}catch(e){console.warn('Draft could not be restored',e);loadData(IQQuest.DEMO,false);status('draft-status','Previous draft could not be loaded: '+e.message,true)}
+ } else loadFreshDraft();
+}catch(e){
+ console.warn('Draft could not be restored',e);
+ try{const raw=localStorage.getItem(DRAFT_KEY)||localStorage.getItem('iqquest_v31_creator_draft');if(raw)localStorage.setItem(DRAFT_KEY+'_failed_restore_backup_v536',raw);}catch(_e){}
+ loadFreshDraft();status('draft-status','Previous draft could not be loaded. If it contains unfinished work, ask for recovery help before publishing: '+e.message,true);
+}
 })();
 </script>
 <script>
