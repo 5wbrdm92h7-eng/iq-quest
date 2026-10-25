@@ -370,10 +370,15 @@ details.advanced-box[open]>summary{color:#adffb8;margin-bottom:13px}
 .creator-simple .top-links .nav-play{display:inline-flex!important;align-items:center;justify-content:center;padding:10px 13px;border:1px solid #719f86;border-radius:10px;color:#d6f8df;white-space:nowrap}
 .creator-simple .top-links .nav-play:hover{border-color:#5bf98a;color:#5bf98a}
 @media(max-width:740px){.creator-simple .top-links .nav-play{font-size:11px;padding:7px 10px}}
+/* V5.32 · Matching player/creator header and a compact creator invitation. */
+.page-tagline{margin:13px 0 0;font-family:Georgia,"Times New Roman",serif;font-size:clamp(18px,3vw,24px);line-height:1.35;font-weight:700;color:#c8ffd0;letter-spacing:0;text-shadow:0 0 13px #38dd6740}
+.creator-simple #studio{margin-top:15px}
+@media(max-width:740px){.page-tagline{margin:12px 0 0;font-size:18px}}
 </style></head>
 <body class="creator-simple" data-page="creator">
   <div class="site-shell">
     <header class="topbar"><div class="brand-cluster"><a class="wordmark" href="index.html" aria-label="IQ Quest home"><span class="wordmark-iq">IQ</span><span class="wordmark-quest">QUEST</span></a><span class="onchain-promise" aria-label="Quest content is stored on Solana Devnet; full onchain gameplay is planned">QUESTS ONCHAIN · DEVNET<small>FULL ONCHAIN · PLANNED</small></span><a class="brand-official-x" href="https://x.com/IQLabsOfficial" target="_blank" rel="noopener noreferrer" aria-label="Open IQ Labs official profile on X">↗ IQ LABS ON X · @IQLabsOfficial</a></div><nav class="top-links" aria-label="Main navigation"><a class="nav-play" href="index.html#quest-entry-options">← PLAY FREE GAMES</a><a href="#studio">Creator Studio</a><a href="imprint.html">Imprint</a></nav></header>
+    <h1 class="page-tagline">Your quest. Your community's challenge.</h1>
     <div class="quick-benefits" aria-label="Creator publication is planned at 0.03 SOL plus network and IQ Labs storage fees; playing is free"><span class="benefit-creator">✦ <strong>CREATORS · PUBLISH 0.03 SOL + FEES</strong> <small>(COMING SOON)</small></span><span class="benefit-play">✦ <strong>PLAY FOR FREE</strong></span><span class="benefit-battle">⚔ <strong>BATTLE WITH FRIENDS ON X</strong></span></div>
     <main>
       <section class="hero hero-creator" aria-labelledby="creator-heading"><div class="hero-scrim"></div><div class="hero-content"><div class="eyebrow"><span class="diamond-dot">✦</span> BUILT FOR DEVS · CREATORS · COMMUNITIES</div><h1 id="creator-heading">CREATE YOUR <span class="gold">MYSTERY,</span><span class="creator-hero-subtitle">ENTERTAIN YOUR COMMUNITY!</span></h1><p class="lead">Create 15 mysteries. Challenge your community to beat the clock and share their results on X.</p><div class="hero-buttons"><a class="btn btn-green" href="#studio">START CREATING <span aria-hidden="true">↗</span></a><a class="btn btn-glass" href="index.html">PLAY FREE</a></div><div class="hero-facts"><span>✧ AI-assisted content</span><span>◇ 3 difficulty levels</span><span>♢ Players free</span></div></div><div class="hero-corner">BUILD THE NEXT LEGEND</div></section>
@@ -402,7 +407,7 @@ details.advanced-box[open]>summary{color:#adffb8;margin-bottom:13px}
       <section id="studio" class="studio-layout">
         <div class="studio-main">
           <div class="simple-journey" aria-label="Build your adventure in three steps">
-            <div class="section-kicker">IQ QUEST · SIMPLE CREATOR · POWERED BY IQ LABS</div>
+            <div class="section-kicker">CREATE AN ONCHAIN QUEST · POWERED BY IQ LABS</div>
             <h2>Create · Test · Publish</h2>
             <p><strong>1. Create</strong> your 15 questions. <strong>2. Test</strong> them for free. <strong>3. Publish</strong> when ready. No wallet is needed until step 3. Paid Mainnet publishing is coming later; the current Devnet test uses test-SOL only.</p>
             <div class="flow-tiles"><div class="flow-tile"><b>1</b>Create 15 puzzles</div><div class="flow-tile"><b>2</b>Test free</div><div class="flow-tile"><b>3</b>Publish onchain</div></div>
@@ -440,10 +445,10 @@ details.advanced-box[open]>summary{color:#adffb8;margin-bottom:13px}
           </details>
           <div class="panel studio-panel">
             <div class="panel-topline"><span class="section-kicker">STEP 1 · CREATE YOUR QUEST</span><span class="status-dot">DRAFT · NO PAYMENT</span></div>
-            <h2>Describe your mystery</h2><p class="section-intro">Name your adventure, describe its idea and choose Easy, Medium or Hard. You can edit everything after ChatGPT creates the puzzles.</p>
+            <h2>Describe your mystery</h2><p class="section-intro">Challenge your friends and community with 15 puzzles of your own. Name your adventure, choose a topic and select Easy, Medium or Hard. You can edit everything after ChatGPT creates the puzzles.</p>
             <div class="form-group"><label for="quest-name">Adventure title</label><input id="quest-name" maxlength="100" value="The Lost Solana Treasure"></div>
             <div class="form-group"><label for="community-name">Creator / community name</label><input id="community-name" maxlength="70" placeholder="e.g. Solana Builders Club" value="Solana Adventurers"></div>
-            <div class="form-group"><label for="quest-theme">Your mystery theme</label><textarea id="quest-theme" rows="3" maxlength="500">An ancient jungle temple filled with forgotten runes, mysterious doors and the lost Solana treasure.</textarea></div>
+            <div class="form-group"><label for="quest-theme">Your topic or idea</label><textarea id="quest-theme" rows="3" maxlength="500" placeholder="e.g. Space, football, dinosaurs or ancient Egypt">An ancient jungle temple filled with forgotten runes, mysterious doors and the lost Solana treasure.</textarea><p class="tiny-note">Even one word such as <strong>Space</strong> or <strong>Weltraum</strong> is enough. Replace the temple example and change the title above if you like. ChatGPT creates <strong>15 new puzzles with hints and answers</strong> based on your topic. Nothing is limited to our example questions.</p></div>
             <div class="form-group"><span class="field-label">Difficulty</span><div class="choice-grid" id="difficulty-options" role="group" aria-label="Quest difficulty"><button type="button" data-difficulty="Easy"><strong>✧ EASY</strong><small>5–9 min · real puzzles</small></button><button type="button" data-difficulty="Medium" class="selected"><strong>◇ MEDIUM</strong><small>9–18 min · two-step logic</small></button><button type="button" data-difficulty="Hard"><strong>✦ HARD</strong><small>15–30 min · linked ciphers</small></button></div></div>
             <div class="form-group"><span class="field-label">Questions per quest</span><div class="notice" style="display:block;position:static;padding:14px 16px;border-radius:10px;background:#152b23;color:#e5f4d5;border:1px solid #416c4d"><strong>15 MYSTERIES · FIXED</strong><br><span style="font-size:12px">Fifteen levels, one non-trivial puzzle each. Estimates depend on difficulty; hints add +1 minute. ChatGPT builds difficulty when you generate or revise, not by simply tapping a different setting.</span></div></div>
           </div>
