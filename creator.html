@@ -457,11 +457,17 @@ details.advanced-box[open]>summary{color:#adffb8;margin-bottom:13px}
               <p><strong>Step 2 of the test:</strong> After the Devnet-only payment rehearsal above succeeds, the IQ Labs SDK can write your complete validated quest to Solana <strong>Devnet</strong>, recording the test receipt. You can opt in below to start the upload automatically after verification. Your selected wallet will still ask you to approve the necessary Devnet transactions. After exact onchain readback and test-payment verification, you get a shareable player link. Friends play free, without connecting a wallet.</p>
               <p><strong>Not a paid Mainnet release.</strong> The 0.002 Devnet test SOL is not a real $3.99 platform payment. Devnet SOL has no monetary value. IQ QUEST now losslessly compresses the complete quest before uploading, aiming for fewer, smaller IQ Labs transactions. All 15 questions and answers are restored and verified on readback. Additional Devnet network / protocol fees and several Phantom approvals may still be needed. Review each wallet prompt.</p>
               <p>Selected plan is recorded as metadata only. A public community directory and real paid Mainnet checkout are not live yet.</p>
-              <label class="publish-consent"><input type="checkbox" id="devnet-accept"><span>I will use <strong>Solana Devnet</strong> in my chosen wallet. I understand the questions, answers and hints are publicly readable onchain and may be permanent. I will review every wallet request.</span></label>
+              <label class="publish-consent"><input type="checkbox" id="devnet-accept"><span>I will use <strong>Solana Devnet</strong> in my chosen wallet. I understand the questions, answers and hints are publicly readable onchain and may be permanent. <strong>I understand the creator must approve several separate Phantom storage transactions, with possible fees on each one.</strong> I will review every wallet request.</span></label>
               <label class="publish-consent"><input type="checkbox" id="devnet-auto-publish"><span><strong>Automatically start publication after a verified Devnet test payment.</strong> I authorize IQ QUEST to begin the public upload without another page-button click. Every wallet signing request still needs my approval. This setting applies to this page session only.</span></label>
               <div id="devnet-storage-only-box" style="padding:14px;margin:12px 0 19px;border:2px solid #77e594;border-radius:12px;background:#102a1d">
                 <h4 style="margin:0 0 5px;color:#c2ffce">◈ STORAGE-ONLY DEVNET TEST · NO PLATFORM PAYMENT</h4>
                 <p>Start a new story-free 15-question upload using safe 800-byte transactions. Your earlier 1-chunk test remains on Devnet and in a separate recovery record; it cannot be reused because the quest contents changed. <strong>No second 0.002 test SOL platform transfer.</strong> Phantom still asks for Devnet storage and network/protocol test-SOL approvals. This is not a paid Mainnet publication.</p>
+                <div role="note" aria-label="Important: multiple wallet approvals required" style="padding:14px 13px;margin:13px 0 16px;border:2px solid #f4c66c;border-radius:12px;background:#382a15;color:#ffecc4;box-shadow:0 0 18px #e8a94824">
+                  <strong style="display:block;font-size:14px;line-height:1.4;letter-spacing:.02em;color:#ffe08c">⚠ CREATOR: MULTIPLE PHANTOM APPROVALS REQUIRED</strong>
+                  <p style="margin:9px 0 6px;color:#ffe8bd;font-size:13px;line-height:1.65"><strong>Why?</strong> All 15 puzzles are stored onchain. Solana limits the size of each transaction, so IQ QUEST writes several small data chunks one after another.</p>
+                  <p style="margin:6px 0;color:#fff0c9;font-size:13px;line-height:1.65"><strong>Expect approximately 6 separate transaction confirmations</strong> for the included example (5 data chunks + 1 final registration). Larger quests can require up to 10 confirmations. Phantom may return you to IQ QUEST between approvals; tap the same storage test button to safely resume.</p>
+                  <p style="margin:6px 0 0;color:#ffe8bd;font-size:12px;line-height:1.65"><strong>Each approval can incur a separate IQ Labs storage/protocol and Solana network fee.</strong> This test uses Devnet test SOL, not real money. Future Mainnet publication would cost real SOL in addition to the planned platform fee. <strong>Players do not connect wallets or sign these transactions.</strong></p>
+                </div>
                 <button type="button" class="btn btn-green" id="publish-storage-devnet" disabled>◈ TEST ONCHAIN STORAGE · NO PAYMENT</button>
               </div>
               <button type="button" class="btn btn-green" id="publish-iq-devnet" disabled>◈ PUBLISH TO IQ LABS DEVNET · TEST SOL ONLY</button>
@@ -479,6 +485,20 @@ details.advanced-box[open]>summary{color:#adffb8;margin-bottom:13px}
       </section>
     </main>
     <footer class="footer"><span><span class="green">IQ</span> QUEST · Creator Studio <strong>V5.16 BETA · NO STORY</strong> · Phantom Devnet test; Mainnet payments OFF</span><nav aria-label="Legal information" style="display:flex;gap:13px;flex-wrap:wrap"><a href="imprint.html" style="color:#b5fbc1;text-decoration:underline">Imprint</a><a href="privacy.html" style="color:#b5fbc1;text-decoration:underline">Privacy</a><a href="withdrawal.html" style="color:#b5fbc1;text-decoration:underline">Withdrawal info</a></nav><span class="footer-iqlabs"><span><b>IQ LABS SDK · DEVNET TEST</b> · Onchain storage &amp; more <span class="footer-soon">(integration in progress)</span></span><a href="https://x.com/IQLabsOfficial" target="_blank" rel="noopener noreferrer" aria-label="IQ Labs official X profile">X @IQLabsOfficial ↗</a></span></footer>
+  </div>
+  <div id="verified-onchain-modal" class="hidden" role="dialog" aria-modal="true" aria-labelledby="verified-onchain-title" style="position:fixed;inset:0;z-index:2000;background:#000d;display:flex;align-items:center;justify-content:center;padding:18px;overflow-y:auto">
+    <div style="width:min(100%,540px);max-height:90vh;overflow-y:auto;border:2px solid #70f68c;border-radius:19px;background:linear-gradient(155deg,#173b28,#091c1a 75%);padding:25px 21px;box-shadow:0 22px 80px #000c,0 0 40px #38fc5840;color:#e6ffe8;text-align:center">
+      <div style="font-size:49px;color:#7aff9d;line-height:1.1" aria-hidden="true">✓</div>
+      <div style="margin:9px 0;color:#a5ffb6;font-size:11px;font-weight:900;letter-spacing:.12em">SOLANA DEVNET · IQ LABS VERIFIED</div>
+      <h2 id="verified-onchain-title" style="margin:10px 0;color:#e8d69c;font-size:clamp(27px,6vw,37px);line-height:1.2">Your Quest Is Onchain!</h2>
+      <p id="verified-onchain-description" style="font-size:14px;line-height:1.65;color:#d7f6dd;margin:10px 0 19px">All 15 questions, hints and answers were read back from Solana Devnet and verified. Your playable link is ready.</p>
+      <div style="margin:10px 0 20px;padding:11px;border:1px solid #54ac6b;border-radius:10px;background:#143322;color:#baffc5;font-size:13px;font-weight:850">✓ 15 / 15 PUZZLES VERIFIED ONCHAIN</div>
+      <a id="verified-onchain-play" class="btn btn-green" style="display:flex;width:100%;font-size:13px;margin:10px 0" target="_blank" rel="noopener noreferrer">▶ OPEN MY PUBLISHED QUEST ↗</a>
+      <button type="button" id="verified-onchain-copy" class="btn btn-outline" style="width:100%;font-size:13px;margin:7px 0">COPY PLAYER LINK</button>
+      <a id="verified-onchain-explorer" style="display:block;color:#a9ffba;text-decoration:underline;margin:13px 0;font-size:12px" target="_blank" rel="noopener noreferrer">Verify transaction in Solana Explorer ↗</a>
+      <p style="font-size:11px;color:#cddfc8;line-height:1.5;margin:13px 0">This confirms the Devnet storage test only. Real Mainnet sales are not enabled. Players do not need a wallet.</p>
+      <button type="button" id="verified-onchain-close" class="btn btn-glass" style="width:100%;margin:7px 0 0">CLOSE · BACK TO CREATOR</button>
+    </div>
   </div>
   <script>(function(){
 'use strict';
@@ -971,10 +991,30 @@ import {getSavedMobileJob,DEVNET_STORAGE_ONLY_JOB_KEY,DEVNET_STORY_FREE_JOB_KEY}
 const $=id=>document.getElementById(id);
 const publish=$('publish-iq-devnet'),storageTest=$('publish-storage-devnet'),consent=$('devnet-accept'),auto=$('devnet-auto-publish'),verify=$('verify-iq-devnet');
 const progress=$('devnet-publish-status'),links=$('devnet-links');
+const successModal=$('verified-onchain-modal');
 let busy=false,lastUrl='';
 const completionKey='iqquest_devnet_completed_v50';
 const storageCompletionKey='iqquest_devnet_storage_only_completed_v516_story_free';
 function setStatus(text){progress.textContent=String(text);}
+function closeVerifiedModal(){successModal.classList.add('hidden');}
+$('verified-onchain-close').addEventListener('click',closeVerifiedModal);
+successModal.addEventListener('click',event=>{if(event.target===successModal)closeVerifiedModal();});
+window.addEventListener('keydown',event=>{if(event.key==='Escape'&&!successModal.classList.contains('hidden'))closeVerifiedModal();});
+$('verified-onchain-copy').addEventListener('click',async()=>{
+ if(!lastUrl)return;
+ try{await navigator.clipboard.writeText(lastUrl);$('verified-onchain-copy').textContent='✓ PLAYER LINK COPIED';}
+ catch(_e){prompt('Copy your verified quest link:',lastUrl);}
+});
+function openVerifiedModal(title,sig){
+ // This must only be invoked after the complete, independently verified
+ // onchain readback. A mere Phantom approval is never treated as success.
+ $('verified-onchain-description').textContent='“'+title+'” is published! All 15 questions, hints and answers were independently read back from IQ Labs on Solana Devnet and verified. Your player link is ready.';
+ $('verified-onchain-play').href=lastUrl;
+ $('verified-onchain-explorer').href='https://explorer.solana.com/tx/'+encodeURIComponent(sig)+'?cluster=devnet';
+ $('verified-onchain-copy').textContent='COPY PLAYER LINK';
+ successModal.classList.remove('hidden');
+ $('verified-onchain-close').focus();
+}
 function enable(){publish.disabled=busy||!consent.checked;storageTest.disabled=busy||!consent.checked;verify.disabled=busy;}
 consent.addEventListener('change',enable);enable();
 $('shortcut-storage-only').addEventListener('click',()=>{
@@ -1009,6 +1049,7 @@ function showPublished(sig,title,verified,storageOnly=false,stats=''){
   $('publish-success-detail').textContent='All 15 questions were verified from IQ Labs on Solana Devnet. This is an unpaid storage test, NOT a paid Mainnet quest. Friends can play free with the link below.';
  }
  setStatus((verified?'✓ Verified all 15 puzzles from IQ Labs Devnet.':'Devnet inscription exists; verification still pending.')+(storageOnly?' STORAGE-ONLY DEVNET TEST — NO PLATFORM PAYMENT.':' Payment-bound Devnet test.')+(stats?'\n'+stats:'')+'\nTransaction: '+sig+'\nYour player link is ready below.');
+ if(verified)openVerifiedModal(title,sig);
 }
 async function checkedDraft(){
  const get=window.IQQuestEditorGetDraft;
