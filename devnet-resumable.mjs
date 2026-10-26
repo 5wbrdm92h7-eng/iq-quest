@@ -3,7 +3,7 @@
  * automatically after a reload; the user must return and explicitly Publish.
  */
 import {sha256Hex} from './payments/order-core.mjs';
-import {prepareAtomicDevnetFinal,verifyAtomicDevnetFinal,ATOMIC_DEVNET_PRICE_LAMPORTS} from './payments/atomic-final-devnet.mjs?v=543';
+import {prepareAtomicDevnetFinal,verifyAtomicDevnetFinal,ATOMIC_DEVNET_PRICE_LAMPORTS} from './payments/atomic-final-devnet.mjs?v=544';
 
 const JOB_KEY='iqquest_devnet_mobile_upload_v1';
 export const DEVNET_STORAGE_ONLY_JOB_KEY='iqquest_devnet_mobile_storage_only_v515';

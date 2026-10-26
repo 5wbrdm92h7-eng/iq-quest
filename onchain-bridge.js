@@ -1,7 +1,7 @@
 /* IQ QUEST V5.16 — story-free 800-byte Phantom storage test; Mainnet stays disabled. */
 import {MAINNET_CLIENT_ENABLED} from './payments/client-bridge.mjs';
 import {sha256Hex,verifyOrderInputs} from './payments/order-core.mjs';
-import {ATOMIC_DEVNET_PRICE_LAMPORTS,ATOMIC_DEVNET_RECIPIENT,verifyAtomicDevnetFinal} from './payments/atomic-final-devnet.mjs?v=543';
+import {ATOMIC_DEVNET_PRICE_LAMPORTS,ATOMIC_DEVNET_RECIPIENT,verifyAtomicDevnetFinal} from './payments/atomic-final-devnet.mjs?v=544';
 const DEVNET_RPC='https://api.devnet.solana.com';
 const MAINNET_RPC='https://api.mainnet-beta.solana.com';
 // Devnet must not depend on the server-only Mainnet publication module.
@@ -122,7 +122,7 @@ export async function verifyAtomicDevnetPublication(signature){
  const program=new web3.PublicKey(IQ_PROGRAM);
  const tx=await connection.getParsedTransaction(signature,{commitment:'finalized',maxSupportedTransactionVersion:0});
  if(!tx||tx.meta?.err)throw Error('The final Devnet transaction is not yet available as a finalized receipt. Do not pay again.');
- const {decodeIqInstruction}=await import('./devnet-resumable.mjs?v=543');
+ const {decodeIqInstruction}=await import('./devnet-resumable.mjs?v=544');
  const finals=(tx.transaction?.message?.instructions||[])
   .map(ix=>decodeIqInstruction(ix,program)).filter(item=>item?.type==='final');
  if(finals.length!==1)throw Error('The signed IQ Labs inventory registration was not found exactly once.');
@@ -332,7 +332,7 @@ export async function publishQuestOnchain({draft,provider,plan='community',netwo
    // Phantom mobile can reload the in-app page after signing. By letting the
    // wallet broadcast, then recording/recovering each SDK-built chunk onchain,
    // a page reset cannot silently discard a signed-but-unsent transaction.
-   const {publishResumableDevnet,DEVNET_STORY_FREE_JOB_KEY,devnetQuestJobKey,getSavedMobileJob}=await import('./devnet-resumable.mjs?v=543');
+   const {publishResumableDevnet,DEVNET_STORY_FREE_JOB_KEY,devnetQuestJobKey,getSavedMobileJob}=await import('./devnet-resumable.mjs?v=544');
    let storageJobKey;
    if(devnetStorageOnly||atomicDevnetFee){
      // New quests need independent resumable jobs. Never overwrite the
