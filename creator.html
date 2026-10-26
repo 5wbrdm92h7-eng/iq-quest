@@ -384,6 +384,15 @@ details.advanced-box[open]>summary{color:#adffb8;margin-bottom:13px}
 .quest-cover-guidance{font-size:11px;line-height:1.5;color:#bfdbc9;margin:8px 0}
 .quest-cover-guidance strong{color:#f7daa9}
 @media(max-width:460px){.quest-cover-actions{grid-template-columns:1fr}}
+/* V5.45 · One scrollable mobile success dialog; sharing is the primary action. */
+.verified-modal-overlay{position:fixed;inset:0;z-index:2000;background:#000d;display:flex;align-items:center;justify-content:center;padding:12px;overflow:hidden}
+.verified-modal-dialog{width:min(100%,540px);max-height:calc(100dvh - 24px);overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;border:2px solid #70f68c;border-radius:19px;background:linear-gradient(155deg,#173b28,#091c1a 75%);padding:17px 19px 22px;box-shadow:0 22px 80px #000c,0 0 40px #38fc5840;color:#e6ffe8;text-align:center}
+.verified-modal-header{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:5px;color:#a5ffb6;font-size:11px;font-weight:900;letter-spacing:.1em;text-align:left}
+.verified-modal-header button{flex:0 0 auto;min-height:40px;border:1px solid #85d9a1;border-radius:9px;padding:7px 12px;background:#123c2b;color:#f1fff2;font-size:12px;font-weight:900}
+.cover-share-primary{display:flex;width:100%;min-height:56px;font-size:15px;margin:12px 0 5px}
+.cover-share-caption{font-size:12px;line-height:1.55;color:#d9f9dd;margin:4px 0 10px}
+.cover-download-secondary{display:flex;width:100%;min-height:40px;font-size:12px;margin:10px 0 0}
+@media(max-width:460px){.verified-modal-overlay{padding:8px}.verified-modal-dialog{padding:14px 13px 20px;max-height:calc(100dvh - 16px)}.verified-modal-dialog .quest-cover-preview{margin:10px 0}}
 .simple-journey h2{font-size:33px;color:#ffe4a4;margin:7px 0 9px}
 .simple-journey .flow-tiles{gap:11px;margin-top:19px}
 .simple-journey .flow-tile{min-height:122px;padding:14px 13px;border:2px solid #6ee88a;background:linear-gradient(155deg,#1e5639,#113624);color:#effff1;font-size:15px;line-height:1.3;box-shadow:inset 0 0 14px #73ff8b16,0 0 18px #62ff7e25}
@@ -505,6 +514,13 @@ details.advanced-box[open]>summary{color:#adffb8;margin-bottom:13px}
 .creator-publish-safety details p{font-size:13px!important;margin:10px 0 0}
 .creator-simple #devnet-publish-primary #devnet-storage-only-box{margin:7px 0 10px!important;padding:12px!important}
 @media(max-width:550px){.creator-start-buttons{grid-template-columns:1fr}.creator-simple .studio-panel,.creator-simple .publish-panel{padding:18px}.creator-simple .panel-topline{align-items:flex-start;flex-wrap:wrap;gap:8px}.creator-simple .status-dot{white-space:normal;font-size:11px}}
+/* V5.46 · Chosen Neon Premium: the SLOGANS below IQ QUEST are the focus. */
+.wordmark-iq{text-shadow:0 0 24px #3eff7b83,0 0 8px #56f86e70}
+.page-tagline{font-size:clamp(42px,5.2vw,62px);font-weight:900;line-height:1.12;letter-spacing:-.018em;max-width:1120px;margin:22px 0 15px;color:#daffe1;text-shadow:0 0 21px #45f98655;text-wrap:balance}
+.page-tagline::after{content:"";display:block;width:min(520px,82vw);height:3px;margin:15px 0 3px;border-radius:4px;background:linear-gradient(90deg,#61ff87,#f3d690,transparent);box-shadow:0 0 15px #60f9875a}
+.page-tagline .tagline-subline{font-size:.78em;line-height:1.12;margin-top:8px;color:#f3dba7}
+@media(max-width:740px){.page-tagline{font-size:clamp(38px,10.2vw,48px);line-height:1.12;margin:17px 0 12px}.page-tagline::after{margin-top:12px}}
+@media(max-width:360px){.page-tagline{font-size:38px}}
 </style></head>
 <body class="creator-simple" data-page="creator">
   <div class="site-shell">
@@ -518,7 +534,7 @@ details.advanced-box[open]>summary{color:#adffb8;margin-bottom:13px}
       link.href=intent.toString();
     })();
     </script>
-    <h1 class="page-tagline">Create your own quest<span class="tagline-subline">Your community’s challenge</span></h1>
+    <h1 class="page-tagline">Create your own quest<span class="tagline-subline">Challenge your community.</span></h1>
     <div class="quick-benefits" aria-label="Creator publication is planned at 0.03 SOL plus network and IQ Labs storage fees; playing is free"><span class="benefit-creator">✦ <strong>CREATORS · PUBLISH 0.03 SOL + FEES</strong> <small>(COMING SOON)</small></span><span class="benefit-play">✦ <strong>PLAY FOR FREE</strong></span><span class="benefit-battle">⚔ <strong>BATTLE WITH FRIENDS ON X</strong></span></div>
     <main>
       <section class="hero hero-creator" aria-labelledby="creator-heading"><div class="hero-scrim"></div><div class="hero-content"><div class="eyebrow"><span class="diamond-dot">✦</span> BUILT FOR DEVS · CREATORS · COMMUNITIES</div><h1 id="creator-heading">CREATE YOUR <span class="gold">MYSTERY,</span><span class="creator-hero-subtitle">ENTERTAIN YOUR COMMUNITY!</span></h1><p class="lead">Create 15 mysteries. Challenge your community to beat the clock and share their results on X.</p><div class="hero-buttons"><a class="btn btn-green" href="#studio">START CREATING <span aria-hidden="true">↗</span></a><a class="btn btn-glass" href="index.html">PLAY FREE</a></div><div class="hero-facts"><span>✧ AI-assisted content</span><span>◇ 3 difficulty levels</span><span>♢ Players free</span></div></div><div class="hero-corner">BUILD THE NEXT LEGEND</div></section>
@@ -628,7 +644,7 @@ details.advanced-box[open]>summary{color:#adffb8;margin-bottom:13px}
                 <button type="button" id="ai-generate-one" class="btn btn-green">1 · COPY CHATGPT REQUEST</button>
                 <div id="quick-ai-status" role="status" aria-live="polite"></div>
                 <div class="ai-next-step"><h3>2 · Let ChatGPT write the puzzles</h3><p>Open ChatGPT, tap <strong>Paste → Send</strong>. Wait for 15 questions, then <strong>copy the full answer</strong> and return to IQ QUEST.</p>
-                <a id="open-chatgpt-step" href="https://chatgpt.com/" class="btn btn-outline ai-open-link">2 · OPEN CHATGPT ↗</a><span class="ai-safety-note"><strong>On your phone:</strong> Tap the <strong>RETURN TO IQ QUEST</strong> link if ChatGPT includes it, or switch back to this browser tab. Your draft is saved on this device.</span></div><button type="button" id="copy-prompt" class="btn btn-outline hidden">COPY TASK AGAIN</button>
+                <a id="open-chatgpt-step" href="https://chatgpt.com/" class="btn btn-outline ai-open-link">2 · OPEN CHATGPT ↗</a><span class="ai-safety-note"><strong>On your phone:</strong> Below ChatGPT's JSON, look for the large <strong>↩ RETURN TO IQ QUEST CREATOR</strong> link. Tap it after copying the questions, or switch back to this browser tab. Your draft is saved on this device.</span></div><button type="button" id="copy-prompt" class="btn btn-outline hidden">COPY TASK AGAIN</button>
               </div>
               <div class="ai-simple-step">
                 <h3>3 · Bring your 15 puzzles back</h3>
@@ -780,10 +796,10 @@ details.advanced-box[open]>summary{color:#adffb8;margin-bottom:13px}
     </main>
     <footer class="footer"><span><span class="green">IQ</span> QUEST · Simple Creator · Devnet beta · Mainnet payments OFF</span><nav aria-label="Legal information" style="display:flex;gap:13px;flex-wrap:wrap"><a href="imprint.html" style="color:#b5fbc1;text-decoration:underline">Imprint</a><a href="privacy.html" style="color:#b5fbc1;text-decoration:underline">Privacy</a><a href="withdrawal.html" style="color:#b5fbc1;text-decoration:underline">Withdrawal info</a></nav><span class="footer-iqlabs"><span><b>POWERED BY IQ LABS · QUEST STORAGE ON DEVNET</b> · Full onchain platform planned</span><a href="https://x.com/IQLabsOfficial" target="_blank" rel="noopener noreferrer" aria-label="IQ Labs official X profile">X @IQLabsOfficial ↗</a></span></footer>
   </div>
-  <div id="verified-onchain-modal" class="hidden" role="dialog" aria-modal="true" aria-labelledby="verified-onchain-title" style="position:fixed;inset:0;z-index:2000;background:#000d;display:flex;align-items:center;justify-content:center;padding:18px;overflow-y:auto">
-    <div style="width:min(100%,540px);max-height:90vh;overflow-y:auto;border:2px solid #70f68c;border-radius:19px;background:linear-gradient(155deg,#173b28,#091c1a 75%);padding:25px 21px;box-shadow:0 22px 80px #000c,0 0 40px #38fc5840;color:#e6ffe8;text-align:center">
+  <div id="verified-onchain-modal" class="hidden verified-modal-overlay" role="dialog" aria-modal="true" aria-labelledby="verified-onchain-title">
+    <div class="verified-modal-dialog">
+      <div class="verified-modal-header"><span>SOLANA DEVNET · IQ LABS VERIFIED</span><button type="button" id="verified-onchain-close-top" aria-label="Close success window and return to Creator">✕ CLOSE</button></div>
       <div style="font-size:49px;color:#7aff9d;line-height:1.1" aria-hidden="true">✓</div>
-      <div style="margin:9px 0;color:#a5ffb6;font-size:11px;font-weight:900;letter-spacing:.12em">SOLANA DEVNET · IQ LABS VERIFIED</div>
       <h2 id="verified-onchain-title" style="margin:10px 0;color:#e8d69c;font-size:clamp(27px,6vw,37px);line-height:1.2">Your Quest Is Onchain!</h2>
       <p id="verified-onchain-description" style="font-size:14px;line-height:1.65;color:#d7f6dd;margin:10px 0 19px">All 15 questions, hints and answers were read back from Solana Devnet and verified. Your playable link is ready.</p>
       <div style="margin:10px 0 20px;padding:11px;border:1px solid #54ac6b;border-radius:10px;background:#143322;color:#baffc5;font-size:13px;font-weight:850">✓ 15 / 15 PUZZLES VERIFIED ONCHAIN</div>
@@ -791,10 +807,12 @@ details.advanced-box[open]>summary{color:#adffb8;margin-bottom:13px}
       <button type="button" id="verified-onchain-copy" class="btn btn-outline" style="width:100%;font-size:13px;margin:7px 0">COPY PLAYER LINK</button>
       <section aria-label="Personalised share image" style="margin:14px 0;padding:12px;border:1px solid #528f73;border-radius:13px;background:#0b231e">
         <strong style="font-size:13px;color:#f0deaa">YOUR PERSONAL X COVER</strong>
-        <canvas id="verified-x-cover-preview" class="quest-cover-preview" width="1200" height="630" role="img" aria-label="Personalised quest artwork with title and onchain information"></canvas>
-        <div class="quest-cover-actions"><button type="button" id="verified-x-cover-share" class="btn btn-green">↗ SHARE COVER + LINK</button><button type="button" id="verified-x-cover-download" class="btn btn-outline">↓ DOWNLOAD COVER</button></div>
-        <p class="quest-cover-guidance">In the share menu, swipe through the apps and choose X. If X isn't listed, download the image and <strong>attach it to your X post</strong>. The ordinary link preview still uses the general IQ QUEST image.</p>
+        <button type="button" id="verified-x-cover-share" class="btn btn-green cover-share-primary">↗ SHARE COVER + GAME LINK</button>
+        <p class="cover-share-caption">Opens your share menu. Choose X to share your own quest image and link.</p>
         <div id="verified-x-cover-status" role="status" aria-live="polite" class="small-status"></div>
+        <canvas id="verified-x-cover-preview" class="quest-cover-preview" width="1200" height="630" role="img" aria-label="Personalised quest artwork with title and onchain information"></canvas>
+        <button type="button" id="verified-x-cover-download" class="btn btn-outline cover-download-secondary">↓ DOWNLOAD PNG · OPTIONAL</button>
+        <p class="quest-cover-guidance">The download option may not save files in every wallet browser. For X, use <strong>SHARE COVER + GAME LINK</strong> above. The ordinary link preview still uses the general IQ QUEST image.</p>
       </section>
       <a id="verified-onchain-share-x" class="btn btn-gold" style="display:flex;width:100%;font-size:13px;margin:10px 0" target="_blank" rel="noopener noreferrer">⚔ SHARE LINK ON X · STANDARD PREVIEW ↗</a>
       <a id="verified-onchain-explorer" style="display:block;color:#a9ffba;text-decoration:underline;margin:13px 0;font-size:12px" target="_blank" rel="noopener noreferrer">Verify transaction in Solana Explorer ↗</a>
@@ -1112,9 +1130,14 @@ RETURN ONE VALID JSON OBJECT, with NO Markdown fence. Exactly this shape:
 
 The levels array MUST contain exactly 15 objects. If accepted answers have synonyms, put them into a single string separated by |, e.g. 'bronze | the bronze statue'. No extra JSON keys, especially no story. Valid JSON escaping only, no literal line breaks inside string values. Aim to keep the entire compact JSON below 6,500 UTF-8 bytes, without making the puzzles trivial. All clues MUST appear in q and all answer keys must be unambiguous. The creator will review before publication.
 
-IMPORTANT IPHONE RETURN STEP: Immediately AFTER the JSON object, on a separate line, output exactly this clickable Markdown link (not inside JSON):
+IMPORTANT IPHONE RETURN STEP: After the final closing brace of the JSON object, leave AT LEAST THREE COMPLETELY EMPTY LINES. Outside the JSON and outside all code fences, display this LARGE Markdown heading followed by the clickable Markdown link. Do NOT place this link inside a code block or on the same line as JSON:
+
+
+
+## ⬅️ TAP BELOW TO GO BACK TO IQ QUEST CREATOR
+
 [↩ RETURN TO IQ QUEST CREATOR](${returnLink})
-Do not add any other explanation. The creator will copy the JSON answer and tap this link to return to the editor. The IQ QUEST import safely ignores this link if the entire reply is pasted.`;
+Do not add any other explanation. Make this return link unmistakably separate from the JSON. The creator will copy the JSON answer and tap the large return link to return to the editor. The IQ QUEST import safely ignores these extra Markdown lines if the entire reply is pasted.`;
 }
 function offerManualPrompt(prompt){$('manual-ai-prompt').value=prompt;$('prompt-fallback').classList.remove('hidden');$('manual-ai-prompt').focus();$('manual-ai-prompt').select();}
 async function copyPrompt(){
@@ -1148,7 +1171,7 @@ async function improveWithChatGPT(){
  const d=safeDraft();
  const difficultyRule={Easy:'5–9 min, real one-step logic; never trivial',Medium:'9–18 min, 1–2 steps, 3 cross-level clues',Hard:'15–30 min, 2–4 steps, 4+ cross-level dependencies'}[d.difficulty];
  const returnLink=new URL('creator.html?from=chatgpt#ai-builder',location.href).href;
- const prompt='Act as a senior escape-room editor and strict puzzle verifier. Audit and IMPROVE the following IQ QUEST JSON. The creator chose '+d.difficulty+' difficulty ('+difficultyRule+'). All 15 puzzles must fit this standard. For EVERY level, independently recompute the intended answer using only its question and earlier levels. Fix ambiguous or unsolvable riddles; replace simplistic trivia, obvious arithmetic and repeat mechanisms. Do NOT add any story or narration. All necessary rules and clues must appear in q. Ensure Level 15 combines at least two earlier solved clues. Hints help without revealing solutions and cost +60 seconds in play. Return the complete, valid, corrected JSON with exactly 15 levels and keys v,title,creator,theme,difficulty,levels (each level: title,q,h,a). Do not add extra JSON keys. Difficulty must remain '+d.difficulty+'.\n\nQUEST TO REVISE:\n'+JSON.stringify(d)+'\n\nAfter the JSON, put this clickable link on its own line so I can return to IQ QUEST on my iPhone: [↩ RETURN TO IQ QUEST CREATOR]('+returnLink+'). Do not add other explanation.';
+ const prompt='Act as a senior escape-room editor and strict puzzle verifier. Audit and IMPROVE the following IQ QUEST JSON. The creator chose '+d.difficulty+' difficulty ('+difficultyRule+'). All 15 puzzles must fit this standard. For EVERY level, independently recompute the intended answer using only its question and earlier levels. Fix ambiguous or unsolvable riddles; replace simplistic trivia, obvious arithmetic and repeat mechanisms. Do NOT add any story or narration. All necessary rules and clues must appear in q. Ensure Level 15 combines at least two earlier solved clues. Hints help without revealing solutions and cost +60 seconds in play. Return the complete, valid, corrected JSON with exactly 15 levels and keys v,title,creator,theme,difficulty,levels (each level: title,q,h,a). Do not add extra JSON keys. Difficulty must remain '+d.difficulty+'.\n\nQUEST TO REVISE:\n'+JSON.stringify(d)+'\n\nAfter the completed JSON, leave THREE BLANK LINES, then show this big Markdown heading OUTSIDE any JSON or code fence: ## ⬅️ TAP BELOW TO GO BACK TO IQ QUEST CREATOR\n\n[↩ RETURN TO IQ QUEST CREATOR]('+returnLink+'). Do not add other explanation.';
  try {await navigator.clipboard.writeText(prompt);status('import-status','Difficulty review prompt copied! Open ChatGPT, paste it and import the improved JSON below.');}
  catch(e){offerManualPrompt(prompt);status('import-status','Select and copy the review prompt from the box below; the JSON import field is untouched.',true);}
 }
@@ -1424,7 +1447,7 @@ import {publishQuestDevnet,publishQuestDevnetStorageTest,publishQuestDevnetAtomi
 import {verifyDevnetPayment,questFingerprint} from './checkout-bridge.js';
 import {requestCheckoutWallet} from './wallet-bridge.js?v=514';
 import {getSavedMobileJob,DEVNET_STORAGE_ONLY_JOB_KEY,DEVNET_STORY_FREE_JOB_KEY} from './devnet-resumable.mjs?v=544';
-import {previewQuestCover,shareQuestCover,downloadQuestCover} from './quest-cover.mjs?v=540';
+import {previewQuestCover,shareQuestCover,downloadQuestCover} from './quest-cover.mjs?v=545';
 const $=id=>document.getElementById(id);
 const publish=$('publish-iq-devnet'),storageTest=$('publish-storage-devnet'),consent=$('devnet-accept'),auto=$('devnet-auto-publish'),verify=$('verify-iq-devnet');
 const atomicButton=$('atomic-devnet-publish'),atomicConsent=$('atomic-devnet-consent'),atomicStatus=$('atomic-devnet-status');
@@ -1446,6 +1469,7 @@ try{
 function setStatus(text){progress.textContent=String(text);}
 function closeVerifiedModal(){successModal.classList.add('hidden');}
 $('verified-onchain-close').addEventListener('click',closeVerifiedModal);
+$('verified-onchain-close-top').addEventListener('click',closeVerifiedModal);
 successModal.addEventListener('click',event=>{if(event.target===successModal)closeVerifiedModal();});
 window.addEventListener('keydown',event=>{if(event.key==='Escape'&&!successModal.classList.contains('hidden'))closeVerifiedModal();});
 $('verified-onchain-copy').addEventListener('click',async()=>{
@@ -1463,18 +1487,19 @@ function openVerifiedModal(title,sig){
  $('verified-onchain-copy').textContent='COPY PLAYER LINK';
  try{previewQuestCover($('verified-x-cover-preview'),lastCover);}catch(error){$('verified-x-cover-status').textContent='Image preview could not be drawn: '+String(error?.message||error);}
  successModal.classList.remove('hidden');
- $('verified-onchain-close').focus();
+ successModal.querySelector('.verified-modal-dialog').scrollTop=0;
+ $('verified-onchain-close-top').focus({preventScroll:true});
 }
 $('verified-x-cover-share').addEventListener('click',async()=>{
  const message=$('verified-x-cover-status');message.textContent='Preparing your personal quest image…';
  try{
   const outcome=await shareQuestCover({...lastCover,url:lastUrl});
-  message.textContent=outcome==='shared'?'Share sheet completed. Check your X post before publishing.':outcome==='cancelled'?'Share cancelled. Nothing was posted.':'Cover downloaded. Attach the image to your X post and include your player link.';
+  message.textContent=outcome==='shared'?'Share sheet closed. Check your X draft; nothing is posted until you send it.':outcome==='cancelled'?'Share cancelled. Nothing was posted.':'This wallet browser did not support sharing the image. A PNG download was requested but may not be saved. Try opening the creator in Safari, or share the player link separately.';
  }catch(error){message.textContent='Could not prepare the image: '+String(error?.message||error);}
 });
 $('verified-x-cover-download').addEventListener('click',async()=>{
  const message=$('verified-x-cover-status');message.textContent='Creating PNG…';
- try{await downloadQuestCover(lastCover);message.textContent='PNG saved. Attach it to your X post; copy your player link above.';}
+ try{await downloadQuestCover(lastCover);message.textContent='PNG download requested. Check Files → Downloads on your phone; your wallet browser may not save it. The onchain quest remains published.';}
  catch(error){message.textContent='Could not download the image: '+String(error?.message||error);}
 });
 function enable(){publish.disabled=busy||!consent.checked;storageTest.disabled=busy||!consent.checked;verify.disabled=busy;atomicButton.disabled=busy||!atomicConsent.checked;}
@@ -1802,6 +1827,6 @@ verifyButton.addEventListener('click',async()=>{
 });
 </script>
 <script type="module" src="./payments/checkout-ui.mjs"></script>
-<script type="module" src="./my-quests.mjs?v=540"></script>
+<script type="module" src="./my-quests.mjs?v=545"></script>
 </body>
 </html>

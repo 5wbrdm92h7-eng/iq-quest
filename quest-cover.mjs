@@ -150,5 +150,5 @@ export async function shareQuestCover(options={}){
   try{await navigator.share({title:safeCoverTitle(options.title),text:'🧠 Try my onchain IQ QUEST! Powered by IQ Labs.',url:options.url||undefined,files:[file]});return 'shared';}
   catch(error){if(error?.name==='AbortError')return 'cancelled';}
  }
- saveFile(file);return 'downloaded';
+ saveFile(file);return 'download-requested';
 }
