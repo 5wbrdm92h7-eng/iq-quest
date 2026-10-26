@@ -550,6 +550,20 @@ details.advanced-box[open]>summary{color:#adffb8;margin-bottom:13px}
 .creator-step-one-status{margin:12px 0 0;font-size:13px;line-height:1.5;color:#cefbd6;font-weight:800}
 .creator-step-one-status[data-ready="true"]{color:#c8ff9a}
 .creator-step-one-finish{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-top:3px;padding:12px 10px 3px;border-top:1px solid #608c68}
+/* V5.62 · Clear test → publish flow. Keep payment and recovery logic unchanged. */
+.creator-simple #preview-step .preview-edit-link{display:flex;align-items:center;justify-content:center;width:100%;padding:12px 15px;margin-top:9px;border-radius:10px;border:1px solid #bc9652;background:#24231a;color:#ffe1a2;font-size:13px;font-weight:850;text-decoration:none;text-align:center;line-height:1.4}
+.creator-simple #preview-step .preview-edit-link:hover,.creator-simple #preview-step .preview-edit-link:focus-visible{border-color:#ffe8ae;outline:2px solid #ffe8ae;outline-offset:2px}
+.creator-simple #preview-step .preview-help-text{font-size:13px;line-height:1.5;color:#f9e4bd}
+.creator-simple #publish-card .creator-publish-safety{margin:12px 0;padding:11px 14px;background:#142d2e;border:1px solid #638a83}
+.creator-simple #publish-card .creator-publish-safety>summary{cursor:pointer;color:#d7f8ed;font-size:14px;line-height:1.5;font-weight:900}
+.creator-simple #publish-card .creator-publish-safety[open]>summary{margin-bottom:11px;padding-bottom:10px;border-bottom:1px solid #638a83}
+.creator-simple #publish-card .creator-publish-safety h4{font-size:17px;margin-top:0}
+.creator-simple #publish-card #devnet-preverify{padding:13px 14px;margin:11px 0;background:#102d2e;border-width:1px}
+.creator-simple #publish-card #devnet-preverify h4{font-size:16px;margin-bottom:6px}
+.creator-simple #publish-card #devnet-preverify>p{font-size:13px;line-height:1.5;margin-bottom:9px}
+.creator-simple #publish-card #atomic-devnet-card{margin-top:12px!important}
+.creator-publish-intro{font-size:14px!important;line-height:1.6;color:#e0f1eb!important}
+.creator-publish-final-note{margin:10px 0 0;color:#d7fff4;font-size:13px;line-height:1.5}
 .creator-step-one-finish p{color:#d5eedb;font-size:13px;line-height:1.5;margin:0;flex:1 1 220px}
 .creator-step-one-finish a{flex:1 1 215px;text-align:center;white-space:normal}
 .creator-step-one #create-quest,.creator-step-one #ai-builder,.creator-step-one #question-review{margin:0}
@@ -724,13 +738,14 @@ details.advanced-box[open]>summary{color:#adffb8;margin-bottom:13px}
             </div>
           </section>
         </div>
-        <aside class="studio-aside"><div class="panel preview-panel" id="preview-step"><div class="section-kicker">STEP 2 · TEST FOR FREE</div><h3 class="creator-stage-title">Try your own quest</h3><p class="creator-stage-note">ChatGPT can make mistakes. Play and check ALL 15 answers, hints and difficulty before paying. Return here to edit anything that feels wrong.</p><div class="preview-image" role="img" aria-label="Ancient temple ruins in jungle mist"></div><div class="preview-body"><div class="preview-brand">IQ QUEST</div><h3 id="preview-title">Your new quest</h3><p id="preview-theme">Your topic will appear here.</p><div class="preview-tags"><span id="preview-difficulty">MEDIUM</span><span id="preview-count">15 QUESTIONS</span><span id="preview-duration">9–18 MIN</span></div><div class="stack-buttons"><button type="button" id="preview-game" class="btn btn-green">▶ TEST MY 15 QUESTIONS</button><span class="preview-help-text">No wallet or payment needed. Return here to make changes.</span><span class="draft-autosave-message">✓ Draft saved on this device.</span></div><div id="draft-status" class="small-status" role="status" aria-live="polite"></div></div></div>
+        <aside class="studio-aside"><div class="panel preview-panel" id="preview-step"><div class="section-kicker">STEP 2 · TEST FOR FREE</div><h3 class="creator-stage-title">Play your quest before publishing</h3><p class="creator-stage-note">ChatGPT can make mistakes. Play and check ALL 15 answers, hints and difficulty before paying. Return to Step 1 if anything needs fixing. <strong>No Phantom or payment needed for testing.</strong></p><div class="preview-image" role="img" aria-label="Ancient temple ruins in jungle mist"></div><div class="preview-body"><div class="preview-brand">IQ QUEST</div><h3 id="preview-title">Your new quest</h3><p id="preview-theme">Your topic will appear here.</p><div class="preview-tags"><span id="preview-difficulty">MEDIUM</span><span id="preview-count">15 QUESTIONS</span><span id="preview-duration">9–18 MIN</span></div><div class="stack-buttons"><button type="button" id="preview-game" class="btn btn-green">▶ TEST MY 15 QUESTIONS</button><a id="preview-edit-questions" class="preview-edit-link" href="#question-review">✎ NEED TO FIX A QUESTION? BACK TO STEP 1 C</a><span class="draft-autosave-message">✓ Draft saved on this device.</span></div><div id="draft-status" class="small-status" role="status" aria-live="polite"></div></div></div>
           <div class="panel publish-panel" id="publish-card">
             <div class="section-kicker">STEP 3 · PUBLISH YOUR QUEST</div>
-            <h3>Publish your quest on Solana</h3>
-            <p>Your questions are ready? Publishing stores all 15 questions, hints and answers publicly onchain. Connect Phantom <strong>only now</strong>. <strong>Sharing on X is optional and can wait until you are ready.</strong></p>
+            <h3>Publish your tested quest</h3>
+            <p class="creator-publish-intro">Finished Step 2? Connect Phantom <strong>only now</strong> to publish all 15 questions, hints and answers publicly on Solana Devnet. Expect <strong>several wallet confirmations</strong>; the last one includes <strong>0.03 Devnet test SOL</strong>. Sharing on X is optional and can wait until you are ready.</p>
             <div class="creator-publish-simple-summary"><strong>DEVNET BETA · 0.03 TEST-SOL FINAL PAYMENT.</strong> Your friends play for free. Real Mainnet publishing is still OFF; Devnet storage and network test fees are additional.</div>
-            <section class="creator-publish-safety" aria-label="Devnet publication steps, fees and payment protection">
+            <details class="creator-publish-safety" aria-label="Devnet publication steps, fees and payment protection">
+              <summary>ⓘ VIEW PHANTOM APPROVALS, COST EXAMPLE &amp; RECOVERY</summary>
               <h4>Before you approve in Phantom</h4>
               <p><strong>Expect several wallet confirmations.</strong> The early transactions store your puzzles; the final confirmation also includes 0.03 Devnet test SOL. Wait until all 15 questions and the final receipt are verified. Then you receive a playable link — <strong>no X post required.</strong></p>
               <p class="publish-cost-line"><strong>Previous storage-only example:</strong> 6 Phantom approvals, about <strong>0.0030324 Devnet SOL</strong> (IQ Labs registration + Solana transaction fees). The atomic test additionally transfers <strong>0.03 Devnet SOL</strong> in the final approval. This is not a live fee quote. Review each wallet transaction.</p>
@@ -738,19 +753,20 @@ details.advanced-box[open]>summary{color:#adffb8;margin-bottom:13px}
                 <p><strong>Interrupted?</strong> Return with the same wallet and unchanged quest. The app checks saved onchain transactions before asking for the next approval. If a transaction is uncertain, repeat signing is blocked. Check Phantom/Explorer; never make another platform payment just to resume.</p>
                 <p><strong>Devnet 0.03 test SOL:</strong> The final IQ Labs registration and test payment are bundled in one transaction. If the final transaction fails, its platform transfer is reversed; network fees and earlier storage costs may remain. The app does not treat a wallet approval as success without a finalized onchain receipt. Real Mainnet payments remain OFF.</p>
               </details>
-            </section>
+            </details>
             <section id="devnet-preverify" class="creator-preverify" aria-label="Check an existing Devnet publication before paying">
-              <h4>1 · VERIFY PREVIOUS PUBLICATION</h4>
-              <p>Already published? Verify your saved onchain receipt first — <strong>no wallet connection and no new payment</strong>. A finished quest opens its playable link again.</p>
+              <h4>ALREADY PUBLISHED OR INTERRUPTED?</h4>
+              <p>Check your previous publication before paying again. Verification is free and needs no wallet.</p>
               <div id="devnet-verify-slot"></div>
               <div id="devnet-status-slot"></div>
             </section>
             <section id="atomic-devnet-card" aria-label="Atomic Devnet publication test" style="border:2px solid #efd187;border-radius:13px;background:#2b2618;padding:15px;margin:14px 0">
-              <strong style="color:#ffe8a7;font-size:15px">2 · PUBLISH A NEW QUEST · 0.03 TEST SOL · DEVNET ONLY</strong>
-              <p style="font-size:12px;line-height:1.65;color:#f2e5c9">Your custom quest is stored in several IQ Labs Devnet transactions. <strong>Only the final transaction</strong> includes the 0.03 test-SOL transfer. No separate advance payment. All 15 puzzles and the final payment receipt must verify before your link is shown.</p>
+              <strong style="color:#ffe8a7;font-size:15px">PUBLISH A NEW QUEST · 0.03 TEST SOL · DEVNET ONLY</strong>
+              <p style="font-size:13px;line-height:1.6;color:#f2e5c9">Check the consent box, then tap the gold button. Approve each Phantom request. <strong>Only the final transaction includes 0.03 test SOL.</strong> Your playable link appears after all 15 questions and the payment are verified.</p>
               <p style="font-size:11px;line-height:1.6;color:#e5d8ba;overflow-wrap:anywhere">Platform recipient: <strong>BbMdFqpXfkJeKLvoT8W7QSFZmVeLV35gp6At2MbZF377</strong>. Wallet approvals also include separate Devnet IQ Labs and network charges. Test SOL has no real-world value.</p>
               <label class="publish-consent" style="display:flex;gap:9px;align-items:flex-start"><input type="checkbox" id="atomic-devnet-consent" style="margin-top:3px"><span><strong>I agree to the Devnet-only test.</strong> My 15 questions, answers and hints will be publicly readable on Solana. I will check every wallet request, including the final 0.03 test-SOL transfer to the address above. I understand earlier storage fees can remain if the upload is interrupted. <strong>No Mainnet SOL will be sent.</strong></span></label>
               <button type="button" id="atomic-devnet-publish" class="btn btn-gold" disabled style="width:100%;margin:12px 0 8px">✓ TEST 0.03 DEVNET SOL + PUBLISH ONCHAIN</button>
+              <p class="creator-publish-final-note">✓ After success: <strong>Play · Copy link · Share on X</strong>. You do not have to post on X.</p>
               <p id="atomic-devnet-status" role="status" aria-live="polite" style="font-size:12px;line-height:1.6;white-space:pre-wrap;overflow-wrap:anywhere;color:#fff0c7">No new publication started. If you have published before, first use VERIFY PREVIOUS PUBLICATION above.</p>
             </section>
             <div id="devnet-publish-primary" aria-label="Publication results and optional advanced Devnet testing">
@@ -1414,6 +1430,10 @@ $('creator-resume-draft').addEventListener('click',()=>{
 });
 // The editor auto-saves. Manual download/save controls are intentionally not shown.
 $('preview-game').addEventListener('click',previewGame);
+$('preview-edit-questions').addEventListener('click',()=>{
+  // Open the editor before jumping to it; on phones it is collapsed by default.
+  $('question-review').open=true;
+});
 try{if(localStorage.getItem(IMPORT_BACKUP_KEY))$('undo-ai-import').classList.remove('hidden');}catch(e){}
 try{
  const saved=localStorage.getItem(DRAFT_KEY)||localStorage.getItem('iqquest_v31_creator_draft');
