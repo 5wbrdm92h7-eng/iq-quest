@@ -467,7 +467,7 @@ h1,h2,h3{font-family:Georgia,"Times New Roman",serif;letter-spacing:-.015em}h1{f
 .battle-run-banner{margin:14px 0;padding:14px 17px;border:1px solid #a9d47c;border-radius:12px;background:#193526;color:#d8f9db;font-size:13px;line-height:1.55}
 .battle-run-banner strong{display:block;color:#f2d89c;letter-spacing:.06em;margin-bottom:3px}
 /* V5.29 · Clear return to game selection, including mid-quest on mobile. */
-.game-return-row{position:sticky;top:0;z-index:8;display:flex;justify-content:flex-start;margin:-2px 0 8px;padding:4px 1px 8px;background:linear-gradient(#11231e 84%,transparent)}
+.game-return-row{position:relative;display:flex;justify-content:flex-start;margin:-2px 0 8px;padding:4px 1px 8px}
 .game-return-row .game-return-link{display:inline-flex;align-items:center;justify-content:center;min-height:39px;padding:8px 13px;border:1px solid #719f86;border-radius:10px;color:#d6f8df;background:#11291c;font-size:12px;font-weight:900;letter-spacing:.02em;text-decoration:none}
 .game-return-row .game-return-link:hover,.game-return-row .game-return-link:focus-visible{border-color:#5bf98a;color:#5bf98a;outline-offset:2px}
 .is-creator-preview .game-return-row{display:none}
@@ -649,7 +649,7 @@ body:not(.is-home-chooser) .page-tagline{display:none}
             <div class="finish-status"><span id="finish-attempt" class="finish-attempt-chip">FIRST ATTEMPT</span><span id="finish-badges" class="finish-badges"></span></div><div class="result-share-meta" style="margin:0 0 14px;font-weight:800;color:#f3dc9f">DIFFICULTY: <span id="result-difficulty">HARD</span> · <span id="result-count">15 MYSTERIES</span></div><div id="result-completion" class="fineprint" style="margin-top:-3px">15 answers solved</div><div class="result-grid"><div><span>BASE TIME</span><strong id="result-base">00:00</strong></div><div><span>HINTS / SKIPS</span><strong id="result-hints">0 / 0 (+00:00)</strong></div><div class="result-total"><span>FINAL TIME</span><strong id="result-final">00:00</strong></div></div>
             <section class="battle-share-card" aria-label="Share your community battle challenge">
               <div class="battle-share-header"><span class="battle-brand"><span class="green">IQ</span> QUEST</span><span class="battle-kicker">COMMUNITY CHALLENGE</span></div>
-              <h4 class="battle-share-title">Can your community beat this?</h4>
+              <h4 class="battle-share-title" id="battle-share-title">Can your community beat this?</h4>
               <p class="battle-share-description" id="battle-share-description">Challenge friends on X with your final time and the link to this adventure.</p>
               <div class="battle-share-time-label">YOUR FINAL TIME</div>
               <div class="battle-share-time" id="battle-share-time" aria-label="Your total time">00:00</div>
@@ -988,8 +988,8 @@ function stopTimer(){if(ticker){clearInterval(ticker);ticker=null;}}
 function updateClocks(){const b=baseSeconds(),p=penaltySeconds();$('base-time').textContent=time(b);$('hint-penalty').textContent='+'+time(p);$('running-total').textContent=time(b+p);}
 function updateAttemptChip(){
  const chip=$('attempt-chip');chip.classList.remove('practice','preview');
- const label=preview?'CREATOR PREVIEW':run.attemptType==='first'?'★ FIRST ATTEMPT':run.attemptType==='practice'?'↻ REPLAY / PRACTICE':hasAttempt()?'↻ PRACTICE AVAILABLE':'★ FIRST ATTEMPT AVAILABLE';
- chip.textContent=label;chip.classList.toggle('practice',label.includes('PRACTICE'));chip.classList.toggle('preview',preview);
+ const label=preview?'CREATOR PREVIEW':run.attemptType==='first'?(run.finishedAt&&run.skips.length?'★ FIRST TRY · NOT RANKED':'★ FIRST ATTEMPT'):run.attemptType==='practice'?'↻ REPLAY / PRACTICE':hasAttempt()?'↻ PRACTICE AVAILABLE':'★ FIRST ATTEMPT AVAILABLE';
+ chip.textContent=label;chip.classList.toggle('practice',label.includes('PRACTICE')||label.includes('NOT RANKED'));chip.classList.toggle('preview',preview);
  $('mode-description').textContent=preview?'UNPUBLISHED DRAFT':battleMode?'⚔ FRIEND BATTLE · 15 ONCHAIN PUZZLES':playMode==='lightning'?'LIGHTNING · 3 PUZZLES · SAME QUESTIONS FOR FRIENDS':'FULL QUEST · 15 CHAMBERS';
  $('challenge-target').classList.toggle('hidden',!targetTime||preview);
  if(targetTime)$('challenge-target-time').textContent=time(targetTime);
@@ -1014,7 +1014,7 @@ function render(){
  $('question-area').classList.toggle('hidden',!run.startedAt||!!run.finishedAt);
  $('finish-area').classList.toggle('hidden',!run.finishedAt);
  $('start-gate-summary').textContent=`${quest.levels.length} questions · ${quest.difficulty} difficulty${playMode==='lightning'?' · Lightning Battle':''}`;
- $('start-gate').querySelector('.start-gate-note').textContent=preview?'Your preview timer begins only when you press Start Quest.':'Your timer and First Attempt begin only when you press Start Quest. The first question stays hidden until then.';
+ $('start-gate').querySelector('.start-gate-note').textContent=preview?'Your preview timer begins only when you press Start Quest.':hasAttempt()?'This is a Practice replay. The timer starts when you press Start Quest. Your first result stays saved locally.':'Your timer and First Attempt begin only when you press Start Quest. The first question stays hidden until then.';
  const panel=document.querySelector('.game-panel');if(panel){panel.classList.toggle('active-run',!!run.startedAt&&!run.finishedAt);panel.classList.toggle('finish-mode',!!run.finishedAt);}
  updateAttemptChip();
  if(run.finishedAt){showFinish();renderChapters();updateClocks();return;}
@@ -1074,7 +1074,7 @@ function saveResultOnce(){
  qaEvent('finishes_'+playMode+'_'+quest.difficulty);
  const record=readBest();const total=totalSeconds();record.completed=(record.completed||0)+1;
  if(!record.best||total<record.best)record.best=total;
- if(run.attemptType==='first'&&!record.firstAttemptTime)record.firstAttemptTime=total;
+ if(run.attemptType==='first'&&!run.skips.length&&!record.firstAttemptTime)record.firstAttemptTime=total;
  writeStore(bestKey(),JSON.stringify(record));run.resultCommitted=true;save();
 }
 function showFinish(){
@@ -1083,17 +1083,18 @@ function showFinish(){
  const eligibleForComparison=!!targetTime&&canShareChallengeTime();
  $('result-final').textContent=time(total);$('finale-score-lead-time').textContent=time(total);$('finale-score-lead-versus').textContent=eligibleForComparison?(total<targetTime?'⚔ YOU BEAT THE FRIEND CHALLENGE':total>targetTime?'⚔ FRIEND CHALLENGE NOT BEATEN':'⚔ FRIEND CHALLENGE TIED'):(run.attemptType==='first'&&run.skips.length===0?'★ FIRST ATTEMPT':'↻ PRACTICE / SKIPPED · NOT RANKED');$('result-difficulty').textContent=quest.difficulty.toUpperCase();$('result-count').textContent=quest.levels.length+' CHAMBERS';
  $('finish-heading').textContent=run.skips.length?'TEMPLE COMPLETED — WITH SKIPS':'ALL MYSTERIES SOLVED';
- $('finish-summary').textContent=playMode==='lightning'?'Three lightning puzzles cleared. Send a friend the same code set and your target time.':`You crossed all ${quest.levels.length} chambers. Your time is ready for the next explorer.`;
+ $('finish-summary').textContent=canShareChallengeTime()?(playMode==='lightning'?'Three lightning puzzles cleared. Your first-try result can become a friendly challenge.':`All ${quest.levels.length} puzzles solved. Your first-try time is ready for a friendly challenge.`):'Quest finished! This is a practice or skipped run. You can share the puzzles, but there is no time to beat.';
  $('result-completion').textContent=run.skips.length?`${quest.levels.length-run.skips.length} solved · ${run.skips.length} skipped · penalties included`:`All ${quest.levels.length} mysteries solved without skips`;
  $('battle-share-time').textContent=time(total);$('battle-share-stats').textContent=`${playMode==='lightning'?'LIGHTNING · ':''}${quest.difficulty.toUpperCase()} · ${quest.levels.length-run.skips.length} solved · ${run.skips.length} skipped · ${run.hints.length} hints`;
  const ranked=canShareChallengeTime();
+ $('battle-share-title').textContent=ranked?'Can your community beat this?':'Challenge friends to play this quest';
  $('share-x').textContent=ranked?'↗ SHARE CHALLENGE ON X':'↗ SHARE PRACTICE QUEST ON X';
  $('copy-challenge').textContent=ranked?'⤴ COPY FRIEND CHALLENGE LINK':'⧉ COPY PRACTICE QUEST LINK';
  $('battle-share-description').textContent=ranked?'Your first, fully solved attempt is ready for a friendly time challenge.':'Practice or skipped run: you can still share the quest, but no time to beat is attached.';
  $('battle-share-guidance').textContent=ranked?'Your link contains the same puzzle set and your time, including hint penalties. Results are browser-based and unverified.':'Your link contains the same puzzles without a competitive target time. Only a first attempt with all questions solved may include a target.';
- const first=run.attemptType==='first';$('finish-attempt').textContent=preview?'CREATOR PREVIEW':first?'★ FIRST ATTEMPT':'↻ REPLAY / PRACTICE';$('finish-attempt').classList.toggle('practice',!first&&!preview);
+ const first=run.attemptType==='first';$('finish-attempt').textContent=preview?'CREATOR PREVIEW':ranked?'★ FIRST ATTEMPT':first?'★ FIRST TRY · NOT RANKED':'↻ REPLAY / PRACTICE';$('finish-attempt').classList.toggle('practice',!ranked&&!preview);
  const badge=run.hints.length===0&&run.skips.length===0?'✦ PERFECT RUN · NO HINTS':run.skips.length===0?'✦ CODEBREAKER · NO SKIPS':'✦ GATEWAY EXPLORER';$('finish-badges').textContent=badge;
- const best=readBest();$('record-strip').textContent=preview?'Preview result · no public record':`★ PERSONAL BEST${playMode==='lightning'?' (THIS PUZZLE SET)':''}: ${best.best?time(best.best):time(total)} · ${best.completed||0} local completions${best.firstAttemptTime?' · First try: '+time(best.firstAttemptTime):''}`;
+ const best=readBest();$('record-strip').textContent=preview?'Preview result · no public record':ranked?`★ LOCAL BEST${playMode==='lightning'?' (THIS PUZZLE SET)':''}: ${best.best?time(best.best):time(total)} · ${best.completed||0} local completions · Unverified`:`↻ LOCAL RESULT: ${time(total)} · ${best.completed||0} local completions · Not ranked`;
  $('versus-result').classList.toggle('hidden',!eligibleForComparison);
  if(eligibleForComparison){const delta=total-targetTime;const v=$('versus-result');v.classList.toggle('win',delta<0);v.classList.toggle('loss',delta>0);$('versus-result-heading').textContent=delta<0?'YOU BEAT THE CHALLENGE!':delta>0?'THE CHALLENGE WINS':'EXACT TIE!';$('versus-result-detail').textContent=delta===0?'Same time, including penalties.':`${Math.abs(delta)} seconds ${delta<0?'faster':'slower'} than your friend · unverified`;}
  $('new-lightning').classList.toggle('hidden',preview||playMode!=='lightning');
