@@ -537,6 +537,25 @@ details.advanced-box[open]>summary{color:#adffb8;margin-bottom:13px}
 #devnet-advanced-testing{padding:13px 15px;margin:18px 0;border:1px solid #53736a;border-radius:12px;background:#0b201d}
 #devnet-advanced-testing>summary{cursor:pointer;color:#c6dfd4;font-size:13px;font-weight:850;line-height:1.5}
 #devnet-advanced-testing>p{font-size:12px;color:#bfd8cd;line-height:1.6}
+/* V5.61 · The full first creator step reads as one connected green area. */
+.creator-simple .creator-step-one{display:grid;gap:12px;border:2px solid #67da80;border-radius:17px;padding:14px;background:linear-gradient(180deg,#153b29 0%,#0b211b 100%);box-shadow:0 0 25px #49e87716;scroll-margin-top:14px}
+.creator-step-one-header{padding:10px 9px 5px}
+.creator-step-one-label{display:inline-block;border:1px solid #8cffaa;border-radius:100px;padding:6px 12px;color:#092c1c;background:#a4ffb4;font-size:12px;font-weight:950;letter-spacing:.075em}
+.creator-step-one-header h2{font-family:Georgia,serif;font-size:clamp(26px,5vw,36px);line-height:1.16;margin:12px 0 6px;color:#f2e2b5}
+.creator-step-one-header>p{font-size:14px;line-height:1.6;color:#def4e0;margin:0 0 13px}
+.creator-step-one-map{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.creator-step-one-map a{display:flex;align-items:center;gap:9px;padding:10px;background:#08251a;border:1px solid #659b70;border-radius:11px;color:#e2f6e4;font-size:12px;font-weight:850;line-height:1.35}
+.creator-step-one-map a b{display:grid;place-items:center;flex:0 0 29px;height:29px;border-radius:50%;background:#80f394;color:#0a311a;font-size:14px}
+.creator-step-one-map a:hover,.creator-step-one-map a:focus-visible{border-color:#a9ffb7;outline:2px solid #a9ffb7;outline-offset:1px}
+.creator-step-one-status{margin:12px 0 0;font-size:13px;line-height:1.5;color:#cefbd6;font-weight:800}
+.creator-step-one-status[data-ready="true"]{color:#c8ff9a}
+.creator-step-one-finish{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-top:3px;padding:12px 10px 3px;border-top:1px solid #608c68}
+.creator-step-one-finish p{color:#d5eedb;font-size:13px;line-height:1.5;margin:0;flex:1 1 220px}
+.creator-step-one-finish a{flex:1 1 215px;text-align:center;white-space:normal}
+.creator-step-one #create-quest,.creator-step-one #ai-builder,.creator-step-one #question-review{margin:0}
+.creator-simple #my-quests,.creator-simple .templates-collapsible{border-color:#455c52!important;background:#10221e!important}
+.creator-simple #my-quests>summary,.creator-simple .templates-collapsible>summary{color:#d4e6da}
+@media(max-width:740px){.creator-simple .creator-step-one{padding:10px;gap:10px}.creator-step-one-header{padding:9px 5px 2px}.creator-step-one-map{grid-template-columns:1fr}.creator-step-one-map a{min-height:42px;font-size:13px}.creator-step-one-finish a{width:100%}}
 </style></head>
 <body class="creator-simple" data-page="creator">
   <div class="site-shell">
@@ -581,11 +600,11 @@ details.advanced-box[open]>summary{color:#adffb8;margin-bottom:13px}
           <div class="simple-journey" aria-label="Build your adventure in three steps">
             <div class="section-kicker">CREATE AN ONCHAIN QUEST · POWERED BY IQ LABS</div>
             <h2>3 simple steps to your own quest</h2>
-            <p>Give ChatGPT your topic, check the 15 puzzles, test for free, then publish. <strong>No wallet is needed until publishing.</strong> Only Devnet testing is available for now.</p>
+            <p><strong>Step 1 (green):</strong> Choose a topic, create 15 questions and review them. <strong>Step 2 (gold):</strong> Test for free. <strong>Step 3 (turquoise):</strong> Publish on Devnet. No wallet is needed until publishing.</p>
             <div class="flow-tiles"><a class="flow-tile" href="#create-quest"><b>1</b>Create 15 puzzles</a><a class="flow-tile" href="#preview-step"><b>2</b>Test for free</a><a class="flow-tile" href="#publish-card"><b>3</b>Publish onchain</a></div>
           </div>
           <details class="panel studio-panel my-quests-panel" id="my-quests">
-            <summary>▣ MY QUESTS · OPEN &amp; SHARE YOUR PUBLISHED GAMES</summary>
+            <summary>▣ ALREADY PUBLISHED? MY QUESTS · OPTIONAL</summary>
             <p class="my-quests-intro">Your published quests: <strong>PLAY</strong>, <strong>COPY LINK</strong>, or <strong>SHARE ON X</strong> with the game title, ready-made promotional text and game link. X uses the same general IQ QUEST puzzle banner for all games (subject to its link preview). Saved links stay on this device. To recover them on another phone, search your <strong>public creator-wallet address</strong> below. No wallet connection or payment is needed.</p>
             <span id="my-quests-count">0 SAVED QUESTS</span>
             <div id="my-quests-list" class="my-quests-list" aria-live="polite"></div>
@@ -606,7 +625,7 @@ details.advanced-box[open]>summary{color:#adffb8;margin-bottom:13px}
             <p id="my-quests-status" role="status" aria-live="polite">Ready to look up published quests on Solana Devnet.</p>
           </details>
           <details class="panel studio-panel templates-collapsible" aria-labelledby="prepared-quests-heading">
-            <summary>OPTIONAL · START FROM A READY-MADE QUEST</summary>
+            <summary>OPTIONAL · READY-MADE QUESTS (NOT PART OF STEP 1)</summary>
             <div class="panel-topline"><span class="section-kicker">3 FREE · ONCHAIN · 15 PUZZLES EACH</span><span class="status-dot">ALL THREE VERIFIED ON DEVNET</span></div>
             <h2 id="prepared-quests-heading">Play Easy, Medium or Hard for free</h2>
             <p class="section-intro">All three versions have been stored and verified on <strong>IQ Labs Solana Devnet</strong>. Press the green button to play free. The gold buttons below only load an <strong>editable copy</strong> into your creator draft; publishing that copy would be a new onchain upload, so do not republish an unchanged game.</p>
@@ -636,9 +655,21 @@ details.advanced-box[open]>summary{color:#adffb8;margin-bottom:13px}
             <p class="tiny-note">Loading a preset saves an Undo backup. <strong>All three quests already work: do not publish the same questions again just to play them.</strong> The original older Hard Treasure version also remains on Devnet, but it is not part of the featured free three-game selection. Only a newly customized quest needs another publication; editing or loading does not connect a wallet.</p>
             <p id="prepared-quest-status" class="small-status" role="status" aria-live="polite">Choose one to load its questions into the editor.</p>
           </details>
+          <section class="creator-step-one" id="creator-step-one" aria-labelledby="creator-step-one-title">
+            <div class="creator-step-one-header">
+              <span class="creator-step-one-label">STEP 1 OF 3 · BUILD YOUR QUEST</span>
+              <h2 id="creator-step-one-title">Everything green belongs to Step 1</h2>
+              <p>Work through <strong>A, B and C</strong> from top to bottom. You only need a topic to begin. Step 2 (gold) starts below this green area.</p>
+              <nav class="creator-step-one-map" aria-label="Parts of Step 1">
+                <a href="#create-quest"><b>A</b> Choose title &amp; topic</a>
+                <a href="#ai-builder"><b>B</b> Get 15 questions</a>
+                <a href="#question-review"><b>C</b> Check or edit</a>
+              </nav>
+              <p id="creator-step-one-status" class="creator-step-one-status" role="status" aria-live="polite">Start with A: enter your quest title and topic.</p>
+            </div>
           <div class="panel studio-panel" id="create-quest">
-            <div class="panel-topline"><span class="section-kicker">STEP 1 · CREATE YOUR QUEST</span><span class="status-dot">DRAFT · NO PAYMENT</span></div>
-            <h2>What is your quest about?</h2><p class="section-intro">Just choose a title, a topic and the difficulty. ChatGPT helps you create 15 new puzzles below.</p>
+            <div class="panel-topline"><span class="section-kicker">STEP 1 · CREATE YOUR QUEST · PART A</span><span class="status-dot">DRAFT · NO PAYMENT</span></div>
+            <h2>A · Choose your topic</h2><p class="section-intro">Enter a title, a topic and the difficulty. A single word like <strong>Space</strong> is enough. ChatGPT helps you create 15 new puzzles in Part B.</p>
             <div class="creator-start-choice" role="group" aria-label="Start a new quest or continue your saved draft">
               <h3>Where would you like to start?</h3>
               <div class="creator-start-buttons"><button type="button" id="reset-quest-draft" class="btn btn-green">＋ CREATE NEW QUEST</button><button type="button" id="creator-resume-draft" class="btn btn-outline">↻ CONTINUE MY DRAFT</button></div>
@@ -652,9 +683,9 @@ details.advanced-box[open]>summary{color:#adffb8;margin-bottom:13px}
             <a href="#ai-builder" class="btn btn-green creator-continue">NEXT · CREATE 15 QUESTIONS WITH CHATGPT ↓</a>
           </div>
           <div class="panel studio-panel ai-panel" id="ai-builder">
-            <div class="panel-topline"><span class="section-kicker">STEP 1 · CREATE 15 QUESTIONS</span><span class="ai-glow">WITH CHATGPT</span></div>
-            <h2>Create your 15 puzzles</h2>
-            <p class="section-intro">No technical knowledge needed. Copy the prepared request, let ChatGPT write the puzzles, then paste the answer here. <strong>Creating costs nothing.</strong></p>
+            <div class="panel-topline"><span class="section-kicker">STEP 1 · CREATE 15 QUESTIONS · PART B</span><span class="ai-glow">WITH CHATGPT</span></div>
+            <h2>B · Get your 15 questions</h2>
+            <p class="section-intro">Follow the three small actions below: <strong>copy → ChatGPT → paste</strong>. This is still Step 1 and costs nothing.</p>
             <div class="ai-simplified">
               <div class="ai-simple-step">
                 <h3>1 · Copy your quest idea</h3>
@@ -686,7 +717,12 @@ details.advanced-box[open]>summary{color:#adffb8;margin-bottom:13px}
             </div>
             <div class="prompt-fallback hidden" id="prompt-fallback"><label for="manual-ai-prompt">If your browser couldn't copy the task, select and copy this text manually:</label><textarea id="manual-ai-prompt" rows="6" readonly></textarea><button type="button" id="select-ai-prompt" class="btn btn-outline">SELECT TASK TEXT</button></div>
           </div>
-          <details class="panel studio-panel creator-review" id="question-review"><summary>✓ REVIEW OR EDIT MY 15 QUESTIONS</summary><div class="panel-topline"><span class="section-kicker">STEP 1 · CHECK YOUR PUZZLES</span><span id="editor-count" class="status-dot">15 QUESTIONS</span></div><h2>Review questions &amp; answers</h2><p class="section-intro">Open each of the 15 questions and check the answer and hint. If you change the difficulty, ask ChatGPT to create new puzzles for that level.</p><div class="editor-layout"><div class="level-selector" id="level-selector" aria-label="Choose a question"></div><div class="level-fields"><div class="form-group"><label for="level-title">Question title</label><input id="level-title" maxlength="100"></div><div class="form-group"><label for="level-question">Question · include every clue here</label><textarea id="level-question" rows="4" maxlength="600"></textarea></div><div class="form-group"><label for="level-hint">Hint <span class="muted">(adds +1 minute for the player)</span></label><textarea id="level-hint" rows="2" maxlength="400"></textarea></div><div class="form-group"><label for="level-answer">Answer <span class="muted">(separate alternatives with |)</span></label><input id="level-answer" maxlength="180" spellcheck="false" placeholder="e.g. compass | a compass"></div><div class="tiny-note">Questions, hints and answers are public when published onchain. Never use secret or prize-safe answers.</div></div></div></details>
+          <details class="panel studio-panel creator-review" id="question-review"><summary>✓ REVIEW OR EDIT MY 15 QUESTIONS</summary><div class="panel-topline"><span class="section-kicker">STEP 1 · CHECK YOUR PUZZLES · PART C</span><span id="editor-count" class="status-dot">15 QUESTIONS</span></div><h2>Review questions &amp; answers</h2><p class="section-intro">Open each of the 15 questions and check the answer and hint. If you change the difficulty, ask ChatGPT to create new puzzles for that level.</p><div class="editor-layout"><div class="level-selector" id="level-selector" aria-label="Choose a question"></div><div class="level-fields"><div class="form-group"><label for="level-title">Question title</label><input id="level-title" maxlength="100"></div><div class="form-group"><label for="level-question">Question · include every clue here</label><textarea id="level-question" rows="4" maxlength="600"></textarea></div><div class="form-group"><label for="level-hint">Hint <span class="muted">(adds +1 minute for the player)</span></label><textarea id="level-hint" rows="2" maxlength="400"></textarea></div><div class="form-group"><label for="level-answer">Answer <span class="muted">(separate alternatives with |)</span></label><input id="level-answer" maxlength="180" spellcheck="false" placeholder="e.g. compass | a compass"></div><div class="tiny-note">Questions, hints and answers are public when published onchain. Never use secret or prize-safe answers.</div></div></div></details>
+            <div class="creator-step-one-finish">
+              <p><strong>End of Step 1.</strong> Your topic and questions stay saved on this device. Check every answer in the free test next.</p>
+              <a href="#preview-step" class="btn btn-gold">NEXT · STEP 2 · TEST YOUR QUEST ↓</a>
+            </div>
+          </section>
         </div>
         <aside class="studio-aside"><div class="panel preview-panel" id="preview-step"><div class="section-kicker">STEP 2 · TEST FOR FREE</div><h3 class="creator-stage-title">Try your own quest</h3><p class="creator-stage-note">ChatGPT can make mistakes. Play and check ALL 15 answers, hints and difficulty before paying. Return here to edit anything that feels wrong.</p><div class="preview-image" role="img" aria-label="Ancient temple ruins in jungle mist"></div><div class="preview-body"><div class="preview-brand">IQ QUEST</div><h3 id="preview-title">Your new quest</h3><p id="preview-theme">Your topic will appear here.</p><div class="preview-tags"><span id="preview-difficulty">MEDIUM</span><span id="preview-count">15 QUESTIONS</span><span id="preview-duration">9–18 MIN</span></div><div class="stack-buttons"><button type="button" id="preview-game" class="btn btn-green">▶ TEST MY 15 QUESTIONS</button><span class="preview-help-text">No wallet or payment needed. Return here to make changes.</span><span class="draft-autosave-message">✓ Draft saved on this device.</span></div><div id="draft-status" class="small-status" role="status" aria-live="polite"></div></div></div>
           <div class="panel publish-panel" id="publish-card">
@@ -1101,7 +1137,7 @@ function difficultySelect(diff){promptPrepared=false;quest.difficulty=diff;docum
 function renderSelector(){const root=$('level-selector');root.replaceChildren();quest.levels.forEach((l,i)=>{const b=document.createElement('button');b.type='button';b.textContent=`${String(i+1).padStart(2,'0')} · ${l.title||'Untitled'}`;b.className=i===current?'active':'';b.setAttribute('aria-current',i===current?'true':'false');b.addEventListener('click',()=>{current=i;renderSelector();renderFields();});root.append(b);});}
 function renderFields(){const l=quest.levels[current];for(const [id,key] of [['level-title','title'],['level-question','q'],['level-hint','h'],['level-answer','a']]){$(id).value=l[key]||'';}}
 function updateLevel(){const level=quest.levels[current];for(const [id,key] of [['level-title','title'],['level-question','q'],['level-hint','h'],['level-answer','a']]){level[key]=$(id).value;}renderSelector();refreshPreview();queueSave();}
-function refreshPreview(){const draft=safeDraft();$('preview-title').textContent=draft.title||'Your new quest';$('preview-theme').textContent=draft.theme||'Choose a topic to start';$('preview-difficulty').textContent=draft.difficulty.toUpperCase();$('preview-count').textContent=draft.levels.length+' QUESTIONS';$('preview-duration').textContent=times[draft.difficulty]||times.Medium;updateFeeEstimate();}
+function refreshPreview(){const draft=safeDraft();$('preview-title').textContent=draft.title||'Your new quest';$('preview-theme').textContent=draft.theme||'Choose a topic to start';$('preview-difficulty').textContent=draft.difficulty.toUpperCase();$('preview-count').textContent=draft.levels.length+' QUESTIONS';$('preview-duration').textContent=times[draft.difficulty]||times.Medium;const progress=$('creator-step-one-status');if(progress){const count=draft.levels.filter(l=>l.title.trim()&&l.q.trim()&&l.h.trim()&&l.a.trim()).length;const hasIdea=!!draft.title&&!!draft.theme;progress.dataset.ready=String(hasIdea&&count===15);progress.textContent=!hasIdea?'A · Enter a title and topic to begin.':count<15?`B · ${count}/15 questions ready. Use ChatGPT to fill the rest.`:'✓ 15 questions entered. C · Review them, then test in Step 2.';}updateFeeEstimate();}
 function loadData(data,announce=true){quest=clone(IQQuest.validate(data));$('quest-name').value=quest.title;$('community-name').value=quest.creator;$('quest-theme').value=quest.theme;current=0;count=15;difficultySelect(quest.difficulty);$('editor-count').textContent='15 QUESTIONS';renderSelector();renderFields();refreshPreview();saveSilent();if(announce)status('import-status',`${count} questions loaded. Review answers and hints before sharing.`);}
 function loadIncompleteDraft(data){
  if(!data||!Array.isArray(data.levels)||data.levels.length!==15)throw Error('Draft must contain 15 question slots.');
