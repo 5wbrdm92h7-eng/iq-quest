@@ -378,6 +378,12 @@ details.advanced-box[open]>summary{color:#adffb8;margin-bottom:13px}
 .wordmark{font-size:clamp(42px,4.25vw,55px)}
 .page-tagline{font-size:clamp(24px,3.25vw,31px);line-height:1.3;margin-top:15px}
 .page-tagline .tagline-subline{display:block;color:#ebd5ae;font-size:.86em;margin-top:2px}
+.quest-cover-preview{display:block;width:100%;height:auto;aspect-ratio:1200/630;border:1px solid #80d79f;border-radius:12px;background:#0b1d19;margin:9px 0}
+.quest-cover-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:8px 0}
+.quest-cover-actions .btn{width:100%;min-width:0;padding:11px 8px;font-size:11px}
+.quest-cover-guidance{font-size:11px;line-height:1.5;color:#bfdbc9;margin:8px 0}
+.quest-cover-guidance strong{color:#f7daa9}
+@media(max-width:460px){.quest-cover-actions{grid-template-columns:1fr}}
 .simple-journey h2{font-size:33px;color:#ffe4a4;margin:7px 0 9px}
 .simple-journey .flow-tiles{gap:11px;margin-top:19px}
 .simple-journey .flow-tile{min-height:122px;padding:14px 13px;border:2px solid #6ee88a;background:linear-gradient(155deg,#1e5639,#113624);color:#effff1;font-size:15px;line-height:1.3;box-shadow:inset 0 0 14px #73ff8b16,0 0 18px #62ff7e25}
@@ -774,7 +780,14 @@ details.advanced-box[open]>summary{color:#adffb8;margin-bottom:13px}
       <div style="margin:10px 0 20px;padding:11px;border:1px solid #54ac6b;border-radius:10px;background:#143322;color:#baffc5;font-size:13px;font-weight:850">✓ 15 / 15 PUZZLES VERIFIED ONCHAIN</div>
       <a id="verified-onchain-play" class="btn btn-green" style="display:flex;width:100%;font-size:13px;margin:10px 0" target="_blank" rel="noopener noreferrer">▶ OPEN MY PUBLISHED QUEST ↗</a>
       <button type="button" id="verified-onchain-copy" class="btn btn-outline" style="width:100%;font-size:13px;margin:7px 0">COPY PLAYER LINK</button>
-      <a id="verified-onchain-share-x" class="btn btn-gold" style="display:flex;width:100%;font-size:13px;margin:10px 0" target="_blank" rel="noopener noreferrer">⚔ SHARE MY QUEST ON X ↗</a>
+      <section aria-label="Personalised share image" style="margin:14px 0;padding:12px;border:1px solid #528f73;border-radius:13px;background:#0b231e">
+        <strong style="font-size:13px;color:#f0deaa">YOUR PERSONAL X COVER</strong>
+        <canvas id="verified-x-cover-preview" class="quest-cover-preview" width="1200" height="630" role="img" aria-label="Personalised quest artwork with title and onchain information"></canvas>
+        <div class="quest-cover-actions"><button type="button" id="verified-x-cover-share" class="btn btn-green">↗ SHARE COVER + LINK</button><button type="button" id="verified-x-cover-download" class="btn btn-outline">↓ DOWNLOAD COVER</button></div>
+        <p class="quest-cover-guidance">On iPhone, choose X in the share sheet if available. Otherwise download the image and <strong>attach it to your X post</strong>. The ordinary link preview still uses the general IQ QUEST image.</p>
+        <div id="verified-x-cover-status" role="status" aria-live="polite" class="small-status"></div>
+      </section>
+      <a id="verified-onchain-share-x" class="btn btn-gold" style="display:flex;width:100%;font-size:13px;margin:10px 0" target="_blank" rel="noopener noreferrer">⚔ SHARE LINK ON X · STANDARD PREVIEW ↗</a>
       <a id="verified-onchain-explorer" style="display:block;color:#a9ffba;text-decoration:underline;margin:13px 0;font-size:12px" target="_blank" rel="noopener noreferrer">Verify transaction in Solana Explorer ↗</a>
       <p style="font-size:11px;color:#cddfc8;line-height:1.5;margin:13px 0">This confirms the Devnet storage test only. Real Mainnet sales are not enabled. Players do not need a wallet.</p>
       <button type="button" id="verified-onchain-close" class="btn btn-glass" style="width:100%;margin:7px 0 0">CLOSE · BACK TO CREATOR</button>
@@ -1369,7 +1382,7 @@ try{
    preview.classList.remove('hidden');
    preview.scrollIntoView({behavior:'smooth',block:'start'});
  });
- window.IQQuestShowVerifiedPublication=({url,title,network})=>{
+ window.IQQuestShowVerifiedPublication=({url,title,network,topic='',difficulty=''})=>{
    if(typeof url!=='string'||!/^https:\/\//.test(url))return;
    const u=new URL(url);
    if(u.origin!==location.origin||u.pathname.replace(/index\.html$/,'')!==new URL('index.html',location.href).pathname.replace(/index\.html$/,''))return;
@@ -1391,7 +1404,7 @@ try{
    // The caller has already completed independent onchain readback. Give My Quests
    // the verified publication link without prompting for a second wallet action.
    if(network==='devnet'&&typeof CustomEvent==='function'&&typeof window.dispatchEvent==='function')
-     window.dispatchEvent(new CustomEvent('iqquest:quest-verified',{detail:{url,title,network}}));
+     window.dispatchEvent(new CustomEvent('iqquest:quest-verified',{detail:{url,title,network,topic,difficulty}}));
    preview.scrollIntoView({behavior:'smooth',block:'start'});
  };
  refresh();
@@ -1402,11 +1415,12 @@ import {publishQuestDevnet,publishQuestDevnetStorageTest,readQuestOnchain,isSola
 import {verifyDevnetPayment,questFingerprint} from './checkout-bridge.js';
 import {requestCheckoutWallet} from './wallet-bridge.js?v=514';
 import {getSavedMobileJob,DEVNET_STORAGE_ONLY_JOB_KEY,DEVNET_STORY_FREE_JOB_KEY} from './devnet-resumable.mjs?v=537';
+import {previewQuestCover,shareQuestCover,downloadQuestCover} from './quest-cover.mjs?v=540';
 const $=id=>document.getElementById(id);
 const publish=$('publish-iq-devnet'),storageTest=$('publish-storage-devnet'),consent=$('devnet-accept'),auto=$('devnet-auto-publish'),verify=$('verify-iq-devnet');
 const progress=$('devnet-publish-status'),links=$('devnet-links');
 const successModal=$('verified-onchain-modal');
-let busy=false,lastUrl='';
+let busy=false,lastUrl='',lastCover={title:'',topic:'',difficulty:''};
 const completionKey='iqquest_devnet_completed_v50';
 const storageCompletionKey='iqquest_devnet_storage_only_completed_v516_story_free';
 const storageCompletionPrefix='iqquest_devnet_storage_only_completed_v517_';
@@ -1437,9 +1451,22 @@ function openVerifiedModal(title,sig){
  $('verified-onchain-share-x').href=$('devnet-share-x').href;
  $('verified-onchain-explorer').href='https://explorer.solana.com/tx/'+encodeURIComponent(sig)+'?cluster=devnet';
  $('verified-onchain-copy').textContent='COPY PLAYER LINK';
+ try{previewQuestCover($('verified-x-cover-preview'),lastCover);}catch(error){$('verified-x-cover-status').textContent='Image preview could not be drawn: '+String(error?.message||error);}
  successModal.classList.remove('hidden');
  $('verified-onchain-close').focus();
 }
+$('verified-x-cover-share').addEventListener('click',async()=>{
+ const message=$('verified-x-cover-status');message.textContent='Preparing your personal quest image…';
+ try{
+  const outcome=await shareQuestCover({...lastCover,url:lastUrl});
+  message.textContent=outcome==='shared'?'Share sheet completed. Check your X post before publishing.':outcome==='cancelled'?'Share cancelled. Nothing was posted.':'Cover downloaded. Attach the image to your X post and include your player link.';
+ }catch(error){message.textContent='Could not prepare the image: '+String(error?.message||error);}
+});
+$('verified-x-cover-download').addEventListener('click',async()=>{
+ const message=$('verified-x-cover-status');message.textContent='Creating PNG…';
+ try{await downloadQuestCover(lastCover);message.textContent='PNG saved. Attach it to your X post; copy your player link above.';}
+ catch(error){message.textContent='Could not download the image: '+String(error?.message||error);}
+});
 function enable(){publish.disabled=busy||!consent.checked;storageTest.disabled=busy||!consent.checked;verify.disabled=busy;}
 consent.addEventListener('change',enable);enable();
 $('shortcut-storage-only').addEventListener('click',()=>{
@@ -1463,11 +1490,12 @@ try{
  else if(job&&!job.finalSignature)
   setStatus('An earlier Phantom Devnet upload may be unfinished ('+job.index+' confirmed chunks saved). First VERIFY LAST DEVNET TEST PAYMENT above. After checking the Devnet consent box, Publish will safely CHECK THE CHAIN AND RESUME; do not make a second test payment.');
 }catch(_e){}
-function showPublished(sig,title,verified,storageOnly=false,stats=''){
+function showPublished(sig,title,verified,storageOnly=false,stats='',topic='',difficulty=''){
  if(!verified){links.classList.add('hidden');setStatus('Onchain verification is still pending. Your X share link will appear only after all 15 puzzles are verified.');return;}
  const u=new URL('index.html',location.href);
  u.searchParams.set('tx',sig);u.searchParams.set('network','devnet');
  lastUrl=u.toString();
+ lastCover={title,topic,difficulty};
  $('devnet-play-link').href=lastUrl;
  $('devnet-explorer').href='https://explorer.solana.com/tx/'+encodeURIComponent(sig)+'?cluster=devnet';
  const battleUrl=new URL(lastUrl);battleUrl.searchParams.set('battle','1');
@@ -1476,7 +1504,7 @@ function showPublished(sig,title,verified,storageOnly=false,stats=''){
  share.searchParams.set('url',battleUrl.href);
  $('devnet-share-x').href=share.toString();
  links.classList.remove('hidden');
- window.IQQuestShowVerifiedPublication?.({url:lastUrl,title,network:'devnet'});
+ window.IQQuestShowVerifiedPublication?.({url:lastUrl,title,network:'devnet',topic,difficulty});
  if(storageOnly){
   $('publish-success-tag').textContent='✓ IQ LABS DEVNET · STORAGE TEST · NO PAYMENT';
   $('publish-success-detail').textContent='All 15 questions were verified from IQ Labs on Solana Devnet. This is an unpaid storage test, NOT a paid Mainnet quest. Friends can play free or compete in an X Battle using the same 15 questions.';
@@ -1519,7 +1547,7 @@ async function publishStorageOnly(){
       await questFingerprint(existing.data,meta.plan)!==fingerprint||JSON.stringify(existingDraft)!==JSON.stringify(draft))
     throw Error('The saved Devnet storage test does not match this wallet and quest. No duplicate was started.');
    showPublished(previous.signature,existing.data.title,true,true,
-    'Original onchain data: '+new TextEncoder().encode(existing.raw).length+' bytes · compressed: '+new TextEncoder().encode(existing.storedRaw).length+' bytes (protocol fees extra).');
+    'Original onchain data: '+new TextEncoder().encode(existing.raw).length+' bytes · compressed: '+new TextEncoder().encode(existing.storedRaw).length+' bytes (protocol fees extra).',existing.data.theme,existing.data.difficulty);
    return;
   }
   setStatus('Storage-only DEVNET test. No platform payment will be requested. The next step connects Phantom; then you individually approve IQ Labs storage transactions. Devnet network/protocol fees may apply.');
@@ -1535,7 +1563,7 @@ async function publishStorageOnly(){
    localStorage.setItem(storageCompletionKey,record);
   }catch(_e){}
   showPublished(result.signature,result.data.title||draft.title,true,true,
-   'Original onchain data: '+new TextEncoder().encode(JSON.stringify(result.data)).length+' bytes · compressed: '+result.bytes+' bytes (protocol fees extra).');
+   'Original onchain data: '+new TextEncoder().encode(JSON.stringify(result.data)).length+' bytes · compressed: '+result.bytes+' bytes (protocol fees extra).',result.data.theme,result.data.difficulty);
  }catch(error){
   setStatus('Storage-only Devnet upload was NOT verified: '+String(error?.message||error)+
    '\nIf Phantom approved anything or returned to this page, do not pay again. Wait for confirmation, then tap CONFIRM & PUBLISH MY QUEST ON DEVNET to check and resume safely.');
@@ -1571,7 +1599,7 @@ async function publishAfterVerifiedPayment(autoStarted=false){
      if(meta.testPaymentSignature===saved.signature){
        if(meta.publisher!==payer||existingFingerprint!==fingerprint)throw Error('A publication for this payment exists but does not match this wallet or draft. No duplicate was started.');
        try{localStorage.setItem(completionKey,JSON.stringify({signature:recoverySig,paymentSignature:saved.signature,fingerprint,payer}));}catch(e){}
-       showPublished(recoverySig,draft.title,true);
+       showPublished(recoverySig,draft.title,true,false,'',draft.theme,draft.difficulty);
        return;
      }
      if(meta.publisher===payer&&existingFingerprint===fingerprint&&!meta.testPaymentSignature)
@@ -1587,7 +1615,7 @@ async function publishAfterVerifiedPayment(autoStarted=false){
      localStorage.setItem('iqquest_devnet_last_title_v45',draft.title);
      localStorage.setItem(completionKey,JSON.stringify({signature:result.signature,paymentSignature:saved.signature,fingerprint,payer}));
    }catch(e){console.warn('Publication recovery data could not be saved',e);}
-   showPublished(result.signature,draft.title,true);
+   showPublished(result.signature,draft.title,true,false,'',draft.theme,draft.difficulty);
  }catch(error){
    setStatus('Upload was NOT verified: '+String(error?.message||error)+'\nIf you approved any transactions, inspect your wallet history / Solana Explorer before retrying. Do not pay mainnet SOL.');
  }finally{busy=false;enable();}
@@ -1623,7 +1651,7 @@ verify.addEventListener('click',async()=>{
    }
    const title=result.data.title||'An IQ QUEST Adventure';
    showPublished(sig,title,true,meta.testMode==='storage-only',
-    'Original onchain data: '+new TextEncoder().encode(result.raw).length+' bytes · compressed: '+new TextEncoder().encode(result.storedRaw).length+' bytes (protocol fees extra).');
+    'Original onchain data: '+new TextEncoder().encode(result.raw).length+' bytes · compressed: '+new TextEncoder().encode(result.storedRaw).length+' bytes (protocol fees extra).',result.data.theme,result.data.difficulty);
  }catch(error){setStatus('Could not verify saved inscription: '+String(error?.message||error));}
  finally{busy=false;enable();}
 });
@@ -1725,6 +1753,6 @@ verifyButton.addEventListener('click',async()=>{
 });
 </script>
 <script type="module" src="./payments/checkout-ui.mjs"></script>
-<script type="module" src="./my-quests.mjs?v=535"></script>
+<script type="module" src="./my-quests.mjs?v=540"></script>
 </body>
 </html>

@@ -3,6 +3,7 @@
  * No wallet connection, signature, server account or payment is required to search.
  */
 import {readQuestOnchain,isSolanaSignature} from './onchain-bridge.js?v=517';
+import {shareQuestCover} from './quest-cover.mjs?v=540';
 
 export const MY_QUESTS_KEY='iqquest_verified_creator_links_v535';
 export const HISTORY_PAGE_LIMIT=12;
@@ -16,6 +17,7 @@ function cleanRecord(value){
  const title=String(value.title||'Untitled Onchain Quest').trim().slice(0,100);
  const publisher=typeof value.publisher==='string'&&/^[1-9A-HJ-NP-Za-km-z]{32,44}$/.test(value.publisher)?value.publisher:'';
  return {signature:value.signature,title,network:'devnet',publisher,
+  topic:String(value.topic||'').trim().slice(0,120),
   difficulty:['Easy','Medium','Hard'].includes(value.difficulty)?value.difficulty:'',
   verifiedAt:Number.isFinite(value.verifiedAt)&&value.verifiedAt>0?Math.floor(value.verifiedAt):Date.now()};
 }
@@ -36,6 +38,7 @@ export function rememberVerifiedQuest(record,storage=globalThis.localStorage){
  const old=readMyQuests(storage);
  const previous=old.find(item=>item.signature===valid.signature);
  const merged={...previous,...valid,publisher:valid.publisher||previous?.publisher||'',
+  topic:valid.topic||previous?.topic||'',
   difficulty:valid.difficulty||previous?.difficulty||'',verifiedAt:previous?.verifiedAt||valid.verifiedAt};
  const list=[merged,...old.filter(item=>item.signature!==valid.signature)].slice(0,MAX_SAVED);
  storage.setItem(MY_QUESTS_KEY,JSON.stringify(list));
@@ -91,7 +94,7 @@ function verifiedItemFromRead(signature,read,publisher='',time=Date.now()){
    !Array.isArray(data.levels)||data.levels.length!==15||typeof data.iqquest.publisher!=='string')
   throw Error('Not a supported verified IQ QUEST Devnet publication.');
  if(publisher&&data.iqquest.publisher!==publisher)throw Error('The quest belongs to a different publisher wallet.');
- return cleanRecord({signature,title:data.title,difficulty:data.difficulty,publisher:data.iqquest.publisher,verifiedAt:time});
+ return cleanRecord({signature,title:data.title,topic:data.theme,difficulty:data.difficulty,publisher:data.iqquest.publisher,verifiedAt:time});
 }
 export async function verifyOneQuest(signature,{reader=readQuestOnchain}={}){
  if(!isSolanaSignature(signature))throw Error('Enter a valid Solana Devnet transaction signature or game link.');
@@ -167,7 +170,18 @@ function startMyQuestsUI(){
     try{await navigator.clipboard.writeText(url);copy.textContent='✓ COPIED';}catch(_e){prompt('Copy your player link:',url);}
    });
    const share=document.createElement('a');share.className='btn btn-gold';share.textContent='↗ SHARE ON X';share.href=makeCreatorShareUrl(item);share.target='_blank';share.rel='noopener noreferrer';
-   actions.append(play,copy,share);card.append(title,subtitle,actions);list.append(card);
+   const cover=document.createElement('button');cover.type='button';cover.className='btn btn-outline';cover.textContent='▧ MY X COVER';
+   cover.addEventListener('click',async()=>{
+    if(cover.disabled)return;
+    cover.disabled=true;
+    status('Preparing an individual cover for “'+item.title+'”…');
+    try{
+     const outcome=await shareQuestCover({title:item.title,topic:item.topic,difficulty:item.difficulty,url:makePublishedQuestUrl(item.signature)});
+     status(outcome==='shared'?'Share sheet completed; check your post on X before sending.':outcome==='cancelled'?'Cover sharing cancelled. Nothing was posted.':'Your cover was downloaded. Attach the image to your X post; use SHARE ON X for the player link.');
+    }catch(error){status('Could not create your cover: '+String(error?.message||error),true);}
+    finally{cover.disabled=false;}
+   });
+   actions.append(play,copy,share,cover);card.append(title,subtitle,actions);list.append(card);
   }
  };
  const setBusy=value=>{
@@ -234,7 +248,7 @@ function startMyQuestsUI(){
   if(detail.network!=='devnet')return;
   const signature=signatureFromPlayerLink(detail.url);
   if(!signature)return;
-  remember({signature,title:detail.title,network:'devnet'});render();
+  remember({signature,title:detail.title,topic:detail.topic,difficulty:detail.difficulty,network:'devnet'});render();
  });
  render();
 }
