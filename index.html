@@ -546,13 +546,13 @@ body:not(.is-home-chooser) .page-tagline{display:none}
             <span class="quest-path-tag">02 · MEDIUM · INTERMEDIATE · DEVNET</span>
             <h3>The Clockwork Observatory</h3>
             <p><strong>Level: MEDIUM.</strong> Solve star maps, gears, clock calculations, number patterns and secret signals. 15 verified onchain puzzles.</p>
-            <a class="btn btn-green" href="index.html?tx=3B2DJjR28V5HZpV2Tv4HKuMET2imBaYQFf4LxufBRF2oKVScHe5iyJfexn3wopscKJntyhFAd2PTNwxZbY6BzcfU&amp;network=devnet">▶ PLAY MEDIUM QUEST · FREE</a>
+            <a class="btn btn-green" href="index.html?tx=5RKCzfFcEpmeJtMkhy1cGiHkhKKmgZCYszRCVzLD1eFLBydZKwbyaviQDETDhBi6QUoY6Z9YdkF7pqYeL2zW51As&amp;network=devnet">▶ PLAY MEDIUM QUEST · FREE</a>
           </article>
           <article class="quest-path-card hard">
             <span class="quest-path-tag">03 · HARD · ADVANCED · DEVNET</span>
             <h3>The Neon Cipher Vault</h3>
             <p><strong>Level: HARD.</strong> Crack demanding binary clues, hidden ciphers and connected logic challenges in 15 onchain stages.</p>
-            <a class="btn btn-green" href="index.html?tx=5TZS5svVvKLmAPnjrLeL9JbZtXMMriit8KpG8uSupvDAqGRDkjMV7jgtP6GZerzV4cZKJuusXApbfHA1ohRbgKAz&amp;network=devnet">▶ PLAY HARD QUEST · FREE</a>
+            <a class="btn btn-green" href="index.html?tx=zLFqbHA88f1DnN2tzCZLkTcaNWa3YzERx6qxJdWZFxmjecPmsH5Cd131p2jGCfXyH1YGu6yqSLSoinwYRdrvykQ&amp;network=devnet">▶ PLAY HARD QUEST · FREE</a>
           </article>
         </div>
         <div class="quest-create-callout">
@@ -767,12 +767,12 @@ if(battlePoolRequest)$('game-return-link').href='index.html?view=battle#quest-en
 const onchainMode=!preview&&(!!onchainSignature||!!publishedQuestId||battlePoolRequest);
 const battleMode=battlePoolRequest||(onchainMode&&(params.get('battle')==='1'||params.has('target')));
 const onchainNetwork=params.get('network')==='mainnet-beta'?'mainnet-beta':'devnet';
-// These are final IQ Labs Devnet inscriptions. Every new Battle must read and
-// validate both onchain source quests; local JSON is never a live game fallback.
+// These are the 9 final IQ Labs Devnet V2 inscriptions. Every new Battle must
+// read all THREE source packs; local JSON is never a live game fallback.
 const VERIFIED_BATTLE_POOL={
- Easy:['4BjUpU6xeg6FRx98mwjDQvXychL5fuKdGnb5Z5uVYnzWPXXimoSZGadDnaCSg13T6fGHBga9parmsVfGP2JmAfjk','22DnDida35KVJvfqiZW8UQZCUUQ9RowUmkBLbhT1zrcPiSMxm2N5cNwwP6AFjwQKLzTR7Ekv5D5nKAqwPv7hDsMR'],
- Medium:['97bkz9odKBCc2WtWdi4osAvp2Y9gZRY6Dh5ZGhmmjMKgJADMAJv4M8vFdkrpfjdqK8PMeuwSoELSgbwMSnZ1Vth','3oKQvvCVxBLdRWMw3YHHQUpKKZLVhW1Ya5mNkJTVf1ytKpsurKcdorg8ydtWyKaxC6BZJ1EZAYd8qKN8pxW6py64'],
- Hard:['d1mtH6N21cn5yRjLUVQAS3Z8AwhUrGiuXAzSyjSevnkPVrHE2H4wL2XtiGFkNQ2iacdeJBu12NYCTWhH9LVo7LC','YevSpp4Hw6j6j7VuyJkwoCbtXY61qhnKMuU8ksrzGqzsYbkCFuE3JfM1PJVFip3DDdp3dMdGchjYcnWGE7sQe3n']
+ Easy:['2mPxNod6i356fz2FovuxCgbwf7qdyQ9yxgt3mP7vxbPsvGnXCLN22TsG4VXqWjFchqciRPzDGgwsxr93mg7g2RMD','4SipWUcHDb7QBbPASCzbH7VdfAjnpTwYeoDDCCj6GqKqPoFrhx3pnbgNVxSSXv2RxBtLXj4andFVwUtfvAV1f3aF','3VCWbub75wna9maz9nehqkM8tfy7u5NtkaUb8Jz3UzUBpxxPRNK62fAnFZKdX8VWvfgmL9Kq2dQPo6XFUKQkRdhX'],
+ Medium:['RiPNzwTxEygPPnv4i4J3NTeQmkTiFVyQ11kfCDXksJXekqgWayiQyctz8V9TQg1ConxgtiTXG9UpAgD3YWnmF7Y','47oVdkpL6r1Gse2tA74myzdNVrAmxkfeTdFG7WWgGNLLwPJEmDUADvwEVmeELPek4t6L7VH1LxxyuRhMoS77R2Wy','5nnAtLAEvGWDLA1TMax8FidpJNtBoKy6H8XtEBzQbnj4WYNTRyCd9KDMxAGo7ErqYbeExNMZ1nytncrd5cNaoYoT'],
+ Hard:['53nDLJtbJHBJDF7gTxKs7S7QaCYHcrngDSsMP98um3MXbKTegSAPgs6KACb83Uv8jpQ245YPFEPrG3poX2RKVgN6','bQFBY754pUE29Wo9LrgmLJ24UpgYSWyg4Ce9CsuPwYAzBcoHfozWHBSgJnZMiXy7bhp4q84y2s39oXuArW5CHT5','2ziQH2MFUdQyvG8FnLUSfBaVZRHQUpUtjDS7om6dccx7gVcZQm4X9j4h1AupdRseYCKEaRP632QkecnmkJxwctNT']
 };
 const isHomeChooser=!preview&&!onchainMode&&!params.has('difficulty')&&!params.has('mode')&&!params.has('target');
 document.body.classList.toggle('is-home-chooser',isHomeChooser);
@@ -795,9 +795,9 @@ if(isHomeChooser){
   freeButton.setAttribute('aria-pressed',String(!useBattle));
   battleButton.setAttribute('aria-pressed',String(useBattle));
   heading.textContent=useBattle?'FREE X BATTLES · Choose your level':'Choose your level: Easy, Medium or Hard';
-  intro.innerHTML=useBattle?'<strong>90 puzzles · 6 verified onchain packs.</strong> Pick Easy, Medium or Hard. Every Battle draws 15 independent questions from two 15-question Devnet packs. Share your link so friends face the <strong>same 15 puzzles</strong>. No wallet needed; browser times and scores are unverified.':originalIntro;
-  kicker.textContent=useBattle?'FREE X BATTLES · 90 ONCHAIN QUESTIONS · POWERED BY IQ LABS':originalKicker;
-  description.textContent=useBattle?'Each new Battle mixes 15 questions from 30 verified onchain puzzles. Your shared link keeps the selection identical for friends.':'Pick Easy, Medium or Hard to start your free onchain quest.';
+  intro.innerHTML=useBattle?'<strong>135 puzzles · 9 verified onchain packs.</strong> Pick Easy, Medium or Hard. Every Battle draws 15 independent questions from three 15-question Devnet packs. Share your link so friends face the <strong>same 15 puzzles</strong>. No wallet needed; browser times and scores are unverified.':originalIntro;
+  kicker.textContent=useBattle?'FREE X BATTLES · 135 ONCHAIN QUESTIONS · POWERED BY IQ LABS':originalKicker;
+  description.textContent=useBattle?'Each new Battle mixes 15 questions from 45 verified onchain puzzles. Your shared link keeps the selection identical for friends.':'Pick Easy, Medium or Hard to start your free onchain quest.';
   chooserCards.forEach(card=>{
    const link=card.querySelector('a.btn');
    const name=card.classList.contains('easy')?'Easy':card.classList.contains('medium')?'Medium':'Hard';
@@ -810,9 +810,9 @@ if(isHomeChooser){
     const href=new URL('index.html',location.href);
     href.searchParams.set('pool',name.toLowerCase());href.searchParams.set('seed',seed);href.searchParams.set('battle','1');href.searchParams.set('network','devnet');
     link.href=href.href;
-    title.textContent=name+' X Battle · 30-question pool';
-    copy.innerHTML='<strong>15 rotating onchain puzzles</strong> chosen from 30 verified '+name+' questions. Your friend gets the identical selection through your Battle link.';
-    tag.textContent=difficulty+' · 30 ONCHAIN QUESTIONS · ROTATING 15';
+    title.textContent=name+' X Battle · 45-question pool';
+    copy.innerHTML='<strong>15 rotating onchain puzzles</strong> chosen from 45 verified '+name+' questions. Your friend gets the identical selection through your Battle link.';
+    tag.textContent=difficulty+' · 45 ONCHAIN QUESTIONS · ROTATING 15';
    }else{link.href=card.dataset.soloHref;title.textContent=card.dataset.soloTitle;copy.innerHTML=card.dataset.soloCopy;tag.textContent=card.dataset.soloTag;}
    link.textContent=useBattle?`⚔ START ${difficulty} BATTLE`:`▶ PLAY ${difficulty} QUEST · FREE`;
   });
@@ -1146,7 +1146,7 @@ if(!onchainMode){load();syncSelection();render();}
 else{
  document.body.classList.add('is-onchain');
  const n=$('onchain-load-status');n.classList.remove('hidden');
- n.textContent=battlePoolRequest?'◈ Reading both verified Battle packs from Solana Devnet (30 puzzles). Selecting your shared 15-question challenge…':publishedQuestId?'◈ Resolving the published IQ Labs Mainnet signature… No wallet needed to play.':'◈ Verifying 15 questions from IQ Labs on Solana '+onchainNetwork+'… No wallet needed to play.';
+ n.textContent=battlePoolRequest?'◈ Reading three verified Battle packs from Solana Devnet (45 puzzles). Selecting your shared 15-question challenge…':publishedQuestId?'◈ Resolving the published IQ Labs Mainnet signature… No wallet needed to play.':'◈ Verifying 15 questions from IQ Labs on Solana '+onchainNetwork+'… No wallet needed to play.';
  $('demo-selector').classList.add('hidden');
  $('start-the-clue').disabled=true;
  syncSelection();
@@ -1158,26 +1158,27 @@ else{
      const difficulty=battlePoolDifficulty[0].toUpperCase()+battlePoolDifficulty.slice(1);
      const signatures=VERIFIED_BATTLE_POOL[difficulty];
      const bridge=await import('./onchain-bridge.js?v=516');
-     const pool=await import('./battle-pool/packs/selector.mjs?v=525');
-     const pair=[];
-     for(let i=0;i<2;i++){
-       n.textContent=`◈ Reading IQ Labs Devnet Battle pack ${i+1}/2 · ${difficulty} · ${i?'B':'A'}…`;
+     const pool=await import('./battle-pool/packs/selector.mjs?v=600');
+     if(!Array.isArray(signatures)||signatures.length!==3)throw Error('Battle requires three Devnet pack signatures.');
+     const verifiedPacks=[];
+     for(let i=0;i<3;i++){
+       n.textContent=`◈ Reading IQ Labs Devnet Battle pack ${i+1}/3 · ${difficulty} · ${'ABC'[i]}…`;
        let fetched;
        for(let attempt=0;attempt<3;attempt++){
          try{fetched=await bridge.readQuestOnchain(signatures[i],'devnet');break;}
          catch(error){
            const message=String(error?.message||error);
            if(attempt===2||!/429|rate.limit|too many requests|fetch failed|network error/i.test(message))throw error;
-           n.textContent=`◈ Devnet is busy. Retrying Battle pack ${i+1}/2 (attempt ${attempt+2}/3)…`;
+           n.textContent=`◈ Devnet is busy. Retrying Battle pack ${i+1}/3 (attempt ${attempt+2}/3)…`;
            await new Promise(resolve=>setTimeout(resolve,2000*(attempt+1)));
          }
        }
        if(fetched.data?.iqquest?.network!=='devnet'||fetched.data?.iqquest?.testMode!=='storage-only'||fetched.data?.iqquest?.publisher!=='BbMdFqpXfkJeKLvoT8W7QSFZmVeLV35gp6At2MbZF377')throw Error('The published Battle pack has unexpected onchain metadata.');
        const verified=IQQuest.validate(fetched.data);
-       if(verified.title!==`IQ QUEST Battle Pool ${difficulty} ${i?'B':'A'}`||verified.difficulty!==difficulty||verified.levels.length!==15)throw Error('The registered Battle pack does not match its expected difficulty and title.');
-       pair.push(verified);
+       if(verified.title!==`IQ QUEST Battle Pool ${difficulty} ${'ABC'[i]}`||verified.difficulty!==difficulty||verified.levels.length!==15)throw Error('The registered Battle pack does not match its expected difficulty and title.');
+       verifiedPacks.push(verified);
      }
-     quest=IQQuest.validate(pool.assembleBattleQuest(pair[0],pair[1],battlePoolSeed));
+     quest=IQQuest.validate(pool.assembleBattleQuestV2(verifiedPacks,battlePoolSeed));
    }else if(publishedQuestId){
      if(!/^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(publishedQuestId))throw Error('Invalid published quest ID.');
      const {API_BASE}=await import('./payments/site-config.mjs');
@@ -1200,8 +1201,8 @@ else{
    if(battleMode)$('battle-run-banner').classList.remove('hidden');
    $('start-the-clue').disabled=false;
    document.body.classList.add('onchain-loaded');
-   n.textContent=battlePoolRequest?'✓ BOTH ONCHAIN BATTLE PACKS VERIFIED · IQ Labs DEVNET · 30 source puzzles · 15 selected · '+quest.difficulty.toUpperCase()+' · No wallet needed.':publishedQuestId?'✓ VERIFIED ONCHAIN · IQ Labs MAINNET · 15 questions · Free to play.':'✓ VERIFIED ONCHAIN · IQ Labs '+onchainNetwork.toUpperCase()+' · 15 questions · '+quest.difficulty.toUpperCase()+' · No wallet needed.';
-   const status=document.querySelector('.onchain-status');if(status)status.textContent=battlePoolRequest?'✓ IQ LABS DEVNET BATTLE POOL VERIFIED · 15 questions selected from 30 published onchain. Browser times remain unverified.':publishedQuestId?'✓ IQ LABS MAINNET ONCHAIN QUEST VERIFIED · Questions and answers were read from Solana; battle times remain browser-unverified.':'✓ IQ LABS ONCHAIN QUEST VERIFIED · '+onchainNetwork.toUpperCase()+' · Quest and answers are publicly readable on Solana. Battle times remain browser-unverified.';
+   n.textContent=battlePoolRequest?'✓ ALL THREE ONCHAIN BATTLE PACKS VERIFIED · IQ Labs DEVNET · 45 source puzzles · 15 selected · '+quest.difficulty.toUpperCase()+' · No wallet needed.':publishedQuestId?'✓ VERIFIED ONCHAIN · IQ Labs MAINNET · 15 questions · Free to play.':'✓ VERIFIED ONCHAIN · IQ Labs '+onchainNetwork.toUpperCase()+' · 15 questions · '+quest.difficulty.toUpperCase()+' · No wallet needed.';
+   const status=document.querySelector('.onchain-status');if(status)status.textContent=battlePoolRequest?'✓ IQ LABS DEVNET BATTLE POOL VERIFIED · 15 questions selected from 45 published onchain. Browser times remain unverified.':publishedQuestId?'✓ IQ LABS MAINNET ONCHAIN QUEST VERIFIED · Questions and answers were read from Solana; battle times remain browser-unverified.':'✓ IQ LABS ONCHAIN QUEST VERIFIED · '+onchainNetwork.toUpperCase()+' · Quest and answers are publicly readable on Solana. Battle times remain browser-unverified.';
    if(run.startedAt&&!run.finishedAt)ensureStart();
  }catch(error){
    onchainReady=false;
