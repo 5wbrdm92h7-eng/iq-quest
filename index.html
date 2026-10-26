@@ -569,7 +569,7 @@ body:not(.is-home-chooser) .page-tagline{display:none}
           <button class="demo-difficulty-card" type="button" data-difficulty="Medium" aria-pressed="true"><span class="demo-card-label">02 · THE RUNE KEEPER</span><strong>MEDIUM</strong><span>15 unique puzzles · 9–18 min*</span><small>Crack ciphers and connect discoveries.</small></button>
           <button class="demo-difficulty-card" type="button" data-difficulty="Hard" aria-pressed="false"><span class="demo-card-label">03 · THE FINAL SEAL</span><strong>HARD</strong><span>15 unique puzzles · 15–30 min*</span><small>Follow a demanding chain of cryptic seals.</small></button>
         </div>
-        <div class="selector-bottom"><p class="demo-selector-note">*15-puzzle estimates · Lightning ~1–3 min. First Attempt starts only when you press Start the Clue. Replays count as Practice; results are browser-unverified.</p><a class="selector-jump btn btn-green" href="#adventure">↓ GO TO START THE CLUE</a></div>
+        <div class="selector-bottom"><p class="demo-selector-note">*15-puzzle estimates · Lightning ~1–3 min. First Attempt starts only when you press Start Quest. Replays count as Practice; results are browser-unverified.</p><a class="selector-jump btn btn-green" href="#adventure">↓ GO TO QUEST START</a></div>
       </section>
 
       <section class="hero hero-player" aria-labelledby="hero-heading">
@@ -619,10 +619,10 @@ body:not(.is-home-chooser) .page-tagline{display:none}
           <section id="start-gate" class="start-gate" aria-labelledby="start-gate-title">
             <div class="start-gate-emblem" aria-hidden="true">✧ ◇ ✧</div>
             <div class="section-kicker">THE FIRST SEAL AWAITS</div>
-            <h3 id="start-gate-title">Ready to unlock the mystery?</h3>
+            <h3 id="start-gate-title">Ready to start your quest?</h3>
             <p id="start-gate-summary">15 chambers · Medium difficulty</p>
-            <p class="start-gate-note">Your timer and First Attempt begin only when you press Start the Clue. The first question stays hidden until then.</p>
-            <button type="button" id="start-the-clue" class="btn btn-green start-gate-button">START THE CLUE <span aria-hidden="true">→</span></button>
+            <p class="start-gate-note">Your timer and First Attempt begin only when you press Start Quest. The first question stays hidden until then.</p>
+            <button type="button" id="start-the-clue" class="btn btn-green start-gate-button">START QUEST <span aria-hidden="true">→</span></button>
           </section>
           <div id="question-area" class="question-area hidden">
             <div class="question-subtitle"><span id="question-number">MYSTERY 01</span><span class="micro-rune" aria-hidden="true">◇ ✧ ◇</span></div>
@@ -1011,7 +1011,7 @@ function render(){
  $('question-area').classList.toggle('hidden',!run.startedAt||!!run.finishedAt);
  $('finish-area').classList.toggle('hidden',!run.finishedAt);
  $('start-gate-summary').textContent=`${quest.levels.length} questions · ${quest.difficulty} difficulty${playMode==='lightning'?' · Lightning Battle':''}`;
- $('start-gate').querySelector('.start-gate-note').textContent=preview?'Your preview timer begins only when you press Start the Clue.':'Your timer and First Attempt begin only when you press Start the Clue. The first question stays hidden until then.';
+ $('start-gate').querySelector('.start-gate-note').textContent=preview?'Your preview timer begins only when you press Start Quest.':'Your timer and First Attempt begin only when you press Start Quest. The first question stays hidden until then.';
  const panel=document.querySelector('.game-panel');if(panel){panel.classList.toggle('active-run',!!run.startedAt&&!run.finishedAt);panel.classList.toggle('finish-mode',!!run.finishedAt);}
  updateAttemptChip();
  if(run.finishedAt){showFinish();renderChapters();updateClocks();return;}
