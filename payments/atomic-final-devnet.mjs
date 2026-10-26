@@ -50,15 +50,21 @@ function key(web3,value,label){
 function checkFinalInstruction({web3,wallet,finalInstruction,iqLabsFeeReceiver}){
  const program=key(web3,IQ_LABS_PROGRAM,'IQ Labs program');
  const receiver=key(web3,iqLabsFeeReceiver,'IQ Labs registration fee recipient');
- if(!finalInstruction?.programId?.equals?.(program)||finalInstruction.keys?.length!==4)
+ // Official IQ Labs SDK 0.3.6 IDL has SIX accounts for
+ // user_inventory_code_in. Its optional session and iq_ata accounts are
+ // encoded as program-ID placeholders when omitted, not dropped.
+ if(!finalInstruction?.programId?.equals?.(program)||finalInstruction.keys?.length!==6)
   fail('The last instruction is not the expected IQ Labs registration.');
  const keys=finalInstruction.keys;
  // IQ Labs inventory PDA has seeds ["inventorymY}AGBJiqLabs", payer].
  const correctInventory=web3.PublicKey.findProgramAddressSync([new TextEncoder().encode(INVENTORY_SEED),wallet.toBuffer()],program)[0];
  if(!keys[0].pubkey.equals(wallet)||!keys[0].isSigner||!keys[0].isWritable||
-    !keys[1].pubkey.equals(correctInventory)||!keys[1].isWritable||
-    !keys[2].pubkey.equals(web3.SystemProgram.programId)||
-    !keys[3].pubkey.equals(receiver))fail('IQ Labs inventory accounts differ from the expected payer, PDA or fee receiver.');
+    !keys[1].pubkey.equals(correctInventory)||keys[1].isSigner||!keys[1].isWritable||
+    !keys[2].pubkey.equals(web3.SystemProgram.programId)||keys[2].isSigner||keys[2].isWritable||
+    !keys[3].pubkey.equals(receiver)||keys[3].isSigner||!keys[3].isWritable||
+    !keys[4].pubkey.equals(program)||keys[4].isSigner||keys[4].isWritable||
+    !keys[5].pubkey.equals(program)||keys[5].isSigner||keys[5].isWritable)
+   fail('IQ Labs inventory accounts differ from the expected payer, PDA, fee receiver or optional-account placeholders.');
  return parseFinalData(finalInstruction.data);
 }
 
@@ -121,8 +127,9 @@ export async function verifyAtomicDevnetFinal({connection,web3,signature,payer,e
    const decoded=parseFinalData(data);
    if(decoded.path!==expectedPath||decoded.metadataText!==expectedMetadata)fail('IQ Labs registration did not match the expected quest data.');
    const keys=(ix.accounts||[]).map(account=>String(account?.toBase58?.()||account));
-   if(keys.length!==4||keys[0]!==wallet.toBase58()||keys[1]!==inventory.toBase58()||
-      keys[2]!==web3.SystemProgram.programId.toBase58()||keys[3]!==feeReceiver.toBase58())
+   if(keys.length!==6||keys[0]!==wallet.toBase58()||keys[1]!==inventory.toBase58()||
+      keys[2]!==web3.SystemProgram.programId.toBase58()||keys[3]!==feeReceiver.toBase58()||
+      keys[4]!==program.toBase58()||keys[5]!==program.toBase58())
     fail('Inventory registration uses the wrong onchain accounts.');
    foundFinal++;
   }else if(ix.programId?.equals?.(web3.SystemProgram.programId)){
