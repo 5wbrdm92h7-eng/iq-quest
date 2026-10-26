@@ -3,7 +3,7 @@
  * No wallet connection, signature, server account or payment is required to search.
  */
 import {readQuestOnchain,isSolanaSignature} from './onchain-bridge.js?v=517';
-import {shareQuestCover} from './quest-cover.mjs?v=545';
+import {shareQuestCover,makeQuestShareCaption} from './quest-cover.mjs?v=548';
 
 export const MY_QUESTS_KEY='iqquest_verified_creator_links_v535';
 export const HISTORY_PAGE_LIMIT=12;
@@ -84,7 +84,7 @@ export function makeCreatorShareUrl(item,baseUrl=globalThis.location.href){
  const play=new URL(makePublishedQuestUrl(item.signature,baseUrl));
  play.searchParams.set('battle','1');
  const intent=new URL('https://x.com/intent/tweet');
- intent.searchParams.set('text',`🧠 I created “${item.title}” on IQ QUEST! Can you solve all 15 puzzles? ⚔ Challenge your friends and community! Quest data stored on Solana Devnet (beta), powered by IQ Labs. #IQQUEST #Solana`);
+ intent.searchParams.set('text',makeQuestShareCaption(item));
  intent.searchParams.set('url',play.toString());
  return intent.toString();
 }
@@ -170,6 +170,12 @@ function startMyQuestsUI(){
     try{await navigator.clipboard.writeText(url);copy.textContent='✓ COPIED';}catch(_e){prompt('Copy your player link:',url);}
    });
    const share=document.createElement('a');share.className='btn btn-outline';share.textContent='↗ SHARE LINK ONLY';share.href=makeCreatorShareUrl(item);share.target='_blank';share.rel='noopener noreferrer';
+   const copyCaption=document.createElement('button');copyCaption.type='button';copyCaption.className='btn btn-outline';copyCaption.textContent='⧉ COPY X TEXT';
+   copyCaption.addEventListener('click',async()=>{
+    const caption=makeQuestShareCaption(item);
+    try{await navigator.clipboard.writeText(caption);copyCaption.textContent='✓ X TEXT COPIED';status('✓ X caption copied. Tap SHARE COVER + LINK, choose X, then paste this caption above the game link.');}
+    catch(_e){prompt('Copy this text, then paste it into your X post:',caption);status('Copy the caption shown, then share the cover and paste it above the link on X.');}
+   });
    const cover=document.createElement('button');cover.type='button';cover.className='btn btn-green';cover.textContent='↗ SHARE COVER + LINK';
    cover.addEventListener('click',async()=>{
     if(cover.disabled)return;
@@ -177,11 +183,11 @@ function startMyQuestsUI(){
     status('Preparing an individual cover for “'+item.title+'”…');
     try{
      const outcome=await shareQuestCover({title:item.title,topic:item.topic,difficulty:item.difficulty,url:makePublishedQuestUrl(item.signature)});
-     status(outcome==='shared'?'Share sheet closed; review your X draft before posting.':outcome==='cancelled'?'Cover sharing cancelled. Nothing was posted.':'This wallet browser could not share the image. It requested a PNG download, but may not save the file. Try the Creator in Safari or use SHARE LINK ONLY.');
+     status(outcome==='shared'?'Share sheet closed. If X showed only the cover and link, use COPY X TEXT and paste the caption before posting.':outcome==='cancelled'?'Cover sharing cancelled. Nothing was posted.':'This wallet browser could not share the image. It requested a PNG download, but may not save the file. Try the Creator in Safari or use SHARE LINK ONLY.');
     }catch(error){status('Could not create your cover: '+String(error?.message||error),true);}
     finally{cover.disabled=false;}
    });
-   actions.append(play,copy,cover,share);card.append(title,subtitle,actions);list.append(card);
+   actions.append(play,copy,copyCaption,cover,share);card.append(title,subtitle,actions);list.append(card);
   }
  };
  const setBusy=value=>{

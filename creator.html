@@ -570,7 +570,7 @@ details.advanced-box[open]>summary{color:#adffb8;margin-bottom:13px}
           </div>
           <details class="panel studio-panel my-quests-panel" id="my-quests">
             <summary>▣ MY QUESTS · OPEN &amp; SHARE YOUR PUBLISHED GAMES</summary>
-            <p class="my-quests-intro">Find your verified, published IQ QUEST games, play them again, copy the game link or share them on X. Saved links stay on this device. You can also find Devnet publications on a new phone using your <strong>public creator-wallet address</strong> — no wallet connection, payment or secret phrase needed.</p>
+            <p class="my-quests-intro">Find your verified, published IQ QUEST games, play them again, copy the game link or share them on X. <strong>Sharing on iPhone:</strong> X may show only the image and link. Tap <strong>COPY X TEXT</strong> first, then <strong>SHARE COVER + LINK</strong>, and paste the text into your X post. Saved links stay on this device. You can also find Devnet publications on a new phone using your <strong>public creator-wallet address</strong> — no wallet connection, payment or secret phrase needed.</p>
             <span id="my-quests-count">0 SAVED QUESTS</span>
             <div id="my-quests-list" class="my-quests-list" aria-live="polite"></div>
             <p class="quest-cover-guidance">For <strong>MY X COVER</strong>, swipe through the apps in the share menu and choose X. If X isn't listed, save the image and attach it to your post.</p>
@@ -807,8 +807,9 @@ details.advanced-box[open]>summary{color:#adffb8;margin-bottom:13px}
       <button type="button" id="verified-onchain-copy" class="btn btn-outline" style="width:100%;font-size:13px;margin:7px 0">COPY PLAYER LINK</button>
       <section aria-label="Personalised share image" style="margin:14px 0;padding:12px;border:1px solid #528f73;border-radius:13px;background:#0b231e">
         <strong style="font-size:13px;color:#f0deaa">YOUR PERSONAL X COVER</strong>
+        <button type="button" id="verified-x-cover-copy-caption" class="btn btn-outline cover-download-secondary">⧉ COPY X TEXT · PASTE INTO YOUR POST</button>
         <button type="button" id="verified-x-cover-share" class="btn btn-green cover-share-primary">↗ SHARE COVER + GAME LINK</button>
-        <p class="cover-share-caption">Opens your share menu. Choose X to share your own quest image and link.</p>
+        <p class="cover-share-caption">On iPhone, X may omit the description. Copy X text first, then share your cover and link and paste the text above the link in X.</p>
         <div id="verified-x-cover-status" role="status" aria-live="polite" class="small-status"></div>
         <canvas id="verified-x-cover-preview" class="quest-cover-preview" width="1200" height="630" role="img" aria-label="Personalised quest artwork with title and onchain information"></canvas>
         <button type="button" id="verified-x-cover-download" class="btn btn-outline cover-download-secondary">↓ DOWNLOAD PNG · OPTIONAL</button>
@@ -1447,7 +1448,7 @@ import {publishQuestDevnet,publishQuestDevnetStorageTest,publishQuestDevnetAtomi
 import {verifyDevnetPayment,questFingerprint} from './checkout-bridge.js';
 import {requestCheckoutWallet} from './wallet-bridge.js?v=514';
 import {getSavedMobileJob,DEVNET_STORAGE_ONLY_JOB_KEY,DEVNET_STORY_FREE_JOB_KEY} from './devnet-resumable.mjs?v=544';
-import {previewQuestCover,shareQuestCover,downloadQuestCover} from './quest-cover.mjs?v=545';
+import {previewQuestCover,shareQuestCover,downloadQuestCover,makeQuestShareCaption} from './quest-cover.mjs?v=548';
 const $=id=>document.getElementById(id);
 const publish=$('publish-iq-devnet'),storageTest=$('publish-storage-devnet'),consent=$('devnet-accept'),auto=$('devnet-auto-publish'),verify=$('verify-iq-devnet');
 const atomicButton=$('atomic-devnet-publish'),atomicConsent=$('atomic-devnet-consent'),atomicStatus=$('atomic-devnet-status');
@@ -1477,6 +1478,11 @@ $('verified-onchain-copy').addEventListener('click',async()=>{
  try{await navigator.clipboard.writeText(lastUrl);$('verified-onchain-copy').textContent='✓ PLAYER LINK COPIED';}
  catch(_e){prompt('Copy your verified quest link:',lastUrl);}
 });
+$('verified-x-cover-copy-caption').addEventListener('click',async()=>{
+ const caption=makeQuestShareCaption(lastCover);
+ try{await navigator.clipboard.writeText(caption);$('verified-x-cover-copy-caption').textContent='✓ X TEXT COPIED · PASTE INTO X';$('verified-x-cover-status').textContent='Caption copied. Now tap SHARE COVER + GAME LINK; paste this text into your X post if only the URL appears.';}
+ catch(_e){prompt('Copy this text, then paste it into your X post:',caption);$('verified-x-cover-status').textContent='Copy the caption shown and paste it into X after you share the cover.';}
+});
 function openVerifiedModal(title,sig){
  // This must only be invoked after the complete, independently verified
  // onchain readback. A mere Phantom approval is never treated as success.
@@ -1494,7 +1500,7 @@ $('verified-x-cover-share').addEventListener('click',async()=>{
  const message=$('verified-x-cover-status');message.textContent='Preparing your personal quest image…';
  try{
   const outcome=await shareQuestCover({...lastCover,url:lastUrl});
-  message.textContent=outcome==='shared'?'Share sheet closed. Check your X draft; nothing is posted until you send it.':outcome==='cancelled'?'Share cancelled. Nothing was posted.':'This wallet browser did not support sharing the image. A PNG download was requested but may not be saved. Try opening the creator in Safari, or share the player link separately.';
+  message.textContent=outcome==='shared'?'Share sheet closed. If X shows only the image and link, paste the caption you copied before posting. Nothing is posted until you send it.':outcome==='cancelled'?'Share cancelled. Nothing was posted.':'This wallet browser did not support sharing the image. A PNG download was requested but may not be saved. Try opening the creator in Safari, or share the player link separately.';
  }catch(error){message.textContent='Could not prepare the image: '+String(error?.message||error);}
 });
 $('verified-x-cover-download').addEventListener('click',async()=>{
@@ -1827,6 +1833,6 @@ verifyButton.addEventListener('click',async()=>{
 });
 </script>
 <script type="module" src="./payments/checkout-ui.mjs"></script>
-<script type="module" src="./my-quests.mjs?v=545"></script>
+<script type="module" src="./my-quests.mjs?v=548"></script>
 </body>
 </html>

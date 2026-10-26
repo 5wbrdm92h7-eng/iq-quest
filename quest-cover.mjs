@@ -25,6 +25,14 @@ export function coverFilename(title){
   .replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'').slice(0,45);
  return 'iq-quest-'+(slug||'quest')+'-x-cover.png';
 }
+/** Ready to paste into X if iOS ignores the text supplied with a shared image.
+ * The player URL is intentionally separate, because X normally keeps that URL
+ * when importing the PNG from the phone's share sheet.
+ */
+export function makeQuestShareCaption({title}={}){
+ const full=safeCoverTitle(title),name=full.length>40?full.slice(0,39)+'…':full;
+ return `🧠 I created my own onchain quest “${name}” with IQ QUEST!\n⚔️ Can you solve all 15 puzzles? Challenge your friends!\n⛓️ Stored on Solana Devnet · Powered by IQ Labs.\n✨ Create your own quest too! #IQQUEST #Solana`;
+}
 function deterministicRandom(seed){
  let value=2166136261;
  for(const char of seed){value=Math.imul(value^char.charCodeAt(0),16777619)>>>0;}
@@ -147,7 +155,7 @@ export async function shareQuestCover(options={}){
  const canShare=typeof navigator!=='undefined'&&typeof navigator.share==='function'&&
   typeof navigator.canShare==='function'&&navigator.canShare({files:[file]});
  if(canShare){
-  try{await navigator.share({title:safeCoverTitle(options.title),text:'🧠 Try my onchain IQ QUEST! Powered by IQ Labs.',url:options.url||undefined,files:[file]});return 'shared';}
+  try{await navigator.share({title:safeCoverTitle(options.title),text:makeQuestShareCaption(options),url:options.url||undefined,files:[file]});return 'shared';}
   catch(error){if(error?.name==='AbortError')return 'cancelled';}
  }
  saveFile(file);return 'download-requested';
