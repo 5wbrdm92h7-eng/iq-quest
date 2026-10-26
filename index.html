@@ -620,7 +620,7 @@ body:not(.is-home-chooser) .page-tagline{display:none}
           </section>
           <div id="question-area" class="question-area hidden">
             <div class="question-subtitle"><span id="question-number">MYSTERY 01</span><span class="micro-rune" aria-hidden="true">◇ ✧ ◇</span></div>
-            <h3 id="question-heading">The Hidden Door</h3>
+            <h3 id="question-heading" tabindex="-1">The Hidden Door</h3>
             <p id="question-story" class="narration hidden" aria-hidden="true"></p>
             <div class="question-box"><p id="question-text"></p></div>
             <form id="answer-form" autocomplete="off">
@@ -1028,6 +1028,9 @@ function render(){
 function normalize(s){return IQQuest.normalizeAnswer(s);}
 function milestone(){if(playMode==='lightning'||preview||run.step===0||run.step%5!==0)return;const m=$('milestone-burst');m.textContent=run.step===5?'✦ FIRST RUNE AWAKENED · 5 / 15 ✦':run.step===10?'✦ GATEWAY POWER RISING · 10 / 15 ✦':`✦ ${run.step} CHAMBERS CLEARED ✦`;m.classList.remove('hidden');clearTimeout(milestoneTimer);milestoneTimer=setTimeout(()=>m.classList.add('hidden'),1550);}
 function advanceLevel(){
+ // Close a mobile keyboard before revealing the next puzzle. The player
+ // chooses when to tap the answer field for each question.
+ $('answer-input').blur();
  if(run.step+1>=quest.levels.length){run.finishedAt=Date.now();stopTimer();save();render();}
  else{run.step++;save();render();milestone();}
 }
@@ -1189,8 +1192,8 @@ if(run.startedAt&&!run.finishedAt)ensureStart();
 if(!preview&&!onchainMode&&playMode==='lightning'&&!params.get('seed'))updateURL();
 document.querySelectorAll('[data-difficulty]').forEach(btn=>btn.addEventListener('click',()=>switchGame(playMode,btn.dataset.difficulty)));
 document.querySelectorAll('[data-mode]').forEach(btn=>btn.addEventListener('click',()=>switchGame(btn.dataset.mode,chosenDifficulty)));
-function startTheClue(){if(onchainMode&&!onchainReady)return;ensureStart();render();if(matchMedia('(max-width:740px)').matches){document.querySelector('.game-panel').scrollIntoView({behavior:'auto',block:'start'});}else{$('question-area').scrollIntoView({behavior:'smooth',block:'center'});}$('answer-input').focus({preventScroll:true});}
-$('hero-start').addEventListener('click',()=>{$('adventure').scrollIntoView({behavior:'smooth',block:'start'});if(run.finishedAt)$('finish-area').focus({preventScroll:true});else if(run.startedAt)$('answer-input').focus({preventScroll:true});else $('start-the-clue').focus({preventScroll:true});});
+function startTheClue(){if(onchainMode&&!onchainReady)return;ensureStart();render();if(matchMedia('(max-width:740px)').matches){document.querySelector('.game-panel').scrollIntoView({behavior:'auto',block:'start'});}else{$('question-area').scrollIntoView({behavior:'smooth',block:'center'});}$('question-heading').focus({preventScroll:true});}
+$('hero-start').addEventListener('click',()=>{$('adventure').scrollIntoView({behavior:'smooth',block:'start'});if(run.finishedAt)$('finish-area').focus({preventScroll:true});else if(run.startedAt)$('question-heading').focus({preventScroll:true});else $('start-the-clue').focus({preventScroll:true});});
 $('start-the-clue').addEventListener('click',startTheClue);
 $('answer-form').addEventListener('submit',submit);$('show-hint').addEventListener('click',showHint);$('reset-run').addEventListener('click',reset);$('play-again').addEventListener('click',reset);$('new-lightning').addEventListener('click',newLightning);
 $('share-x').addEventListener('click',shareX);$('copy-challenge').addEventListener('click',copyChallenge);$('copy-result').addEventListener('click',copyResult);$('download-card').addEventListener('click',downloadCard);
