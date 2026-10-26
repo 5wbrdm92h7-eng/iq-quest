@@ -658,19 +658,27 @@ details.advanced-box[open]>summary{color:#adffb8;margin-bottom:13px}
             <div class="section-kicker">STEP 3 · PUBLISH YOUR QUEST</div>
             <h3>Publish your quest on Solana</h3>
             <p>Your questions are ready? Publishing stores all 15 questions, hints and answers publicly onchain. Connect Phantom <strong>only now</strong>.</p>
-            <div class="creator-publish-simple-summary"><strong>DEVNET TEST · NO PLATFORM PAYMENT.</strong> Your friends play for free. Future creator price: <strong>0.03 SOL + network and IQ Labs storage fees</strong> (Mainnet not live).</div>
+            <div class="creator-publish-simple-summary"><strong>DEVNET BETA · 0.03 TEST-SOL FINAL PAYMENT.</strong> Your friends play for free. Real Mainnet publishing is still OFF; Devnet storage and network test fees are additional.</div>
             <section class="creator-publish-safety" aria-label="Devnet publication steps, fees and payment protection">
               <h4>Publish in 3 steps</h4>
               <ol>
                 <li><strong>Check your 15 questions</strong> and agree to public onchain storage.</li>
-                <li><strong>Connect Phantom on Devnet</strong> and approve each storage transaction.</li>
-                <li><strong>Wait for 15/15 verified.</strong> Then copy your player link or share it on X.</li>
+                <li><strong>Connect Phantom on Devnet</strong> and approve each storage transaction. The final one also includes 0.03 test SOL.</li>
+                <li><strong>Wait for 15/15 verified and the finalized payment receipt.</strong> Then copy your player link or share it on X.</li>
               </ol>
-              <p class="publish-cost-line"><strong>Example:</strong> 6 Phantom approvals, about <strong>0.0030324 Devnet SOL</strong> total (IQ Labs registration + Solana transaction fees). Bigger quests may need up to 10 approvals. This is a previous test result, <strong>not a fixed quote</strong>. Review the amounts inside Phantom.</p>
+              <p class="publish-cost-line"><strong>Previous storage-only example:</strong> 6 Phantom approvals, about <strong>0.0030324 Devnet SOL</strong> (IQ Labs registration + Solana transaction fees). The atomic test additionally transfers <strong>0.03 Devnet SOL</strong> in the final approval. This is not a live fee quote. Review each wallet transaction.</p>
               <details><summary>Interrupted upload or future payment?</summary>
                 <p><strong>Interrupted?</strong> Return with the same wallet and unchanged quest. The app checks saved onchain transactions before asking for the next approval. If a transaction is uncertain, repeat signing is blocked. Check Phantom/Explorer; never make another platform payment just to resume.</p>
-                <p><strong>Future 0.03 SOL:</strong> We are preparing a payment instruction bundled with the final IQ Labs registration in one Solana transaction, with no separate advance payment. That design still needs testing and a reliable onchain readback/recovery flow. Network/IQ Labs fees can still be incurred even if publication is interrupted. Real Mainnet payments remain off.</p>
+                <p><strong>Devnet 0.03 test SOL:</strong> The final IQ Labs registration and test payment are bundled in one transaction. If the final transaction fails, its platform transfer is reversed; network fees and earlier storage costs may remain. The app does not treat a wallet approval as success without a finalized onchain receipt. Real Mainnet payments remain OFF.</p>
               </details>
+            </section>
+            <section id="atomic-devnet-card" aria-label="Atomic Devnet publication test" style="border:2px solid #efd187;border-radius:13px;background:#2b2618;padding:15px;margin:14px 0">
+              <strong style="color:#ffe8a7;font-size:15px">◈ NEW · PUBLISH + 0.03 TEST SOL · DEVNET ONLY</strong>
+              <p style="font-size:12px;line-height:1.65;color:#f2e5c9">Your custom quest is stored in several IQ Labs Devnet transactions. <strong>Only the final transaction</strong> includes the 0.03 test-SOL transfer. No separate advance payment. All 15 puzzles and the final payment receipt must verify before your link is shown.</p>
+              <p style="font-size:11px;line-height:1.6;color:#e5d8ba;overflow-wrap:anywhere">Platform recipient: <strong>BbMdFqpXfkJeKLvoT8W7QSFZmVeLV35gp6At2MbZF377</strong>. Wallet approvals also include separate Devnet IQ Labs and network charges. Test SOL has no real-world value.</p>
+              <label class="publish-consent" style="display:flex;gap:9px;align-items:flex-start"><input type="checkbox" id="atomic-devnet-consent" style="margin-top:3px"><span><strong>I agree to the Devnet-only test.</strong> My 15 questions, answers and hints will be publicly readable on Solana. I will check every wallet request, including the final 0.03 test-SOL transfer to the address above. I understand earlier storage fees can remain if the upload is interrupted. <strong>No Mainnet SOL will be sent.</strong></span></label>
+              <button type="button" id="atomic-devnet-publish" class="btn btn-gold" disabled style="width:100%;margin:12px 0 8px">✓ TEST 0.03 DEVNET SOL + PUBLISH ONCHAIN</button>
+              <p id="atomic-devnet-status" role="status" aria-live="polite" style="font-size:12px;line-height:1.6;white-space:pre-wrap;overflow-wrap:anywhere;color:#fff0c7">Nothing has been sent. Connect Phantom only after confirming the checkbox.</p>
             </section>
             <div id="devnet-publish-primary" aria-label="Publish and recover your onchain Devnet quest"></div>
             <input type="radio" name="publish-plan" value="community" checked hidden aria-label="One publishing plan">
@@ -790,7 +798,7 @@ details.advanced-box[open]>summary{color:#adffb8;margin-bottom:13px}
       </section>
       <a id="verified-onchain-share-x" class="btn btn-gold" style="display:flex;width:100%;font-size:13px;margin:10px 0" target="_blank" rel="noopener noreferrer">⚔ SHARE LINK ON X · STANDARD PREVIEW ↗</a>
       <a id="verified-onchain-explorer" style="display:block;color:#a9ffba;text-decoration:underline;margin:13px 0;font-size:12px" target="_blank" rel="noopener noreferrer">Verify transaction in Solana Explorer ↗</a>
-      <p style="font-size:11px;color:#cddfc8;line-height:1.5;margin:13px 0">This confirms the Devnet storage test only. Real Mainnet sales are not enabled. Players do not need a wallet.</p>
+      <p id="verified-onchain-mode-note" style="font-size:11px;color:#cddfc8;line-height:1.5;margin:13px 0">This confirms the Devnet storage test only. Real Mainnet sales are not enabled. Players do not need a wallet.</p>
       <button type="button" id="verified-onchain-close" class="btn btn-glass" style="width:100%;margin:7px 0 0">CLOSE · BACK TO CREATOR</button>
     </div>
   </div>
@@ -1412,13 +1420,14 @@ try{
 })();
 </script><script type="module">
 // Explicit release query avoids a stale cached module in Phantom's in-app browser.
-import {publishQuestDevnet,publishQuestDevnetStorageTest,readQuestOnchain,isSolanaSignature} from './onchain-bridge.js?v=537';
+import {publishQuestDevnet,publishQuestDevnetStorageTest,publishQuestDevnetAtomicTest,verifyAtomicDevnetPublication,readQuestOnchain,isSolanaSignature} from './onchain-bridge.js?v=543';
 import {verifyDevnetPayment,questFingerprint} from './checkout-bridge.js';
 import {requestCheckoutWallet} from './wallet-bridge.js?v=514';
-import {getSavedMobileJob,DEVNET_STORAGE_ONLY_JOB_KEY,DEVNET_STORY_FREE_JOB_KEY} from './devnet-resumable.mjs?v=537';
+import {getSavedMobileJob,DEVNET_STORAGE_ONLY_JOB_KEY,DEVNET_STORY_FREE_JOB_KEY} from './devnet-resumable.mjs?v=543';
 import {previewQuestCover,shareQuestCover,downloadQuestCover} from './quest-cover.mjs?v=540';
 const $=id=>document.getElementById(id);
 const publish=$('publish-iq-devnet'),storageTest=$('publish-storage-devnet'),consent=$('devnet-accept'),auto=$('devnet-auto-publish'),verify=$('verify-iq-devnet');
+const atomicButton=$('atomic-devnet-publish'),atomicConsent=$('atomic-devnet-consent'),atomicStatus=$('atomic-devnet-status');
 const progress=$('devnet-publish-status'),links=$('devnet-links');
 const successModal=$('verified-onchain-modal');
 let busy=false,lastUrl='',lastCover={title:'',topic:'',difficulty:''};
@@ -1468,8 +1477,9 @@ $('verified-x-cover-download').addEventListener('click',async()=>{
  try{await downloadQuestCover(lastCover);message.textContent='PNG saved. Attach it to your X post; copy your player link above.';}
  catch(error){message.textContent='Could not download the image: '+String(error?.message||error);}
 });
-function enable(){publish.disabled=busy||!consent.checked;storageTest.disabled=busy||!consent.checked;verify.disabled=busy;}
+function enable(){publish.disabled=busy||!consent.checked;storageTest.disabled=busy||!consent.checked;verify.disabled=busy;atomicButton.disabled=busy||!atomicConsent.checked;}
 consent.addEventListener('change',enable);enable();
+atomicConsent.addEventListener('change',enable);
 $('shortcut-storage-only').addEventListener('click',()=>{
  $('developer-tests').open=true;
  consent.scrollIntoView({behavior:'smooth',block:'center'});
@@ -1491,7 +1501,7 @@ try{
  else if(job&&!job.finalSignature)
   setStatus('An earlier Phantom Devnet upload may be unfinished ('+job.index+' confirmed chunks saved). First VERIFY LAST DEVNET TEST PAYMENT above. After checking the Devnet consent box, Publish will safely CHECK THE CHAIN AND RESUME; do not make a second test payment.');
 }catch(_e){}
-function showPublished(sig,title,verified,storageOnly=false,stats='',topic='',difficulty=''){
+function showPublished(sig,title,verified,storageOnly=false,stats='',topic='',difficulty='',atomicPaid=false){
  if(!verified){links.classList.add('hidden');setStatus('Onchain verification is still pending. Your X share link will appear only after all 15 puzzles are verified.');return;}
  const u=new URL('index.html',location.href);
  u.searchParams.set('tx',sig);u.searchParams.set('network','devnet');
@@ -1510,7 +1520,14 @@ function showPublished(sig,title,verified,storageOnly=false,stats='',topic='',di
   $('publish-success-tag').textContent='✓ IQ LABS DEVNET · STORAGE TEST · NO PAYMENT';
   $('publish-success-detail').textContent='All 15 questions were verified from IQ Labs on Solana Devnet. This is an unpaid storage test, NOT a paid Mainnet quest. Friends can play free or compete in an X Battle using the same 15 questions.';
  }
- setStatus((verified?'✓ Verified all 15 puzzles from IQ Labs Devnet.':'Devnet inscription exists; verification still pending.')+(storageOnly?' STORAGE-ONLY DEVNET TEST — NO PLATFORM PAYMENT.':' Payment-bound Devnet test.')+(stats?'\n'+stats:'')+'\nTransaction: '+sig+'\nYour player link is ready below.');
+ if(atomicPaid){
+  $('publish-success-tag').textContent='✓ DEVNET · 0.03 TEST SOL + FINAL REGISTRATION VERIFIED';
+  $('publish-success-detail').textContent='All 15 puzzles were read back from Solana Devnet. The SAME finalized transaction contains the IQ Labs registration and exactly 0.03 Devnet test SOL sent to the platform wallet. No Mainnet funds moved.';
+ }
+ $('verified-onchain-mode-note').textContent=atomicPaid?
+  '✓ Atomic Devnet test: 0.03 test SOL and the final IQ Labs registration were verified in one finalized transaction. No real Mainnet SOL moved. Players need no wallet.':
+  'This confirms a Devnet storage test. Real Mainnet sales are not enabled. Players do not need a wallet.';
+ setStatus((verified?'✓ Verified all 15 puzzles from IQ Labs Devnet.':'Devnet inscription exists; verification still pending.')+(atomicPaid?' 0.03 DEVNET TEST-SOL FINAL PAYMENT IN THE SAME VERIFIED TRANSACTION.':storageOnly?' STORAGE-ONLY DEVNET TEST — NO PLATFORM PAYMENT.':' Legacy payment-bound Devnet test.')+(stats?'\n'+stats:'')+'\nTransaction: '+sig+'\nYour player link is ready below.');
  if(verified)openVerifiedModal(title,sig);
 }
 async function checkedDraft(){
@@ -1522,6 +1539,34 @@ async function checkedDraft(){
  if(!draft.levels.every(l=>l.q&&l.a&&l.h))throw Error('All 15 questions, answers and hints must be complete.');
  return draft;
 }
+async function publishAtomicDevnet(){
+ if(busy||!atomicConsent.checked)return;
+ busy=true;enable();links.classList.add('hidden');
+ const status=message=>{atomicStatus.textContent=String(message);setStatus(message);};
+ try{
+  const draft=await checkedDraft();
+  const plan=document.querySelector('input[name="publish-plan"]:checked')?.value||'community';
+  const fingerprint=await questFingerprint(draft,plan);
+  status('Connecting your selected wallet for the DEVNET-ONLY 0.03 test-SOL publication. No transfer happens when connecting.');
+  const provider=await requestCheckoutWallet({purpose:'publication',network:'devnet',onProgress:status});
+  if(!provider?.publicKey?.toBase58?.())throw Error('No Devnet creator wallet connected.');
+  if(typeof provider.signAndSendTransaction!=='function')
+   throw Error('This test needs Phantom sign-and-send in the Phantom wallet browser. No transaction was sent.');
+  if(await questFingerprint(await checkedDraft(),plan)!==fingerprint)
+   throw Error('Your 15 puzzles changed while connecting. No transfer or upload started.');
+  status('Preparing Devnet onchain storage. Approve each IQ Labs chunk individually. The final wallet request includes 0.03 Devnet test SOL, not real Mainnet SOL.');
+  const result=await publishQuestDevnetAtomicTest({draft,provider,plan,atomicDevnetAcknowledged:true,onProgress:status});
+  try{localStorage.setItem('iqquest_devnet_last_sig_v45',result.signature);}catch(_e){}
+  atomicStatus.textContent='✓ VERIFIED 0.03 TEST SOL + IQ LABS FINAL REGISTRATION. All 15 puzzles are on Devnet. Your share link is ready.';
+  showPublished(result.signature,result.data.title||draft.title,true,false,
+   'Compressed onchain payload: '+result.bytes+' bytes. Separate IQ Labs and network Devnet fees may apply.',result.data.theme,result.data.difficulty,true);
+ }catch(error){
+  const message='Devnet atomic publication is NOT verified: '+String(error?.message||error)+
+   '\nIf you already approved a wallet transaction, keep the SAME wallet and 15-question draft. Wait, then use this SAME button to check and resume. Never send a second payment simply because the page returned or the RPC is slow.';
+  atomicStatus.textContent=message;setStatus(message);
+ }finally{busy=false;enable();}
+}
+atomicButton.addEventListener('click',()=>{void publishAtomicDevnet();});
 async function publishStorageOnly(){
  if(busy||!consent.checked)return;
  busy=true;enable();links.classList.add('hidden');
@@ -1635,7 +1680,10 @@ verify.addEventListener('click',async()=>{
    const result=await readQuestOnchain(sig,'devnet');
    if(window.IQQuest?.validate)window.IQQuest.validate(result.data);
    const meta=result.data.iqquest||{};
-   if(meta.testPaymentSignature){
+   if(meta.testMode==='atomic-0.03-devnet'){
+     setStatus('Checking the exact finalized 0.03 Devnet test-SOL transfer together with IQ Labs registration…');
+     await verifyAtomicDevnetPublication(sig);
+   }else if(meta.testPaymentSignature){
      if(meta.testMode)throw Error('Invalid Devnet payment/storage mode combination.');
      setStatus('Checking saved Devnet test-payment receipt from onchain metadata…');
      await verifyDevnetPayment({signature:meta.testPaymentSignature,draft:result.data,plan:meta.plan,payer:meta.publisher,onProgress:setStatus});
@@ -1652,7 +1700,7 @@ verify.addEventListener('click',async()=>{
    }
    const title=result.data.title||'An IQ QUEST Adventure';
    showPublished(sig,title,true,meta.testMode==='storage-only',
-    'Original onchain data: '+new TextEncoder().encode(result.raw).length+' bytes · compressed: '+new TextEncoder().encode(result.storedRaw).length+' bytes (protocol fees extra).',result.data.theme,result.data.difficulty);
+    'Original onchain data: '+new TextEncoder().encode(result.raw).length+' bytes · compressed: '+new TextEncoder().encode(result.storedRaw).length+' bytes (protocol fees extra).',result.data.theme,result.data.difficulty,meta.testMode==='atomic-0.03-devnet');
  }catch(error){setStatus('Could not verify saved inscription: '+String(error?.message||error));}
  finally{busy=false;enable();}
 });

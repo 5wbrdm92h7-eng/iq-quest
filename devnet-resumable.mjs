@@ -3,6 +3,7 @@
  * automatically after a reload; the user must return and explicitly Publish.
  */
 import {sha256Hex} from './payments/order-core.mjs';
+import {prepareAtomicDevnetFinal,verifyAtomicDevnetFinal,ATOMIC_DEVNET_PRICE_LAMPORTS} from './payments/atomic-final-devnet.mjs?v=543';
 
 const JOB_KEY='iqquest_devnet_mobile_upload_v1';
 export const DEVNET_STORAGE_ONLY_JOB_KEY='iqquest_devnet_mobile_storage_only_v515';
@@ -102,9 +103,10 @@ async function waitForConfirmed(connection,signature){
  throw Error('Phantom submitted transaction '+signature+' but Devnet confirmation is pending. Wait, then return to Publish to resume. Do not pay again.');
 }
 
-export async function publishResumableDevnet({sdk,web3,BufferClass,connection,wallet,provider,payload,preflight,onProgress=()=>{},storage=globalThis.localStorage,jobKey=JOB_KEY}){
+export async function publishResumableDevnet({sdk,web3,BufferClass,connection,wallet,provider,payload,preflight,onProgress=()=>{},storage=globalThis.localStorage,jobKey=JOB_KEY,atomicDevnetAcknowledged=false}){
  const contentScoped=typeof jobKey==='string'&&jobKey.startsWith(MULTI_QUEST_JOB_PREFIX)&&/^[a-f0-9]{64}$/.test(jobKey.slice(MULTI_QUEST_JOB_PREFIX.length));
  if(!contentScoped&&![JOB_KEY,DEVNET_STORAGE_ONLY_JOB_KEY,DEVNET_STORY_FREE_JOB_KEY].includes(jobKey))throw Error('Unsupported IQ Labs Devnet recovery namespace. No wallet request was started.');
+ if(atomicDevnetAcknowledged&&!contentScoped)throw Error('The 0.03 Devnet-SOL test requires an independently saved quest recovery record. No wallet request was started.');
  if(typeof provider?.signAndSendTransaction!=='function')throw Error('This wallet cannot broadcast an approved Devnet transaction.');
  if(!/^[\x00-\x7f]+$/.test(payload))throw Error('The packed onchain data must be ASCII to preserve IQ Labs chunk boundaries.');
  // V5.15 jobs retain the original 850-byte boundaries for safe legacy
@@ -121,14 +123,34 @@ export async function publishResumableDevnet({sdk,web3,BufferClass,connection,wa
  const receiver=new web3.PublicKey(sdk.constants.DEFAULT_WRITE_FEE_RECEIVER);
  const metadata=JSON.stringify({filetype:'application/json',method:0,filename:'iq-quest-15.json',total_chunks:chunks.length});
  const builder=sdk.contract.createInstructionBuilder(sdk.contract.IQ_IDL,program);
+ if(atomicDevnetAcknowledged){
+  // Check the worst-case final transaction *before* spending on any chunks.
+  // The unknown tail will be a base58 signature of at most 88 characters.
+  // This guards against a late 1,232-byte failure after storage costs accrued.
+  const sampleFinal=sdk.contract.userInventoryCodeInInstruction(builder,{
+   user:wallet,user_inventory:inventoryAccount,system_program:web3.SystemProgram.programId,receiver
+  },{on_chain_path:'1'.repeat(88),metadata,session:null});
+  const sampleBlockhash=(await connection.getLatestBlockhash('confirmed')).blockhash;
+  prepareAtomicDevnetFinal({web3,wallet,finalInstruction:sampleFinal,
+   iqLabsFeeReceiver:receiver.toBase58(),latestBlockhash:sampleBlockhash,network:'devnet',acknowledged:true});
+  onProgress('Size checked: the 0.03 Devnet-SOL transfer fits with the final IQ Labs registration. Storage approvals can now begin.');
+ }
  let job=getJob(storage,jobKey);
  if(job&&(job.payer!==payer||job.digest!==digest))
   throw Error('An older IQ Labs Devnet upload is saved for a different wallet or quest. Do not overwrite a potentially submitted upload. Ask for recovery help.');
- if(!job){job={version:1,payer,digest,index:0,tail:'Genesis',pending:null,finalSignature:null};saveJob(storage,job,jobKey);}
+ const mode=atomicDevnetAcknowledged?'atomic-0.03-devnet':'free';
+ if(!job){job={version:1,payer,digest,index:0,tail:'Genesis',pending:null,finalSignature:null,paymentMode:mode};saveJob(storage,job,jobKey);}
+ if((job.paymentMode||'free')!==mode)
+  throw Error('Saved Devnet upload uses a different payment mode. No wallet request or duplicate payment was started.');
  if(job.version!==1||!Number.isInteger(job.index)||job.index<0||job.index>chunks.length||typeof job.tail!=='string')
   throw Error('Saved Devnet upload state is invalid. Do not sign again until it has been checked.');
  if((job.index===0)!==(job.tail==='Genesis'))throw Error('Saved IQ Labs linked-list position is inconsistent. No wallet request was started.');
- if(job.finalSignature)return job.finalSignature;
+ const verifyPaidFinal=async signature=>{
+  if(!atomicDevnetAcknowledged)return;
+  onProgress('Checking the finalized IQ Labs registration and exact 0.03 test-SOL transfer in the SAME transaction…');
+  await verifyAtomicDevnetFinal({connection,web3,signature,payer,expectedPath:job.tail,expectedMetadata:metadata,iqLabsFeeReceiver:receiver.toBase58()});
+ };
+ if(job.finalSignature){await verifyPaidFinal(job.finalSignature);return job.finalSignature;}
 
  // Recover a wallet-broadcast transaction when Phantom reloaded the page before
  // JavaScript received its signature. Scan only the payer's deterministic IQ
@@ -142,7 +164,7 @@ export async function publishResumableDevnet({sdk,web3,BufferClass,connection,wa
   const found=await findLanded({connection,address:type==='final'?inventoryAccount:codeAccount,program,
    kind:type==='final'?'final':'chunk',chunk:chunks[index],beforeTx:tail,metadata});
   if(found){
-   if(type==='final')job.finalSignature=found;
+   if(type==='final'){await verifyPaidFinal(found);job.finalSignature=found;}
    else{job.index=index+1;job.tail=found;}
    job.pending=null;saveJob(storage,job,jobKey);
    onProgress('Recovered confirmed IQ Labs Devnet transaction '+found+'.');
@@ -157,7 +179,7 @@ export async function publishResumableDevnet({sdk,web3,BufferClass,connection,wa
    throw Error('The interrupted Phantom transaction is still uncertain. Automatic repeat signing is blocked to avoid duplicate IQ Labs fees. Check Phantom history / Solana Explorer and request recovery help if it does not appear. No second payment was requested.');
   }
  }
- if(job.finalSignature)return job.finalSignature;
+ if(job.finalSignature){await verifyPaidFinal(job.finalSignature);return job.finalSignature;}
 
  if(job.index>0){
   const status=(await connection.getSignatureStatuses([job.tail],{searchTransactionHistory:true}))?.value?.[0];
@@ -166,11 +188,19 @@ export async function publishResumableDevnet({sdk,web3,BufferClass,connection,wa
  }
 
  const submit=async (ix,type)=>{
-  const tx=new web3.Transaction().add(
-   web3.ComputeBudgetProgram.setComputeUnitPrice({microLamports:1000}),
-   web3.ComputeBudgetProgram.setComputeUnitLimit({units:400000}),ix);
-  tx.feePayer=wallet;
-  tx.recentBlockhash=(await connection.getLatestBlockhash('confirmed')).blockhash;
+  const blockhash=(await connection.getLatestBlockhash('confirmed')).blockhash;
+  let tx;
+  if(type==='final'&&atomicDevnetAcknowledged){
+   tx=prepareAtomicDevnetFinal({web3,wallet,finalInstruction:ix,
+    iqLabsFeeReceiver:receiver.toBase58(),latestBlockhash:blockhash,network:'devnet',acknowledged:true}).transaction;
+   onProgress('FINAL DEVNET TEST: wallet approval will include an exact '+(ATOMIC_DEVNET_PRICE_LAMPORTS/1e9).toFixed(2)+' test-SOL platform transfer to the configured IQ QUEST wallet. No Mainnet SOL.');
+  }else{
+   tx=new web3.Transaction().add(
+    web3.ComputeBudgetProgram.setComputeUnitPrice({microLamports:1000}),
+    web3.ComputeBudgetProgram.setComputeUnitLimit({units:400000}),ix);
+   tx.feePayer=wallet;
+   tx.recentBlockhash=blockhash;
+  }
   await preflight(tx);
   const record={type,index:job.index,tail:job.tail,at:Date.now(),signature:null};
   job.pending=record;saveJob(storage,job,jobKey);
@@ -187,6 +217,19 @@ export async function publishResumableDevnet({sdk,web3,BufferClass,connection,wa
    throw Error('Phantom returned no valid Devnet signature. Wait and recover rather than approving again.');
   job.pending.signature=signature;saveJob(storage,job,jobKey);
   await waitForConfirmed(connection,signature);
+  if(type==='final'&&atomicDevnetAcknowledged){
+   // A confirmed broadcast alone does not prove a platform payment. On slow
+   // RPC, preserve pending state and refuse any repeat signing.
+   let finalized=false;
+   for(let attempt=0;attempt<20;attempt++){
+    const state=(await connection.getSignatureStatuses([signature],{searchTransactionHistory:true}))?.value?.[0];
+    if(state?.err)throw Error('Atomic Devnet final failed. The platform fee was rolled back; normal Solana fees may still apply. Transaction: '+signature);
+    if(state?.confirmationStatus==='finalized'){finalized=true;break;}
+    await new Promise(resolve=>setTimeout(resolve,1500));
+   }
+   if(!finalized)throw Error('Final Devnet transaction is still awaiting finalization: '+signature+'. Wait and resume; do not pay again.');
+   await verifyPaidFinal(signature);
+  }
   const verified=await findLanded({connection,address:type==='final'?inventoryAccount:codeAccount,
    program,kind:type==='final'?'final':'chunk',chunk:chunks[job.index],beforeTx:job.tail,metadata});
   if(verified!==signature)throw Error('Devnet receipt '+signature+' has not been matched to the expected IQ Labs '+type+'. Do not retry until it is checked.');
