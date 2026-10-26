@@ -679,7 +679,8 @@ details.advanced-box[open]>summary{color:#adffb8;margin-bottom:13px}
                 <p class="tiny-note"><strong>Important:</strong> LOAD EXAMPLE puts editable questions into <em>your draft</em>; it does not give you a separate onchain publication. To play or share the <a href="index.html?tx=42M6zsouCMcFqektRzp7D19vbc6mM3RYmjA2UHJzeSZmgFKXDftL6i9KbM1RK47NXyLLTvFKcMHpa7na8wHC46ms&amp;network=devnet" style="color:#a6ffb7;text-decoration:underline">example already on Devnet</a>, no upload or wallet is required. Publishing a new copy under your wallet would require new approvals and fees.</p>
                 <div class="stack-buttons"><button type="button" id="paste-ai" class="btn btn-outline">PASTE FROM CLIPBOARD</button><button type="button" id="import-ai" class="btn btn-outline">FILL FROM TEXT BOX</button></div>
                 <div class="stack-buttons"><button type="button" id="check-ai-json" class="btn btn-outline">CHECK 15 QUESTIONS FIRST</button><button type="button" id="review-with-chatgpt" class="btn btn-outline">IMPROVE DIFFICULTY</button></div>
-                <label class="btn btn-outline import-file-label" for="upload-ai-json">↑ CHOOSE TEXT FILE<input id="upload-ai-json" type="file" accept=".json,.txt,application/json,text/plain" aria-label="Load ChatGPT text file"></label>
+                <label class="btn btn-outline import-file-label" for="upload-ai-json">↑ CHOOSE JSON FILE · IMPORT NOW<input id="upload-ai-json" type="file" accept=".json,.txt,application/json,text/plain" aria-label="Choose and automatically import a complete quest JSON file"></label>
+                <p class="tiny-note">Selecting a JSON file automatically imports all 15 puzzles with its own title and difficulty. Your previous draft is backed up for Undo. No payment or onchain storage happens here.</p>
                 <div class="ai-howto"><h3>Idea to try</h3><div class="example-text" id="theme-example">An ancient jungle temple. Create 15 clever puzzles using secret symbols, hidden codes and mysterious doors. Medium difficulty. The last puzzle must combine earlier clues.</div><button type="button" id="use-theme-example" class="btn btn-outline">USE THIS IDEA</button></div>
               </details>
             </div>
@@ -1232,7 +1233,7 @@ function checkAiResponse(){
 }
 
 let importUndo=null;
-function importResponse(){
+function importResponse(options={}){
  try{
   const text=$('chatgpt-json').value;
   const existing=safeDraft();
@@ -1241,7 +1242,11 @@ function importResponse(){
   // In that case the complete imported JSON must restore the quest metadata.
   // Ordinary same-editor imports continue keeping the current editor settings.
   const returnedFromChatGPT=new URLSearchParams(location.search).get('from')==='chatgpt';
-  const data=returnedFromChatGPT?parsed:{...parsed,title:$('quest-name').value.trim()||parsed.title,creator:$('community-name').value.trim()||parsed.creator,theme:$('quest-theme').value.trim()||parsed.theme,difficulty:existing.difficulty};
+  // A selected JSON file represents a complete, named quest. Its difficulty and
+  // title must replace the previous draft, or an Easy/Hard pack appears to load
+  // as the earlier difficulty and cannot be reviewed reliably.
+  const importingCompleteFile=options?.fromFile===true;
+  const data=(returnedFromChatGPT||importingCompleteFile)?parsed:{...parsed,title:$('quest-name').value.trim()||parsed.title,creator:$('community-name').value.trim()||parsed.creator,theme:$('quest-theme').value.trim()||parsed.theme,difficulty:existing.difficulty};
   // The user requested a one-tap import. The full previous draft is backed up for Undo before replacing anything.
   importUndo=clone(existing);
   try{localStorage.setItem(IMPORT_BACKUP_KEY,JSON.stringify(existing));}catch(e){console.warn('Import backup could not be persisted',e)}
@@ -1250,9 +1255,10 @@ function importResponse(){
   $('chatgpt-json').value='';
   $('undo-ai-import').classList.remove('hidden');
   $('editor-count').textContent='✓ 15 AI QUESTIONS IMPORTED';
-  status('import-status','✓ IMPORTED 15 QUESTIONS — NOT YET VERIFIED FOR CORRECTNESS. '+(IQQuest.importNotice?IQQuest.importNotice+' ':'')+'Review every answer and hint, then use STEP 2 · TEST FOR FREE before any publication. Your earlier draft was backed up.');
+  status('import-status','✓ IMPORTED '+data.title+' · '+data.difficulty.toUpperCase()+' · 15 QUESTIONS — NOT YET VERIFIED FOR CORRECTNESS. '+(IQQuest.importNotice?IQQuest.importNotice+' ':'')+'Review every answer and hint, then use STEP 2 · TEST FOR FREE before any publication. Your earlier draft was backed up.');
   document.getElementById('level-question').closest('.studio-panel').scrollIntoView({behavior:'smooth',block:'start'});
- }catch(e){status('import-status','Could not import yet. Check that ChatGPT finished all 15 questions and copy its complete answer. Your previous questions were not changed. Details: '+String(e?.message||e),true);}
+  return true;
+ }catch(e){status('import-status','Could not import yet. Check that the selected file or ChatGPT answer contains all 15 questions. Your previous questions were not changed. Details: '+String(e?.message||e),true);return false;}
 }
 async function pasteAi(){try{
  if(!navigator.clipboard?.readText)throw Error('Clipboard read is unsupported on this browser');
@@ -1265,7 +1271,9 @@ async function importFile(event){
  const file=event.target.files?.[0];if(!file)return;
  try{if(file.size>400000)throw Error('File is too large. Choose a JSON text file under 400 KB.');
  $('chatgpt-json').value=await file.text();
- status('import-status','✓ Loaded '+file.name+'. Now tap USE MY 15 QUESTIONS.');
+ // Loading a prepared pack is one action: validate it, preserve the previous
+ // draft for Undo, and import all metadata and 15 levels immediately.
+ importResponse({fromFile:true});
  }catch(e){status('import-status','Could not load the JSON file: '+String(e?.message||e),true);}finally{event.target.value='';}
 }
 function undoAiImport(){
