@@ -524,6 +524,9 @@ details.advanced-box[open]>summary{color:#adffb8;margin-bottom:13px}
 .page-tagline .tagline-subline{font-size:.78em;line-height:1.12;margin-top:8px;color:#f3dba7}
 @media(max-width:740px){.page-tagline{font-size:clamp(38px,10.2vw,48px);line-height:1.12;margin:17px 0 12px}.page-tagline::after{margin-top:12px}}
 @media(max-width:360px){.page-tagline{font-size:38px}}
+/* Prelaunch: keep the optional X button for verified quests, but do not push
+   people to promote the unfinished creator from the top navigation. */
+.creator-simple .top-links #share-creator-top-x{display:none!important}
 </style></head>
 <body class="creator-simple" data-page="creator">
   <div class="site-shell">
@@ -678,15 +681,11 @@ details.advanced-box[open]>summary{color:#adffb8;margin-bottom:13px}
           <div class="panel publish-panel" id="publish-card">
             <div class="section-kicker">STEP 3 · PUBLISH YOUR QUEST</div>
             <h3>Publish your quest on Solana</h3>
-            <p>Your questions are ready? Publishing stores all 15 questions, hints and answers publicly onchain. Connect Phantom <strong>only now</strong>.</p>
+            <p>Your questions are ready? Publishing stores all 15 questions, hints and answers publicly onchain. Connect Phantom <strong>only now</strong>. <strong>Sharing on X is optional and can wait until you are ready.</strong></p>
             <div class="creator-publish-simple-summary"><strong>DEVNET BETA · 0.03 TEST-SOL FINAL PAYMENT.</strong> Your friends play for free. Real Mainnet publishing is still OFF; Devnet storage and network test fees are additional.</div>
             <section class="creator-publish-safety" aria-label="Devnet publication steps, fees and payment protection">
-              <h4>Publish in 3 steps</h4>
-              <ol>
-                <li><strong>Check your 15 questions</strong> and agree to public onchain storage.</li>
-                <li><strong>Connect Phantom on Devnet</strong> and approve each storage transaction. The final one also includes 0.03 test SOL.</li>
-                <li><strong>Wait for 15/15 verified and the finalized payment receipt.</strong> Then copy your player link or share it on X.</li>
-              </ol>
+              <h4>Before you approve in Phantom</h4>
+              <p><strong>Expect several wallet confirmations.</strong> The early transactions store your puzzles; the final confirmation also includes 0.03 Devnet test SOL. Wait until all 15 questions and the final receipt are verified. Then you receive a playable link — <strong>no X post required.</strong></p>
               <p class="publish-cost-line"><strong>Previous storage-only example:</strong> 6 Phantom approvals, about <strong>0.0030324 Devnet SOL</strong> (IQ Labs registration + Solana transaction fees). The atomic test additionally transfers <strong>0.03 Devnet SOL</strong> in the final approval. This is not a live fee quote. Review each wallet transaction.</p>
               <details><summary>Interrupted upload or future payment?</summary>
                 <p><strong>Interrupted?</strong> Return with the same wallet and unchanged quest. The app checks saved onchain transactions before asking for the next approval. If a transaction is uncertain, repeat signing is blocked. Check Phantom/Explorer; never make another platform payment just to resume.</p>
@@ -734,7 +733,7 @@ details.advanced-box[open]>summary{color:#adffb8;margin-bottom:13px}
               <div class="success-actions"><a class="btn btn-green" id="success-play" href="#" target="_blank" rel="noopener noreferrer" aria-disabled="true">▶ PLAY NOW</a><button type="button" id="success-copy" class="btn btn-outline" disabled>⧉ COPY PLAYABLE LINK</button><a class="btn btn-outline" id="success-share-x" href="#" target="_blank" rel="noopener noreferrer" aria-disabled="true">⚔ SHARE MY QUEST ON X</a><a class="btn btn-outline" href="#studio">BACK TO CREATOR</a></div>
             </div>
             <button type="button" id="preview-publish-success" class="text-button" style="margin:8px 0">SEE THE POST-PAYMENT SCREEN · PREVIEW ONLY</button>
-            <details class="advanced-box"><summary>Future paid publishing · details</summary><p class="tiny-note">Planned platform fee: exactly 0.03 SOL (30,000,000 lamports), plus separately paid Solana and IQ Labs fees. A payment bundled with the final IQ Labs registration would be atomic: either both instructions succeed or the platform fee transfer fails. However, earlier storage chunks still have costs and later readback/recovery must be checked independently. The existing old $3.99 server checkout remains disabled. The new bundled-payment design is preparation only and has not been tested with a wallet. Legal review remains pending; game times and scores are browser-side.</p><span class="price-label">Future creator price</span><strong id="plan-breakdown">0.03 SOL + separate network/storage fees</strong></details>
+            <details class="advanced-box"><summary>Future paid publishing · details</summary><p class="tiny-note">Planned Mainnet platform fee: 0.03 SOL (30,000,000 lamports), plus separate Solana and IQ Labs fees. The bundled final registration and 0.03 test-SOL transfer have been tested on Devnet; this does not activate real Mainnet payments. If the final transaction fails, its platform transfer is rolled back, but earlier storage transactions and their fees are separate. A complete independent readback is still required. Legal review remains pending; game times and scores are browser-side and unverified.</p><span class="price-label">Future creator price</span><strong id="plan-breakdown">0.03 SOL + separate network/storage fees</strong></details>
             <p class="tiny-note">Before any real paid launch, review our <a href="imprint.html" style="color:#aeffbd;text-decoration:underline">imprint</a>, <a href="privacy.html" style="color:#aeffbd;text-decoration:underline">privacy information</a> and <a href="withdrawal.html" style="color:#aeffbd;text-decoration:underline">withdrawal information</a>. These legal pages are still drafts and the Mainnet checkout remains disabled.</p>
             <p id="checkout-status" class="share-step-status" role="status" aria-live="polite">Checkout not live. Your 15-question adventure can be edited and tested without a wallet.</p>
             <button type="button" id="shortcut-storage-only" class="btn btn-green hidden">PUBLISH TEST QUEST ON DEVNET</button>

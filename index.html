@@ -650,7 +650,7 @@ body:not(.is-home-chooser) .page-tagline{display:none}
             <section class="battle-share-card" aria-label="Share your community battle challenge">
               <div class="battle-share-header"><span class="battle-brand"><span class="green">IQ</span> QUEST</span><span class="battle-kicker">COMMUNITY CHALLENGE</span></div>
               <h4 class="battle-share-title">Can your community beat this?</h4>
-              <p class="battle-share-description">Challenge friends on X with your final time and the link to this adventure.</p>
+              <p class="battle-share-description" id="battle-share-description">Challenge friends on X with your final time and the link to this adventure.</p>
               <div class="battle-share-time-label">YOUR FINAL TIME</div>
               <div class="battle-share-time" id="battle-share-time" aria-label="Your total time">00:00</div>
               <div class="battle-share-stats" id="battle-share-stats">HARD · 15 solved · 0 skipped</div>
@@ -661,7 +661,7 @@ body:not(.is-home-chooser) .page-tagline{display:none}
                 <button class="btn btn-outline" id="download-card" type="button">↓ RESULT CARD</button>
                 <button class="btn btn-outline" id="copy-result" type="button">COPY RESULT</button>
               </div>
-              <p class="battle-cta-note">Your link includes difficulty, puzzle identity and target time. Lightning links reproduce the same three puzzles. These results are for friendly, unverified battles.</p>
+              <p class="battle-cta-note" id="battle-share-guidance">First solved attempts include a target time. Replays and skipped runs share only the same puzzles. Times remain unverified.</p>
               <p class="battle-social-note">First Attempt is tied to the exact questions, not merely the random seed. Replays are Practice. Browser data can be cleared; results are not verified.</p>
             </section>
             <div class="finish-next-actions"><button type="button" class="text-button" id="play-again">↻ Play again (Practice)</button><button type="button" class="text-button hidden" id="new-lightning">⚡ New Lightning Puzzle Set</button></div>
@@ -901,7 +901,10 @@ function attemptKey(){return 'iqquest_first_v40_'+puzzleKey();}
 function bestKey(){return 'iqquest_best_v40_'+puzzleKey();}
 // Keep legacy runs: upgrading must not give somebody a fresh First Attempt.
 function legacyAttemptUsed(){
- if(preview)return false;
+ // Legacy browser-wide Easy/Medium/Hard flags belong ONLY to the old local
+ // example quests. Applying them to a distinct onchain quest would falsely
+ // label a new player's first Battle as Practice.
+ if(preview||onchainMode)return false;
  if(readStore('iqquest_first_v39_'+setId()))return true;
  try{
   for(let i=0;i<localStorage.length;i++){
@@ -1077,20 +1080,30 @@ function saveResultOnce(){
 function showFinish(){
  saveResultOnce();const b=baseSeconds(),p=penaltySeconds(),total=b+p;
  $('result-base').textContent=time(b);$('result-hints').textContent=`${run.hints.length} hints / ${run.skips.length} skips (+${time(p)})`;
- $('result-final').textContent=time(total);$('finale-score-lead-time').textContent=time(total);$('finale-score-lead-versus').textContent=targetTime&&!preview?(total<targetTime?'⚔ YOU BEAT THE FRIEND CHALLENGE':total>targetTime?'⚔ FRIEND CHALLENGE NOT BEATEN':'⚔ FRIEND CHALLENGE TIED'):(run.attemptType==='first'?'★ FIRST ATTEMPT':'↻ PRACTICE RUN');$('result-difficulty').textContent=quest.difficulty.toUpperCase();$('result-count').textContent=quest.levels.length+' CHAMBERS';
+ const eligibleForComparison=!!targetTime&&canShareChallengeTime();
+ $('result-final').textContent=time(total);$('finale-score-lead-time').textContent=time(total);$('finale-score-lead-versus').textContent=eligibleForComparison?(total<targetTime?'⚔ YOU BEAT THE FRIEND CHALLENGE':total>targetTime?'⚔ FRIEND CHALLENGE NOT BEATEN':'⚔ FRIEND CHALLENGE TIED'):(run.attemptType==='first'&&run.skips.length===0?'★ FIRST ATTEMPT':'↻ PRACTICE / SKIPPED · NOT RANKED');$('result-difficulty').textContent=quest.difficulty.toUpperCase();$('result-count').textContent=quest.levels.length+' CHAMBERS';
  $('finish-heading').textContent=run.skips.length?'TEMPLE COMPLETED — WITH SKIPS':'ALL MYSTERIES SOLVED';
  $('finish-summary').textContent=playMode==='lightning'?'Three lightning puzzles cleared. Send a friend the same code set and your target time.':`You crossed all ${quest.levels.length} chambers. Your time is ready for the next explorer.`;
  $('result-completion').textContent=run.skips.length?`${quest.levels.length-run.skips.length} solved · ${run.skips.length} skipped · penalties included`:`All ${quest.levels.length} mysteries solved without skips`;
  $('battle-share-time').textContent=time(total);$('battle-share-stats').textContent=`${playMode==='lightning'?'LIGHTNING · ':''}${quest.difficulty.toUpperCase()} · ${quest.levels.length-run.skips.length} solved · ${run.skips.length} skipped · ${run.hints.length} hints`;
+ const ranked=canShareChallengeTime();
+ $('share-x').textContent=ranked?'↗ SHARE CHALLENGE ON X':'↗ SHARE PRACTICE QUEST ON X';
+ $('copy-challenge').textContent=ranked?'⤴ COPY FRIEND CHALLENGE LINK':'⧉ COPY PRACTICE QUEST LINK';
+ $('battle-share-description').textContent=ranked?'Your first, fully solved attempt is ready for a friendly time challenge.':'Practice or skipped run: you can still share the quest, but no time to beat is attached.';
+ $('battle-share-guidance').textContent=ranked?'Your link contains the same puzzle set and your time, including hint penalties. Results are browser-based and unverified.':'Your link contains the same puzzles without a competitive target time. Only a first attempt with all questions solved may include a target.';
  const first=run.attemptType==='first';$('finish-attempt').textContent=preview?'CREATOR PREVIEW':first?'★ FIRST ATTEMPT':'↻ REPLAY / PRACTICE';$('finish-attempt').classList.toggle('practice',!first&&!preview);
  const badge=run.hints.length===0&&run.skips.length===0?'✦ PERFECT RUN · NO HINTS':run.skips.length===0?'✦ CODEBREAKER · NO SKIPS':'✦ GATEWAY EXPLORER';$('finish-badges').textContent=badge;
  const best=readBest();$('record-strip').textContent=preview?'Preview result · no public record':`★ PERSONAL BEST${playMode==='lightning'?' (THIS PUZZLE SET)':''}: ${best.best?time(best.best):time(total)} · ${best.completed||0} local completions${best.firstAttemptTime?' · First try: '+time(best.firstAttemptTime):''}`;
- $('versus-result').classList.toggle('hidden',!targetTime||preview);
- if(targetTime&&!preview){const delta=total-targetTime;const v=$('versus-result');v.classList.toggle('win',delta<0);v.classList.toggle('loss',delta>0);$('versus-result-heading').textContent=delta<0?'YOU BEAT THE CHALLENGE!':delta>0?'THE CHALLENGE WINS':'EXACT TIE!';$('versus-result-detail').textContent=delta===0?'Same time, including penalties.':`${Math.abs(delta)} seconds ${delta<0?'faster':'slower'} than your friend · unverified`;}
+ $('versus-result').classList.toggle('hidden',!eligibleForComparison);
+ if(eligibleForComparison){const delta=total-targetTime;const v=$('versus-result');v.classList.toggle('win',delta<0);v.classList.toggle('loss',delta>0);$('versus-result-heading').textContent=delta<0?'YOU BEAT THE CHALLENGE!':delta>0?'THE CHALLENGE WINS':'EXACT TIE!';$('versus-result-detail').textContent=delta===0?'Same time, including penalties.':`${Math.abs(delta)} seconds ${delta<0?'faster':'slower'} than your friend · unverified`;}
  $('new-lightning').classList.toggle('hidden',preview||playMode!=='lightning');
  $('play-again').textContent=preview?'↻ Test again':'↻ Replay these puzzles (Practice)';
  $('share-x').disabled=preview;$('copy-challenge').disabled=preview;
 }
+// A replay, or a run that revealed an answer using Skip, is not a fair
+// competitive target. It can still be shared as a practice game. This is
+// UX-level fair play, NOT tamper-resistant timing or verified leaderboards.
+function canShareChallengeTime(){return run.attemptType==='first'&&run.skips.length===0&&!!run.finishedAt&&!preview;}
 function challengeURL(){
  const url=new URL(location.origin+location.pathname);
  if(battlePoolRequest){url.searchParams.set('pool',battlePoolDifficulty);url.searchParams.set('seed',battlePoolSeed);url.searchParams.set('network','devnet');}
@@ -1098,9 +1111,14 @@ function challengeURL(){
  else if(onchainMode){url.searchParams.set('tx',onchainSignature);url.searchParams.set('network',onchainNetwork);}else url.searchParams.set('difficulty',chosenDifficulty);
  if(onchainMode)url.searchParams.set('battle','1');
  if(!onchainMode&&playMode==='lightning'){url.searchParams.set('mode','lightning');url.searchParams.set('seed',String(puzzleSeed));}
- url.searchParams.set('target',String(totalSeconds()));url.searchParams.set('match',puzzleFingerprint(quest));return url.toString();
+ if(canShareChallengeTime()){
+  url.searchParams.set('target',String(totalSeconds()));
+  url.searchParams.set('match',puzzleFingerprint(quest));
+ }else url.searchParams.set('practice','1');
+ return url.toString();
 }
 function shareText(){
+ if(!canShareChallengeTime())return `🧩 IQ QUEST: I played “${quest.title}” (${quest.difficulty}) in Practice mode.\n⚔ Try the same ${quest.levels.length} puzzles — no competitive time is claimed.\n⛓ Quest data ${onchainMode?(publishedQuestId||onchainNetwork==='mainnet-beta'?'on Solana Mainnet':'on Solana Devnet'):'in the browser'}; results are unverified. Powered by IQ Labs. #IQQUEST #Solana`;
  if(onchainMode){
   const network=publishedQuestId||onchainNetwork==='mainnet-beta'?'Solana Mainnet':'Solana Devnet';
   return `⚔ IQ QUEST: Beat my ${time(totalSeconds())} on 15 ${quest.difficulty} mysteries!\n⛓ Questions onchain, powered by IQ Labs (${network}).\n⏱ Times are browser-only. Battle friends or create your own onchain quest (Devnet beta)! #IQQUEST #Solana`;
@@ -1108,7 +1126,7 @@ function shareText(){
  return `⚔️ IQ QUEST: Can you beat ${time(totalSeconds())}?\n${playMode==='lightning'?'⚡ Lightning Battle: same 3 puzzles':'✦ Full Quest: same 15 mysteries'} · ${quest.difficulty} · ${run.attemptType==='first'?'First Attempt':'Practice'}\n${quest.levels.length-run.skips.length}/${quest.levels.length} solved · ${run.hints.length} hints · ${run.skips.length} skips (penalties included)\nPlay the same quest: #IQQUEST #Solana`;
 }
 function shareX(){if(preview)return;qaEvent('share_x_clicked');const url=new URL('https://x.com/intent/tweet');url.searchParams.set('text',shareText());url.searchParams.set('url',challengeURL());window.open(url.toString(),'_blank','noopener,noreferrer');}
-async function copyChallenge(){if(preview)return;qaEvent('friend_link_copied');try{await navigator.clipboard.writeText(challengeURL());$('copy-challenge').textContent='✓ CHALLENGE LINK COPIED';setTimeout(()=>$('copy-challenge').textContent='⤴ COPY FRIEND CHALLENGE LINK',1800);}catch(e){prompt('Copy the friend challenge link:',challengeURL());}}
+async function copyChallenge(){if(preview)return;qaEvent('friend_link_copied');try{await navigator.clipboard.writeText(challengeURL());$('copy-challenge').textContent='✓ LINK COPIED';setTimeout(()=>$('copy-challenge').textContent=canShareChallengeTime()?'⤴ COPY FRIEND CHALLENGE LINK':'⧉ COPY PRACTICE QUEST LINK',1800);}catch(e){prompt('Copy the quest link:',challengeURL());}}
 async function copyResult(){try{await navigator.clipboard.writeText(shareText()+'\n'+(preview?location.href:challengeURL()));$('copy-result').textContent='COPIED!';setTimeout(()=>$('copy-result').textContent='COPY RESULT',1800);}catch(e){prompt('Copy your result:',shareText()+'\n'+challengeURL());}}
 function wrap(ctx,text,maxWidth,x,y,lineHeight,maxLines=2){const words=String(text).split(/\s+/);let line='',n=0;for(const word of words){const test=line?line+' '+word:word;if(ctx.measureText(test).width>maxWidth&&line){ctx.fillText(line,x,y+n*lineHeight);n++;line=word;if(n>=maxLines-1)break;}else line=test;}if(line)ctx.fillText(line,x,y+n*lineHeight);}
 async function downloadCard(){
