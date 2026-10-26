@@ -1153,7 +1153,7 @@ function difficultySelect(diff){promptPrepared=false;quest.difficulty=diff;docum
 function renderSelector(){const root=$('level-selector');root.replaceChildren();quest.levels.forEach((l,i)=>{const b=document.createElement('button');b.type='button';b.textContent=`${String(i+1).padStart(2,'0')} · ${l.title||'Untitled'}`;b.className=i===current?'active':'';b.setAttribute('aria-current',i===current?'true':'false');b.addEventListener('click',()=>{current=i;renderSelector();renderFields();});root.append(b);});}
 function renderFields(){const l=quest.levels[current];for(const [id,key] of [['level-title','title'],['level-question','q'],['level-hint','h'],['level-answer','a']]){$(id).value=l[key]||'';}}
 function updateLevel(){const level=quest.levels[current];for(const [id,key] of [['level-title','title'],['level-question','q'],['level-hint','h'],['level-answer','a']]){level[key]=$(id).value;}renderSelector();refreshPreview();queueSave();}
-function refreshPreview(){const draft=safeDraft();$('preview-title').textContent=draft.title||'Your new quest';$('preview-theme').textContent=draft.theme||'Choose a topic to start';$('preview-difficulty').textContent=draft.difficulty.toUpperCase();$('preview-count').textContent=draft.levels.length+' QUESTIONS';$('preview-duration').textContent=times[draft.difficulty]||times.Medium;const progress=$('creator-step-one-status');if(progress){const count=draft.levels.filter(l=>l.title.trim()&&l.q.trim()&&l.h.trim()&&l.a.trim()).length;const hasIdea=!!draft.title&&!!draft.theme;progress.dataset.ready=String(hasIdea&&count===15);progress.textContent=!hasIdea?'A · Enter a title and topic to begin.':count<15?`B · ${count}/15 questions ready. Use ChatGPT to fill the rest.`:'✓ 15 questions entered. C · Review them, then test in Step 2.';}updateFeeEstimate();}
+function refreshPreview(){const draft=safeDraft();$('preview-title').textContent=draft.title||'Your new quest';$('preview-theme').textContent=draft.theme||'Choose a topic to start';$('preview-difficulty').textContent=draft.difficulty.toUpperCase();$('preview-count').textContent=draft.levels.length+' QUESTIONS';$('preview-duration').textContent=times[draft.difficulty]||times.Medium;const progress=$('creator-step-one-status');if(progress){const count=draft.levels.filter(l=>l.title.trim()&&l.q.trim()&&l.h.trim()&&l.a.trim()).length;const hasIdea=!!draft.title&&!!draft.theme;progress.dataset.ready=String(hasIdea&&count===15);progress.textContent=!hasIdea?'A · Enter a title and topic to begin.':count<15?`B · ${count}/15 questions ready. Use ChatGPT to fill the rest.`:'✓ 15 questions entered. C · Review them, then test in Step 2.';}updateFeeEstimate();window.dispatchEvent(new Event('iqquest:draft-changed'));}
 function loadData(data,announce=true){quest=clone(IQQuest.validate(data));$('quest-name').value=quest.title;$('community-name').value=quest.creator;$('quest-theme').value=quest.theme;current=0;count=15;difficultySelect(quest.difficulty);$('editor-count').textContent='15 QUESTIONS';renderSelector();renderFields();refreshPreview();saveSilent();if(announce)status('import-status',`${count} questions loaded. Review answers and hints before sharing.`);}
 function loadIncompleteDraft(data){
  if(!data||!Array.isArray(data.levels)||data.levels.length!==15)throw Error('Draft must contain 15 question slots.');
@@ -1600,6 +1600,7 @@ $('verified-x-cover-copy-caption').addEventListener('click',async()=>{
 function openVerifiedModal(title,sig){
  // This must only be invoked after the complete, independently verified
  // onchain readback. A mere Phantom approval is never treated as success.
+ $('verified-onchain-title').textContent='Your Quest Is Onchain!';
  $('verified-onchain-description').textContent='“'+title+'” is published! All 15 questions, hints and answers were independently read back from IQ Labs on Solana Devnet and verified. Your player link is ready.';
  $('verified-onchain-play').href=lastUrl;
  $('verified-onchain-share-x').href=$('devnet-share-x').href;
@@ -1635,6 +1636,32 @@ function savedFinalSignature(){
  }catch(error){console.warn('Cannot inspect a saved Devnet publication',error);}
  return '';
 }
+// The previous publication remains verified when editing or starting another
+// quest. Recompute whether the CURRENT draft is identical; do not leave a
+// stale lock from a prior draft, and never clear the onchain receipt.
+let draftLockRevision=0;
+async function updateVerifiedDraftLock(){
+ if(!verifiedLast||busy)return;
+ const revision=++draftLockRevision;
+ let matchesPreviouslyPublished=false;
+ try{
+  const draft=window.IQQuestEditorGetDraft?.();
+  if(draft){
+   const plan=document.querySelector('input[name="publish-plan"]:checked')?.value||'community';
+   matchesPreviouslyPublished=await questFingerprint(draft,plan)===verifiedLast.fingerprint;
+  }
+ }catch(_error){/* Incomplete new drafts cannot be published; checkedDraft blocks them. */}
+ if(revision!==draftLockRevision||busy||!verifiedLast)return;
+ const changed=currentDraftAlreadyPublished!==matchesPreviouslyPublished;
+ currentDraftAlreadyPublished=matchesPreviouslyPublished;
+ enable();
+ if(changed){
+  atomicStatus.textContent=matchesPreviouslyPublished?
+   '✓ This exact quest is already onchain. Your existing link has been recovered; a second payment is blocked.':
+   '✓ Different draft detected. Finish and test all 15 questions first. Your earlier publication remains verified; a NEW publication will need separate Devnet storage approvals and a final 0.03 test-SOL transfer.';
+ }
+}
+window.addEventListener('iqquest:draft-changed',()=>{void updateVerifiedDraftLock();});
 function enable(){
  publish.disabled=busy||!consent.checked;
  storageTest.disabled=busy||!consent.checked;
@@ -1893,10 +1920,13 @@ verify.addEventListener('click',async()=>{
     currentDraftAlreadyPublished=await questFingerprint(draft,meta.plan||'community')===verifiedLast.fingerprint;
    }catch(_e){/* A partial new draft cannot start a wallet transaction anyway. */}
    atomicStatus.textContent=currentDraftAlreadyPublished?
-    '✓ THIS EXACT QUEST IS ALREADY ONCHAIN. Your verified link has been recovered. A second payment is blocked. To publish another quest, change the draft and verify the previous publication again.':
+    '✓ THIS EXACT QUEST IS ALREADY ONCHAIN. Your verified link has been recovered. A second payment is blocked. To publish another quest, close this message, choose CREATE NEW QUEST in Step 1, and prepare a different 15-question draft.':
     '✓ Earlier publication checked. A DIFFERENT completed quest may be published after your explicit confirmation; the next upload and 0.03 Devnet test-SOL payment are separate.';
    showPublished(sig,title,true,meta.testMode==='storage-only',
     'Original onchain data: '+new TextEncoder().encode(result.raw).length+' bytes · compressed: '+new TextEncoder().encode(result.storedRaw).length+' bytes (protocol fees extra).',result.data.theme,result.data.difficulty,meta.testMode==='atomic-0.03-devnet');
+   // Verification is a read-only recovery, not a NEW publication or payment.
+   $('verified-onchain-title').textContent='Previous Quest Recovered!';
+   $('verified-onchain-description').textContent='“'+title+'” was ALREADY published on Solana Devnet. All 15 questions were verified again. No new publication or SOL payment happened. To make another quest, close this window and choose CREATE NEW QUEST in Step 1.';
  }catch(error){setStatus('Could not verify saved inscription: '+String(error?.message||error));}
  finally{busy=false;enable();}
 });

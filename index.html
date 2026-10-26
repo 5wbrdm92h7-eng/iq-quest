@@ -194,6 +194,19 @@ h1,h2,h3{font-family:Georgia,"Times New Roman",serif;letter-spacing:-.015em}h1{f
 /* V4.5 – Onchain quest verification status */
 .onchain-load-status{margin:15px 0;padding:14px 18px;border:1px solid #6ddc87;background:#10291d;border-radius:12px;color:#c9f8d2;font-size:13px;line-height:1.55}
 .onchain-load-status.error{border-color:#c7857e;background:#301e1b;color:#ffe5dd}
+/* V5.64 · Original animated chain loader during verified onchain Battles. */
+.onchain-load-status.is-battle-loading{min-height:365px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:7px;padding:20px 12px;border-color:#3ba77f;background:radial-gradient(circle at 50% 42%,#184734 0%,#0b231c 52%,#091410 100%)}
+.battle-onchain-loader{display:flex;flex-direction:column;align-items:center;gap:3px;width:100%}
+.battle-onchain-loader.hidden{display:none!important}
+.battle-onchain-loader svg{display:block;width:min(275px,83vw);height:auto;max-height:280px}
+.battle-onchain-loader .chain-center-glow{animation:iq-battle-breathe 7s ease-in-out infinite}
+.battle-onchain-loader .chain-loader-label{color:#43e8a8;font-size:12px;font-weight:900;letter-spacing:.16em}
+.battle-onchain-loader .chain-loader-caption{color:#c8ead8;font-size:15px;font-weight:750;margin-top:5px}
+#onchain-load-message{max-width:560px;margin:10px 0 0;color:#bdebd0;font-size:13px;line-height:1.6}
+.onchain-load-status.error #onchain-load-message{color:#ffe5dd}
+#onchain-retry-load{margin:0 8px 14px 0}
+@keyframes iq-battle-breathe{0%,100%{opacity:.15}45%,55%{opacity:.65}}
+@media(prefers-reduced-motion:reduce){.battle-onchain-loader .chain-center-glow{animation:none;opacity:.35}}
 .is-onchain .hero .hero-buttons a[href="creator.html"]{display:inline-flex}
 .is-onchain .onchain-status{border-color:#8af7a3;background:#133b22}
 
@@ -595,7 +608,25 @@ body:not(.is-home-chooser) .page-tagline{display:none}
       <div class="onchain-status" role="note" aria-label="Onchain development status"><span class="onchain-dot" aria-hidden="true"></span><strong>SOLANA-NATIVE ROADMAP</strong><span>Free browser play is live. 100% fully onchain creation, storage and play are planned — not live yet.</span></div>
       <div class="mini-info"><span>✦ <b>FREE PLAY</b> · NO WALLET</span><span>◷ HINT +1:00 · SKIP +1:00</span><span>⚔ SHARE YOUR TIME · CHALLENGE FRIENDS ON X</span></div>
 
-      <section id="onchain-load-status" class="onchain-load-status hidden" role="status" aria-live="polite"></section>
+      <section id="onchain-load-status" class="onchain-load-status hidden" role="status" aria-live="polite" aria-busy="false">
+        <div id="battle-onchain-loader" class="battle-onchain-loader hidden" aria-hidden="true">
+          <svg viewBox="0 0 300 300" focusable="false" aria-hidden="true">
+            <defs>
+              <linearGradient id="iq-battle-metal" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#c7ffe4"/><stop offset=".48" stop-color="#47efae"/><stop offset="1" stop-color="#07865d"/></linearGradient>
+              <filter id="iq-battle-glow"><feGaussianBlur stdDeviation="8"/></filter>
+            </defs>
+            <circle cx="150" cy="150" r="82" stroke="#2b7050" stroke-width="2" fill="none" opacity=".15"/>
+            <circle class="chain-center-glow" cx="150" cy="150" r="74" stroke="#3cffb3" stroke-width="12" fill="none" filter="url(#iq-battle-glow)"/>
+            <circle cx="150" cy="150" r="62" fill="#10231c" stroke="#205039"/>
+            <g id="battle-onchain-chain" fill="none" stroke="url(#iq-battle-metal)" stroke-width="5" stroke-linecap="round"></g>
+            <text x="150" y="166" font-size="65" font-weight="850" letter-spacing="-4" text-anchor="middle" fill="#f3fff8">on</text>
+          </svg>
+          <span class="chain-loader-label">ONCHAIN PROCESSING</span>
+          <span class="chain-loader-caption">Loading your Onchain Battle…</span>
+        </div>
+        <p id="onchain-load-message"></p>
+      </section>
+      <button type="button" id="onchain-retry-load" class="btn btn-green hidden">↻ TRY AGAIN</button>
       <a id="onchain-retry-home" class="btn btn-outline hidden" href="index.html">← BACK TO THE THREE FREE GAMES</a>
       <div id="battle-run-banner" class="battle-run-banner hidden" role="note"><strong>⚔ FRIEND BATTLE · 15 ONCHAIN PUZZLES</strong>Race the clock. After finishing, share your exact quest and target time on X. Your friend gets the same verified questions. Times and scores are browser-based, not verified onchain.</div>
       <section id="adventure" class="adventure-layout">
@@ -1146,7 +1177,44 @@ if(!onchainMode){load();syncSelection();render();}
 else{
  document.body.classList.add('is-onchain');
  const n=$('onchain-load-status');n.classList.remove('hidden');
- n.textContent=battlePoolRequest?'◈ Reading three verified Battle packs from Solana Devnet (45 puzzles). Selecting your shared 15-question challenge…':publishedQuestId?'◈ Resolving the published IQ Labs Mainnet signature… No wallet needed to play.':'◈ Verifying 15 questions from IQ Labs on Solana '+onchainNetwork+'… No wallet needed to play.';
+ const loadingMessage=$('onchain-load-message');
+ const battleLoader=$('battle-onchain-loader');
+ const chainAnimations=[];
+ function setOnchainLoadingMessage(message){loadingMessage.textContent=message;}
+ function finishChainLoading(){
+  n.classList.remove('is-battle-loading');n.setAttribute('aria-busy','false');
+  battleLoader.classList.add('hidden');
+  for(const animation of chainAnimations)animation.cancel();
+ }
+ function startBattleChainLoading(){
+  if(!battleMode)return;
+  n.classList.add('is-battle-loading');n.setAttribute('aria-busy','true');
+  battleLoader.classList.remove('hidden');
+  const chain=$('battle-onchain-chain');
+  const reducedMotion=window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+  const namespace='http://www.w3.org/2000/svg';
+  for(let i=0;i<14;i++){
+   const link=document.createElementNS(namespace,'rect');
+   link.setAttribute('x','-20');link.setAttribute('y','-92');
+   link.setAttribute('width','40');link.setAttribute('height','20');link.setAttribute('rx','10');
+   link.setAttribute('transform',`translate(150 150) rotate(${i*360/14}) rotate(${i%2?14:-14} 0 -82)`);
+   chain.appendChild(link);
+   if(reducedMotion||typeof link.animate!=='function')continue;
+   const appear=(i+1)*.44/14;
+   const disappear=1-appear;
+   chainAnimations.push(link.animate([
+    {opacity:0,offset:0},
+    {opacity:0,offset:Math.max(0,appear-.014)},
+    {opacity:1,offset:appear},
+    {opacity:1,offset:disappear},
+    {opacity:0,offset:Math.min(1,disappear+.014)},
+    {opacity:0,offset:1}
+   ],{duration:7000,iterations:Infinity,easing:'linear'}));
+  }
+ }
+ startBattleChainLoading();
+ setOnchainLoadingMessage(battlePoolRequest?'◈ Reading three verified Battle packs from Solana Devnet (45 puzzles). Selecting your shared 15-question challenge…':publishedQuestId?'◈ Resolving the published IQ Labs Mainnet signature… No wallet needed to play.':'◈ Verifying 15 questions from IQ Labs on Solana '+onchainNetwork+'… No wallet needed to play.');
+ $('onchain-retry-load').addEventListener('click',()=>location.reload());
  $('demo-selector').classList.add('hidden');
  $('start-the-clue').disabled=true;
  syncSelection();
@@ -1162,14 +1230,14 @@ else{
      if(!Array.isArray(signatures)||signatures.length!==3)throw Error('Battle requires three Devnet pack signatures.');
      const verifiedPacks=[];
      for(let i=0;i<3;i++){
-       n.textContent=`◈ Reading IQ Labs Devnet Battle pack ${i+1}/3 · ${difficulty} · ${'ABC'[i]}…`;
+       setOnchainLoadingMessage(`◈ Reading IQ Labs Devnet Battle pack ${i+1}/3 · ${difficulty} · ${'ABC'[i]}…`);
        let fetched;
        for(let attempt=0;attempt<3;attempt++){
          try{fetched=await bridge.readQuestOnchain(signatures[i],'devnet');break;}
          catch(error){
            const message=String(error?.message||error);
            if(attempt===2||!/429|rate.limit|too many requests|fetch failed|network error/i.test(message))throw error;
-           n.textContent=`◈ Devnet is busy. Retrying Battle pack ${i+1}/3 (attempt ${attempt+2}/3)…`;
+           setOnchainLoadingMessage(`◈ Devnet is busy. Retrying Battle pack ${i+1}/3 (attempt ${attempt+2}/3)…`);
            await new Promise(resolve=>setTimeout(resolve,2000*(attempt+1)));
          }
        }
@@ -1201,12 +1269,15 @@ else{
    if(battleMode)$('battle-run-banner').classList.remove('hidden');
    $('start-the-clue').disabled=false;
    document.body.classList.add('onchain-loaded');
-   n.textContent=battlePoolRequest?'✓ ALL THREE ONCHAIN BATTLE PACKS VERIFIED · IQ Labs DEVNET · 45 source puzzles · 15 selected · '+quest.difficulty.toUpperCase()+' · No wallet needed.':publishedQuestId?'✓ VERIFIED ONCHAIN · IQ Labs MAINNET · 15 questions · Free to play.':'✓ VERIFIED ONCHAIN · IQ Labs '+onchainNetwork.toUpperCase()+' · 15 questions · '+quest.difficulty.toUpperCase()+' · No wallet needed.';
+   finishChainLoading();
+   setOnchainLoadingMessage(battlePoolRequest?'✓ ALL THREE ONCHAIN BATTLE PACKS VERIFIED · IQ Labs DEVNET · 45 source puzzles · 15 selected · '+quest.difficulty.toUpperCase()+' · No wallet needed.':publishedQuestId?'✓ VERIFIED ONCHAIN · IQ Labs MAINNET · 15 questions · Free to play.':'✓ VERIFIED ONCHAIN · IQ Labs '+onchainNetwork.toUpperCase()+' · 15 questions · '+quest.difficulty.toUpperCase()+' · No wallet needed.');
    const status=document.querySelector('.onchain-status');if(status)status.textContent=battlePoolRequest?'✓ IQ LABS DEVNET BATTLE POOL VERIFIED · 15 questions selected from 45 published onchain. Browser times remain unverified.':publishedQuestId?'✓ IQ LABS MAINNET ONCHAIN QUEST VERIFIED · Questions and answers were read from Solana; battle times remain browser-unverified.':'✓ IQ LABS ONCHAIN QUEST VERIFIED · '+onchainNetwork.toUpperCase()+' · Quest and answers are publicly readable on Solana. Battle times remain browser-unverified.';
    if(run.startedAt&&!run.finishedAt)ensureStart();
  }catch(error){
    onchainReady=false;
-   n.classList.add('error');n.textContent='COULD NOT LOAD THE PUBLISHED QUEST: '+String(error?.message||error)+' · Check the public game link. No demo questions are being substituted.';
+   finishChainLoading();
+   n.classList.add('error');setOnchainLoadingMessage('COULD NOT LOAD THE PUBLISHED QUEST: '+String(error?.message||error)+' · Check the public game link. No demo questions are being substituted.');
+   $('onchain-retry-load').classList.remove('hidden');
    $('onchain-retry-home').classList.remove('hidden');
    $('hero-quest-name').textContent='ONCHAIN QUEST UNAVAILABLE';
    $('start-the-clue').disabled=true;
