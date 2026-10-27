@@ -564,6 +564,22 @@ details.advanced-box[open]>summary{color:#adffb8;margin-bottom:13px}
 .creator-simple #publish-card #atomic-devnet-card{margin-top:12px!important}
 .creator-publish-intro{font-size:14px!important;line-height:1.6;color:#e0f1eb!important}
 .creator-publish-final-note{margin:10px 0 0;color:#d7fff4;font-size:13px;line-height:1.5}
+/* V5.65 · Display-only onchain confirmations. Never infer paid success from progress. */
+.creator-onchain-progress{margin:14px 0;padding:17px 14px 14px;border:1px solid #6cb994;border-radius:15px;background:radial-gradient(circle at 85% 0%,#235441 0%,#102920 45%,#091d1a 100%);box-shadow:0 8px 25px #07140d75}
+.creator-onchain-progress.hidden{display:none!important}
+.creator-onchain-progress-head{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px}
+.creator-onchain-progress-head strong{color:#dbffe3;font-size:16px;line-height:1.3}
+.creator-onchain-progress-badge{border:1px solid #dfc486;border-radius:99px;background:#4a3820;color:#ffdf99;font-size:10px;font-weight:950;letter-spacing:.1em;padding:5px 9px}
+.creator-onchain-progress-bars{display:flex;gap:5px;margin:17px 0 12px;min-height:12px}
+.creator-onchain-progress-bars .tx-segment{flex:1 1 0;min-width:0;height:12px;border-radius:5px;border:1px solid #3b695a;background:#21382f;box-shadow:inset 0 1px 3px #071510}
+.creator-onchain-progress-bars .tx-segment.is-confirmed{border-color:#8effad;background:linear-gradient(90deg,#2dcc68,#72f89f);box-shadow:0 0 11px #4cff8760}
+.creator-onchain-progress-bars .tx-segment.is-current{border-color:#ffde8e;background:linear-gradient(90deg,#b88c49,#f4d48a);box-shadow:0 0 12px #e8c17d70;animation:iq-tx-glow 1.8s ease-in-out infinite alternate}
+.creator-onchain-progress-count{color:#e9e6bd;font-size:13px;font-weight:900;letter-spacing:.04em}
+.creator-onchain-progress-help{color:#c4e3d1!important;font-size:13px!important;line-height:1.6;margin:6px 0 0!important}
+.creator-onchain-progress[data-phase="done"]{border-color:#8effaa;background:linear-gradient(130deg,#173e2b,#0b241c)}
+.creator-onchain-progress[data-phase="error"]{border-color:#d3a37a;background:linear-gradient(130deg,#3a2e23,#15251f)}
+@keyframes iq-tx-glow{from{filter:brightness(.75)}to{filter:brightness(1.17)}}
+@media(prefers-reduced-motion:reduce){.creator-onchain-progress-bars .tx-segment.is-current{animation:none}}
 .creator-step-one-finish p{color:#d5eedb;font-size:13px;line-height:1.5;margin:0;flex:1 1 220px}
 .creator-step-one-finish a{flex:1 1 215px;text-align:center;white-space:normal}
 .creator-step-one #create-quest,.creator-step-one #ai-builder,.creator-step-one #question-review{margin:0}
@@ -766,6 +782,12 @@ details.advanced-box[open]>summary{color:#adffb8;margin-bottom:13px}
               <p style="font-size:11px;line-height:1.6;color:#e5d8ba;overflow-wrap:anywhere">Platform recipient: <strong>BbMdFqpXfkJeKLvoT8W7QSFZmVeLV35gp6At2MbZF377</strong>. Wallet approvals also include separate Devnet IQ Labs and network charges. Test SOL has no real-world value.</p>
               <label class="publish-consent" style="display:flex;gap:9px;align-items:flex-start"><input type="checkbox" id="atomic-devnet-consent" style="margin-top:3px"><span><strong>I agree to the Devnet-only test.</strong> My 15 questions, answers and hints will be publicly readable on Solana. I will check every wallet request, including the final 0.03 test-SOL transfer to the address above. I understand earlier storage fees can remain if the upload is interrupted. <strong>No Mainnet SOL will be sent.</strong></span></label>
               <button type="button" id="atomic-devnet-publish" class="btn btn-gold" disabled style="width:100%;margin:12px 0 8px">✓ TEST 0.03 DEVNET SOL + PUBLISH ONCHAIN</button>
+              <div id="creator-onchain-progress" class="creator-onchain-progress hidden" data-phase="preparing" role="group" aria-label="Devnet transaction confirmation progress">
+                <div class="creator-onchain-progress-head"><strong id="creator-tx-progress-heading">Saving your quest onchain</strong><span class="creator-onchain-progress-badge">SOLANA DEVNET</span></div>
+                <div id="creator-tx-progress-bars" class="creator-onchain-progress-bars" aria-hidden="true"></div>
+                <div id="creator-tx-progress-count" class="creator-onchain-progress-count" role="status" aria-live="polite">Preparing wallet requests…</div>
+                <p id="creator-tx-progress-help" class="creator-onchain-progress-help">You will approve each request separately in Phantom. No step is complete until Solana confirms it.</p>
+              </div>
               <p class="creator-publish-final-note">✓ After success: <strong>Play · Copy link · Share on X</strong>. You do not have to post on X.</p>
               <p id="atomic-devnet-status" role="status" aria-live="polite" style="font-size:12px;line-height:1.6;white-space:pre-wrap;overflow-wrap:anywhere;color:#fff0c7">No new publication started. If you have published before, first use VERIFY PREVIOUS PUBLICATION above.</p>
             </section>
@@ -1739,10 +1761,81 @@ async function checkedDraft(){
  if(!draft.levels.every(l=>l.q&&l.a&&l.h))throw Error('All 15 questions, answers and hints must be complete.');
  return draft;
 }
+const txProgressPanel=$('creator-onchain-progress');
+const txProgressHeading=$('creator-tx-progress-heading');
+const txProgressBars=$('creator-tx-progress-bars');
+const txProgressCount=$('creator-tx-progress-count');
+const txProgressHelp=$('creator-tx-progress-help');
+let txProgress={completed:0,total:0,phase:'preparing',current:0};
+function drawTxProgress(){
+ txProgressPanel.dataset.phase=txProgress.phase;
+ const count=txProgress.total||3;
+ const blocks=Array.from({length:count},(_,i)=>{
+  const block=document.createElement('span');block.className='tx-segment';
+  if(txProgress.total&&i<txProgress.completed)block.classList.add('is-confirmed');
+  else if(txProgress.total&&i===txProgress.current-1&&['approval','confirming','verifying'].includes(txProgress.phase))block.classList.add('is-current');
+  return block;
+ });
+ txProgressBars.replaceChildren(...blocks);
+ if(txProgress.phase==='done'){
+  txProgressHeading.textContent='✓ Quest verified onchain';
+  txProgressCount.textContent=txProgress.total?`${txProgress.total} of ${txProgress.total} transactions confirmed`:'✓ All publication transactions verified';
+  txProgressHelp.textContent='All 15 questions, hints and answers were read back successfully. Your player link is ready.';
+ }else if(txProgress.phase==='error'){
+  txProgressHeading.textContent='⚠ Publication not verified';
+  txProgressCount.textContent=txProgress.total?`${txProgress.completed} of ${txProgress.total} transactions confirmed`:'Check the saved onchain status';
+  txProgressHelp.textContent='Do not approve another payment just because the page returned. Check the detailed message below and recover the existing transaction first.';
+ }else if(txProgress.phase==='approval'){
+  txProgressHeading.textContent='Saving your quest onchain';
+  txProgressCount.textContent=`${txProgress.completed} of ${txProgress.total} transactions confirmed`;
+  txProgressHelp.textContent=`Review transaction ${txProgress.current} of ${txProgress.total} in Phantom. After approving, wait for its Solana confirmation. Each request is separate.`;
+ }else if(txProgress.phase==='confirming'||txProgress.phase==='verifying'){
+  txProgressHeading.textContent='Checking Solana confirmations';
+  txProgressCount.textContent=txProgress.total?`${txProgress.completed} of ${txProgress.total} confirmed · final verification pending`:'Verifying the previous onchain transaction…';
+  txProgressHelp.textContent='Please wait for the chain check. Never sign a duplicate transaction because verification is slow.';
+ }else{
+  txProgressHeading.textContent='Preparing your onchain quest';
+  txProgressCount.textContent='Preparing wallet requests…';
+  txProgressHelp.textContent='The number of transactions will appear after IQ Labs calculates the storage chunks. Nothing has been confirmed yet.';
+ }
+}
+function beginTxProgress(){
+ txProgress={completed:0,total:0,current:0,phase:'preparing'};
+ txProgressPanel.classList.remove('hidden');drawTxProgress();
+}
+function updateTxProgressFromMessage(message){
+ const text=String(message||'');
+ const approval=text.match(/Phantom will SIGN AND SEND (?:chunk|final) on Devnet \((\d+)\/(\d+)\)/);
+ const confirmed=text.match(/IQ Labs Devnet chunk (\d+)\/(\d+) confirmed\./);
+ if(approval){
+  const current=Number(approval[1]),total=Number(approval[2]);
+  if(total>=2&&total<=10&&current>=1&&current<=total){
+   txProgress.total=total;txProgress.completed=Math.max(txProgress.completed,current-1);
+   txProgress.current=current;txProgress.phase='approval';
+  }
+ }else if(confirmed){
+  const completed=Number(confirmed[1]),total=Number(confirmed[2])+1;
+  if(total>=2&&total<=10&&completed>=1&&completed<total){
+   txProgress.total=total;txProgress.completed=Math.max(txProgress.completed,completed);
+   txProgress.current=completed+1;txProgress.phase='confirming';
+  }
+ }else if(/Checking the finalized IQ Labs registration|Written on Devnet\. Reading all 15 questions/.test(text)){
+  txProgress.phase='verifying';txProgress.current=txProgress.total;
+ }
+ drawTxProgress();
+}
+function finishTxProgress(){
+ if(txProgressPanel.classList.contains('hidden'))return;
+ txProgress.completed=txProgress.total;txProgress.phase='done';drawTxProgress();
+}
+function failTxProgress(){
+ if(txProgressPanel.classList.contains('hidden'))return;
+ txProgress.phase='error';drawTxProgress();
+}
 async function publishAtomicDevnet(){
  if(busy||!atomicConsent.checked)return;
  busy=true;enable();links.classList.add('hidden');
- const status=message=>{atomicStatus.textContent=String(message);setStatus(message);};
+ const status=message=>{atomicStatus.textContent=String(message);setStatus(message);if(!txProgressPanel.classList.contains('hidden'))updateTxProgressFromMessage(message);};
  try{
   const draft=await checkedDraft();
   const plan=document.querySelector('input[name="publish-plan"]:checked')?.value||'community';
@@ -1761,6 +1854,7 @@ async function publishAtomicDevnet(){
     return;
    }
   }
+  beginTxProgress();
   status('Connecting your selected wallet for the DEVNET-ONLY 0.03 test-SOL publication. No transfer happens when connecting.');
   const provider=await requestCheckoutWallet({purpose:'publication',network:'devnet',onProgress:status});
   if(!provider?.publicKey?.toBase58?.())throw Error('No Devnet creator wallet connected.');
@@ -1774,7 +1868,9 @@ async function publishAtomicDevnet(){
   atomicStatus.textContent='✓ VERIFIED 0.03 TEST SOL + IQ LABS FINAL REGISTRATION. All 15 puzzles are on Devnet. Your share link is ready.';
   showPublished(result.signature,result.data.title||draft.title,true,false,
    'Compressed onchain payload: '+result.bytes+' bytes. Separate IQ Labs and network Devnet fees may apply.',result.data.theme,result.data.difficulty,true);
+  finishTxProgress();
  }catch(error){
+  failTxProgress();
   const message='Devnet atomic publication is NOT verified: '+String(error?.message||error)+
    '\nIf you already approved a wallet transaction, keep the SAME wallet and 15-question draft. Wait, then use this SAME button to check and resume. Never send a second payment simply because the page returned or the RPC is slow.';
   atomicStatus.textContent=message;setStatus(message);
